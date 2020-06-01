@@ -13,8 +13,8 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://mtdi.github.io
-root: /
+url: http://mtdi.github.io/blog
+root: /blog/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -122,7 +122,7 @@ search:
   path: search.xml
   field: post
   format: html
-  limit: 100
+  limit: 10000
 # 观看时长估计
 symbols_count_time:
  #文章内是否显示
