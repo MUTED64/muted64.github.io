@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://muted64.github.io/blog/"/>
-  <updated>2020-06-17T14:44:04.479Z</updated>
+  <updated>2020-07-20T08:16:58.512Z</updated>
   <id>http://muted64.github.io/blog/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>文件上传操作整理</title>
+    <link href="http://muted64.github.io/blog/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/"/>
+    <id>http://muted64.github.io/blog/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</id>
+    <published>2020-07-20T04:44:58.000Z</published>
+    <updated>2020-07-20T08:16:58.512Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;获取Webshell的常见操作，整理一下。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="网络安全" scheme="http://muted64.github.io/blog/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="CTF" scheme="http://muted64.github.io/blog/tags/CTF/"/>
+    
+  </entry>
   
   <entry>
     <title>Mysql基础补完</title>
