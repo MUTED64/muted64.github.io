@@ -6,7 +6,7 @@
   <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://muted64.github.io/blog/"/>
-  <updated>2020-07-20T08:16:58.512Z</updated>
+  <updated>2020-09-11T09:21:00.035Z</updated>
   <id>http://muted64.github.io/blog/</id>
   
   <author>
@@ -17,11 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
+    <link href="http://muted64.github.io/blog/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>http://muted64.github.io/blog/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <published>2020-09-11T03:31:32.000Z</published>
+    <updated>2020-09-11T09:21:00.035Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统" scheme="http://muted64.github.io/blog/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="KDE" scheme="http://muted64.github.io/blog/tags/KDE/"/>
+    
+      <category term="Linux" scheme="http://muted64.github.io/blog/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
     <title>文件上传操作整理</title>
     <link href="http://muted64.github.io/blog/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/"/>
     <id>http://muted64.github.io/blog/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</id>
     <published>2020-07-20T04:44:58.000Z</published>
-    <updated>2020-07-20T08:16:58.512Z</updated>
+    <updated>2020-07-20T08:21:19.096Z</updated>
     
     <summary type="html">
     
@@ -137,13 +160,36 @@
     <link href="http://muted64.github.io/blog/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://muted64.github.io/blog/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2020-06-16T11:43:31.000Z</published>
-    <updated>2020-06-16T11:43:31.881Z</updated>
+    <updated>2020-09-11T08:30:21.621Z</updated>
     
     <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;使用逻辑&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;import tkinter。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实例化窗口对象。例如&lt;/p&gt;
+&lt;figure class=&quot;highlight ini&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td
+        
+      
     
     </summary>
     
     
+      <category term="开发" scheme="http://muted64.github.io/blog/categories/%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="开发" scheme="http://muted64.github.io/blog/tags/%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="python" scheme="http://muted64.github.io/blog/tags/python/"/>
+    
+      <category term="GUI" scheme="http://muted64.github.io/blog/tags/GUI/"/>
     
   </entry>
   
@@ -167,7 +213,7 @@
     <link href="http://muted64.github.io/blog/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/"/>
     <id>http://muted64.github.io/blog/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</id>
     <published>2020-06-16T11:42:02.000Z</published>
-    <updated>2020-06-21T06:52:26.940Z</updated>
+    <updated>2020-07-23T02:42:17.929Z</updated>
     
     <summary type="html">
     
@@ -241,7 +287,7 @@
     <link href="http://muted64.github.io/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/"/>
     <id>http://muted64.github.io/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</id>
     <published>2020-06-01T10:13:28.000Z</published>
-    <updated>2020-06-16T11:35:24.972Z</updated>
+    <updated>2020-07-23T14:33:31.002Z</updated>
     
     <summary type="html">
     
