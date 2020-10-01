@@ -2,32 +2,32 @@
 <search>
   <entry>
     <title>Linux相关笔记</title>
-    <url>/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Mysql基础补完</title>
-    <url>/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
+    <url>/blog/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>PHP反序列化笔记</title>
-    <url>/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>CTF中的命令执行</title>
-    <url>/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
+    <url>/blog/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Python利用多线程和多进程编写脚本</title>
-    <url>/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/</url>
+    <url>/blog/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Tkinter学习笔记</title>
-    <url>/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>简单的Python GUI… 要想强大一点还是去用PyQt了。</p>
 <a id="more"></a>
 <h1>使用逻辑</h1>
@@ -259,7 +259,7 @@
   </entry>
   <entry>
     <title>CTF中琐碎的姿势们</title>
-    <url>/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</url>
+    <url>/blog/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</url>
     <content><![CDATA[<p>记录CTF中的一些琐碎杂项备忘，方便查找。</p>
 <a id="more"></a>
 <h2 id="HTML">HTML</h2>
@@ -351,12 +351,12 @@
   </entry>
   <entry>
     <title>前端三剑客笔记</title>
-    <url>/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>PHP相关姿势</title>
-    <url>/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</url>
+    <url>/blog/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</url>
     <content><![CDATA[<p>整理 CTF 中 PHP 相关的利用姿势，不定期补充。</p>
 <a id="more"></a>
 <h2 id="弱类型相关姿势">弱类型相关姿势</h2>
@@ -417,7 +417,7 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
   </entry>
   <entry>
     <title>Ubuntu+gunicorn+nginx在ECS上搭建Flask环境</title>
-    <url>/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</url>
+    <url>/blog/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</url>
     <content><![CDATA[<p>网络上能搜索到的资源基本都有些疏漏的地方，把自己的配置过程Po上来做个参考防止重复踩坑。</p>
 <a id="more"></a>
 <p><a href="https://zhuanlan.zhihu.com/p/22126999" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22126999</a> 这篇专栏写得还不错，参考了其中的一些内容做了自己的配置，不过这篇里也有一些没写清楚的超级坑点，坑了我好久，我在这里补充一些内容来防止重复踩坑了。</p>
@@ -500,7 +500,7 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
   </entry>
   <entry>
     <title>SQL注入笔记</title>
-    <url>/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。</p>
 <a id="more"></a>
 <h2 id="Sql-注入的本质理解">Sql 注入的本质理解</h2>
@@ -728,7 +728,7 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
   </entry>
   <entry>
     <title>正则学习笔记</title>
-    <url>/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/blog/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
     <content><![CDATA[<p>CTF中经常出现的正则，基础薄弱。突击学习下记点笔记。</p>
 <a id="more"></a>
 <h2 id="PHP正则">PHP正则</h2>
@@ -968,7 +968,7 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
   </entry>
   <entry>
     <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
-    <url>/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <url>/blog/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。</p>
 <a id="more"></a>
 <h1>问题描述</h1>
@@ -1001,7 +1001,7 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
   </entry>
   <entry>
     <title>文件上传操作整理</title>
-    <url>/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</url>
+    <url>/blog/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<p>获取Webshell的常见操作，整理一下。</p>
 <a id="more"></a>
 <h2 id="上传及绕过">上传及绕过</h2>
@@ -1088,7 +1088,7 @@ xx.jpg的内容可以为一段合法的asp脚本文件。</p>
   </entry>
   <entry>
     <title>PHP基础补完</title>
-    <url>/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
+    <url>/blog/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</url>
     <content><![CDATA[<p>PHP基础太薄弱了。最近几天做个补完，记点笔记。</p>
 <a id="more"></a>
 <h2 id="PHP基础">PHP基础</h2>

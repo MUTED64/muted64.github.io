@@ -3,7 +3,7 @@
   <title>MUTED&#39;s Blog</title>
   <icon>http://blog.muted.top/icon.png</icon>
   <subtitle>MUTED的网络自留地</subtitle>
-  <link href="/atom.xml" rel="self"/>
+  <link href="/blog/atom.xml" rel="self"/>
   
   <link href="http://blog.muted.top/"/>
   <updated>2020-10-01T06:51:32.770Z</updated>
