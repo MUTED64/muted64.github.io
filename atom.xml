@@ -3,7 +3,7 @@
   <title>MUTED&#39;s Blog</title>
   <icon>http://blog.muted.top/icon.png</icon>
   <subtitle>MUTED的网络自留地</subtitle>
-  <link href="/blog/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.muted.top/"/>
   <updated>2020-10-01T06:51:32.770Z</updated>
@@ -84,51 +84,6 @@
   </entry>
   
   <entry>
-    <title>Mysql基础补完</title>
-    <link href="http://blog.muted.top/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/"/>
-    <id>http://blog.muted.top/2020/06/17/Mysql%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</id>
-    <published>2020-06-17T14:44:04.000Z</published>
-    <updated>2020-06-17T14:44:04.479Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>CTF中的命令执行</title>
-    <link href="http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/"/>
-    <id>http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%9A%84%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C/</id>
-    <published>2020-06-16T13:00:11.000Z</published>
-    <updated>2020-06-16T13:00:11.191Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Python利用多线程和多进程编写脚本</title>
-    <link href="http://blog.muted.top/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/"/>
-    <id>http://blog.muted.top/2020/06/16/Python%E5%88%A9%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%BC%96%E5%86%99%E8%84%9A%E6%9C%AC/</id>
-    <published>2020-06-16T12:51:58.000Z</published>
-    <updated>2020-06-16T12:51:58.967Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>PHP基础补完</title>
     <link href="http://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/"/>
     <id>http://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</id>
@@ -204,21 +159,6 @@
   </entry>
   
   <entry>
-    <title>前端三剑客笔记</title>
-    <link href="http://blog.muted.top/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/16/%E5%89%8D%E7%AB%AF%E4%B8%89%E5%89%91%E5%AE%A2%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-06-16T11:42:57.000Z</published>
-    <updated>2020-06-16T11:42:57.949Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>CTF中琐碎的姿势们</title>
     <link href="http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/"/>
     <id>http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</id>
@@ -236,36 +176,6 @@
     
     
       <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP反序列化笔记</title>
-    <link href="http://blog.muted.top/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/16/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-06-16T11:41:12.000Z</published>
-    <updated>2020-06-16T11:41:12.721Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Linux相关笔记</title>
-    <link href="http://blog.muted.top/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/16/Linux%E7%9B%B8%E5%85%B3%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-06-16T11:40:31.000Z</published>
-    <updated>2020-06-16T11:40:31.566Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
     
   </entry>
   
