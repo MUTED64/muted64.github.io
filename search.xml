@@ -929,7 +929,6 @@ md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1'or'8</code> 也可行。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">'one     two'</span>;</span><br><span class="line"><span class="variable">$str</span> = preg_replace(<span class="string">'/\s+/'</span>, <span class="string">' '</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span>; // 结果改变为<span class="string">'one two'</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>网络安全</category>
-        <category>开发</category>
       </categories>
       <tags>
         <tag>CTF</tag>
@@ -1933,11 +1932,273 @@ xx.jpg的内容可以为一段合法的asp脚本文件。</p>
 ]]></content>
       <categories>
         <category>网络安全</category>
-        <category>开发</category>
       </categories>
       <tags>
         <tag>PHP</tag>
         <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Re:1 Config Archlinux From Scratch</title>
+    <url>/2020/10/17/Re-1-Config-Archlinux-From-Scratch/</url>
+    <content><![CDATA[<p>上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。<s>下次重装系统自己能看懂就行</s></p>
+<a id="more"></a>
+<h2 id="Create-a-new-user">Create a new user</h2>
+<p>It is unsafe to use root for daily use. It is better to create a ordinary user.</p>
+<p>Let’s create a new user named muted.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">useradd -m -G wheel muted</span><br></pre></td></tr></table></figure>
+<p><code>-m</code> stands for creating a new folder whose name is the same as your new user. You can use <code>~</code> to access it easily. <code>-G wheel</code> stands for adding the new user “muted” to a group named “wheel”.</p>
+<p>Set a password for this user:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd muted</span><br></pre></td></tr></table></figure>
+<h2 id="Config-sudo">Config sudo</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -s /usr/bin/vim /usr/bin/vi</span><br><span class="line">visudo</span><br></pre></td></tr></table></figure>
+<p>Uncomment <code># %wheel ALL=(ALL)ALL</code>, then reboot. This time your new user is able to use <code>sudo</code> command.</p>
+<h2 id="Graphical-interface-installation">Graphical interface installation</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dhcpcd  <span class="comment"># Connet to the Internet</span></span><br><span class="line">sudo pacman -S xf86-video-intel  <span class="comment"># If your GPU is from Intel</span></span><br></pre></td></tr></table></figure>
+<p>See also: <a href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Xorg#Driver_installation</a></p>
+<p>Now install Xorg and some necessary packages:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S xorg xorg-server plasma dolphin kate kdialog konsole fsearch dragon ffmpegthumbs kde-meta-kdeadmin kde-meta-kdeutils kde-meta-kdegraphics sddm sddm-kcm</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
+<h2 id="Config-your-Internet">Config your Internet</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> netctl</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> NetworkManager  <span class="comment"># Draw attention on UPPER and lower case</span></span><br><span class="line">sudo pacman -S network-manager-applet</span><br></pre></td></tr></table></figure>
+<h2 id="Use-pacman-mirror">Use pacman mirror</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
+<p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
+<h2 id="Use-archlinuxcn-repository">Use archlinuxcn repository</h2>
+<p>At the end of file add:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<p>If you are a ‘Xidianer’ too, you can also:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Server = https://linux.xidian.edu.cn/mirrors/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+<p>Then:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -Syy</span><br><span class="line">sudo pacman -Syu</span><br><span class="line">sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+<h2 id="Use-AUR-repository-with-yay">Use AUR repository with yay</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S yay</span><br><span class="line">yay -Syu --devel --combinedupgrade --save</span><br></pre></td></tr></table></figure>
+<p>Then change current <code>aururl</code> to <code>https://aur.tuna.tsinghua.edu.cn</code>.</p>
+<h2 id="Use-fish-shell-as-your-default-shell">Use fish shell as  your default shell</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S fish</span><br></pre></td></tr></table></figure>
+<p>Set fish the default shell on Konsole: <code>Konsole -&gt; Settings -&gt; Edit Current Profile</code>, choose /bin/fish as default command, Then restart Konsole.</p>
+<p>Use fish as default user shell:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo chsh -s /usr/bin/fish root</span><br><span class="line">sudo chsh -s /usr/bin/fish [username]</span><br></pre></td></tr></table></figure>
+<p>Set greeting words:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> fish_greeting <span class="string">'Your Greeting Words'</span></span><br></pre></td></tr></table></figure>
+<p>Config fish shell:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fish_config</span><br></pre></td></tr></table></figure>
+<p>I recommend to set some abbreviations, for example:</p>
+<p><code>pc</code> is short for <code>proxychains</code></p>
+<p><code>pmc</code> is short for <code>sudo vim /etc/pacman.d/mirrorlist</code></p>
+<p><code>pmi</code> is short for <code>sudo pacman -S</code></p>
+<p><code>pms</code> is short for <code>sudo pacman -Ss</code></p>
+<p><code>pmu</code> is short for <code>sudo pacman -Syyu</code></p>
+<h2 id="Change-hosts-Github">Change hosts (Github)</h2>
+<p>Seems not very useful for me but… just record it here in case that some day I need it.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S dnsutils</span><br></pre></td></tr></table></figure>
+<p>Use <code>dig</code> or <code>nslookup</code> command to build a hosts file yourself.</p>
+<h2 id="Bypass-GFW">Bypass GFW</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S v2ray qv2ray proxychains-ng</span><br></pre></td></tr></table></figure>
+<p>More? …sorry but I won’t tell you more🤪</p>
+<p><strong>Caution! : Set your system time correctly first, or you can never success.</strong></p>
+<p>If you want some rules, look at here: <a href="https://github.com/Loyalsoldier/v2ray-rules-dat" target="_blank" rel="noopener">https://github.com/Loyalsoldier/v2ray-rules-dat</a>, just put geosite and geoip into <code>/usr/share/v2ray/</code>. Easy!</p>
+<h2 id="Fonts-config">Fonts config</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic nerd-fonts-jetbrains-mono wqy-microhei wqy-zenhei</span><br></pre></td></tr></table></figure>
+<p>Download the config file at <a href="https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf" target="_blank" rel="noopener">https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf</a>, put it into <code>~/.config/fontconfig/fonts.conf</code>, log out and log in, then it works.</p>
+<h2 id="Install-Google-chrome">Install Google-chrome</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S google-chrome</span><br></pre></td></tr></table></figure>
+<p>Caution: the bin file named <code>google-chrome-stable</code>, so if you want to start it use command line, use:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">google-chrome-stable</span><br></pre></td></tr></table></figure>
+<h2 id="Chinese-input">Chinese input</h2>
+<p>I chose Rime(fcitx5) as my Chinese input scheme instead of sogou pinyin because the latter has some strange conflict with Jetbrains IDEs. <s>🔪🔪🔪Fuck Sogou</s></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-configtool</span><br><span class="line">sudo pacman -S fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5</span><br><span class="line">sudo pacman -S fcitx5-rime</span><br></pre></td></tr></table></figure>
+<p><code>fcitx-configtool -&gt; add rime</code></p>
+<p>Now let’s config it:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.xprofile</span><br></pre></td></tr></table></figure>
+<p>Then add:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE-fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br><span class="line">fcitx5 &amp;</span><br></pre></td></tr></table></figure>
+<p>Log out then Log in. It works. But… It’s not BEEEAAAUTIFUL enough!</p>
+<p><strong>RXnb! Let’s use RX’s skin for fcitx5 input method!</strong><br>
+<a href="https://github.com/Reverier-Xu/RxWe10-Fcitx5" target="_blank" rel="noopener">https://github.com/Reverier-Xu/RxWe10-Fcitx5</a><br>
+Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/.config/fcitx5/conf/classicui.conf</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 垂直候选列表</span></span><br><span class="line">Vertical Candidate List=False</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按屏幕 DPI 使用</span></span><br><span class="line">PerScreenDPI=True</span><br><span class="line"></span><br><span class="line"><span class="comment"># Font (设置成你喜欢的字体)</span></span><br><span class="line">Font=<span class="string">"字体字体字体字体写在这里"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题</span></span><br><span class="line">Theme=RxWe10-light</span><br></pre></td></tr></table></figure>
+<p>Or you can use some famous theme such as:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S fcitx5-material-color</span><br></pre></td></tr></table></figure>
+<p>See Also: <a href="https://github.com/hosxy/Fcitx5-Material-Color" target="_blank" rel="noopener">https://github.com/hosxy/Fcitx5-Material-Color</a></p>
+<h2 id="Install-Jetbrains-IDEs">Install Jetbrains IDEs</h2>
+<p>Developers necessity. Use <code>pacman</code> or <code>yay</code> .</p>
+<h2 id="Install-Tencent-shits">Install Tencent shits</h2>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+<p>To use deepin-wine I have to enable multilib since my Archlinux is x64 version (?)</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -Sy deepin.com.qq.office</span><br></pre></td></tr></table></figure>
+<p>Now TIM is installed. But we cannot run it now since it is designed to be compatible with GTK style desktops. So we:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo pacman -S gnome-settings-daemon</span><br></pre></td></tr></table></figure>
+<p><code>System Settings -&gt; Start up and shut down -&gt; Autostart -&gt; Add Script -&gt; /usr/lib/gsd-xsettings</code></p>
+<p>Now TIM is available. Though it is not easy to use as it is on Windows, we barely HAVE a TIM on Arch at least.</p>
+<h2 id="References">References</h2>
+<ol>
+<li><a href="https://www.viseator.com/2017/05/19/arch_setup/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/19/arch_setup/</a></li>
+<li><a href="https://www.wootec.top/2019/11/02/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/02/如何在Linux上优雅的堕落/</a></li>
+<li><a href="https://www.wootec.top/2019/11/15/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD-2/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/15/如何在Linux上优雅的堕落-2/</a></li>
+<li><a href="https://rocka.me/article/arch-linux-kde-plasma-install-and-config" target="_blank" rel="noopener">https://rocka.me/article/arch-linux-kde-plasma-install-and-config</a></li>
+</ol>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Re:0 Install Archlinux From Scratch</title>
+    <url>/2020/10/17/Re-0-Install-Archlinux-From-Scratch/</url>
+    <content><![CDATA[<p>前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。<s>自己再装的时候能看懂就行</s></p>
+<a id="more"></a>
+<h2 id="Prepare-an-installation-medium">Prepare an installation medium</h2>
+<p>I used rufus on Windows 10 to make my U-disk an installation medium. I chose dd mode of rufus. Make sure there is an empty partition on your disk.</p>
+<p>I will go straight to the next step because this is easy.</p>
+<h2 id="Pre-Installation">Pre-Installation</h2>
+<h3 id="Boot-the-live-environment">Boot the live environment</h3>
+<p>Disable secure boot. Then restart your PC and boot from your USB device. Choose <code>Boot Arch Linux (x86_64)</code> , now you can see Archlinux is ready to load contents. Finally you will logged in on the first virtual console as the root user, and presented with a <code>zsh</code> shell prompt. You can autocomplete your commands using <code>tab</code> , OHHHHHH!</p>
+<h3 id="Verify-the-boot-mode">Verify the boot mode</h3>
+<p>To verify the boot mode, list the efivars directory:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
+<p>If the command shows the directory without error, then the system is booted in UEFI mode. If the directory does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired, refer to your motherboard’s manual.</p>
+<p>Or, a more secure way is <code>fdisk -l</code> ,if your SSD (or HDD) shows its <code>Disklabel type</code> is <code>gpt</code> and there is a small partition whose type is <code>EFI System</code> , Then your boot mode can be verified to be EFI.</p>
+<h3 id="Connect-to-the-Internet">Connect to the Internet</h3>
+<p>Arch needs network connection to complete its installation.</p>
+<p>Ensure your network interface is listed and enabled:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ip link</span><br></pre></td></tr></table></figure>
+<p>For wired connection:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dhcpcd</span><br></pre></td></tr></table></figure>
+<p>For wireless connection:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">iwctl</span><br><span class="line">device list</span><br><span class="line">station wlan0 scan</span><br><span class="line">station wlan0 get-networks</span><br><span class="line">station wlan0 connect `xxxxx`</span><br></pre></td></tr></table></figure>
+<p>Check if you are connected to the internet:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ping baidu.com</span><br></pre></td></tr></table></figure>
+<p>If everything is OK, quit iwd:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">quit</span><br></pre></td></tr></table></figure>
+<h3 id="Update-the-system-clock">Update the system clock</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>To check the service status, use <code>timedatectl status</code>.</p>
+<h3 id="Partition-the-disks">Partition the disks</h3>
+<table>
+<thead>
+<tr>
+<th>Device Type</th>
+<th>File Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SATA/SAS/USB</td>
+<td>/dev/sda,/dev/sdb,……</td>
+</tr>
+<tr>
+<td>IDE</td>
+<td>/dev/hd0,/dev/hd1,……</td>
+</tr>
+<tr>
+<td>VIRTIO-BLOCK</td>
+<td>/dev/vda,/dev/vdb,……</td>
+</tr>
+<tr>
+<td>M2(SSD)</td>
+<td>/dev/nvme0,/dev/nvme1</td>
+</tr>
+<tr>
+<td>SD/MMC/EMMC(Card)</td>
+<td>/dev/mmcblk0,/dev/mmcblk1</td>
+</tr>
+<tr>
+<td>CD drive</td>
+<td>/dev/cdrom,/dev/sr0,/dev/sr1</td>
+</tr>
+</tbody>
+</table>
+<p>When recognized by the live system, disks are assigned to a <a href="https://wiki.archlinux.org/index.php/Block_device" target="_blank" rel="noopener">block device</a> such as <code>/dev/sda</code>, <code>/dev/nvme0n1</code> or <code>/dev/mmcblk0</code>. To identify these devices, use <code>lsblk</code> or <code>fdisk</code>.</p>
+<p>I boot my Arch in UEFI mode, so first I must create a boot partition (EFI system partition).</p>
+<h4 id="Create-a-boot-partition">Create a boot partition</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;  <span class="comment"># Example: fdisk /dev/sdx  or  fdisk /dev/nvmex</span></span><br></pre></td></tr></table></figure>
+<p>See usages of commands by typing <code>m</code> and enter.</p>
+<p>Enter <code>n</code> to create a new partition. You are asked to select the starting sector, generally we type enter (select by default). Then enter end sector or partition size. I used <code>+512M</code> .</p>
+<p>Enter <code>p</code> to check if it works. Enter <code>t</code> to change the type of your new partition. Enter <code>l</code> to see all types supported. Change it to EFI.</p>
+<p>Enter <code>w</code> to save. You can check whether there is something wrong before that by <code>p</code>.</p>
+<p>Format it:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/&#123;YOUR BOOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Root-partition">Root partition</h4>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;</span><br></pre></td></tr></table></figure>
+<p>Create a new partition table if there is not one exist. I already have one on my disk so I go on directly.</p>
+<p>Enter <code>n</code> to create a new partition. I want my new partition fill up the free space completely, so I use enter to choose the default.</p>
+<p>Enter <code>p</code> then <code>w</code> just like creating your boot partition.</p>
+<p>Format it:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mkfs.ext4 /dev/P&#123;YOUR ROOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Mount-the-file-systems">Mount the file systems</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">mount /dev/&#123;YOUR ROOT PARTITION&#125; /mnt</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mount /dev/&#123;YOUR BOOT PARTITION&#125; /mnt/boot</span><br></pre></td></tr></table></figure>
+<h2 id="Installation">Installation</h2>
+<h3 id="Use-Pacman-Mirror">Use Pacman Mirror</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+<p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
+<p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
+<h3 id="Install-essential-packages">Install essential packages</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacstrap /mnt base base-devel linux linux-firmware dhcpcd</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-the-system">Configure the system</h2>
+<h3 id="Fstab">Fstab</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">genfstab -L /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<p>We need a check to make sure it is right since it is an important step. Check the resulting <code>/mnt/etc/fstab</code> file, and edit it in case of errors:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
+<h3 id="Chroot">Chroot</h3>
+<p><code>chroot</code> means ‘change root’. Change root into the new system:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
+<p>We can also use this command to fix our system if there is some problem with it.</p>
+<h3 id="Time-zone">Time zone</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h3 id="Install-necessary-packages">Install necessary packages</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S vim dialog wpa_supplicant ntfs-3g networkmanager netctl</span><br></pre></td></tr></table></figure>
+<h3 id="Localization">Localization</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
+<p>Uncomment <code>zh_CN.UTF-8 UTF-8</code> <code>zh_HK.UTF-8 UTF-8</code> <code>zh_TW.UTF-8 UTF-8</code> <code>en_US.UTF-8 UTF-8</code> .</p>
+<p>Then <code>:wq</code> save and quit.</p>
+<p>Generate the locales by running:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
+<p>Config locale file:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/locale.conf</span><br></pre></td></tr></table></figure>
+<p>Add the following line to the first line of this file:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
+<p><code>:wq</code> . Fine.</p>
+<h3 id="Network-configuration">Network configuration</h3>
+<p>Create the hostname file:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
+<p>Config your hosts:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<p>Add the following contents to the end of this file:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1	localhost</span><br><span class="line">::1		localhost</span><br><span class="line">127.0.1.1	myhostname.localdomain	myhostname</span><br></pre></td></tr></table></figure>
+<h3 id="Set-root-password">Set root password</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Intel-ucode-if-you-have-a-Intel-CPU">Install Intel-ucode (if you have a Intel CPU)</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S intel-ucode</span><br></pre></td></tr></table></figure>
+<h3 id="Install-BootLoader">Install BootLoader</h3>
+<p>Caution! This blog is only for EFI/GPT boot mode! If you are in BIOS/MBR mode, please see <code>Reference 2</code> at the end.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pacman -S os-prober ntfs-3g</span><br><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>If there is multi systems on your device, it is recommended to check whether each system’s entry is well generated.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p>Check if it is all right.</p>
+<h3 id="Reboot">Reboot</h3>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount /mnt/boot</span><br><span class="line">umount /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<p>Pull out your U-disk. Login as root, enter your password.</p>
+<p>If you can see the command line, congratulations, you have installed Archlinux successfully! OHHHHHHH!</p>
+<p>There is still many things to do after that, I will put some guide for them on my next blog.</p>
+<h2 id="References">References</h2>
+<ol>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a></p>
+</li>
+<li>
+<p><a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/17/arch_install/</a></p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>系统</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
       </tags>
   </entry>
 </search>
