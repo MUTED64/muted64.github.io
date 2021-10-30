@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="整理 CTF 中 PHP 相关的利用姿势，不定期补充。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP相关姿势">
+<meta property="og:url" content="http://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/index.html">
+<meta property="og:site_name" content="MUTED&#39;s Blog">
+<meta property="og:description" content="整理 CTF 中 PHP 相关的利用姿势，不定期补充。">
+<meta property="article:published_time" content="2020-06-16T11:30:37.000Z">
+<meta property="article:modified_time" content="2020-06-16T13:54:06.267Z">
+<meta property="article:author" content="MUTED">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="PHP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>PHP相关姿势 | MUTED's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MUTED's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MUTED's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">MUTED的网络自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="MUTED">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MUTED's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PHP相关姿势
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-06-16 19:30:37 / 修改时间：21:54:06" itemprop="dateCreated datePublished" datetime="2020-06-16T19:30:37+08:00">2020-06-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" itemprop="url" rel="index"><span itemprop="name">网络安全</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>整理 CTF 中 PHP 相关的利用姿势，不定期补充。</p>
+<a id="more"></a>
+
+<h2 id="弱类型相关姿势"><a href="#弱类型相关姿势" class="headerlink" title="弱类型相关姿势"></a>弱类型相关姿势</h2><p>弱类型的语言对变量的数据类型没有限制，你可以在任何地时候将变量赋值给任意的其他类型的变量，同时变量也可以转换成任意地其他类型的数据。</p>
+<h3 id="比较操作符"><a href="#比较操作符" class="headerlink" title="比较操作符"></a>比较操作符</h3><h4 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h4><p>弱等的比较中不需左右两边的类型相等，会经过转换变成相同的类型后比较，由此产生安全问题。如：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$a=<span class="keyword">NULL</span>;$b=<span class="keyword">FALSE</span>;  <span class="comment">//$a==$b</span></span><br><span class="line">$a=<span class="string">''</span>;$b=<span class="keyword">NULL</span>;  <span class="comment">//$a==$b</span></span><br></pre></td></tr></table></figure>
+
+<p>还有，bool类型的true跟任意字符串可以弱类型相等。</p>
+<p>以及类型转换的一些规则，如字符串转数字会从不满足转换规则的位置开始截断只取最前边的数字部分而不会报错等。（ 注：数字到字符串可以用strval()，字符串和数字可以用intval() ）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span> == <span class="string">'0'</span>		<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> == <span class="string">'abcdefg'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="number">0</span> === <span class="string">'abcdefg'</span>	<span class="comment">//false</span></span><br><span class="line"><span class="number">1</span> == <span class="string">'1abcdef'</span>	<span class="comment">//true</span></span><br><span class="line"><span class="string">"0e123456"</span>==<span class="string">"0e4456789"</span>   <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="哈希比较"><a href="#哈希比较" class="headerlink" title="哈希比较"></a>哈希比较</h4><h5 id="md5-弱等的绕过"><a href="#md5-弱等的绕过" class="headerlink" title="md5 弱等的绕过"></a>md5 弱等的绕过</h5><p>md5(‘240610708’) == md5(‘QNKCDZO’) (0exxxxxxx)</p>
+<p>在进行比较运算时，如果遇到了0e\d+这种字符串，就会将这种字符串解析为科学计数法。所以上面例子中2个数的值都是0因而就相等了。如果不满足0e\d+这种模式就不会相等。</p>
+<p>0e\d+ 的字符串整理：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">QNKCDZO</span><br><span class="line"><span class="number">0e830400451993494058024219903391</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s155964671a</span><br><span class="line"><span class="number">0e342768416822451524974117254469</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s214587387a</span><br><span class="line"><span class="number">0e848240448830537924465865611904</span></span><br><span class="line">s878926199a</span><br><span class="line"><span class="number">0e545993274517709034328855841020</span></span><br><span class="line">s1091221200a</span><br><span class="line"><span class="number">0e940624217856561557816327384675</span></span><br><span class="line">s1885207154a</span><br><span class="line"><span class="number">0e509367213418206700842008763514</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>强等的绕过方法放在后文的 内置函数的参数松散性 一节中。</p>
+<h5 id="绕过-md5-函数注入-MySQL"><a href="#绕过-md5-函数注入-MySQL" class="headerlink" title="绕过 md5()函数注入 MySQL"></a>绕过 md5()函数注入 MySQL</h5><p><code>ffifdyop</code> 这个字符串被 md5 哈希了之后会变成 276f722736c95d99e921722cf9ed621c，这个字符串前几位刚好是 ‘ or ‘6（<code>&#39;or&#39;6\xc9]\x99\xe9!r,\xf9\xedb\x1c</code>），而 Mysql 刚好又会把 hex 转成 ascii 解释，因此拼接之后的形式是 <code>select * from &#39;admin&#39; where password=&#39;&#39; or &#39;6xxxxx&#39;</code></p>
+<p>等价于 or 一个永真式，因此相当于万能密码，可以绕过 md5()函数。</p>
+<p>或者 129581926211651571912466741651878684928，<br>md5 值为 <code>\x06\xdaT0D\x9f\x8fo#\xdf\xc1&#39;or&#39;8</code> 也可行。</p>
+<h4 id="十六进制转换"><a href="#十六进制转换" class="headerlink" title="十六进制转换"></a>十六进制转换</h4><p>还存在一种十六进制余字符串进行比较运算时的问题。例子如下：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"123456"</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="number">123456</span>		<span class="comment">//true</span></span><br><span class="line"><span class="string">"0x1e240"</span>==<span class="string">"1e240"</span>		<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
+<p>当其中的一个字符串是0x开头的时候，PHP会将此字符串解析成为十进制然后再进行比较，0x1e240解析成为十进制就是123456，所以与 int 类型和 string 类型的 123456 比较都是相等。攻防平台中的<strong>起名字真难</strong>就是考察的这个特性。</p>
+<h4 id="json绕过"><a href="#json绕过" class="headerlink" title="json绕过"></a>json绕过</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'message'</span>])) &#123;</span><br><span class="line">    $message = json_decode($_POST[<span class="string">'message'</span>]);</span><br><span class="line">    $key =<span class="string">"*********"</span>;</span><br><span class="line">    <span class="keyword">if</span> ($message-&gt;key ==$key ) &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"flag"</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"fail"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">else</span>&#123;</span><br><span class="line">     <span class="keyword">echo</span> <span class="string">"~~~~"</span>;</span><br><span class="line"> &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>输入一个json类型的字符串，json_decode函数解密成一个数组，判断数组中key的值是否等于$key的值，但$key的值我们不知道,这时我们构造一个和任意字符串返回为真的数组{“key”:true}。即可绕过。</p>
+<p>payload: message={“key”,true}</p>
+<h3 id="内置函数的参数松散性"><a href="#内置函数的参数松散性" class="headerlink" title="内置函数的参数松散性"></a>内置函数的参数松散性</h3><h4 id="md5-强等的绕过"><a href="#md5-强等的绕过" class="headerlink" title="md5()  强等的绕过"></a>md5()  强等的绕过</h4><p>md5()中的需要是一个string类型的参数。如果md5 函数的参数是一个数组值，会导致函数返回 false。除了 md5 之外 sha1 函数也有这个特性。 例如传入为 <code>?a[]=1&amp;b[]=2</code></p>
+<p> 或者找到 md5 值相等的二进制数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line"></span><br><span class="line">b&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure>
+
+<h4 id="strcmp"><a href="#strcmp" class="headerlink" title="strcmp()"></a>strcmp()</h4><p>strcmp()函数在PHP官方手册中的描述是<code>int strcmp ( string $str1 , string $str2 )</code>,需要给strcmp()传递2个string类型的参数。如果str1小于str2,返回-1，相等返回0，否则返回1。strcmp函数比较字符串的本质是将两个变量转换为ascii，然后进行减法运算，然后根据运算结果来决定返回值。<br>如果传入给出strcmp()的参数是其它类型，可能产生其它不希望的结果。如：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$<span class="built_in">array</span>=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">var_dump(strcmp($<span class="built_in">array</span>,<span class="string">'123'</span>)); <span class="comment">//null,在某种意义上null也就是相当于false，。</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="switch"><a href="#switch" class="headerlink" title="switch()"></a>switch()</h4><p>如果switch是数字类型的case的判断时，switch会将其中的参数转换为int类型。如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$i =<span class="string">"2abc"</span>;</span><br><span class="line"><span class="keyword">switch</span> ($i) &#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line"><span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is less than 3 but not negative"</span>;</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="number">3</span>:</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"i is 3"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个时候程序输出的是<code>i is less than 3 but not negative</code>，是由于switch()函数将$i进行了类型转换，转换结果为2。</p>
+<h4 id="in-array"><a href="#in-array" class="headerlink" title="in_array()"></a>in_array()</h4><p>在PHP手册中，in_array()函数的解释是<code>bool in_array ( mixed $needle , array $haystack [, bool $strict = FALSE ] )</code>,如果strict参数没有提供，那么in_array就会使用松散比较来判断$needle是否在$haystack中。当strince的值为true时，needls的类型和haystack中的类型会被严格比较。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$<span class="built_in">array</span>=<span class="literal">[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,'<span class="number">3</span>']</span>;</span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('<span class="params">abc</span>', $<span class="params">array</span>)</span>);  <span class="comment">//true</span></span><br><span class="line">var<span class="constructor">_dump(<span class="params">in_array</span>('1bc', $<span class="params">array</span>)</span>);	<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+<p>array_search()与in_array()也有一样的问题。</p>
+<h2 id="PHP-Filter-相关姿势"><a href="#PHP-Filter-相关姿势" class="headerlink" title="PHP Filter 相关姿势"></a>PHP Filter 相关姿势</h2><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php://<span class="built_in">filter</span>/<span class="built_in">read</span>=<span class="built_in">convert</span>.base64-encode/resource=</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/PHP/" rel="tag"># PHP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/" rel="prev" title="SQL注入笔记">
+      <i class="fa fa-chevron-left"></i> SQL注入笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/" rel="next" title="CTF中琐碎的姿势们">
+      CTF中琐碎的姿势们 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#弱类型相关姿势"><span class="nav-number">1.</span> <span class="nav-text">弱类型相关姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#比较操作符"><span class="nav-number">1.1.</span> <span class="nav-text">比较操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哈希比较"><span class="nav-number">1.1.2.</span> <span class="nav-text">哈希比较</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#md5-弱等的绕过"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">md5 弱等的绕过</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#绕过-md5-函数注入-MySQL"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">绕过 md5()函数注入 MySQL</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十六进制转换"><span class="nav-number">1.1.3.</span> <span class="nav-text">十六进制转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json绕过"><span class="nav-number">1.1.4.</span> <span class="nav-text">json绕过</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数的参数松散性"><span class="nav-number">1.2.</span> <span class="nav-text">内置函数的参数松散性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#md5-强等的绕过"><span class="nav-number">1.2.1.</span> <span class="nav-text">md5()  强等的绕过</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#strcmp"><span class="nav-number">1.2.2.</span> <span class="nav-text">strcmp()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch"><span class="nav-number">1.2.3.</span> <span class="nav-text">switch()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#in-array"><span class="nav-number">1.2.4.</span> <span class="nav-text">in_array()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP-Filter-相关姿势"><span class="nav-number">2.</span> <span class="nav-text">PHP Filter 相关姿势</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MUTED"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MUTED</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/muted64" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;muted64" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:muted32555664@gmail.com" title="E-Mail → mailto:muted32555664@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">MUTED</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">78k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:11</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>

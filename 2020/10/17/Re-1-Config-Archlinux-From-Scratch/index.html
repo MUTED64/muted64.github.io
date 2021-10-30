@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。下次重装系统自己能看懂就行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Re:1 Config Archlinux From Scratch">
+<meta property="og:url" content="http://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/index.html">
+<meta property="og:site_name" content="MUTED&#39;s Blog">
+<meta property="og:description" content="上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。下次重装系统自己能看懂就行">
+<meta property="article:published_time" content="2020-10-17T10:16:32.000Z">
+<meta property="article:modified_time" content="2020-10-28T12:11:18.389Z">
+<meta property="article:author" content="MUTED">
+<meta property="article:tag" content="Linux">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Re:1 Config Archlinux From Scratch | MUTED's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MUTED's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MUTED's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">MUTED的网络自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="MUTED">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MUTED's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Re:1 Config Archlinux From Scratch
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-17 18:16:32" itemprop="dateCreated datePublished" datetime="2020-10-17T18:16:32+08:00">2020-10-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-28 20:11:18" itemprop="dateModified" datetime="2020-10-28T20:11:18+08:00">2020-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index"><span itemprop="name">系统</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。<del>下次重装系统自己能看懂就行</del></p>
+<a id="more"></a>
+
+<h2 id="Create-a-new-user"><a href="#Create-a-new-user" class="headerlink" title="Create a new user"></a>Create a new user</h2><p>It is unsafe to use root for daily use. It is better to create a ordinary user.</p>
+<p>Let’s create a new user named muted.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel muted</span><br></pre></td></tr></table></figure>
+
+<p><code>-m</code> stands for creating a new folder whose name is the same as your new user. You can use <code>~</code> to access it easily. <code>-G wheel</code> stands for adding the new user “muted” to a group named “wheel”.</p>
+<p>Set a password for this user:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd muted</span><br></pre></td></tr></table></figure>
+
+<h2 id="Config-sudo"><a href="#Config-sudo" class="headerlink" title="Config sudo"></a>Config sudo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/vim /usr/bin/vi</span><br><span class="line">visudo</span><br></pre></td></tr></table></figure>
+
+<p>Uncomment <code># %wheel ALL=(ALL)ALL</code>, then reboot. This time your new user is able to use <code>sudo</code> command.</p>
+<h2 id="Graphical-interface-installation"><a href="#Graphical-interface-installation" class="headerlink" title="Graphical interface installation"></a>Graphical interface installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dhcpcd  <span class="comment"># Connet to the Internet</span></span><br><span class="line">sudo pacman -S xf86-video-intel  <span class="comment"># If your GPU is from Intel</span></span><br></pre></td></tr></table></figure>
+
+<p>See also: <a href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Xorg#Driver_installation</a></p>
+<p>Now install Xorg and some necessary packages:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg xorg-server plasma dolphin kate kdialog konsole fsearch dragon ffmpegthumbs sddm sddm-kcm</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
+
+<p><code>kde-meta-kdeadmin</code> <code>kde-meta-kdeutils</code> <code>kde-meta-kdegraphics</code> have been removed because of obsoleteness.</p>
+<h2 id="Config-your-Internet"><a href="#Config-your-Internet" class="headerlink" title="Config your Internet"></a>Config your Internet</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> netctl</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> NetworkManager  <span class="comment"># Draw attention on UPPER and lower case</span></span><br><span class="line">sudo pacman -S network-manager-applet</span><br></pre></td></tr></table></figure>
+
+<h2 id="Use-pacman-mirror"><a href="#Use-pacman-mirror" class="headerlink" title="Use pacman mirror"></a>Use pacman mirror</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
+
+<p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
+<p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
+<h2 id="Use-archlinuxcn-repository"><a href="#Use-archlinuxcn-repository" class="headerlink" title="Use archlinuxcn repository"></a>Use archlinuxcn repository</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+<p>At the end of file add:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+
+<p>If you are a ‘Xidianer’ too, you can also:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://linux.xidian.edu.cn/mirrors/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
+
+<p>Then:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy</span><br><span class="line">sudo pacman -Syu</span><br><span class="line">sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+
+<h2 id="Use-AUR-repository-with-yay"><a href="#Use-AUR-repository-with-yay" class="headerlink" title="Use AUR repository with yay"></a>Use AUR repository with yay</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br><span class="line">yay -Syu --devel --combinedupgrade --save</span><br></pre></td></tr></table></figure>
+
+<p>Then change current <code>aururl</code> to <code>https://aur.tuna.tsinghua.edu.cn</code>.</p>
+<h2 id="Use-fish-shell-as-your-default-shell"><a href="#Use-fish-shell-as-your-default-shell" class="headerlink" title="Use fish shell as  your default shell"></a>Use fish shell as  your default shell</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fish</span><br></pre></td></tr></table></figure>
+
+
+<p>Set fish the default shell on Konsole: <code>Konsole -&gt; Settings -&gt; Edit Current Profile</code>, choose /bin/fish as default command, Then restart Konsole.</p>
+<p>Use fish as default user shell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo chsh -s /usr/bin/fish root</span><br><span class="line">sudo chsh -s /usr/bin/fish [username]</span><br></pre></td></tr></table></figure>
+
+<p>Set greeting words:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> fish_greeting <span class="string">'Your Greeting Words'</span></span><br></pre></td></tr></table></figure>
+
+<p>Config fish shell:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fish_config</span><br></pre></td></tr></table></figure>
+
+<p>I recommend to set some abbreviations, for example:</p>
+<p><code>pc</code> is short for <code>proxychains</code></p>
+<p><code>pmc</code> is short for <code>sudo vim /etc/pacman.d/mirrorlist</code></p>
+<p><code>pmi</code> is short for <code>sudo pacman -S</code></p>
+<p><code>pms</code> is short for <code>sudo pacman -Ss</code></p>
+<p><code>pmu</code> is short for <code>sudo pacman -Syyu</code></p>
+<h2 id="Change-hosts-Github"><a href="#Change-hosts-Github" class="headerlink" title="Change hosts (Github)"></a>Change hosts (Github)</h2><p>Seems not very useful for me but… just record it here in case that some day I need it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S dnsutils</span><br></pre></td></tr></table></figure>
+
+
+<p>Use <code>dig</code> or <code>nslookup</code> command to build a hosts file yourself.</p>
+<h2 id="Bypass-GFW"><a href="#Bypass-GFW" class="headerlink" title="Bypass GFW"></a>Bypass GFW</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S v2ray qv2ray proxychains-ng</span><br></pre></td></tr></table></figure>
+
+<p>More? …sorry but I won’t tell you more🤪</p>
+<p><strong>Caution! : Set your system time correctly first, or you can never success.</strong></p>
+<p>If you want some rules, look at here: <a href="https://github.com/Loyalsoldier/v2ray-rules-dat" target="_blank" rel="noopener">https://github.com/Loyalsoldier/v2ray-rules-dat</a>, just put geosite and geoip into <code>/usr/share/v2ray/</code>. Easy!</p>
+<h2 id="Fonts-config"><a href="#Fonts-config" class="headerlink" title="Fonts config"></a>Fonts config</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic nerd-fonts-jetbrains-mono wqy-microhei wqy-zenhei</span><br></pre></td></tr></table></figure>
+
+
+<p>Download the config file at <a href="https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf" target="_blank" rel="noopener">https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf</a>, put it into <code>~/.config/fontconfig/fonts.conf</code>, log out and log in, then it works.</p>
+<h2 id="Install-Google-chrome"><a href="#Install-Google-chrome" class="headerlink" title="Install Google-chrome"></a>Install Google-chrome</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S google-chrome</span><br></pre></td></tr></table></figure>
+
+<p>Caution: the bin file named <code>google-chrome-stable</code>, so if you want to start it use command line, use:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">google-chrome-stable</span><br></pre></td></tr></table></figure>
+
+<h2 id="Chinese-input"><a href="#Chinese-input" class="headerlink" title="Chinese input"></a>Chinese input</h2><p>I chose Rime(fcitx5) as my Chinese input scheme instead of sogou pinyin because the latter has some strange conflict with Jetbrains IDEs. <del>🔪🔪🔪Fuck Sogou</del></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-configtool</span><br><span class="line">sudo pacman -S fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5</span><br><span class="line">sudo pacman -S fcitx5-rime</span><br></pre></td></tr></table></figure>
+
+<p><code>fcitx-configtool -&gt; add rime</code></p>
+<p>Now let’s config it:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.xprofile</span><br></pre></td></tr></table></figure>
+
+<p>Then add:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE-fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br><span class="line">fcitx5 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>Log out then Log in. It works. But… It’s not BEEEAAAUTIFUL enough! </p>
+<p><strong>RXnb! Let’s use RX’s skin for fcitx5 input method!</strong><br><a href="https://github.com/Reverier-Xu/RxWe10-Fcitx5" target="_blank" rel="noopener">https://github.com/Reverier-Xu/RxWe10-Fcitx5</a><br>Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/.config/fcitx5/conf/classicui.conf</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 垂直候选列表</span></span><br><span class="line">Vertical Candidate List=False</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按屏幕 DPI 使用</span></span><br><span class="line">PerScreenDPI=True</span><br><span class="line"></span><br><span class="line"><span class="comment"># Font (设置成你喜欢的字体)</span></span><br><span class="line">Font=<span class="string">"字体字体字体字体写在这里"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题</span></span><br><span class="line">Theme=RxWe10-light</span><br></pre></td></tr></table></figure>
+
+<p>Or you can use some famous theme such as:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-material-color</span><br></pre></td></tr></table></figure>
+
+<p>See Also: <a href="https://github.com/hosxy/Fcitx5-Material-Color" target="_blank" rel="noopener">https://github.com/hosxy/Fcitx5-Material-Color</a></p>
+<p>If you want to use simplified Chinese, create a new file named <code>default.custom.yaml</code> under <code>$HOME/.local/share/fcitx5/rime/</code> . With <code>default.yaml</code> in <code>./build</code> folder as reference, you can customize your settings freely. Also, you can turn to <code>/usr/share/rime-data/</code> to do those things.</p>
+<h2 id="Install-Jetbrains-IDEs"><a href="#Install-Jetbrains-IDEs" class="headerlink" title="Install Jetbrains IDEs"></a>Install Jetbrains IDEs</h2><p>Developers necessity. Use <code>pacman</code> or <code>yay</code> .</p>
+<h2 id="Install-Tencent-shits"><a href="#Install-Tencent-shits" class="headerlink" title="Install Tencent shits"></a>Install Tencent shits</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
+
+<p>To use deepin-wine I have to enable multilib since my Archlinux is x64 version (?)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Sy deepin.com.qq.office</span><br></pre></td></tr></table></figure>
+
+<p>Now TIM is installed. But we cannot run it now since it is designed to be compatible with GTK style desktops. So we:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S gnome-settings-daemon</span><br></pre></td></tr></table></figure>
+
+<p><code>System Settings -&gt; Start up and shut down -&gt; Autostart -&gt; Add Script -&gt; /usr/lib/gsd-xsettings</code></p>
+<p>Reboot. Now TIM is available. Though it is not easy to use as it is on Windows, we HAVE a TIM on Arch at least. </p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li><a href="https://www.viseator.com/2017/05/19/arch_setup/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/19/arch_setup/</a></li>
+<li><a href="https://www.wootec.top/2019/11/02/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/02/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD/</a></li>
+<li><a href="https://www.wootec.top/2019/11/15/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD-2/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/15/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD-2/</a></li>
+<li><a href="https://rocka.me/article/arch-linux-kde-plasma-install-and-config" target="_blank" rel="noopener">https://rocka.me/article/arch-linux-kde-plasma-install-and-config</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/17/Re-0-Install-Archlinux-From-Scratch/" rel="prev" title="Re:0 Install Archlinux From Scratch">
+      <i class="fa fa-chevron-left"></i> Re:0 Install Archlinux From Scratch
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/" rel="next" title="ArchLinux下奇怪小问题的解决">
+      ArchLinux下奇怪小问题的解决 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-new-user"><span class="nav-number">1.</span> <span class="nav-text">Create a new user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-sudo"><span class="nav-number">2.</span> <span class="nav-text">Config sudo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graphical-interface-installation"><span class="nav-number">3.</span> <span class="nav-text">Graphical interface installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-your-Internet"><span class="nav-number">4.</span> <span class="nav-text">Config your Internet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-pacman-mirror"><span class="nav-number">5.</span> <span class="nav-text">Use pacman mirror</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-archlinuxcn-repository"><span class="nav-number">6.</span> <span class="nav-text">Use archlinuxcn repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-AUR-repository-with-yay"><span class="nav-number">7.</span> <span class="nav-text">Use AUR repository with yay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-fish-shell-as-your-default-shell"><span class="nav-number">8.</span> <span class="nav-text">Use fish shell as  your default shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-hosts-Github"><span class="nav-number">9.</span> <span class="nav-text">Change hosts (Github)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bypass-GFW"><span class="nav-number">10.</span> <span class="nav-text">Bypass GFW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fonts-config"><span class="nav-number">11.</span> <span class="nav-text">Fonts config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Google-chrome"><span class="nav-number">12.</span> <span class="nav-text">Install Google-chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chinese-input"><span class="nav-number">13.</span> <span class="nav-text">Chinese input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jetbrains-IDEs"><span class="nav-number">14.</span> <span class="nav-text">Install Jetbrains IDEs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Tencent-shits"><span class="nav-number">15.</span> <span class="nav-text">Install Tencent shits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">16.</span> <span class="nav-text">References</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MUTED"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">MUTED</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/muted64" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;muted64" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:muted32555664@gmail.com" title="E-Mail → mailto:muted32555664@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">MUTED</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">78k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:11</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
