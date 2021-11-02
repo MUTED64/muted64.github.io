@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>MUTED&#39;s Blog</title>
-  <icon>http://blog.muted.top/icon.png</icon>
+  <icon>https://blog.muted.top/icon.png</icon>
   <subtitle>MUTED的网络自留地</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.muted.top/"/>
-  <updated>2021-10-30T14:46:03.484Z</updated>
-  <id>http://blog.muted.top/</id>
+  <link href="https://blog.muted.top/"/>
+  <updated>2021-11-02T06:37:48.370Z</updated>
+  <id>https://blog.muted.top/</id>
   
   <author>
     <name>MUTED</name>
@@ -17,9 +17,34 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>CVE-2021-31760漏洞复现与CSRF攻击的分析</title>
+    <link href="https://blog.muted.top/2021/11/02/CVE-2021-31760%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8ECSRF%E6%94%BB%E5%87%BB%E7%9A%84%E5%88%86%E6%9E%90/"/>
+    <id>https://blog.muted.top/2021/11/02/CVE-2021-31760%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8ECSRF%E6%94%BB%E5%87%BB%E7%9A%84%E5%88%86%E6%9E%90/</id>
+    <published>2021-11-02T02:33:42.000Z</published>
+    <updated>2021-11-02T06:37:48.370Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;通过 CVE-2021-31760 对 CSRF 攻击做了一点更加深入的了解。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="Web" scheme="https://blog.muted.top/tags/Web/"/>
+    
+      <category term="CVE" scheme="https://blog.muted.top/tags/CVE/"/>
+    
+      <category term="CSRF" scheme="https://blog.muted.top/tags/CSRF/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Linux LVM 简记</title>
-    <link href="http://blog.muted.top/2021/10/30/Linux-LVM-%E7%AE%80%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2021/10/30/Linux-LVM-%E7%AE%80%E8%AE%B0/</id>
+    <link href="https://blog.muted.top/2021/10/30/Linux-LVM-%E7%AE%80%E8%AE%B0/"/>
+    <id>https://blog.muted.top/2021/10/30/Linux-LVM-%E7%AE%80%E8%AE%B0/</id>
     <published>2021-10-30T10:23:15.000Z</published>
     <updated>2021-10-30T14:46:03.484Z</updated>
     
@@ -30,19 +55,19 @@
     </summary>
     
     
-      <category term="开发" scheme="http://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
-      <category term="LVM" scheme="http://blog.muted.top/tags/LVM/"/>
+      <category term="LVM" scheme="https://blog.muted.top/tags/LVM/"/>
     
   </entry>
   
   <entry>
     <title>使用Optimus在ArchLinux下配置双显卡双显示器</title>
-    <link href="http://blog.muted.top/2021/04/05/%E4%BD%BF%E7%94%A8Optimus%E5%9C%A8ArchLinux%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%99%A8/"/>
-    <id>http://blog.muted.top/2021/04/05/%E4%BD%BF%E7%94%A8Optimus%E5%9C%A8ArchLinux%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%99%A8/</id>
+    <link href="https://blog.muted.top/2021/04/05/%E4%BD%BF%E7%94%A8Optimus%E5%9C%A8ArchLinux%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%99%A8/"/>
+    <id>https://blog.muted.top/2021/04/05/%E4%BD%BF%E7%94%A8Optimus%E5%9C%A8ArchLinux%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%99%A8/</id>
     <published>2021-04-05T14:05:12.000Z</published>
     <updated>2021-04-05T14:49:42.960Z</updated>
     
@@ -53,19 +78,19 @@
     </summary>
     
     
-      <category term="系统" scheme="http://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
-      <category term="显卡" scheme="http://blog.muted.top/tags/%E6%98%BE%E5%8D%A1/"/>
+      <category term="显卡" scheme="https://blog.muted.top/tags/%E6%98%BE%E5%8D%A1/"/>
     
   </entry>
   
   <entry>
     <title>妙语集III</title>
-    <link href="http://blog.muted.top/2020/11/15/%E5%A6%99%E8%AF%AD%E9%9B%86III/"/>
-    <id>http://blog.muted.top/2020/11/15/%E5%A6%99%E8%AF%AD%E9%9B%86III/</id>
+    <link href="https://blog.muted.top/2020/11/15/%E5%A6%99%E8%AF%AD%E9%9B%86III/"/>
+    <id>https://blog.muted.top/2020/11/15/%E5%A6%99%E8%AF%AD%E9%9B%86III/</id>
     <published>2020-11-15T09:40:55.000Z</published>
     <updated>2021-05-09T13:13:11.586Z</updated>
     
@@ -76,17 +101,17 @@
     </summary>
     
     
-      <category term="悠哉日常" scheme="http://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
+      <category term="悠哉日常" scheme="https://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
     
     
-      <category term="妙语集" scheme="http://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
+      <category term="妙语集" scheme="https://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>妙语集II</title>
-    <link href="http://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86II/"/>
-    <id>http://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86II/</id>
+    <link href="https://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86II/"/>
+    <id>https://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86II/</id>
     <published>2020-10-24T09:28:43.000Z</published>
     <updated>2020-10-28T12:21:50.458Z</updated>
     
@@ -97,17 +122,17 @@
     </summary>
     
     
-      <category term="悠哉日常" scheme="http://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
+      <category term="悠哉日常" scheme="https://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
     
     
-      <category term="妙语集" scheme="http://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
+      <category term="妙语集" scheme="https://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>妙语集I</title>
-    <link href="http://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86I/"/>
-    <id>http://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86I/</id>
+    <link href="https://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86I/"/>
+    <id>https://blog.muted.top/2020/10/24/%E5%A6%99%E8%AF%AD%E9%9B%86I/</id>
     <published>2020-10-24T09:11:26.000Z</published>
     <updated>2020-10-24T09:28:24.049Z</updated>
     
@@ -118,17 +143,17 @@
     </summary>
     
     
-      <category term="悠哉日常" scheme="http://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
+      <category term="悠哉日常" scheme="https://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
     
     
-      <category term="妙语集" scheme="http://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
+      <category term="妙语集" scheme="https://blog.muted.top/tags/%E5%A6%99%E8%AF%AD%E9%9B%86/"/>
     
   </entry>
   
   <entry>
     <title>ArchLinux下奇怪小问题的解决</title>
-    <link href="http://blog.muted.top/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
-    <id>http://blog.muted.top/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
+    <link href="https://blog.muted.top/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/"/>
+    <id>https://blog.muted.top/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/</id>
     <published>2020-10-18T05:08:43.000Z</published>
     <updated>2020-10-18T15:30:28.756Z</updated>
     
@@ -139,17 +164,17 @@
     </summary>
     
     
-      <category term="系统" scheme="http://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Re:1 Config Archlinux From Scratch</title>
-    <link href="http://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/"/>
-    <id>http://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/</id>
+    <link href="https://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/"/>
+    <id>https://blog.muted.top/2020/10/17/Re-1-Config-Archlinux-From-Scratch/</id>
     <published>2020-10-17T10:16:32.000Z</published>
     <updated>2020-10-28T12:11:18.389Z</updated>
     
@@ -160,17 +185,17 @@
     </summary>
     
     
-      <category term="系统" scheme="http://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Re:0 Install Archlinux From Scratch</title>
-    <link href="http://blog.muted.top/2020/10/17/Re-0-Install-Archlinux-From-Scratch/"/>
-    <id>http://blog.muted.top/2020/10/17/Re-0-Install-Archlinux-From-Scratch/</id>
+    <link href="https://blog.muted.top/2020/10/17/Re-0-Install-Archlinux-From-Scratch/"/>
+    <id>https://blog.muted.top/2020/10/17/Re-0-Install-Archlinux-From-Scratch/</id>
     <published>2020-10-17T04:32:00.000Z</published>
     <updated>2020-10-17T14:38:11.585Z</updated>
     
@@ -181,17 +206,17 @@
     </summary>
     
     
-      <category term="系统" scheme="http://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Ubuntu+gunicorn+nginx在ECS上搭建Flask环境</title>
-    <link href="http://blog.muted.top/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/"/>
-    <id>http://blog.muted.top/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</id>
+    <link href="https://blog.muted.top/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/"/>
+    <id>https://blog.muted.top/2020/10/01/gunicorn+nginx%E5%9C%A8ECS%E4%B8%8A%E6%90%AD%E5%BB%BAFlask%E7%8E%AF%E5%A2%83/</id>
     <published>2020-10-01T05:51:00.000Z</published>
     <updated>2020-10-01T06:51:32.770Z</updated>
     
@@ -202,19 +227,19 @@
     </summary>
     
     
-      <category term="开发" scheme="http://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="Python" scheme="http://blog.muted.top/tags/Python/"/>
+      <category term="Python" scheme="https://blog.muted.top/tags/Python/"/>
     
-      <category term="Web" scheme="http://blog.muted.top/tags/Web/"/>
+      <category term="Web" scheme="https://blog.muted.top/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>解决更改Plasma桌面后KDE系统设置无法打开的问题</title>
-    <link href="http://blog.muted.top/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/"/>
-    <id>http://blog.muted.top/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</id>
+    <link href="https://blog.muted.top/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+    <id>https://blog.muted.top/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/</id>
     <published>2020-09-11T03:31:32.000Z</published>
     <updated>2020-09-11T09:57:23.410Z</updated>
     
@@ -225,19 +250,19 @@
     </summary>
     
     
-      <category term="系统" scheme="http://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="Linux" scheme="http://blog.muted.top/tags/Linux/"/>
+      <category term="Linux" scheme="https://blog.muted.top/tags/Linux/"/>
     
-      <category term="KDE" scheme="http://blog.muted.top/tags/KDE/"/>
+      <category term="KDE" scheme="https://blog.muted.top/tags/KDE/"/>
     
   </entry>
   
   <entry>
     <title>文件上传操作整理</title>
-    <link href="http://blog.muted.top/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/"/>
-    <id>http://blog.muted.top/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</id>
+    <link href="https://blog.muted.top/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/"/>
+    <id>https://blog.muted.top/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/</id>
     <published>2020-07-20T04:44:58.000Z</published>
     <updated>2020-07-20T08:21:19.096Z</updated>
     
@@ -248,17 +273,17 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
+      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>PHP基础补完</title>
-    <link href="http://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/"/>
-    <id>http://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</id>
+    <link href="https://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/"/>
+    <id>https://blog.muted.top/2020/06/16/PHP%E5%9F%BA%E7%A1%80%E8%A1%A5%E5%AE%8C/</id>
     <published>2020-06-16T12:51:21.000Z</published>
     <updated>2020-10-17T04:42:52.798Z</updated>
     
@@ -269,19 +294,19 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="PHP" scheme="http://blog.muted.top/tags/PHP/"/>
+      <category term="PHP" scheme="https://blog.muted.top/tags/PHP/"/>
     
-      <category term="Web" scheme="http://blog.muted.top/tags/Web/"/>
+      <category term="Web" scheme="https://blog.muted.top/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>正则学习笔记</title>
-    <link href="http://blog.muted.top/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://blog.muted.top/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://blog.muted.top/2020/06/16/%E6%AD%A3%E5%88%99%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2020-06-16T12:24:43.000Z</published>
     <updated>2020-10-17T04:43:15.625Z</updated>
     
@@ -292,19 +317,19 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
+      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
-      <category term="正则" scheme="http://blog.muted.top/tags/%E6%AD%A3%E5%88%99/"/>
+      <category term="正则" scheme="https://blog.muted.top/tags/%E6%AD%A3%E5%88%99/"/>
     
   </entry>
   
   <entry>
     <title>Tkinter学习笔记</title>
-    <link href="http://blog.muted.top/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://blog.muted.top/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://blog.muted.top/2020/06/16/Tkinter%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
     <published>2020-06-16T11:43:31.000Z</published>
     <updated>2020-10-01T06:09:23.036Z</updated>
     
@@ -315,21 +340,21 @@
     </summary>
     
     
-      <category term="开发" scheme="http://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://blog.muted.top/categories/%E5%BC%80%E5%8F%91/"/>
     
     
-      <category term="开发" scheme="http://blog.muted.top/tags/%E5%BC%80%E5%8F%91/"/>
+      <category term="开发" scheme="https://blog.muted.top/tags/%E5%BC%80%E5%8F%91/"/>
     
-      <category term="python" scheme="http://blog.muted.top/tags/python/"/>
+      <category term="python" scheme="https://blog.muted.top/tags/python/"/>
     
-      <category term="GUI" scheme="http://blog.muted.top/tags/GUI/"/>
+      <category term="GUI" scheme="https://blog.muted.top/tags/GUI/"/>
     
   </entry>
   
   <entry>
     <title>CTF中琐碎的姿势们</title>
-    <link href="http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/"/>
-    <id>http://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</id>
+    <link href="https://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/"/>
+    <id>https://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</id>
     <published>2020-06-16T11:42:02.000Z</published>
     <updated>2020-07-23T02:42:17.929Z</updated>
     
@@ -340,17 +365,17 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
+      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
   </entry>
   
   <entry>
     <title>PHP相关姿势</title>
-    <link href="http://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/"/>
-    <id>http://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</id>
+    <link href="https://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/"/>
+    <id>https://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</id>
     <published>2020-06-16T11:30:37.000Z</published>
     <updated>2020-06-16T13:54:06.267Z</updated>
     
@@ -361,19 +386,19 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
+      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
-      <category term="PHP" scheme="http://blog.muted.top/tags/PHP/"/>
+      <category term="PHP" scheme="https://blog.muted.top/tags/PHP/"/>
     
   </entry>
   
   <entry>
     <title>SQL注入笔记</title>
-    <link href="http://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/"/>
-    <id>http://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/"/>
+    <id>https://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</id>
     <published>2020-06-01T10:13:28.000Z</published>
     <updated>2020-07-23T14:33:31.002Z</updated>
     
@@ -384,12 +409,12 @@
     </summary>
     
     
-      <category term="网络安全" scheme="http://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
     
     
-      <category term="CTF" scheme="http://blog.muted.top/tags/CTF/"/>
+      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
-      <category term="渗透测试" scheme="http://blog.muted.top/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
+      <category term="渗透测试" scheme="https://blog.muted.top/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
