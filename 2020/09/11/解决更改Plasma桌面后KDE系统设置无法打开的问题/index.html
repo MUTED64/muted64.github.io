@@ -14,10 +14,11 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。">
@@ -194,7 +195,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2020/09/11/%E8%A7%A3%E5%86%B3%E6%9B%B4%E6%94%B9Plasma%E6%A1%8C%E9%9D%A2%E5%90%8EKDE%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE%E6%97%A0%E6%B3%95%E6%89%93%E5%BC%80%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="MUTED">
       <meta itemprop="description" content="">
     </span>
@@ -254,18 +255,25 @@
       
         <p>更新 Manjaro Linux(KDE) 的 Plasma 主题包之后发现系统设置无法打开的解决方案。</p>
 <a id="more"></a>
-
-<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在 Manjaro Linux 下配置 KDE Plasma 的时候更换了McMojave 主题。更换之后发现系统设置无法打开。猜测是由于主题的冲突导致的，于是猜测用切换成默认主题的方式可以解决此问题。但是一般更换默认主题的方式都是从系统设置入手，找到外观选项再切换主题，现在系统设置的 GUI 界面无法打开，于是尝试用其它方法更换成默认主题。</p>
-<h1 id="失败的尝试"><a href="#失败的尝试" class="headerlink" title="失败的尝试"></a>失败的尝试</h1><h2 id="用中文搜索相关内容"><a href="#用中文搜索相关内容" class="headerlink" title="用中文搜索相关内容"></a>用中文搜索相关内容</h2><p>什么也没有。中文使用地区对操作系统问题的相关支持还是太薄弱了，即使有相关内容也一般都是及其过时的只言片语，相反转而去搜索英文内容的时候发现相关支持非常多，还是差距挺大的。也算获得了经验，以后遇到问题宁可去啃英文的文档也要减少对中文的依赖。</p>
-<h2 id="删除KDE设置项并重启"><a href="#删除KDE设置项并重启" class="headerlink" title="删除KDE设置项并重启"></a>删除KDE设置项并重启</h2><p>根据网络上的相关支持，将 <code>~/</code> 目录下的 <code>~/.kde/</code> 和 <code>~/.kde4/</code> 目录删除并重启，重启后发现 <code>~/.kde/</code> 目录自动生成了，其中的配置文件是根据当前主题的设置自动生成的。遂放弃。</p>
-<h2 id="重新安装-plasma-desktop-和-plasma-meta"><a href="#重新安装-plasma-desktop-和-plasma-meta" class="headerlink" title="重新安装 plasma-desktop 和 plasma-meta"></a>重新安装 plasma-desktop 和 plasma-meta</h2><p>重新安装之后发现没有任何变化。</p>
-<h1 id="成功的尝试"><a href="#成功的尝试" class="headerlink" title="成功的尝试"></a>成功的尝试</h1><h2 id="用命令行检查系统设置GUI程序的问题"><a href="#用命令行检查系统设置GUI程序的问题" class="headerlink" title="用命令行检查系统设置GUI程序的问题"></a>用命令行检查系统设置GUI程序的问题</h2><p>Konsole 中键入 <code>systemsettings5</code> 以尝试从命令行启动系统设置。发现输出错误：</p>
+<h1>问题描述</h1>
+<p>在 Manjaro Linux 下配置 KDE Plasma 的时候更换了McMojave 主题。更换之后发现系统设置无法打开。猜测是由于主题的冲突导致的，于是猜测用切换成默认主题的方式可以解决此问题。但是一般更换默认主题的方式都是从系统设置入手，找到外观选项再切换主题，现在系统设置的 GUI 界面无法打开，于是尝试用其它方法更换成默认主题。</p>
+<h1>失败的尝试</h1>
+<h2 id="用中文搜索相关内容">用中文搜索相关内容</h2>
+<p>什么也没有。中文使用地区对操作系统问题的相关支持还是太薄弱了，即使有相关内容也一般都是及其过时的只言片语，相反转而去搜索英文内容的时候发现相关支持非常多，还是差距挺大的。也算获得了经验，以后遇到问题宁可去啃英文的文档也要减少对中文的依赖。</p>
+<h2 id="删除KDE设置项并重启">删除KDE设置项并重启</h2>
+<p>根据网络上的相关支持，将 <code>~/</code> 目录下的 <code>~/.kde/</code> 和 <code>~/.kde4/</code> 目录删除并重启，重启后发现 <code>~/.kde/</code> 目录自动生成了，其中的配置文件是根据当前主题的设置自动生成的。遂放弃。</p>
+<h2 id="重新安装-plasma-desktop-和-plasma-meta">重新安装 plasma-desktop 和 plasma-meta</h2>
+<p>重新安装之后发现没有任何变化。</p>
+<h1>成功的尝试</h1>
+<h2 id="用命令行检查系统设置GUI程序的问题">用命令行检查系统设置GUI程序的问题</h2>
+<p>Konsole 中键入 <code>systemsettings5</code> 以尝试从命令行启动系统设置。发现输出错误：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cyclic dependency detected between <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and <span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:141:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/share/kpackage/genericqml/org.kde.systemsettings.sidebar/contents/ui/subcategorypage.qml:131:9: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125;</span><br><span class="line">file:///usr/lib/qt/qml/org/kde/kirigami.2/private/refreshablescrollview.qml:143:13: qml connections: implicitly defined onfoo properties <span class="keyword">in</span> connections are deprecated. use this syntax instead: <span class="keyword">function</span> onfoo(&lt;arguments&gt;) &#123; ... &#125; </span><br><span class="line">cyclic dependency detected between</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span> and</span><br><span class="line"><span class="string">"file:///usr/lib/qt/qml/org/kde/kirigami.2/styles/org.kde.desktop.plasma/units.qml"</span></span><br><span class="line">qqmlengine::setcontextforobject(): object already has a qqmlcontext qt.qpa.xcb:</span><br><span class="line">qxcbconnection: xcb error: 5 (badatom), sequence: 629, resource id: 0, major code: 20 (getproperty), minor code: 0</span><br></pre></td></tr></table></figure>
-
 <p>似乎确定了问题是由于新采用的主题产生了循环依赖之类的问题。接下来考虑如何将主题更换回默认。</p>
-<h2 id="从命令行将主题更换回-Breeze（默认主题）"><a href="#从命令行将主题更换回-Breeze（默认主题）" class="headerlink" title="从命令行将主题更换回 Breeze（默认主题）"></a>从命令行将主题更换回 Breeze（默认主题）</h2><p>使用 Konsole，键入 <code>systemsettings5 --style=Breeze</code>，绕过GUI界面从命令行直接更改主题。重启。系统设置可以打开，问题得到解决。</p>
+<h2 id="从命令行将主题更换回-Breeze（默认主题）">从命令行将主题更换回 Breeze（默认主题）</h2>
+<p>使用 Konsole，键入 <code>systemsettings5 --style=Breeze</code>，绕过GUI界面从命令行直接更改主题。重启。系统设置可以打开，问题得到解决。</p>
 <p>详请参见：<a href="https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/" target="_blank" rel="noopener">https://www.reddit.com/r/kde/comments/i0m5gz/system_settings_wont_open_after_changing/</a></p>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>中文社区的力量还是比较渺小，学英语真的很重要，英文社区啥都有（</p>
+<h1>感想</h1>
+<p>中文社区的力量还是比较渺小，学英语真的很重要，英文社区啥都有（</p>
 
     </div>
 
@@ -369,14 +377,14 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#失败的尝试"><span class="nav-number">2.</span> <span class="nav-text">失败的尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用中文搜索相关内容"><span class="nav-number">2.1.</span> <span class="nav-text">用中文搜索相关内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除KDE设置项并重启"><span class="nav-number">2.2.</span> <span class="nav-text">删除KDE设置项并重启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新安装-plasma-desktop-和-plasma-meta"><span class="nav-number">2.3.</span> <span class="nav-text">重新安装 plasma-desktop 和 plasma-meta</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#成功的尝试"><span class="nav-number">3.</span> <span class="nav-text">成功的尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用命令行检查系统设置GUI程序的问题"><span class="nav-number">3.1.</span> <span class="nav-text">用命令行检查系统设置GUI程序的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从命令行将主题更换回-Breeze（默认主题）"><span class="nav-number">3.2.</span> <span class="nav-text">从命令行将主题更换回 Breeze（默认主题）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">失败的尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用中文搜索相关内容"><span class="nav-number">2.1.</span> <span class="nav-text">用中文搜索相关内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除KDE设置项并重启"><span class="nav-number">2.2.</span> <span class="nav-text">删除KDE设置项并重启</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重新安装-plasma-desktop-和-plasma-meta"><span class="nav-number">2.3.</span> <span class="nav-text">重新安装 plasma-desktop 和 plasma-meta</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">成功的尝试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用命令行检查系统设置GUI程序的问题"><span class="nav-number">3.1.</span> <span class="nav-text">用命令行检查系统设置GUI程序的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从命令行将主题更换回-Breeze（默认主题）"><span class="nav-number">3.2.</span> <span class="nav-text">从命令行将主题更换回 Breeze（默认主题）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="MUTED"
-      src="/images/avatar.png">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">MUTED</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -470,6 +478,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

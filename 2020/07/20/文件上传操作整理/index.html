@@ -14,10 +14,11 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="获取Webshell的常见操作，整理一下。">
@@ -195,7 +196,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2020/07/20/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%93%8D%E4%BD%9C%E6%95%B4%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="MUTED">
       <meta itemprop="description" content="">
     </span>
@@ -255,8 +256,9 @@
       
         <p>获取Webshell的常见操作，整理一下。</p>
 <a id="more"></a>
-
-<h2 id="上传及绕过"><a href="#上传及绕过" class="headerlink" title="上传及绕过"></a>上传及绕过</h2><h3 id="常见上传点"><a href="#常见上传点" class="headerlink" title="常见上传点"></a>常见上传点</h3><ul>
+<h2 id="上传及绕过">上传及绕过</h2>
+<h3 id="常见上传点">常见上传点</h3>
+<ul>
 <li>上传头像</li>
 <li>上传相册</li>
 <li>上传附件</li>
@@ -264,13 +266,15 @@
 <li>前台留言资料上传</li>
 <li>编辑器文件上传</li>
 </ul>
-<h3 id="后缀绕过"><a href="#后缀绕过" class="headerlink" title="后缀绕过"></a>后缀绕过</h3><ul>
+<h3 id="后缀绕过">后缀绕过</h3>
+<ul>
 <li>PHP:php2、php3、php5、phtml、pht(是否解析需要根据配置文件中设置类型来决定)</li>
 <li>ASP：asa、cer、cdx</li>
 <li>ASPX：ascx、ashx、asac</li>
 <li>JSP：jsp、jspx、jspf</li>
 </ul>
-<h3 id="绕过类型"><a href="#绕过类型" class="headerlink" title="绕过类型"></a>绕过类型</h3><ul>
+<h3 id="绕过类型">绕过类型</h3>
+<ul>
 <li>Content-Type绕过</li>
 <li>前端绕过</li>
 <li>文件解析规则绕过</li>
@@ -281,35 +285,50 @@
 <li>文件头绕过</li>
 <li>条件竞争绕过</li>
 </ul>
-<h2 id="漏洞在系统中的差异"><a href="#漏洞在系统中的差异" class="headerlink" title="漏洞在系统中的差异"></a>漏洞在系统中的差异</h2><h3 id="IIS-5-x-6-0-解析漏洞"><a href="#IIS-5-x-6-0-解析漏洞" class="headerlink" title="IIS 5.x/6.0 解析漏洞"></a>IIS 5.x/6.0 解析漏洞</h3><p>1、当创建.asp的文件目录的时候，在此目录下的任意文件，服务器都解析为asp文件。例如：<br>漏洞目录利用形式：<a href="http://www.xxx.com/xx.asp/xx.jpg%E3%80%82" target="_blank" rel="noopener">www.xxx.com/xx.asp/xx.jpg。</a><br>xx.jpg的内容可以为一段合法的asp脚本文件。<br>2、服务器默认不解析”;“以后的内容，导致xx.asp;.jpg被解析成xx.asp<br>漏洞文件利用形式：<a href="http://www.xxx.com/xx.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp;.jpg</a><br>xx.jpg的内容可以为一段合法的asp脚本文件。</p>
-<h3 id="Nginx-解析漏洞"><a href="#Nginx-解析漏洞" class="headerlink" title="Nginx 解析漏洞"></a>Nginx 解析漏洞</h3><p>在低版本Nginx中存在一个由PHP-CGI导致的文件解析漏洞。在PHP的配置文件中有一个关键的选项cgi.fix_pathinfo在本机中位于php.ini配置文件中，默认是开启的，当URL中有不存在的文件时，PHP就会默认向前解析。</p>
+<h2 id="漏洞在系统中的差异">漏洞在系统中的差异</h2>
+<h3 id="IIS-5-x-6-0-解析漏洞">IIS 5.x/6.0 解析漏洞</h3>
+<p>1、当创建.asp的文件目录的时候，在此目录下的任意文件，服务器都解析为asp文件。例如：<br>
+漏洞目录利用形式：<a href="http://www.xxx.com/xx.asp/xx.jpg%E3%80%82" target="_blank" rel="noopener">www.xxx.com/xx.asp/xx.jpg。</a><br>
+xx.jpg的内容可以为一段合法的asp脚本文件。<br>
+2、服务器默认不解析”;“以后的内容，导致xx.asp;.jpg被解析成xx.asp<br>
+漏洞文件利用形式：<a href="http://www.xxx.com/xx.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp;.jpg</a><br>
+xx.jpg的内容可以为一段合法的asp脚本文件。</p>
+<h3 id="Nginx-解析漏洞">Nginx 解析漏洞</h3>
+<p>在低版本Nginx中存在一个由PHP-CGI导致的文件解析漏洞。在PHP的配置文件中有一个关键的选项cgi.fix_pathinfo在本机中位于php.ini配置文件中，默认是开启的，当URL中有不存在的文件时，PHP就会默认向前解析。</p>
 <p>普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。访问<code>http://www.xx.com/phpinfo.jpg/1.php</code> 这个URL时，$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP-CGI，但是PHP为什么会接受这样的参数，并将phpinfo.jpg作为PHP文件解析呢？这就要说到fix_pathinfo这个选项了。如果开启了这个选项，那么就会触发在PHP中的如下逻辑：PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg作为PHP文件来解析了。</p>
-<p>在默认Fast-CGI开启状况下上传名字为xx.jpg,内容为:<br><code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[cmd])?&gt;&#39;);?&gt;</code></p>
+<p>在默认Fast-CGI开启状况下上传名字为xx.jpg,内容为:<br>
+<code>&lt;?PHP fputs(fopen('shell.php','w'),'&lt;?php eval($_POST[cmd])?&gt;');?&gt;</code></p>
 <p>然后访问xx.jpg/.php,在这个目录下就会生成一句话木马shell.php。</p>
-<h3 id="Apache-解析漏洞"><a href="#Apache-解析漏洞" class="headerlink" title="Apache 解析漏洞"></a>Apache 解析漏洞</h3><p>Apache 在1.x和2.x版本中存在解析漏洞，例如如下地址格式：</p>
+<h3 id="Apache-解析漏洞">Apache 解析漏洞</h3>
+<p>Apache 在1.x和2.x版本中存在解析漏洞，例如如下地址格式：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www<span class="selector-class">.xxxx</span>.com/apache<span class="selector-class">.php</span><span class="selector-class">.bbb</span>.aaa</span><br></pre></td></tr></table></figure>
-
 <p>Apache从右至左开始判断后缀，若aaa非可识别后缀，再判断bbb，直到找到可识别后缀为止，然后将该可识别后缀进解析，因此如上地址解析为访问apache.php文件。</p>
 <p>另外对于Apache解析漏洞的正确说法应该是，使用module模式与php结合的所有版本apache存在未知扩展名解析漏洞，使用fastcgi模式与php结合的所有版本apache不存在此漏洞。而是否解析的后缀名在文件mime.types（互联网媒体类型（Internet media type，也称为MIME类型（<em>MIME type</em>）或内容类型（<em>content type</em>））中查找是否出现。</p>
-<h2 id="测试方法"><a href="#测试方法" class="headerlink" title="测试方法"></a>测试方法</h2><h3 id="前端验证"><a href="#前端验证" class="headerlink" title="前端验证"></a>前端验证</h3><p>只在前端利用JS来做效验，采用禁用JS上传、抓包上传都可以绕过此处限制。</p>
-<h3 id="htaccess规则文件绕过"><a href="#htaccess规则文件绕过" class="headerlink" title=".htaccess规则文件绕过"></a>.htaccess规则文件绕过</h3><p>在一些启用了.htaccess文件的网站上就可以使用此文件类型来绕过限制较全面的黑名单过滤。</p>
+<h2 id="测试方法">测试方法</h2>
+<h3 id="前端验证">前端验证</h3>
+<p>只在前端利用JS来做效验，采用禁用JS上传、抓包上传都可以绕过此处限制。</p>
+<h3 id="htaccess规则文件绕过">.htaccess规则文件绕过</h3>
+<p>在一些启用了.htaccess文件的网站上就可以使用此文件类型来绕过限制较全面的黑名单过滤。</p>
 <p>先上传一个.htaccess文件，内容为：<code>AddType application/x-httpd-php .aaa</code>。然后再上传文件后缀为.aaa的文件，让其解析为php类型文件。上传成功后即可访问并getshell。</p>
-<h3 id="文件名后缀大小写混合绕过"><a href="#文件名后缀大小写混合绕过" class="headerlink" title="文件名后缀大小写混合绕过"></a>文件名后缀大小写混合绕过</h3><p>在对后缀的判断中，如果只是对字符串进行单独的比较来判断是不是限制文件，可以采用后缀名大小写绕过形式。如<code>a.PHp</code>。</p>
-<h3 id="Windows文件流特性绕过"><a href="#Windows文件流特性绕过" class="headerlink" title="Windows文件流特性绕过"></a>Windows文件流特性绕过</h3><p>流文件，即NTFS交换数据流（alternate data  streams，简称ADS），是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，就是说除了主文件流之外还可以有许多非主文件流寄宿在主文件流中，它使用资源派生来维持与文件相关的信息。创建一个数据交换流文件的方法很简单，命令为“宿主文件:准备与宿主文件关联的数据流文件”。</p>
+<h3 id="文件名后缀大小写混合绕过">文件名后缀大小写混合绕过</h3>
+<p>在对后缀的判断中，如果只是对字符串进行单独的比较来判断是不是限制文件，可以采用后缀名大小写绕过形式。如<code>a.PHp</code>。</p>
+<h3 id="Windows文件流特性绕过">Windows文件流特性绕过</h3>
+<p>流文件，即NTFS交换数据流（alternate data  streams，简称ADS），是NTFS磁盘格式的一个特性，在NTFS文件系统下，每个文件都可以存在多个数据流，就是说除了主文件流之外还可以有许多非主文件流寄宿在主文件流中，它使用资源派生来维持与文件相关的信息。创建一个数据交换流文件的方法很简单，命令为“宿主文件:准备与宿主文件关联的数据流文件”。</p>
 <p>上传文件：<code>xxx.php::$data</code>。访问时可以直接访问xxx.php文件。</p>
-<h3 id="00截断绕过"><a href="#00截断绕过" class="headerlink" title="%00截断绕过"></a>%00截断绕过</h3><p>以上问题被绕过的根本原因是采用了一些有缺陷的黑名单限制，一般采用白名单的限制会减少相当多的绕过问题产生，但是并不意味着一定安全，在某些没有处理严格的程序上，仍然可以采用截断绕过的形式。</p>
+<h3 id="00截断绕过">%00截断绕过</h3>
+<p>以上问题被绕过的根本原因是采用了一些有缺陷的黑名单限制，一般采用白名单的限制会减少相当多的绕过问题产生，但是并不意味着一定安全，在某些没有处理严格的程序上，仍然可以采用截断绕过的形式。</p>
 <p>例如：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$is_upload = <span class="keyword">false</span>;</span><br><span class="line">$msg = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>($_POST[<span class="string">'submit'</span>]))&#123;</span><br><span class="line">    $ext_arr = <span class="keyword">array</span>(<span class="string">'jpg'</span>,<span class="string">'png'</span>,<span class="string">'gif'</span>);</span><br><span class="line">    $file_ext = substr($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],strrpos($_FILES[<span class="string">'upload_file'</span>][<span class="string">'name'</span>],<span class="string">"."</span>)+<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span>(in_array($file_ext,$ext_arr))&#123;</span><br><span class="line">        $temp_file = $_FILES[<span class="string">'upload_file'</span>][<span class="string">'tmp_name'</span>];</span><br><span class="line">        $img_path = $_POST[<span class="string">'save_path'</span>].<span class="string">"/"</span>.rand(<span class="number">10</span>, <span class="number">99</span>).date(<span class="string">"YmdHis"</span>).<span class="string">"."</span>.$file_ext;</span><br><span class="line">        <span class="keyword">if</span>(move_uploaded_file($temp_file,$img_path))&#123;</span><br><span class="line">            $is_upload = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            $msg = <span class="string">"上传失败"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $msg = <span class="string">"只允许上传.jpg|.png|.gif类型文件！"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>可以看出代码采用的白名单校验，只允许上传图片格式，理论上这个上传是不好绕过的。但是后面采用保存文件的时候，是路径拼接的形式，而路径又是从前端获取，所以我们可以采用在路径上截断。如下上传，显示文件路径中有个空格，这并不是真正意义上的空格，而是%00截断后显示成的空格。</p>
 <p><img src="https://misakikata.github.io/2019/05/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/1559095054720.png" alt="1559095054720"></p>
-<h3 id="文件头检测绕过"><a href="#文件头检测绕过" class="headerlink" title="文件头检测绕过"></a>文件头检测绕过</h3><p>JPG：文件头前十个字节为<code>FF D8 FF E0 00 10 4A 46 49 46</code>，FF D8代表SOI标记，意思是图像文件开始值。<code>4A 46 49 46</code>代表字符串JFIF标记。</p>
+<h3 id="文件头检测绕过">文件头检测绕过</h3>
+<p>JPG：文件头前十个字节为<code>FF D8 FF E0 00 10 4A 46 49 46</code>，FF D8代表SOI标记，意思是图像文件开始值。<code>4A 46 49 46</code>代表字符串JFIF标记。</p>
 <p>PNG：开头4字节为右栏中<code>‰PNG</code>字样，PNG的8字节文件署名域用来识别该文件是不是PNG文件。也就是<code>89 50 4E 47 0D 0A 1A 0A</code>。</p>
 <p>GIF：GIF89a</p>
-<h2 id="利用工具实现FUZZ"><a href="#利用工具实现FUZZ" class="headerlink" title="利用工具实现FUZZ"></a>利用工具实现FUZZ</h2><p>很多网站对上传进行拦截的时候采取的是黑名单校验，当我们看到黑名单的时候就可以考虑采取修改后缀、截断等方式尝试绕过。</p>
+<h2 id="利用工具实现FUZZ">利用工具实现FUZZ</h2>
+<p>很多网站对上传进行拦截的时候采取的是黑名单校验，当我们看到黑名单的时候就可以考虑采取修改后缀、截断等方式尝试绕过。</p>
 <p>采用工具 <a href="https://github.com/c0ny1/upload-fuzz-dic-builder" target="_blank" rel="noopener">https://github.com/c0ny1/upload-fuzz-dic-builder</a> 来生成fuzz的字典。执行命令:</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">python</span> <span class="selector-tag">upload-fuzz-dic-builder</span><span class="selector-class">.py</span> <span class="selector-tag">-n</span> <span class="selector-tag">test</span> <span class="selector-tag">-a</span> <span class="selector-tag">jpg</span> <span class="selector-tag">-l</span> <span class="selector-tag">php</span> <span class="selector-tag">-m</span> <span class="selector-tag">apache</span> <span class="selector-tag">--os</span> <span class="selector-tag">win</span> <span class="selector-tag">-o</span> <span class="selector-tag">upload_file</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure>
-
 <p>把生成的字典导入burp中，同时取消payload-encoding的选中状态。执行后可以看到有些php文件上传成功。然后访问其中上传成功的文件，查看是否执行。</p>
 
     </div>
@@ -420,7 +439,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="MUTED"
-      src="/images/avatar.png">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">MUTED</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -514,6 +533,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

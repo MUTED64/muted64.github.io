@@ -14,10 +14,11 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(大概)">
@@ -27,7 +28,7 @@
 <meta property="og:site_name" content="MUTED&#39;s Blog">
 <meta property="og:description" content="ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(大概)">
 <meta property="article:published_time" content="2020-10-18T05:08:43.000Z">
-<meta property="article:modified_time" content="2020-10-18T15:30:28.756Z">
+<meta property="article:modified_time" content="2021-11-03T03:13:10.623Z">
 <meta property="article:author" content="MUTED">
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
@@ -193,7 +194,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2020/10/18/ArchLinux%E4%B8%8B%E5%A5%87%E6%80%AA%E5%B0%8F%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="MUTED">
       <meta itemprop="description" content="">
     </span>
@@ -212,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-18 13:08:43 / 修改时间：23:30:28" itemprop="dateCreated datePublished" datetime="2020-10-18T13:08:43+08:00">2020-10-18</time>
+              <time title="创建时间：2020-10-18 13:08:43" itemprop="dateCreated datePublished" datetime="2020-10-18T13:08:43+08:00">2020-10-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-11-03 11:13:10" itemprop="dateModified" datetime="2021-11-03T11:13:10+08:00">2021-11-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -251,28 +258,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(<del>大概</del>)</p>
+        <p>ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(<s>大概</s>)</p>
 <a id="more"></a>
-
-<h2 id="Plasma-discover-无法联网"><a href="#Plasma-discover-无法联网" class="headerlink" title="Plasma-discover 无法联网"></a>Plasma-discover 无法联网</h2><h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>装了个比较纯净的Arch系统，没有安装kde-applications包组，发现plasma-discover无法联网，显示<code>Unable to load applications. Please verify Internet connectivity</code>。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>问题的产生是由于缺少kde-application包组里的一些包。不过这个包组实在臃肿，我不愿意装它。所以去定位造成问题的包了。最后发现造成问题的包是 <code>packagekit-qt5</code> 和 <code>appstream</code> 这两个。所以：</p>
+<h2 id="Plasma-discover-无法联网">Plasma-discover 无法联网</h2>
+<h3 id="问题描述">问题描述</h3>
+<p>装了个比较纯净的Arch系统，没有安装kde-applications包组，发现plasma-discover无法联网，显示<code>Unable to load applications. Please verify Internet connectivity</code>。</p>
+<h3 id="解决方案">解决方案</h3>
+<p>问题的产生是由于缺少kde-application包组里的一些包。不过这个包组实在臃肿，我不愿意装它。所以去定位造成问题的包了。最后发现造成问题的包是 <code>packagekit-qt5</code> 和 <code>appstream</code> 这两个。所以：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S packagekit-qt5 appstream</span><br></pre></td></tr></table></figure>
-
 <p>问题解决。</p>
-<h2 id="双系统情况下Windows磁盘无法自动挂载"><a href="#双系统情况下Windows磁盘无法自动挂载" class="headerlink" title="双系统情况下Windows磁盘无法自动挂载"></a>双系统情况下Windows磁盘无法自动挂载</h2><h3 id="问题描述-1"><a href="#问题描述-1" class="headerlink" title="问题描述"></a>问题描述</h3><p>我使用了Arch和Win10的双系统。每次需要访问Win10硬盘分区中的内容都要手动重新挂载而且需要用户密码。懒狗觉得这样不行，必须把这个问题解决了才能叫做懒狗。</p>
-<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>首先解决每次都需要手动挂载的问题。我先让它来个自动挂载。先查看一下分区看看自己需要挂载哪些内容：</p>
+<h2 id="双系统情况下Windows磁盘无法自动挂载">双系统情况下Windows磁盘无法自动挂载</h2>
+<h3 id="问题描述-2">问题描述</h3>
+<p>我使用了Arch和Win10的双系统。每次需要访问Win10硬盘分区中的内容都要手动重新挂载而且需要用户密码。懒狗觉得这样不行，必须把这个问题解决了才能叫做懒狗。</p>
+<h3 id="解决方案-2">解决方案</h3>
+<p>首先解决每次都需要手动挂载的问题。我先让它来个自动挂载。先查看一下分区看看自己需要挂载哪些内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
-
 <p>我需要挂载的是两个分区，一个是 <code>/dev/nvme0n1p3</code> （C盘），一个是 <code>/dev/nvme0n1p5</code> （D盘）。所以编辑一下fstab的内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
-
 <p>在文件的最后加上这样几句：</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># /dev/nvme0n1p3</span></span><br><span class="line"><span class="meta-keyword">/dev/</span>nvme0n1p3          <span class="meta-keyword">/run/</span>media<span class="meta-keyword">/muted/</span>Windows/  ntfs        rw,relatime     <span class="number">0</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># /dev/nvme0n1p5</span></span><br><span class="line"><span class="meta-keyword">/dev/</span>nvme0n1p5          <span class="meta-keyword">/run/</span>media<span class="meta-keyword">/muted/</span>DATA/      ntfs        rw,relatime     <span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-
-<p>当然，具体情况具体分析，<del>意思就是你照抄上面这份估计一般不得行（</del></p>
+<p>当然，具体情况具体分析，<s>意思就是你照抄上面这份估计一般不行（</s></p>
 <p>接下来解决需要输入密码的问题。STFW之后发现这个密码的配置在 <code>/usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy  </code> 这里。备份一下：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/polkit-<span class="number">1</span>/actions/org<span class="selector-class">.freedesktop</span><span class="selector-class">.UDisks2</span><span class="selector-class">.policy</span> org<span class="selector-class">.freedesktop</span><span class="selector-class">.UDisks2</span><span class="selector-class">.policy</span>.bak</span><br></pre></td></tr></table></figure>
-
 <p>改一下文件里 <code>&lt;action id=&quot;org.freedesktop.udisks2.filesystem-mount-system&quot;&gt;</code> 的相关配置，把 <code>&lt;allow_active&gt;</code> 标签里的 <code>auth_admin_keep</code> 改成 <code>yes</code> 。我的是在173行，当然这也需要具体情况具体分析了。</p>
 <p>重启一下，发现这两块分区自动挂载到了/run/media/下面。成了！</p>
 
@@ -377,14 +384,14 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plasma-discover-无法联网"><span class="nav-number">1.</span> <span class="nav-text">Plasma-discover 无法联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双系统情况下Windows磁盘无法自动挂载"><span class="nav-number">2.</span> <span class="nav-text">双系统情况下Windows磁盘无法自动挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plasma-discover-无法联网"><span class="nav-number">1.</span> <span class="nav-text">Plasma-discover 无法联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双系统情况下Windows磁盘无法自动挂载"><span class="nav-number">2.</span> <span class="nav-text">双系统情况下Windows磁盘无法自动挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述-2"><span class="nav-number">2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-2"><span class="nav-number">2.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="MUTED"
-      src="/images/avatar.png">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">MUTED</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -478,6 +485,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

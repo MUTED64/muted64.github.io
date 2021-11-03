@@ -14,10 +14,11 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="ArchLinux使用过程中发现笔记本电脑双显卡和双显示器工作不正常，以下是个人的解决方案，参考ArchWiki，仅供参考。">
@@ -194,7 +195,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2021/04/05/%E4%BD%BF%E7%94%A8Optimus%E5%9C%A8ArchLinux%E4%B8%8B%E9%85%8D%E7%BD%AE%E5%8F%8C%E6%98%BE%E5%8D%A1%E5%8F%8C%E6%98%BE%E7%A4%BA%E5%99%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="MUTED">
       <meta itemprop="description" content="">
     </span>
@@ -254,56 +255,60 @@
       
         <p>ArchLinux使用过程中发现笔记本电脑双显卡和双显示器工作不正常，以下是个人的解决方案，参考ArchWiki，仅供参考。</p>
 <a id="more"></a>
-
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p><strong>OS</strong>: Arch Linux x86_64</p>
-<p><strong>Kernel</strong>: 5.11.11-arch1-1 </p>
+<h2 id="环境">环境</h2>
+<p><strong>OS</strong>: Arch Linux x86_64</p>
+<p><strong>Kernel</strong>: 5.11.11-arch1-1</p>
 <p><strong>DE</strong>: KDE Plasma 5.21.3</p>
 <p><strong>GPU0</strong>: NVIDIA GeForce GTX 1050 Mobile</p>
 <p><strong>GPU1</strong>: Intel UHD Graphics 630</p>
 <p><strong>Monitor0</strong>为笔电自带屏幕，<strong>Monitor1</strong>为HDMI连接的外接显示器。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>使用HDMI接入外接显示器，由于笔记本电脑自带的屏幕默认使用了Intel的核显，而HDMI接入的显示器会使用NVIDIA的显卡，造成禁用自带屏幕时的撕裂和渲染巨慢的问题。</p>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="保证显卡驱动正常"><a href="#保证显卡驱动正常" class="headerlink" title="保证显卡驱动正常"></a>保证显卡驱动正常</h3><h4 id="Intel显卡驱动"><a href="#Intel显卡驱动" class="headerlink" title="Intel显卡驱动"></a>Intel显卡驱动</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S mesa lib32-mesa</span><br></pre></td></tr></table></figure>
-
+<h2 id="问题">问题</h2>
+<p>使用HDMI接入外接显示器，由于笔记本电脑自带的屏幕默认使用了Intel的核显，而HDMI接入的显示器会使用NVIDIA的显卡，造成禁用自带屏幕时的撕裂和渲染巨慢的问题。</p>
+<h2 id="解决方案">解决方案</h2>
+<h3 id="保证显卡驱动正常">保证显卡驱动正常</h3>
+<h4 id="Intel显卡驱动">Intel显卡驱动</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S mesa lib32-mesa</span><br></pre></td></tr></table></figure>
 <p>另外需要注意的是，如果之前安装了 <code>xf86-video-intel</code> 包，最好卸载掉。官方已经不建议继续使用此软件包。</p>
 <blockquote>
-<p> Often not recommended, see note below</p>
-<p><strong>Note:</strong> Some (<a href="https://www.phoronix.com/scan.php?page=news_item&px=Ubuntu-Debian-Abandon-Intel-DDX" target="_blank" rel="noopener">Debian &amp; Ubuntu</a>, <a href="https://www.phoronix.com/scan.php?page=news_item&px=Fedora-Xorg-Intel-DDX-Switch" target="_blank" rel="noopener">Fedora</a>, <a href="https://community.kde.org/Plasma/5.9_Errata#Intel_GPUs" target="_blank" rel="noopener">KDE</a>) recommend not installing the <a href="https://www.archlinux.org/packages/?name=xf86-video-intel" target="_blank" rel="noopener">xf86-video-intel</a> driver, and instead falling back on the modesetting driver for Gen4 and newer GPUs (GMA 3000 from 2006 and newer). See [<a href="https://web.archive.org/web/20160714232204/https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/" target="_blank" rel="noopener">1]</a>, [<a href="https://www.phoronix.com/scan.php?page=article&item=intel-modesetting-2017&num=1" target="_blank" rel="noopener">2]</a>, <a href="https://wiki.archlinux.org/index.php/Xorg#Installation" target="_blank" rel="noopener">Xorg#Installation</a>, and <a href="https://jlk.fjfi.cvut.cz/arch/manpages/man/modesetting.4" target="_blank" rel="noopener">modesetting(4)</a>. However, the modesetting driver can cause problems such as <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=370022" target="_blank" rel="noopener">Chromium Issue 370022</a>.</p>
+<p>Often not recommended, see note below</p>
+<p><strong>Note:</strong> Some (<a href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Ubuntu-Debian-Abandon-Intel-DDX" target="_blank" rel="noopener">Debian &amp; Ubuntu</a>, <a href="https://www.phoronix.com/scan.php?page=news_item&amp;px=Fedora-Xorg-Intel-DDX-Switch" target="_blank" rel="noopener">Fedora</a>, <a href="https://community.kde.org/Plasma/5.9_Errata#Intel_GPUs" target="_blank" rel="noopener">KDE</a>) recommend not installing the <a href="https://www.archlinux.org/packages/?name=xf86-video-intel" target="_blank" rel="noopener">xf86-video-intel</a> driver, and instead falling back on the modesetting driver for Gen4 and newer GPUs (GMA 3000 from 2006 and newer). See [<a href="https://web.archive.org/web/20160714232204/https://www.reddit.com/r/archlinux/comments/4cojj9/it_is_probably_time_to_ditch_xf86videointel/" target="_blank" rel="noopener">1]</a>, [<a href="https://www.phoronix.com/scan.php?page=article&amp;item=intel-modesetting-2017&amp;num=1" target="_blank" rel="noopener">2]</a>, <a href="https://wiki.archlinux.org/index.php/Xorg#Installation" target="_blank" rel="noopener">Xorg#Installation</a>, and <a href="https://jlk.fjfi.cvut.cz/arch/manpages/man/modesetting.4" target="_blank" rel="noopener">modesetting(4)</a>. However, the modesetting driver can cause problems such as <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=370022" target="_blank" rel="noopener">Chromium Issue 370022</a>.</p>
 </blockquote>
 <p>卸载方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -Rsc xf86-video-intel</span><br></pre></td></tr></table></figure>
-
-<h4 id="Nvidia显卡驱动"><a href="#Nvidia显卡驱动" class="headerlink" title="Nvidia显卡驱动"></a>Nvidia显卡驱动</h4><p>安装 nvidia 包，为了对 32 位程序的支持，安装 lib32-nvidia-utils 包 (位于 multilib 仓库，需要在pacman config中提前自行开启此仓库)。</p>
+<h4 id="Nvidia显卡驱动">Nvidia显卡驱动</h4>
+<p>安装 nvidia 包，为了对 32 位程序的支持，安装 lib32-nvidia-utils 包 (位于 multilib 仓库，需要在pacman config中提前自行开启此仓库)。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S nvidia lib32-nvidia-utils</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置-PRIME-render-offload"><a href="#配置-PRIME-render-offload" class="headerlink" title="配置 PRIME render offload"></a>配置 PRIME render offload</h3><p>安装 <code>nvidia-prime</code> 包来使用官方配置。</p>
+<h3 id="配置-PRIME-render-offload">配置 PRIME render offload</h3>
+<p>安装 <code>nvidia-prime</code> 包来使用官方配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S nvidia-prime</span><br></pre></td></tr></table></figure>
-
 <p>重启系统后可以使用 <code>prime-run</code> 命令使指定程序在N卡上渲染。例如</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 n 卡渲染 vlc</span></span><br><span class="line">$ prime-run vlc</span><br><span class="line"><span class="comment"># 以 n 卡渲染 wine 游戏</span></span><br><span class="line">$ prime-run wine touhou08.exe</span><br></pre></td></tr></table></figure>
-
 <p>可以使用 <code>mesa-demo</code> 包里的 <code>glxinfo</code> 指令查看当前使用的显卡。</p>
-<h3 id="使用Optimus-Manager配置双显卡"><a href="#使用Optimus-Manager配置双显卡" class="headerlink" title="使用Optimus Manager配置双显卡"></a>使用Optimus Manager配置双显卡</h3><p>此时HDMI连接的显示器可以正常工作了。但是笔电自带的显示器卡在TTY，可能是由于显卡不兼容的问题。我选择了使用Optimus Manager进行双显卡的配置。</p>
-<h4 id="事前准备"><a href="#事前准备" class="headerlink" title="事前准备"></a>事前准备</h4><p>首先清除（备份）<code>/etc/X11/xorg.conf.d/</code> 下的配置文件, 并删掉（备份）<code>/etc/X11/xorg.conf</code>, 因为Optimus Manager会自动生成配置文件存放到<code>/etc/X11/xorg.conf.d/</code>里面, 所以建议安装前把显示配置相关的文件都清除掉。</p>
-<h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><p>安装Optimus Manager包：</p>
+<h3 id="使用Optimus-Manager配置双显卡">使用Optimus Manager配置双显卡</h3>
+<p>此时HDMI连接的显示器可以正常工作了。但是笔电自带的显示器卡在TTY，可能是由于显卡不兼容的问题。我选择了使用Optimus Manager进行双显卡的配置。</p>
+<h4 id="事前准备">事前准备</h4>
+<p>首先清除（备份）<code>/etc/X11/xorg.conf.d/</code> 下的配置文件, 并删掉（备份）<code>/etc/X11/xorg.conf</code>, 因为Optimus Manager会自动生成配置文件存放到<code>/etc/X11/xorg.conf.d/</code>里面, 所以建议安装前把显示配置相关的文件都清除掉。</p>
+<h4 id="安装">安装</h4>
+<p>安装Optimus Manager包：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arch Linux CN</span></span><br><span class="line">$ sudo pacman -S optimus-manager</span><br><span class="line"><span class="comment"># AUR</span></span><br><span class="line">$ yay -S optimus-manager</span><br></pre></td></tr></table></figure>
-
 <p>如果你是GDM用户或者Manjaro KDE 用户，请务必参考<a href="https://github.com/Askannz/optimus-manager#important--gnome-and-gdm-users" target="_blank" rel="noopener">README</a>中的注意事项。</p>
-<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>接下来修改配置文件。将 <code>/usr/share/</code> 目录下的配置文件放到 <code>/etc/optimus-manager/</code> 下进行设置。将切换方式设为<code>switching=none</code>, 不推荐使用bbswitch（容易遇到ACPI锁死的问题, <a href="https://wiki.archlinux.org/index.php/NVIDIA_Optimus#Lockup_issue_(lspci_hangs)" target="_blank" rel="noopener">参考Wiki</a>）, 设置<code>pci_power_control=yes</code>让PCI Power Management切换显卡。</p>
+<h4 id="配置">配置</h4>
+<p>接下来修改配置文件。将 <code>/usr/share/</code> 目录下的配置文件放到 <code>/etc/optimus-manager/</code> 下进行设置。将切换方式设为<code>switching=none</code>, 不推荐使用bbswitch（容易遇到ACPI锁死的问题, <a href="https://wiki.archlinux.org/index.php/NVIDIA_Optimus#Lockup_issue_(lspci_hangs)" target="_blank" rel="noopener">参考Wiki</a>）, 设置<code>pci_power_control=yes</code>让PCI Power Management切换显卡。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cp /usr/share/optimus-manager.conf /etc/optimus-manager/optimus-manager.conf</span><br><span class="line">$ sudo vim /etc/optimus-manager/optimus-manager.conf</span><br></pre></td></tr></table></figure>
-
 <p>根据开机需求自动选择显卡。</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">startup_mode=auto</span><br><span class="line">startup_auto_battery_mode=integrated</span><br><span class="line">startup_auto_extpower_mode=nvidia</span><br></pre></td></tr></table></figure>
-
 <p>上述配置设置了开机时选择使用的显卡。电池模式使用了集显，而充电时使用独显。Reboot之后双显卡显示正常，此时可以使用 <code>nvidia-settings</code> 对双显示器的显示情况进行设置。解决了之前的“laggy”和“tearing”的情况。</p>
-<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ optimus-manager --switch nvidia <span class="comment">#切换到nvidia显卡</span></span><br><span class="line">$ optimus-manager --switch integrated <span class="comment">#切换到集显</span></span><br></pre></td></tr></table></figure>
-
+<h4 id="使用">使用</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ optimus-manager --switch nvidia <span class="comment">#切换到nvidia显卡</span></span><br><span class="line">$ optimus-manager --switch integrated <span class="comment">#切换到集显</span></span><br></pre></td></tr></table></figure>
 <p>注意：</p>
 <ul>
 <li>切换显卡的过程中会自动注销登录, 所以记得<strong>保存并关掉电脑正在运行的程序</strong>。</li>
 <li>你可以在配置文件中修改<code>auto_logout=false</code>禁止自动注销以手动注销切换显卡。</li>
 </ul>
-<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><p>grub在哪块屏幕上显示的问题，之后补充。</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<h2 id="其它">其它</h2>
+<p>grub在哪块屏幕上显示的问题，之后补充。</p>
+<h2 id="References">References</h2>
+<ol>
 <li><a href="https://blog.sakuya.love/archives/linuxgpu/" target="_blank" rel="noopener">https://blog.sakuya.love/archives/linuxgpu/</a></li>
 <li><a href="https://blog.starry-s.me/posts/archlinux-pavilion-gaming-laptop/" target="_blank" rel="noopener">https://blog.starry-s.me/posts/archlinux-pavilion-gaming-laptop/</a></li>
 <li><a href="https://wiki.archlinux.org/index.php/NVIDIA" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/NVIDIA</a></li>
@@ -418,7 +423,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="MUTED"
-      src="/images/avatar.png">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">MUTED</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -512,6 +517,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 

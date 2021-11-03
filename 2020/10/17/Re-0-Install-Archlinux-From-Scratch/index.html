@@ -14,10 +14,11 @@
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。自己再装的时候能看懂就行">
@@ -193,7 +194,7 @@
     <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2020/10/17/Re-0-Install-Archlinux-From-Scratch/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.jpg">
       <meta itemprop="name" content="MUTED">
       <meta itemprop="description" content="">
     </span>
@@ -251,44 +252,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。<del>自己再装的时候能看懂就行</del></p>
+        <p>前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。<s>自己再装的时候能看懂就行</s></p>
 <a id="more"></a>
-
-<h2 id="Prepare-an-installation-medium"><a href="#Prepare-an-installation-medium" class="headerlink" title="Prepare an installation medium"></a>Prepare an installation medium</h2><p>I used rufus on Windows 10 to make my U-disk an installation medium. I chose dd mode of rufus. Make sure there is an empty partition on your disk.</p>
+<h2 id="Prepare-an-installation-medium">Prepare an installation medium</h2>
+<p>I used rufus on Windows 10 to make my U-disk an installation medium. I chose dd mode of rufus. Make sure there is an empty partition on your disk.</p>
 <p>I will go straight to the next step because this is easy.</p>
-<h2 id="Pre-Installation"><a href="#Pre-Installation" class="headerlink" title="Pre-Installation"></a>Pre-Installation</h2><h3 id="Boot-the-live-environment"><a href="#Boot-the-live-environment" class="headerlink" title="Boot the live environment"></a>Boot the live environment</h3><p>Disable secure boot. Then restart your PC and boot from your USB device. Choose <code>Boot Arch Linux (x86_64)</code> , now you can see Archlinux is ready to load contents. Finally you will logged in on the first virtual console as the root user, and presented with a <code>zsh</code> shell prompt. You can autocomplete your commands using <code>tab</code> , OHHHHHH!</p>
-<h3 id="Verify-the-boot-mode"><a href="#Verify-the-boot-mode" class="headerlink" title="Verify the boot mode"></a>Verify the boot mode</h3><p>To verify the boot mode, list the efivars directory:</p>
+<h2 id="Pre-Installation">Pre-Installation</h2>
+<h3 id="Boot-the-live-environment">Boot the live environment</h3>
+<p>Disable secure boot. Then restart your PC and boot from your USB device. Choose <code>Boot Arch Linux (x86_64)</code> , now you can see Archlinux is ready to load contents. Finally you will logged in on the first virtual console as the root user, and presented with a <code>zsh</code> shell prompt. You can autocomplete your commands using <code>tab</code> , OHHHHHH!</p>
+<h3 id="Verify-the-boot-mode">Verify the boot mode</h3>
+<p>To verify the boot mode, list the efivars directory:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
-
 <p>If the command shows the directory without error, then the system is booted in UEFI mode. If the directory does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired, refer to your motherboard’s manual.</p>
 <p>Or, a more secure way is <code>fdisk -l</code> ,if your SSD (or HDD) shows its <code>Disklabel type</code> is <code>gpt</code> and there is a small partition whose type is <code>EFI System</code> , Then your boot mode can be verified to be EFI.</p>
-<h3 id="Connect-to-the-Internet"><a href="#Connect-to-the-Internet" class="headerlink" title="Connect to the Internet"></a>Connect to the Internet</h3><p>Arch needs network connection to complete its installation.</p>
+<h3 id="Connect-to-the-Internet">Connect to the Internet</h3>
+<p>Arch needs network connection to complete its installation.</p>
 <p>Ensure your network interface is listed and enabled:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip link</span><br></pre></td></tr></table></figure>
-
 <p>For wired connection:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dhcpcd</span><br></pre></td></tr></table></figure>
-
 <p>For wireless connection:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iwctl</span><br><span class="line">device list</span><br><span class="line">station wlan0 scan</span><br><span class="line">station wlan0 get-networks</span><br><span class="line">station wlan0 connect `xxxxx`</span><br></pre></td></tr></table></figure>
-
 <p>Check if you are connected to the internet:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping baidu.com</span><br></pre></td></tr></table></figure>
-
 <p>If everything is OK, quit iwd:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit</span><br></pre></td></tr></table></figure>
-
-<h3 id="Update-the-system-clock"><a href="#Update-the-system-clock" class="headerlink" title="Update the system clock"></a>Update the system clock</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
+<h3 id="Update-the-system-clock">Update the system clock</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>To check the service status, use <code>timedatectl status</code>.</p>
-<h3 id="Partition-the-disks"><a href="#Partition-the-disks" class="headerlink" title="Partition the disks"></a>Partition the disks</h3><table>
+<h3 id="Partition-the-disks">Partition the disks</h3>
+<table>
 <thead>
 <tr>
 <th>Device Type</th>
 <th>File Name</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>SATA/SAS/USB</td>
 <td>/dev/sda,/dev/sdb,……</td>
 </tr>
@@ -312,90 +313,87 @@
 <td>CD drive</td>
 <td>/dev/cdrom,/dev/sr0,/dev/sr1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>When recognized by the live system, disks are assigned to a <a href="https://wiki.archlinux.org/index.php/Block_device" target="_blank" rel="noopener">block device</a> such as <code>/dev/sda</code>, <code>/dev/nvme0n1</code> or <code>/dev/mmcblk0</code>. To identify these devices, use <code>lsblk</code> or <code>fdisk</code>.</p>
-<p>I boot my Arch in UEFI mode, so first I must create a boot partition (EFI system partition). </p>
-<h4 id="Create-a-boot-partition"><a href="#Create-a-boot-partition" class="headerlink" title="Create a boot partition"></a>Create a boot partition</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;  <span class="comment"># Example: fdisk /dev/sdx  or  fdisk /dev/nvmex</span></span><br></pre></td></tr></table></figure>
-
+<p>I boot my Arch in UEFI mode, so first I must create a boot partition (EFI system partition).</p>
+<h4 id="Create-a-boot-partition">Create a boot partition</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;  <span class="comment"># Example: fdisk /dev/sdx  or  fdisk /dev/nvmex</span></span><br></pre></td></tr></table></figure>
 <p>See usages of commands by typing <code>m</code> and enter.</p>
 <p>Enter <code>n</code> to create a new partition. You are asked to select the starting sector, generally we type enter (select by default). Then enter end sector or partition size. I used <code>+512M</code> .</p>
 <p>Enter <code>p</code> to check if it works. Enter <code>t</code> to change the type of your new partition. Enter <code>l</code> to see all types supported. Change it to EFI.</p>
 <p>Enter <code>w</code> to save. You can check whether there is something wrong before that by <code>p</code>.</p>
 <p>Format it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/&#123;YOUR BOOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Root-partition"><a href="#Root-partition" class="headerlink" title="Root partition"></a>Root partition</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;</span><br></pre></td></tr></table></figure>
-
+<h4 id="Root-partition">Root partition</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;</span><br></pre></td></tr></table></figure>
 <p>Create a new partition table if there is not one exist. I already have one on my disk so I go on directly.</p>
 <p>Enter <code>n</code> to create a new partition. I want my new partition fill up the free space completely, so I use enter to choose the default.</p>
 <p>Enter <code>p</code> then <code>w</code> just like creating your boot partition.</p>
 <p>Format it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/P&#123;YOUR ROOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Mount-the-file-systems"><a href="#Mount-the-file-systems" class="headerlink" title="Mount the file systems"></a>Mount the file systems</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/&#123;YOUR ROOT PARTITION&#125; /mnt</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mount /dev/&#123;YOUR BOOT PARTITION&#125; /mnt/boot</span><br></pre></td></tr></table></figure>
-
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><h3 id="Use-Pacman-Mirror"><a href="#Use-Pacman-Mirror" class="headerlink" title="Use Pacman Mirror"></a>Use Pacman Mirror</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
-
+<h3 id="Mount-the-file-systems">Mount the file systems</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/&#123;YOUR ROOT PARTITION&#125; /mnt</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mount /dev/&#123;YOUR BOOT PARTITION&#125; /mnt/boot</span><br></pre></td></tr></table></figure>
+<h2 id="Installation">Installation</h2>
+<h3 id="Use-Pacman-Mirror">Use Pacman Mirror</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
 <p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
 <p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
-<h3 id="Install-essential-packages"><a href="#Install-essential-packages" class="headerlink" title="Install essential packages"></a>Install essential packages</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel linux linux-firmware dhcpcd</span><br></pre></td></tr></table></figure>
-
-<h2 id="Configure-the-system"><a href="#Configure-the-system" class="headerlink" title="Configure the system"></a>Configure the system</h2><h3 id="Fstab"><a href="#Fstab" class="headerlink" title="Fstab"></a>Fstab</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -L /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
-
+<h3 id="Install-essential-packages">Install essential packages</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel linux linux-firmware dhcpcd</span><br></pre></td></tr></table></figure>
+<h2 id="Configure-the-system">Configure the system</h2>
+<h3 id="Fstab">Fstab</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -L /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
 <p>We need a check to make sure it is right since it is an important step. Check the resulting <code>/mnt/etc/fstab</code> file, and edit it in case of errors:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
-
-<h3 id="Chroot"><a href="#Chroot" class="headerlink" title="Chroot"></a>Chroot</h3><p><code>chroot</code> means ‘change root’. Change root into the new system:</p>
+<h3 id="Chroot">Chroot</h3>
+<p><code>chroot</code> means ‘change root’. Change root into the new system:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
-
 <p>We can also use this command to fix our system if there is some problem with it.</p>
-<h3 id="Time-zone"><a href="#Time-zone" class="headerlink" title="Time zone"></a>Time zone</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
-
-<h3 id="Install-necessary-packages"><a href="#Install-necessary-packages" class="headerlink" title="Install necessary packages"></a>Install necessary packages</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim dialog wpa_supplicant ntfs-3g networkmanager netctl</span><br></pre></td></tr></table></figure>
-
-<h3 id="Localization"><a href="#Localization" class="headerlink" title="Localization"></a>Localization</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
-
+<h3 id="Time-zone">Time zone</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
+<h3 id="Install-necessary-packages">Install necessary packages</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim dialog wpa_supplicant ntfs-3g networkmanager netctl</span><br></pre></td></tr></table></figure>
+<h3 id="Localization">Localization</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
 <p>Uncomment <code>zh_CN.UTF-8 UTF-8</code> <code>zh_HK.UTF-8 UTF-8</code> <code>zh_TW.UTF-8 UTF-8</code> <code>en_US.UTF-8 UTF-8</code> .</p>
 <p>Then <code>:wq</code> save and quit.</p>
 <p>Generate the locales by running:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locale-gen</span><br></pre></td></tr></table></figure>
-
 <p>Config locale file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.conf</span><br></pre></td></tr></table></figure>
-
 <p>Add the following line to the first line of this file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
-
 <p><code>:wq</code> . Fine.</p>
-<h3 id="Network-configuration"><a href="#Network-configuration" class="headerlink" title="Network configuration"></a>Network configuration</h3><p>Create the hostname file:</p>
+<h3 id="Network-configuration">Network configuration</h3>
+<p>Create the hostname file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
-
 <p>Config your hosts:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
-
 <p>Add the following contents to the end of this file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1	localhost</span><br><span class="line">::1		localhost</span><br><span class="line">127.0.1.1	myhostname.localdomain	myhostname</span><br></pre></td></tr></table></figure>
-
-<h3 id="Set-root-password"><a href="#Set-root-password" class="headerlink" title="Set root password"></a>Set root password</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
-
-<h3 id="Install-Intel-ucode-if-you-have-a-Intel-CPU"><a href="#Install-Intel-ucode-if-you-have-a-Intel-CPU" class="headerlink" title="Install Intel-ucode (if you have a Intel CPU)"></a>Install Intel-ucode (if you have a Intel CPU)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S intel-ucode</span><br></pre></td></tr></table></figure>
-
-<h3 id="Install-BootLoader"><a href="#Install-BootLoader" class="headerlink" title="Install BootLoader"></a>Install BootLoader</h3><p>Caution! This blog is only for EFI/GPT boot mode! If you are in BIOS/MBR mode, please see <code>Reference 2</code> at the end.</p>
+<h3 id="Set-root-password">Set root password</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+<h3 id="Install-Intel-ucode-if-you-have-a-Intel-CPU">Install Intel-ucode (if you have a Intel CPU)</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S intel-ucode</span><br></pre></td></tr></table></figure>
+<h3 id="Install-BootLoader">Install BootLoader</h3>
+<p>Caution! This blog is only for EFI/GPT boot mode! If you are in BIOS/MBR mode, please see <code>Reference 2</code> at the end.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pacman -S os-prober ntfs-3g</span><br><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-
 <p>If there is multi systems on your device, it is recommended to check whether each system’s entry is well generated.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-
 <p>Check if it is all right.</p>
-<h3 id="Reboot-and-enjoy-archlinux"><a href="#Reboot-and-enjoy-archlinux" class="headerlink" title="Reboot and enjoy archlinux"></a>Reboot and enjoy archlinux</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount /mnt/boot</span><br><span class="line">umount /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
-
+<h3 id="Reboot-and-enjoy-archlinux">Reboot and enjoy archlinux</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount /mnt/boot</span><br><span class="line">umount /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 <p>Pull out your U-disk. Login as root, enter your password.</p>
 <p>If you can see the command line, congratulations, you have installed Archlinux successfully! OHHHHHHH!</p>
 <p>There is still many things to do after that, I will put some guide for them on my next blog.</p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
-<li><p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a></p>
+<h2 id="References">References</h2>
+<ol>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a></p>
 </li>
-<li><p><a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/17/arch_install/</a></p>
+<li>
+<p><a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/17/arch_install/</a></p>
 </li>
 </ol>
 
@@ -507,7 +505,7 @@
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="MUTED"
-      src="/images/avatar.png">
+      src="/images/avatar.jpg">
   <p class="site-author-name" itemprop="name">MUTED</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -601,6 +599,8 @@
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
