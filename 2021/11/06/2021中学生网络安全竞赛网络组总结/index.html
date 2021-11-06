@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Microsoft Yahei:300,300italic,400,400italic,700,700italic|Menlo:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="在 2021 年中学生网络安全竞赛工作人员的网络组做了一点网络拓扑规划和网络搭建的工作，总结记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021中学生网络安全竞赛网络组总结">
+<meta property="og:url" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="MUTED&#39;s Blog">
+<meta property="og:description" content="在 2021 年中学生网络安全竞赛工作人员的网络组做了一点网络拓扑规划和网络搭建的工作，总结记录一下。">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E4%BC%9A%E5%9C%BA_v0-1.png">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E6%8B%93%E6%89%91.png">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/VLAN.png">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E4%BC%9A%E5%9C%BA_%E7%BD%91%E7%BA%BF%E5%B8%83%E7%BD%AE-1.png">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/ACL.png">
+<meta property="article:published_time" content="2021-11-06T03:14:26.000Z">
+<meta property="article:modified_time" content="2021-11-06T03:40:22.763Z">
+<meta property="article:author" content="MUTED">
+<meta property="article:tag" content="网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E4%BC%9A%E5%9C%BA_v0-1.png">
+
+<link rel="canonical" href="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>2021中学生网络安全竞赛网络组总结 | MUTED's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="MUTED's Blog" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MUTED's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">MUTED的网络自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://blog.muted.top/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="MUTED">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MUTED's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2021中学生网络安全竞赛网络组总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-11-06 11:14:26 / 修改时间：11:40:22" itemprop="dateCreated datePublished" datetime="2021-11-06T11:14:26+08:00">2021-11-06</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>在 2021 年中学生网络安全竞赛工作人员的网络组做了一点网络拓扑规划和网络搭建的工作，总结记录一下。</p>
+<a id="more"></a>
+
+<h2 id="硬件使用"><a href="#硬件使用" class="headerlink" title="硬件使用"></a>硬件使用</h2><p>服务器两台，主交换机一台，运维用交换机一台，选手用交换机四台，机架一个，UPS 两台，网线若干，16A 专用插排两个（UPS 使用），三芯 3*2.5 电线 100 米</p>
+<ul>
+<li>服务器：型号为 Huawei RH2288v3, E5‐xxxxv3, 128G ECC Memory, 600G<em>4 SAS HDD, 2</em>10Gbps 光口（未使用），2*1Kbps 板载网卡，阵列卡一张，450W 电源</li>
+<li>交换机：两台型号为 Huawei S5720‐52P‐LI‐AC，分别用作主交换机和运维用交换机；四台型号为 H3C LS-5024PV5-EI-PWR，用作选手交换机</li>
+<li>服务器机架一个</li>
+<li>Console 线一根（或多根）</li>
+<li>对讲机：摩托罗拉（Motorola）v168 对讲机 6 台</li>
+<li>路由器：华硕（ASUS）RT‐AC86U 无线路由器 2900M 双频全千兆一台，用于外网访问配置回程路由以及负载均衡</li>
+<li>网线、电源线、光纤跳线和插排若干</li>
+</ul>
+<h2 id="会场布置"><a href="#会场布置" class="headerlink" title="会场布置"></a>会场布置</h2><p>主舞台在会场最前方，运维人员在会场左前方，外网和用于外网访问的上网机位于会场右前方，选手需要通过上网机访问外网。会场前方为嘉宾席，后方为选手比赛区域。选手比赛区域分成四个区域，共 40 个选手分成了 4 个区域，每个区域 10 人。4 台选手用交换机分别放在每个区域的补给区。详见下图。</p>
+<p><img src="/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E4%BC%9A%E5%9C%BA_v0-1.png" alt="会场_v0-1"></p>
+<h2 id="供电相关"><a href="#供电相关" class="headerlink" title="供电相关"></a>供电相关</h2><ul>
+<li>机柜、选手、交换机、现场大屏幕和运维人员分别请电工拉不同的电源线</li>
+<li>提前计算服务器、交换机、选手、大屏幕和运维人员的大概功率，方便电工选择不同规格的电线，也方便我们购买插排</li>
+<li>机架和交换机分别部署 UPS 和防电涌插排</li>
+</ul>
+<h2 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h2><h3 id="网络拓扑"><a href="#网络拓扑" class="headerlink" title="网络拓扑"></a>网络拓扑</h3><p>使用了六台交换机，其中两台 48 口交换机分别用作主交换机和运维用交换机，其它四个 24 口交换机给选手使用。从外网的 VLAN 直接拉了两根网线用一个一分四的 TP-Link 小交换机给物理上网机做外网访问。</p>
+<p>由于今年加入了外网访问，由于担心会场的路由器不能由我们配置，于是加了一台路由器做回程路由，实际上到会场后发现会场的路由器也是可以给我们配置的，不过这部分问题不大（虽然后来又发现会场垃圾的天翼网关没办法配置回程路由）。外网用两根网线接到路由器做了负载均衡用于提升外网访问速度。</p>
+<p><img src="/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E6%8B%93%E6%89%91.png" alt="拓扑"></p>
+<h3 id="VLAN-划分"><a href="#VLAN-划分" class="headerlink" title="VLAN 划分"></a>VLAN 划分</h3><p>共划分了 3 个 VLAN，分别为 VLAN 10，VLAN 20 和 VLAN30。VLAN10 用于选手和题目服务器，VLAN20 用于运维人员，VLAN30 用于外网访问。每一组选手使用 VLAN10 中的上下两个端口，将上下两端口做链路聚合，接到选手用的交换机上，链路聚合起冗余和提速作用。VLAN20 接到运维用交换机，方便运维人员运维，也是上下两个端口做链路聚合。VLAN30 接入外网。</p>
+<p>每个 VLAN 都启用了 VLANIF，并配置了默认网关为 254，使不同 VLAN 之间能够互相访问。之后再使用 ACL 去做 VLAN 间的访问控制。</p>
+<p><img src="/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/VLAN.png" alt="VLAN"></p>
+<h3 id="网线布置"><a href="#网线布置" class="headerlink" title="网线布置"></a>网线布置</h3><p>下图是实际会场的网线布置情况。</p>
+<ul>
+<li>超五类网线</li>
+<li>提前规划网线长度，让会议公司的工作人员做规定长度的网线</li>
+<li>多拉几根备用的网线</li>
+<li>网线检测仪（可以主机和从机分开在网线两端测试网线连通性）</li>
+</ul>
+<p><img src="/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/%E4%BC%9A%E5%9C%BA_%E7%BD%91%E7%BA%BF%E5%B8%83%E7%BD%AE-1.png" alt="会场_网线布置-1"></p>
+<h3 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h3><p>设置一些访问控制，以限制每部分的访问行为。</p>
+<ul>
+<li>选手端口组之间设置端口隔离，使之两两不能访问，但能访问服务器和上网机。</li>
+<li>选手仅限访问题目服务器和上网机，将选手到 VLAN20 和 VLAN30 的访问用 ACL 禁止，将上网机到运维的单向主动访问用 ACL 禁止，防止选手直接或通过上网机访问运维组，并防止选手不通过上网机直接访问外网。</li>
+</ul>
+<p><img src="/2021/11/06/2021%E4%B8%AD%E5%AD%A6%E7%94%9F%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B%E7%BD%91%E7%BB%9C%E7%BB%84%E6%80%BB%E7%BB%93/ACL.png" alt="ACL"></p>
+<h3 id="赛前-check"><a href="#赛前-check" class="headerlink" title="赛前 check"></a>赛前 check</h3><p>有一份 SOP，但是没完全照着做，因为中间又临时改了好多东西（（（</p>
+<h2 id="一些值得注意的问题"><a href="#一些值得注意的问题" class="headerlink" title="一些值得注意的问题"></a>一些值得注意的问题</h2><ul>
+<li>交换机有 Web 配置界面，实在觉得命令行做某些操作太麻烦的时候去看一下 Web 配置页面可能会有意想不到的收获。</li>
+<li>各种配置写完之后一定要记得保存，不要因为没找到保存的命令就默认它自动保存了。交换机的保存是退回用户视图执行 <code>save all</code> 命令。</li>
+<li>配置写好但没有获得预期的结果的时候，首先检查各设备的电源是否打开，接线是否正确，<strong>控制面板里的</strong> Windows <strong>网络</strong>防火墙是否关闭，上网黑魔法是否关闭，可以解决大部分问题（实在不行可以用模拟器模拟一下再在实体设备上排查，可以解决绝大部分问题</li>
+<li>Less is more. 能用更简单的方法实现同样的功能就不要用麻烦的方法，否则出了问题解决起来更费事。</li>
+<li>测线仪的主机和从机是能分开的（逃</li>
+<li>机架里的网线用最短的 2 米线还是有点太长了，放到机架里还是有点混乱，还是自备几根更短一点的比较好。</li>
+<li>抱着电脑去机柜连 console 线调试还是太傻了，为什么不用 telnet 呢…不要在这种基础的事情上犯懒否则后面都会很难做（</li>
+<li>要提前和其它组的工作人员做好沟通，提前确定好一个正式的拓扑。今年感觉沟通没到位，现场改了一堆东西，最后有点混乱</li>
+<li>比赛前一天调试的时候路由器出现经常断连几十秒又重连的情况。晚上没睡觉被叫起来调试了半天，把 DHCP 关掉就缓解了问题，实在是玄学。比赛到下午的时候突然出大问题。路由器直接 down 了，管理页面都进不去，重置重启也不管用，三个路由器有两个都出现了这种问题，幸亏还有一个备用的路由器，只能先拿来给外网访问用了，运维就缺了一个路由器用，最后还是回退到运维直接接交换机的那种最初构想的拓扑…后来就再也没出过问题。合理怀疑是那两个家用级路由器质量的锅。下次要用的话还是全部用企业级的东西稳妥，不管是去实验室借一个还是再去买都行啊，这种玄学问题实在是太难顶了（</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag"># 网络</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/11/02/CVE-2021-31760%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0%E4%B8%8ECSRF%E6%94%BB%E5%87%BB%E7%9A%84%E5%88%86%E6%9E%90/" rel="prev" title="CVE-2021-31760漏洞复现与CSRF攻击的分析">
+      <i class="fa fa-chevron-left"></i> CVE-2021-31760漏洞复现与CSRF攻击的分析
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬件使用"><span class="nav-number">1.</span> <span class="nav-text">硬件使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会场布置"><span class="nav-number">2.</span> <span class="nav-text">会场布置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#供电相关"><span class="nav-number">3.</span> <span class="nav-text">供电相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件环境"><span class="nav-number">4.</span> <span class="nav-text">软件环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络拓扑"><span class="nav-number">4.1.</span> <span class="nav-text">网络拓扑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VLAN-划分"><span class="nav-number">4.2.</span> <span class="nav-text">VLAN 划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网线布置"><span class="nav-number">4.3.</span> <span class="nav-text">网线布置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制"><span class="nav-number">4.4.</span> <span class="nav-text">访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赛前-check"><span class="nav-number">4.5.</span> <span class="nav-text">赛前 check</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些值得注意的问题"><span class="nav-number">5.</span> <span class="nav-text">一些值得注意的问题</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="MUTED"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">MUTED</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/muted64" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;muted64" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:muted32555664@gmail.com" title="E-Mail → mailto:muted32555664@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-rss fa-fw"></i>RSS</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="author" itemprop="copyrightHolder">MUTED</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">84k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:16</span>
+</div>
+  <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+  -->
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
