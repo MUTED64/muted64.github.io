@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.muted.top/"/>
-  <updated>2021-11-06T03:40:22.763Z</updated>
+  <updated>2021-11-06T14:31:24.314Z</updated>
   <id>https://blog.muted.top/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>抽象代数 Remake 指南</title>
+    <link href="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97/"/>
+    <id>https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97/</id>
+    <published>2021-11-06T14:28:54.000Z</published>
+    <updated>2021-11-06T14:31:24.314Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;抽象代数学了好像没学，👴要重学😭（&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="https://blog.muted.top/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+      <category term="数学" scheme="https://blog.muted.top/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="密码学" scheme="https://blog.muted.top/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于使用 Clash 的 TUN 透明代理需要知道的一切</title>
+    <link href="https://blog.muted.top/2021/11/06/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Clash%E7%9A%84TUN%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/"/>
+    <id>https://blog.muted.top/2021/11/06/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8Clash%E7%9A%84TUN%E9%80%8F%E6%98%8E%E4%BB%A3%E7%90%86%E9%9C%80%E8%A6%81%E7%9F%A5%E9%81%93%E7%9A%84%E4%B8%80%E5%88%87/</id>
+    <published>2021-11-06T14:22:53.000Z</published>
+    <updated>2021-11-08T05:35:30.419Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;古人云：用 Clash 不用透明代理，就像四大名著不看红楼梦，说明这个人技术水平和自我修养不足，他理解不了这种内在的阳春白雪的高雅技术，他只能看到系统代理的堆砌，参不透其中深奥的精神内核，他整个人的层次就卡在这里了，只能度过一个相对失败的人生。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="悠哉日常" scheme="https://blog.muted.top/categories/%E6%82%A0%E5%93%89%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="魔法" scheme="https://blog.muted.top/tags/%E9%AD%94%E6%B3%95/"/>
+    
+      <category term="科学" scheme="https://blog.muted.top/tags/%E7%A7%91%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>2021中学生网络安全竞赛网络组总结</title>
@@ -413,29 +459,6 @@
       <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
       <category term="PHP" scheme="https://blog.muted.top/tags/PHP/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SQL注入笔记</title>
-    <link href="https://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/"/>
-    <id>https://blog.muted.top/2020/06/01/SQL%E6%B3%A8%E5%85%A5%E7%AC%94%E8%AE%B0/</id>
-    <published>2020-06-01T10:13:28.000Z</published>
-    <updated>2020-07-23T14:33:31.002Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Sql 注入是渗透测试中的一个重要部分。这里是一些 Sql 注入相关内容的总结和整理，留待以后查阅。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
-    
-      <category term="渗透测试" scheme="https://blog.muted.top/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
