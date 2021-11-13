@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.muted.top/"/>
-  <updated>2021-11-06T14:31:24.314Z</updated>
+  <updated>2021-11-13T15:34:02.024Z</updated>
   <id>https://blog.muted.top/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>fcitx5-rime配置指南</title>
+    <link href="https://blog.muted.top/2021/11/13/fcitx5-rime%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/"/>
+    <id>https://blog.muted.top/2021/11/13/fcitx5-rime%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97/</id>
+    <published>2021-11-13T15:11:50.000Z</published>
+    <updated>2021-11-13T15:34:02.024Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Rime 作为 Linux 下相当不错的输入法，对 fcitx5 的文档支持倒是很差劲。本文介绍了 fcitx5-rime 配置的一些小细节，防止多次踩坑。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="系统" scheme="https://blog.muted.top/categories/%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+      <category term="系统" scheme="https://blog.muted.top/tags/%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="配置" scheme="https://blog.muted.top/tags/%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>抽象代数 Remake 指南</title>
@@ -436,29 +459,6 @@
     
     
       <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PHP相关姿势</title>
-    <link href="https://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/"/>
-    <id>https://blog.muted.top/2020/06/16/PHP%E7%9B%B8%E5%85%B3%E5%A7%BF%E5%8A%BF/</id>
-    <published>2020-06-16T11:30:37.000Z</published>
-    <updated>2020-06-16T13:54:06.267Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;整理 CTF 中 PHP 相关的利用姿势，不定期补充。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
-    
-      <category term="PHP" scheme="https://blog.muted.top/tags/PHP/"/>
     
   </entry>
   
