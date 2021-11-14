@@ -40,15 +40,16 @@
   </entry>
   
   <entry>
-    <title>抽象代数 Remake 指南</title>
-    <link href="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97/"/>
-    <id>https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97/</id>
+    <title>抽象代数 Remake 指南 I - 群</title>
+    <link href="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/"/>
+    <id>https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/</id>
     <published>2021-11-06T14:28:54.000Z</published>
-    <updated>2021-11-06T14:31:24.314Z</updated>
+    <updated>2021-11-14T14:22:08.722Z</updated>
     
     <summary type="html">
     
-      &lt;p&gt;抽象代数学了好像没学，👴要重学😭（&lt;/p&gt;
+      &lt;p&gt;抽象代数学了好像没学，👴 要重学 😭（&lt;/p&gt;
+&lt;p&gt;为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。&lt;/p&gt;
     
     </summary>
     
@@ -249,7 +250,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(&lt;s&gt;大概&lt;/s&gt;)&lt;/p&gt;
+      &lt;p&gt;ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(&lt;del&gt;大概&lt;/del&gt;)&lt;/p&gt;
     
     </summary>
     
@@ -270,7 +271,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。&lt;s&gt;下次重装系统自己能看懂就行&lt;/s&gt;&lt;/p&gt;
+      &lt;p&gt;上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。&lt;del&gt;下次重装系统自己能看懂就行&lt;/del&gt;&lt;/p&gt;
     
     </summary>
     
@@ -291,7 +292,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。&lt;s&gt;自己再装的时候能看懂就行&lt;/s&gt;&lt;/p&gt;
+      &lt;p&gt;前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。&lt;del&gt;自己再装的时候能看懂就行&lt;/del&gt;&lt;/p&gt;
     
     </summary>
     
@@ -425,7 +426,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;简单的Python GUI… 要想强大一点还是去用PyQt了。&lt;/p&gt;
+      &lt;p&gt;简单的Python GUI... 要想强大一点还是去用PyQt了。&lt;/p&gt;
     
     </summary>
     

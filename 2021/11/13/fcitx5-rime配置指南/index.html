@@ -255,13 +255,14 @@
       
         <p>Rime 作为 Linux 下相当不错的输入法，对 fcitx5 的文档支持倒是很差劲。本文介绍了 fcitx5-rime 配置的一些小细节，防止多次踩坑。</p>
 <a id="more"></a>
-
-<h2 id="fcitx5-rime-的配置文件目录"><a href="#fcitx5-rime-的配置文件目录" class="headerlink" title="fcitx5-rime 的配置文件目录"></a>fcitx5-rime 的配置文件目录</h2><p>从 fcitx4 升级到 fcitx5，Rime 悄悄把它的配置文件目录从 <code>~/.config/fcitx/rime/</code> 改到了 <code>~/.local/share/fcitx5/rime/</code> ，网络上倒是有一堆拿 fcitx4-rime 的配置路径冠名到 fcitx5 上的，那怎么可能能行得通呢（</p>
-<h2 id="fcitx5-rime-如何手动修改配置"><a href="#fcitx5-rime-如何手动修改配置" class="headerlink" title="fcitx5-rime 如何手动修改配置"></a>fcitx5-rime 如何手动修改配置</h2><p>fcitx5-rime 的配置目录中有一个 <code>build</code> 文件夹，其中的各个以 <code>.schema.yaml</code> 结尾的文件是在更新时会自动覆盖掉的默认配置文件。我们当然可以手动去更改这些文件使新配置生效，但是每次更新之后配置都会被覆盖掉。rime 提供的解决方案是，我们可以在 fcitx5-rime 配置文件夹中创建一个 <code>.custom.yaml</code> 的配置文件，每次我们需要再次 deploy 输入法的时候，rime 会首先查找是否有 custom 配置文件，如果没有则再回退到 schema 上。</p>
+<h2 id="fcitx5-rime-的配置文件目录">fcitx5-rime 的配置文件目录</h2>
+<p>从 fcitx4 升级到 fcitx5，Rime 悄悄把它的配置文件目录从 <code>~/.config/fcitx/rime/</code> 改到了 <code>~/.local/share/fcitx5/rime/</code> ，网络上倒是有一堆拿 fcitx4-rime 的配置路径冠名到 fcitx5 上的，那怎么可能能行得通呢（</p>
+<h2 id="fcitx5-rime-如何手动修改配置">fcitx5-rime 如何手动修改配置</h2>
+<p>fcitx5-rime 的配置目录中有一个 <code>build</code> 文件夹，其中的各个以 <code>.schema.yaml</code> 结尾的文件是在更新时会自动覆盖掉的默认配置文件。我们当然可以手动去更改这些文件使新配置生效，但是每次更新之后配置都会被覆盖掉。rime 提供的解决方案是，我们可以在 fcitx5-rime 配置文件夹中创建一个 <code>.custom.yaml</code> 的配置文件，每次我们需要再次 deploy 输入法的时候，rime 会首先查找是否有 custom 配置文件，如果没有则再回退到 schema 上。</p>
 <p>rime 的配置文件均使用 yaml 格式，关于 yaml 格式的详情请搜索相关详情。鉴于 rime 在 deploy 时如果 yaml 文件有格式错误并不会报错，因此可能出现看似写好了配置但并没有生效的情况，需要仔细检查 yaml 格式是否有误。</p>
 <p>rime 为自定义配置提供了 <code>patch</code> 选项，用于在 schema 配置上修改需要 patch 的值，并保留 schema 中的其它配置，非常方便。</p>
-<h2 id="配置默认使用英文和简体字的用例"><a href="#配置默认使用英文和简体字的用例" class="headerlink" title="配置默认使用英文和简体字的用例"></a>配置默认使用英文和简体字的用例</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.local/share/fcitx5/rime/luna_pinyin.custom.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">patch:</span></span><br><span class="line">  <span class="attr">switches:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ascii_mode</span></span><br><span class="line">      <span class="attr">reset:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["中文",</span> <span class="string">"西文"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">full_shape</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["半角",</span> <span class="string">"全角"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zh_simp</span></span><br><span class="line">      <span class="attr">reset:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["漢字",</span> <span class="string">"汉字"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ascii_punct</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["。，",</span> <span class="string">"．，"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
-
+<h2 id="配置默认使用英文和简体字的用例">配置默认使用英文和简体字的用例</h2>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ~/.local/share/fcitx5/rime/luna_pinyin.custom.yaml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">patch:</span></span><br><span class="line">  <span class="attr">switches:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ascii_mode</span></span><br><span class="line">      <span class="attr">reset:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["中文",</span> <span class="string">"西文"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">full_shape</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["半角",</span> <span class="string">"全角"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">zh_simp</span></span><br><span class="line">      <span class="attr">reset:</span> <span class="number">1</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["漢字",</span> <span class="string">"汉字"</span><span class="string">]</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">ascii_punct</span></span><br><span class="line">      <span class="attr">states:</span> <span class="string">["。，",</span> <span class="string">"．，"</span><span class="string">]</span></span><br></pre></td></tr></table></figure>
 <p>需要注意简体字有的版本写作 zh_simp，有的版本则是 simplification，使用时可以尝试一下，不行再换另一个。</p>
 
     </div>
@@ -301,8 +302,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97/" rel="prev" title="抽象代数 Remake 指南">
-      <i class="fa fa-chevron-left"></i> 抽象代数 Remake 指南
+    <a href="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/" rel="prev" title="抽象代数 Remake 指南 I - 群">
+      <i class="fa fa-chevron-left"></i> 抽象代数 Remake 指南 I - 群
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -437,13 +438,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -503,6 +504,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

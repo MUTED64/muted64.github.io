@@ -261,16 +261,16 @@
       
         <p>PHP基础太薄弱了。最近几天做个补完，记点笔记。</p>
 <a id="more"></a>
-<h2 id="PHP基础">PHP基础</h2>
+<h2 id="php基础">PHP基础</h2>
 <p>PHP 脚本可以放在文档中的任何位置，以<code>&lt;?php</code>开始，以 <code>?&gt;</code> 结束，每个代码行都必须以分号结束。</p>
 <p><code>//</code> 是单行注释，<code>/**/</code>是多行注释。</p>
-<h2 id="PHP变量">PHP变量</h2>
+<h2 id="php变量">PHP变量</h2>
 <h3 id="变量声明">变量声明</h3>
 <p>变量以 $ 开始，大小写敏感。没有声明变量的命令，在声明变量在首次给变量赋值的同时完成。</p>
 <h3 id="作用域">作用域</h3>
 <p>变量的作用域是脚本中变量可被引用/使用的部分。</p>
 <p>在所有函数外部定义的变量，拥有全局作用域。除了函数外，全局变量可以被脚本中的任何部分访问，<strong>要在一个函数中访问一个全局变量，需要使用 global 关键字</strong>。在 PHP 函数内部声明的变量是局部变量，仅能在函数内部访问。</p>
-<p>**PHP中函数的花括号构成新的作用域。**if和for的花括号并不构成新的作用域。</p>
+<p><strong>PHP中函数的花括号构成新的作用域。</strong>if和for的花括号并不构成新的作用域。</p>
 <p>PHP 有四种不同的变量作用域：</p>
 <ul>
 <li>local：局部变量</li>
@@ -285,9 +285,9 @@
 <p>上面的实例可以写成这样：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$x=<span class="number">5</span>;</span><br><span class="line">$y=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $GLOBALS[<span class="string">'y'</span>]=$GLOBALS[<span class="string">'x'</span>]+$GLOBALS[<span class="string">'y'</span>];</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line">myTest();</span><br><span class="line"><span class="keyword">echo</span> $y;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>PHP的执行是以一个.php脚本为单位，在一个.php脚本的执行过程中，可以include和require其他PHP脚本进来执行。执行的.php脚本与include/require进来的脚本共享一个全局域(global scope)。global关键字无论在哪层，所引用的都是全局域的变量。</p>
-<h4 id="Static">Static</h4>
+<h4 id="static">Static</h4>
 <p>每次调用该函数时，该变量将会保留着函数前一次被调用时的值。该变量仍然是函数的局部变量，但不会像普通的局部变量一样因为函数完成而被删除。</p>
-<h4 id="Parameter">Parameter</h4>
+<h4 id="parameter">Parameter</h4>
 <p>参数是通过调用代码将值传递给函数的局部变量。参数是在参数列表中声明的，作为函数声明的一部分。实例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span><span class="params">($x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> $x;</span><br><span class="line">&#125;</span><br><span class="line">myTest(<span class="number">5</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="预定义变量">预定义变量</h3>
@@ -313,11 +313,11 @@
 </ul>
 <h3 id="可变变量">可变变量</h3>
 <p>在 PHP 的函数和类的方法中，<a href="https://www.php.net/manual/zh/language.variables.superglobals.php" target="_blank" rel="noopener">超全局变量</a>不能用作可变变量。<em>$this</em> 变量也是一个特殊变量，不能被动态引用。</p>
-<p>要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下 $$a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 $$a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 ${$a[1]}，对第二种情况用 ${$a}[1]。</p>
-<h3 id="PHP之外的变量">PHP之外的变量</h3>
+<p>要将可变变量用于数组，必须解决一个模棱两可的问题。这就是当写下 <span class="math display">\[a[1] 时，解析器需要知道是想要 $a[1] 作为一个变量呢，还是想要 \]</span>a 作为一个变量并取出该变量中索引为 [1] 的值。解决此问题的语法是，对第一种情况用 <span class="math inline">\({\)</span>a[1]}，对第二种情况用 <span class="math inline">\({\)</span>a}[1]。</p>
+<h3 id="php之外的变量">PHP之外的变量</h3>
 <p>通常，PHP 不会改变传递给脚本中的变量名。然而应该注意到点（句号）不是 PHP 变量名中的合法字符。至于原因，看看：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$varname.ext;  <span class="comment">/* 非法变量名 */</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>这时，解析器看到是一个名为 $varname 的变量，后面跟着一个字符串连接运算符，后面跟着一个裸字符串（即没有加引号的字符串，且不匹配任何已知的健名或保留字）‘ext’。很明显这不是想要的结果。</p>
+<p>这时，解析器看到是一个名为 $varname 的变量，后面跟着一个字符串连接运算符，后面跟着一个裸字符串（即没有加引号的字符串，且不匹配任何已知的健名或保留字）'ext'。很明显这不是想要的结果。</p>
 <p>出于此原因，要注意 PHP 将会自动将外部变量名中的点替换成下划线。</p>
 <p>因为 PHP 会判断变量类型并在需要时进行转换（通常情况下），因此在某一时刻给定的变量是何种类型并不明显。PHP 包括几个函数可以判断变量的类型，例如：<a href="https://www.php.net/manual/zh/function.gettype.php" target="_blank" rel="noopener">gettype()</a>，<a href="https://www.php.net/manual/zh/function.is-array.php" target="_blank" rel="noopener">is_array()</a>，<a href="https://www.php.net/manual/zh/function.is-float.php" target="_blank" rel="noopener">is_float()</a>，<a href="https://www.php.net/manual/zh/function.is-int.php" target="_blank" rel="noopener">is_int()</a>，<a href="https://www.php.net/manual/zh/function.is-object.php" target="_blank" rel="noopener">is_object()</a> 和 <a href="https://www.php.net/manual/zh/function.is-string.php" target="_blank" rel="noopener">is_string()</a>。参见<a href="https://www.php.net/manual/zh/language.types.php" target="_blank" rel="noopener">类型</a>一章。</p>
 <h2 id="输出语句">输出语句</h2>
@@ -326,7 +326,7 @@
 <li>echo - 可以输出一个或多个字符串</li>
 <li>print - 只允许输出一个字符串，返回值总为 1</li>
 </ul>
-<p>**提示：**echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。</p>
+<p><strong>提示：</strong>echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。</p>
 <h3 id="echo">echo</h3>
 <p>使用的时候可以不用加括号，也可以加上括号： echo 或 echo()。输出的字符串可以带有html标签，多个串用逗号隔开。</p>
 <p>实例：</p>
@@ -334,49 +334,45 @@
 <h3 id="print">print</h3>
 <p>可以使用括号，也可以不使用括号： print 或 print()。使用与echo基本相同。</p>
 <h2 id="数据类型">数据类型</h2>
-<h3 id="String">String</h3>
+<h3 id="string">String</h3>
 <p>放在单引号双引号中均可。</p>
 <p>单引号除了单引号本身和反斜线以外其它均不转义。</p>
 <p>当字符串用双引号或 heredoc 结构定义时，其中的<a href="https://www.php.net/manual/zh/language.variables.php" target="_blank" rel="noopener">变量</a>将会被解析。</p>
 <p>PHP 的字符串在内部是字节组成的数组。因此用花括号访问或修改字符串对多字节字符集很不安全。</p>
 <h4 id="heredoc">heredoc</h4>
 <p><em>&lt;&lt;&lt;xxx</em>。</p>
-<p>要注意的是结束标识符这行除了<em>可能</em>有一个分号（<em>;</em>）外，绝对不能包含其它字符。这意味着标识符<em>不能缩进</em>，分号的前后也不能有任何空白或制表符。更重要的是结束标识符的前面必须是个被本地操作系统认可的换行，比如在 UNIX 和 Mac OS X 系统中是 <em>\n</em>，而结束定界符（可能其后有个分号）之后也必须紧跟一个换行。</p>
+<p>要注意的是结束标识符这行除了<em>可能</em>有一个分号（<em>;</em>）外，绝对不能包含其它字符。这意味着标识符<em>不能缩进</em>，分号的前后也不能有任何空白或制表符。更重要的是结束标识符的前面必须是个被本地操作系统认可的换行，比如在 UNIX 和 Mac OS X 系统中是 *，而结束定界符（可能其后有个分号）之后也必须紧跟一个换行。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">foo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $bar = <span class="string">&lt;&lt;&lt;EOT</span></span><br><span class="line"><span class="string">bar</span></span><br><span class="line">    EOT;  <span class="comment">//非法！！！</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="nowdoc">nowdoc</h4>
-<p><em>&lt;&lt;&lt;‘xxx’</em>。</p>
+<p><em>&lt;&lt;&lt;'xxx'</em>。</p>
 <p>与heredoc结构相似，但不对特殊字符转义。（&gt;php5.3.0）</p>
 <h4 id="变量解析">变量解析</h4>
 <ul>
-<li>
-<p>简单语法</p>
-<p>遇 <code>$</code> 尝试解析。</p>
-</li>
-<li>
-<p>复杂语法</p>
-<p>花括号括起。里面可以写复杂的表达式。只有 <em>$</em> 紧挨着 <em>{</em> 时才会被识别。</p>
-</li>
+<li><p>简单语法</p>
+<p>遇 <code>$</code> 尝试解析。</p></li>
+<li><p>复杂语法</p>
+<p>花括号括起。里面可以写复杂的表达式。只有 <em>$</em> 紧挨着 <em>{</em> 时才会被识别。</p></li>
 </ul>
 <h4 id="存取和修改字符">存取和修改字符</h4>
 <p>用方括号或花括号访问。</p>
-<h3 id="Int">Int</h3>
+<h3 id="int">Int</h3>
 <p>不能包含逗号和空格，无小数点，可正可负，可以是十进制， 十六进制（ 以 0x 为前缀）或八进制（前缀为 0）。</p>
-<h3 id="Float">Float</h3>
+<h3 id="float">Float</h3>
 <p>带小数的或是指数形式的。例如： 1.2，2.4e3，8E-5。</p>
-<h3 id="Bool">Bool</h3>
+<h3 id="bool">Bool</h3>
 <p>true或false。</p>
-<h3 id="Array">Array</h3>
+<h3 id="array">Array</h3>
 <p>有序映射。映射是一种把 <em>values</em> 关联到 <em>keys</em> 的类型。由于数组元素的值也可以是另一个数组，树形结构和多维数组也是允许的。</p>
 <h4 id="定义数组">定义数组</h4>
-<p>可以用 <a href="https://www.php.net/manual/zh/function.array.php" target="_blank" rel="noopener">array()</a> 语言结构来新建一个数组。它接受任意数量用逗号分隔的 *键（key） =&gt; 值（value）*对。</p>
+<p>可以用 <a href="https://www.php.net/manual/zh/function.array.php" target="_blank" rel="noopener">array()</a> 语言结构来新建一个数组。它接受任意数量用逗号分隔的 <em>键（key） =&gt; 值（value）</em>对。</p>
 <p>自 5.4 起可以使用短数组定义语法，用 <em>[]</em> 替代 <em>array()</em>。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$array = <span class="keyword">array</span>(</span><br><span class="line">    <span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,</span><br><span class="line">    <span class="string">"bar"</span> =&gt; <span class="string">"foo"</span>,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自 PHP 5.4 起</span></span><br><span class="line">$array = [</span><br><span class="line">    <span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,</span><br><span class="line">    <span class="string">"bar"</span> =&gt; <span class="string">"foo"</span>,</span><br><span class="line">];</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>key 可以是 <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a> 或者 <a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>。value 可以是任意类型。</p>
 <ul>
-<li>包含有合法整型值的字符串会被转换为整型。例如键名 <em>“8”</em> 实际会被储存为 <em>8</em>。但是 <em>“08”</em> 则不会强制转换，因为其不是一个合法的十进制数值。</li>
+<li>包含有合法整型值的字符串会被转换为整型。例如键名 <em>"8"</em> 实际会被储存为 <em>8</em>。但是 <em>"08"</em> 则不会强制转换，因为其不是一个合法的十进制数值。</li>
 <li>浮点数也会被转换为整型，意味着其小数部分会被舍去。例如键名 <em>8.7</em> 实际会被储存为 <em>8</em>。</li>
 <li>布尔值也会被转换成整型。即键名 <em>true</em> 实际会被储存为 <em>1</em> 而键名 <em>false</em> 会被储存为 <em>0</em>。</li>
-<li><a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">Null</a> 会被转换为空字符串，即键名 <em>null</em> 实际会被储存为 <em>“”</em>。</li>
+<li><a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">Null</a> 会被转换为空字符串，即键名 <em>null</em> 实际会被储存为 <em>""</em>。</li>
 <li>数组和对象<em>不能</em>被用为键名。坚持这么做会导致警告：<em>Illegal offset type</em>。</li>
 </ul>
 <p><strong>如果在数组定义中多个单元都使用了同一个键名，则只使用了最后一个，之前的都被覆盖了。</strong></p>
@@ -391,7 +387,7 @@
 <p><strong>Note</strong>:</p>
 <p>方括号和花括号可以互换使用来访问数组单元（例如 $array[42] 和 $array{42} 在上例中效果相同）。</p>
 </blockquote>
-<h4 id="新建、修改、删除值">新建、修改、删除值</h4>
+<h4 id="新建修改删除值">新建、修改、删除值</h4>
 <p>要修改某个值，通过其键名给该单元赋一个新值。要删除某键值对，对其调用 <a href="https://www.php.net/manual/zh/function.unset.php" target="_blank" rel="noopener">unset()</a> 函数。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="number">5</span> =&gt; <span class="number">1</span>, <span class="number">12</span> =&gt; <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">$arr[] = <span class="number">56</span>;    <span class="comment">// This is the same as $arr[13] = 56;</span></span><br><span class="line">                <span class="comment">// at this point of the script</span></span><br><span class="line"></span><br><span class="line">$arr[<span class="string">"x"</span>] = <span class="number">42</span>; <span class="comment">// This adds a new element to</span></span><br><span class="line">                <span class="comment">// the array with key "x"</span></span><br><span class="line">                </span><br><span class="line"><span class="keyword">unset</span>($arr[<span class="number">5</span>]); <span class="comment">// This removes the element from the array</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unset</span>($arr);    <span class="comment">// This deletes the whole array</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="数组解引用">数组解引用</h4>
@@ -406,23 +402,23 @@
 <p>应该始终在用字符串表示的数组索引上加上引号。而键名为常量和变量的不需要加引号。</p>
 <p>可用函数返回值做数组索引。也可用已知常量。</p>
 <h4 id="转换为数组">转换为数组</h4>
-<p>对于任意 <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a>，<a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a>，<a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">boolean</a> 和 <a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 类型，如果将一个值转换为数组，将得到一个仅有一个元素的数组，其下标为 0，该元素即为此标量的值。换句话说，<em>(array)$scalarValue</em> 与 <em>array($scalarValue)</em> 完全一样。</p>
-<p>如果一个 <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a> 类型转换为 <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a>，则结果为一个数组，其单元为该对象的属性。键名将为成员变量名，不过有几点例外：整数属性不可访问；私有变量前会加上类名作前缀；保护变量前会加上一个 ‘*’ 做前缀。这些前缀的前后都各有一个 NULL 字符。这会导致一些不可预知的行为：</p>
+<p>对于任意 <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a>，<a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a>，<a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">boolean</a> 和 <a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 类型，如果将一个值转换为数组，将得到一个仅有一个元素的数组，其下标为 0，该元素即为此标量的值。换句话说，<em>(array)<span class="math inline">\(scalarValue* 与 *array(\)</span>scalarValue)</em> 完全一样。</p>
+<p>如果一个 <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a> 类型转换为 <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a>，则结果为一个数组，其单元为该对象的属性。键名将为成员变量名，不过有几点例外：整数属性不可访问；私有变量前会加上类名作前缀；保护变量前会加上一个 '*' 做前缀。这些前缀的前后都各有一个 NULL 字符。这会导致一些不可预知的行为：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $A; <span class="comment">// This will become '\0A\0A'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $A; <span class="comment">// This will become '\0B\0A'</span></span><br><span class="line">    <span class="keyword">public</span> $AA; <span class="comment">// This will become 'AA'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var_dump((<span class="keyword">array</span>) <span class="keyword">new</span> B());</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h4 id="比较">比较</h4>
 <p>array_diff()，数组运算符。</p>
-<h3 id="Object">Object</h3>
+<h3 id="object">Object</h3>
 <h4 id="初始化">初始化</h4>
 <p>new 语句。</p>
 <h4 id="转换为对象">转换为对象</h4>
 <p>如果其它任何类型的值被转换成对象，将会创建一个内置类 <em>stdClass</em> 的实例。如果该值为 <strong><code>NULL</code></strong>，则新的实例为空。 <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> 转换成 <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a> 将使键名成为属性名并具有相对应的值。注意：在这个例子里， 使用 PHP 7.2.0 之前的版本，数字键只能通过迭代访问。对于其他值，会包含进成员变量名 <em>scalar</em>。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$obj = (object) <span class="string">'ciao'</span>;</span><br><span class="line"><span class="keyword">echo</span> $obj-&gt;scalar;  <span class="comment">// outputs 'ciao'</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="Resource">Resource</h3>
+<h3 id="resource">Resource</h3>
 <p><code>get_resource_type</code> 返回资源类型。例如：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$c = mysql_connect();</span><br><span class="line"><span class="keyword">echo</span> get_resource_type($c).<span class="string">"\n"</span>;</span><br><span class="line"><span class="comment">// 打印：mysql link</span></span><br><span class="line"></span><br><span class="line">$fp = fopen(<span class="string">"foo"</span>,<span class="string">"w"</span>);</span><br><span class="line"><span class="keyword">echo</span> get_resource_type($fp).<span class="string">"\n"</span>;</span><br><span class="line"><span class="comment">// 打印：file</span></span><br><span class="line"></span><br><span class="line">$doc = new_xmldoc(<span class="string">"1.0"</span>);</span><br><span class="line"><span class="keyword">echo</span> get_resource_type($doc-&gt;doc).<span class="string">"\n"</span>;</span><br><span class="line"><span class="comment">// 打印：domxml document</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="Callback-Callable">Callback/Callable</h3>
+<h3 id="callbackcallable">Callback/Callable</h3>
 <p>自 PHP 5.4 起可用 <a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a> 类型指定回调类型 callback。</p>
-<h3 id="NULL">NULL</h3>
+<h3 id="null">NULL</h3>
 <p>NULL 值表示变量没有值。NULL 是数据类型为 NULL 的值。</p>
 <h3 id="伪类型与变量">伪类型与变量</h3>
 <h4 id="mixed">mixed</h4>
@@ -431,11 +427,11 @@
 <p>可以是 <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a> 或者 <a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a>。</p>
 <h4 id="callback">callback</h4>
 <p>在 PHP 5.4 引入 <a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a> 类型之前使用 了 <a href="https://www.php.net/manual/zh/language.pseudo-types.php#language.types.callback" target="_blank" rel="noopener">callback</a> 伪类型。二者含义完全相同。</p>
-<h4 id="array-object">array|object</h4>
+<h4 id="arrayobject">array|object</h4>
 <p>既可以是 <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> 也可以是 <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a>。</p>
 <h4 id="void">void</h4>
 <p><em>void</em> 作为返回类型意味着函数的返回值是无用的。<em>void</em> 作为参数列表意味着函数不接受任何参数。</p>
-<h4 id="…">…</h4>
+<h4 id="section">...</h4>
 <p>在函数原型中，<code>$...</code> 表示<em>等等</em>的意思。当一个函数可以接受任意个参数时使用此变量名。</p>
 <h3 id="类型转换">类型转换</h3>
 <h4 id="类型设置">类型设置</h4>
@@ -464,177 +460,177 @@
 <h3 id="运算符优先级">运算符优先级</h3>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">结合方向</th>
-<th style="text-align:left">运算符</th>
-<th style="text-align:left">附加信息</th>
+<tr class="header">
+<th style="text-align: left;">结合方向</th>
+<th style="text-align: left;">运算符</th>
+<th style="text-align: left;">附加信息</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">无</td>
-<td style="text-align:left">clone new</td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.oop5.cloning.php" target="_blank" rel="noopener">clone</a> 和 <a href="https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new" target="_blank" rel="noopener">new</a></td>
+<tr class="odd">
+<td style="text-align: left;">无</td>
+<td style="text-align: left;">clone new</td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.oop5.cloning.php" target="_blank" rel="noopener">clone</a> 和 <a href="https://www.php.net/manual/zh/language.oop5.basic.php#language.oop5.basic.new" target="_blank" rel="noopener">new</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left">****</td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;">****</td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>++</em> <em>–</em> <em>~</em> <em>(int)</em> <em>(float)</em> <em>(string)</em> <em>(array)</em> <em>(object)</em> <em>(bool)</em> <em>@</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.php" target="_blank" rel="noopener">类型</a>、<a href="https://www.php.net/manual/zh/language.operators.increment.php" target="_blank" rel="noopener">递增／递减</a>、<a href="https://www.php.net/manual/zh/language.operators.errorcontrol.php" target="_blank" rel="noopener">错误控制</a></td>
+<tr class="odd">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>++</em> <em>--</em> <em>~</em> <em>(int)</em> <em>(float)</em> <em>(string)</em> <em>(array)</em> <em>(object)</em> <em>(bool)</em> *<span class="citation" data-cites="*">@*</span></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.php" target="_blank" rel="noopener">类型</a>、<a href="https://www.php.net/manual/zh/language.operators.increment.php" target="_blank" rel="noopener">递增／递减</a>、<a href="https://www.php.net/manual/zh/language.operators.errorcontrol.php" target="_blank" rel="noopener">错误控制</a></td>
 </tr>
-<tr>
-<td style="text-align:left">无</td>
-<td style="text-align:left"><em>instanceof</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.php" target="_blank" rel="noopener">类型</a></td>
+<tr class="even">
+<td style="text-align: left;">无</td>
+<td style="text-align: left;"><em>instanceof</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.php" target="_blank" rel="noopener">类型</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>!</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>!</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left">*** <em>/</em> <em>%</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;">*** <em>/</em> <em>%</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>+</em> <em>-</em> <em>.</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a> 和 <a href="https://www.php.net/manual/zh/language.operators.string.php" target="_blank" rel="noopener">字符串运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>+</em> <em>-</em> <em>.</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.arithmetic.php" target="_blank" rel="noopener">算术运算符</a> 和 <a href="https://www.php.net/manual/zh/language.operators.string.php" target="_blank" rel="noopener">字符串运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>&lt;&lt;</em> <em>&gt;&gt;</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>&lt;&lt;</em> <em>&gt;&gt;</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">无</td>
-<td style="text-align:left"><em>&lt;</em> <em>&lt;=</em> <em>&gt;</em> <em>&gt;=</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.comparison.php" target="_blank" rel="noopener">比较运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">无</td>
+<td style="text-align: left;"><em>&lt;</em> <em>&lt;=</em> <em>&gt;</em> <em>&gt;=</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.comparison.php" target="_blank" rel="noopener">比较运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">无</td>
-<td style="text-align:left"><em>==</em> <em>!=</em> <em>===</em> <em>!==</em> <em>&lt;&gt;</em> <em>&lt;=&gt;</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.comparison.php" target="_blank" rel="noopener">比较运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">无</td>
+<td style="text-align: left;"><em>==</em> <em>!=</em> <em>===</em> <em>!==</em> <em>&lt;&gt;</em> <em>&lt;=&gt;</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.comparison.php" target="_blank" rel="noopener">比较运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>&amp;</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a> 和 <a href="https://www.php.net/manual/zh/language.references.php" target="_blank" rel="noopener">引用</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>&amp;</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a> 和 <a href="https://www.php.net/manual/zh/language.references.php" target="_blank" rel="noopener">引用</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>^</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>^</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>|</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>|</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.bitwise.php" target="_blank" rel="noopener">位运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>&amp;&amp;</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>&amp;&amp;</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>||</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>||</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>??</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.coalesce" target="_blank" rel="noopener">null 合并运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>??</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.coalesce" target="_blank" rel="noopener">null 合并运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>? :</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.ternary" target="_blank" rel="noopener">三元运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>? :</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.comparison.php#language.operators.comparison.ternary" target="_blank" rel="noopener">三元运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>=</em> <em>+=</em> <em>-=</em> *<em>=</em> **<em>=</em> <em>/=</em> <em>.=</em> <em>%=</em> <em>&amp;=</em> <em>|=</em> <em>^=</em> <em>&lt;&lt;=</em> <em>&gt;&gt;=</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.assignment.php" target="_blank" rel="noopener">赋值运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>=</em> <em>+=</em> <em>-=</em> <strong>=* </strong><em>=</em> <em>/=</em> <em>.=</em> <em>%=</em> <em>&amp;=</em> <em>|=</em> <em>^=</em> <em>&lt;&lt;=</em> <em>&gt;&gt;=</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.assignment.php" target="_blank" rel="noopener">赋值运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>yield from</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield.from" target="_blank" rel="noopener">yield from</a></td>
+<tr class="odd">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>yield from</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield.from" target="_blank" rel="noopener">yield from</a></td>
 </tr>
-<tr>
-<td style="text-align:left">右</td>
-<td style="text-align:left"><em>yield</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield" target="_blank" rel="noopener">yield</a></td>
+<tr class="even">
+<td style="text-align: left;">右</td>
+<td style="text-align: left;"><em>yield</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.generators.syntax.php#control-structures.yield" target="_blank" rel="noopener">yield</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>and</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>and</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>xor</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="even">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>xor</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
-<tr>
-<td style="text-align:left">左</td>
-<td style="text-align:left"><em>or</em></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
+<tr class="odd">
+<td style="text-align: left;">左</td>
+<td style="text-align: left;"><em>or</em></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.operators.logical.php" target="_blank" rel="noopener">逻辑运算符</a></td>
 </tr>
 </tbody>
 </table>
 <h3 id="比较运算">比较运算</h3>
 <p>注意 <code>==</code> 和 <code>===</code> 的区别。</p>
-<p>特别注意的是，$a &lt;&gt; $b 与 $a != $b 表示相同的意思。$a &lt;=&gt; $b是结合比较运算符，当$a小于、等于、大于$b时分别返回一个小于、等于、大于0的<a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a> 值。 PHP7开始提供。</p>
+<p>特别注意的是，$a &lt;&gt; $b 与 $a != <span class="math inline">\(b 表示相同的意思。\)</span>a &lt;=&gt; <span class="math inline">\(b是结合比较运算符，当\)</span>a小于、等于、大于$b时分别返回一个小于、等于、大于0的<a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a> 值。 PHP7开始提供。</p>
 <p><strong>多类型比较（按顺序）</strong></p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">运算数 1 类型</th>
-<th style="text-align:left">运算数 2 类型</th>
-<th style="text-align:left">结果</th>
+<tr class="header">
+<th style="text-align: left;">运算数 1 类型</th>
+<th style="text-align: left;">运算数 2 类型</th>
+<th style="text-align: left;">结果</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">null</a> 或 <a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
-<td style="text-align:left">将 <strong><code>NULL</code></strong> 转换为 “”，进行数字或词汇比较</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">null</a> 或 <a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
+<td style="text-align: left;">将 <strong><code>NULL</code></strong> 转换为 ""，进行数字或词汇比较</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a> 或 <a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">null</a></td>
-<td style="text-align:left">任何其它类型</td>
-<td style="text-align:left">转换为 <a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a>，<strong><code>FALSE</code></strong> &lt; <strong><code>TRUE</code></strong></td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a> 或 <a href="https://www.php.net/manual/zh/language.types.null.php" target="_blank" rel="noopener">null</a></td>
+<td style="text-align: left;">任何其它类型</td>
+<td style="text-align: left;">转换为 <a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a>，<strong><code>FALSE</code></strong> &lt; <strong><code>TRUE</code></strong></td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
-<td style="text-align:left">内置类可以定义自己的比较，不同类不能比较，相同类和数组同样方式比较属性（PHP 4 中），PHP 5 有其自己的<a href="https://www.php.net/manual/zh/language.oop5.object-comparison.php" target="_blank" rel="noopener">说明</a></td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
+<td style="text-align: left;">内置类可以定义自己的比较，不同类不能比较，相同类和数组同样方式比较属性（PHP 4 中），PHP 5 有其自己的<a href="https://www.php.net/manual/zh/language.oop5.object-comparison.php" target="_blank" rel="noopener">说明</a></td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 或 <a href="https://www.php.net/manual/zh/language.pseudo-types.php#language.types.number" target="_blank" rel="noopener">number</a></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 或 <a href="https://www.php.net/manual/zh/language.pseudo-types.php#language.types.number" target="_blank" rel="noopener">number</a></td>
-<td style="text-align:left">将字符串和资源转换成数字，按普通数学比较</td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 或 <a href="https://www.php.net/manual/zh/language.pseudo-types.php#language.types.number" target="_blank" rel="noopener">number</a></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>，<a href="https://www.php.net/manual/zh/language.types.resource.php" target="_blank" rel="noopener">resource</a> 或 <a href="https://www.php.net/manual/zh/language.pseudo-types.php#language.types.number" target="_blank" rel="noopener">number</a></td>
+<td style="text-align: left;">将字符串和资源转换成数字，按普通数学比较</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
-<td style="text-align:left">具有较少成员的数组较小，如果运算数 1 中的键不存在于运算数 2 中则数组无法比较，否则挨个值比较（见下例）</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
+<td style="text-align: left;">具有较少成员的数组较小，如果运算数 1 中的键不存在于运算数 2 中则数组无法比较，否则挨个值比较（见下例）</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
-<td style="text-align:left">任何其它类型</td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a> 总是更大</td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a></td>
+<td style="text-align: left;">任何其它类型</td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a> 总是更大</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
-<td style="text-align:left">任何其它类型</td>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> 总是更大</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
+<td style="text-align: left;">任何其它类型</td>
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> 总是更大</td>
 </tr>
 </tbody>
 </table>
@@ -643,7 +639,7 @@
 <p>表达式 <em>(expr1) ? (expr2) : (expr3)</em> 在 expr1 求值为 <strong><code>TRUE</code></strong> 时的值为 expr2，在 expr1 求值为 <strong><code>FALSE</code></strong> 时的值为 expr3。</p>
 <p>自 PHP 5.3 起，可以省略三元运算符中间那部分。表达式 <em>expr1 ?: expr3</em> 在 expr1 求值为 <strong><code>TRUE</code></strong> 时返回 expr1，否则返回 expr3。</p>
 <p>注意三元运算符是个语句，因此其求值不是变量，而是语句的结果。在一个通过引用返回的函数中语句 <em>return $var == 42 ? $a : $b;</em> 将不起作用，以后的 PHP 版本会为此发出一条警告。</p>
-<h3 id="NULL合并运算">NULL合并运算</h3>
+<h3 id="null合并运算">NULL合并运算</h3>
 <p>当 expr1 为 <strong><code>NULL</code></strong>，表达式 <em>(expr1) ?? (expr2)</em> 等同于 expr2，否则为 expr1。</p>
 <p>尤其要注意，当不存在左侧的值时，此运算符也和 <a href="https://www.php.net/manual/zh/function.isset.php" target="_blank" rel="noopener">isset()</a> 一样不会产生警告。 对于 array 键尤其有用。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// NULL 合并运算符的例子</span></span><br><span class="line">$action = $_POST[<span class="string">'action'</span>] ?? <span class="string">'default'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 以上例子等同于于以下 if/else 语句</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>($_POST[<span class="string">'action'</span>])) &#123;</span><br><span class="line">    $action = $_POST[<span class="string">'action'</span>];</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $action = <span class="string">'default'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -657,57 +653,32 @@
 <h3 id="赋值运算">赋值运算</h3>
 <p>没什么好说的。注意 $a .= $b 和 $a = $a . $b 表示的意思相同。</p>
 <h3 id="递增递减">递增递减</h3>
-<p>x++, ++x, x–, --x。</p>
+<p>x++, ++x, x--, --x。</p>
 <h3 id="逻辑运算">逻辑运算</h3>
-<p>and与 / or或  /xor异或 / &amp;&amp;与 / ||或 / !非。</p>
+<p>and与 / or或 /xor异或 / &amp;&amp;与 / ||或 / !非。</p>
 <h3 id="位运算">位运算</h3>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">例子</th>
-<th style="text-align:left">名称</th>
-<th style="text-align:left">结果</th>
+<tr class="header">
+<th style="text-align: left;">例子</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">结果</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left"><strong><code>$a &amp; $b</code></strong></td>
-<td style="text-align:left">And（按位与）</td>
-<td style="text-align:left">将把 $a 和 $b 中都为 1 的位设为 1。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>$a | $b</code></strong></td>
-<td style="text-align:left">Or（按位或）</td>
-<td style="text-align:left">将把 $a 和 $b 中任何一个为 1 的位设为 1。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>$a ^ $b</code></strong></td>
-<td style="text-align:left">Xor（按位异或）</td>
-<td style="text-align:left">将把 $a 和 $b 中一个为 1 另一个为 0 的位设为 1。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>~ $a</code></strong></td>
-<td style="text-align:left">Not（按位取反）</td>
-<td style="text-align:left">将 $a 中为 0 的位设为 1，反之亦然。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>$a &lt;&lt; $b</code></strong></td>
-<td style="text-align:left">Shift left（左移）</td>
-<td style="text-align:left">将 $a 中的位向左移动 $b 次（每一次移动都表示“乘以 2”）。</td>
-</tr>
-<tr>
-<td style="text-align:left"><strong><code>$a &gt;&gt; $b</code></strong></td>
-<td style="text-align:left">Shift right（右移）</td>
-<td style="text-align:left">将 $a 中的位向右移动 $b 次（每一次移动都表示“除以 2”）。</td>
+<tr class="odd">
+<td style="text-align: left;"><strong><code>$a &amp; $b</code></strong></td>
+<td style="text-align: left;">And（按位与）</td>
+<td style="text-align: left;">将把 $a 和 <span class="math inline">\(b 中都为 1 的位设为 1。 | | **`\)</span>a</td>
 </tr>
 </tbody>
 </table>
-<p>位移在 PHP 中是数学运算。向任何方向（左右）移出去的位都被丢弃。左移时右侧以零填充，**符号位被移走意味着正负号不被保留。**右移时左侧以符号位填充，意味着正负号被保留。</p>
-<p>若&amp;，/，^左右是字符串，则对ASCII做运算以后得到字符串结果，对于其它类型全部转成Integer，得到Integer结果。~操作同理。&lt;&lt;和&gt;&gt;左右两边都被当作 Integer 处理，String也不会转成ASCII。</p>
+<p>位移在 PHP 中是数学运算。向任何方向（左右）移出去的位都被丢弃。左移时右侧以零填充，<strong>符号位被移走意味着正负号不被保留。</strong>右移时左侧以符号位填充，意味着正负号被保留。</p>
+<p>若&amp;，/，^左右是字符串，则对ASCII做运算以后得到字符串结果，对于其它类型全部转成Integer，得到Integer结果。~操作同理。&lt;<和>&gt;左右两边都被当作 Integer 处理，String也不会转成ASCII。</和></p>
 <p>PHP 的 ini 设定 error_reporting 使用了按位的值，提供了关闭某个位的实例。</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">E_ALL ^ E_NOTICE</span><br><span class="line">具体运作方式是先取得 E_ALL 的值：</span><br><span class="line"><span class="number">00000000000000000111011111111111</span></span><br><span class="line">再取得 E_NOTICE 的值：</span><br><span class="line"><span class="number">00000000000000000000000000001000</span></span><br><span class="line">最后再用^得到两个值中都设定了（为 <span class="number">1</span>）的位：</span><br><span class="line"><span class="number">00000000000000000111011111110111</span></span><br></pre></td></tr></table></figure>
 <h3 id="错误控制运算">错误控制运算</h3>
-<p>@符号。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。</p>
+<p><span class="citation" data-cites="符号">@符号</span>。当将其放置在一个 PHP 表达式之前，该表达式可能产生的任何错误信息都被忽略掉。</p>
 <p>如果用 <a href="https://www.php.net/manual/zh/function.set-error-handler.php" target="_blank" rel="noopener">set_error_handler()</a> 设定了自定义的错误处理函数，仍然会被调用，但是此错误处理函数可以（并且也应该）调用 <a href="https://www.php.net/manual/zh/function.error-reporting.php" target="_blank" rel="noopener">error_reporting()</a>，而该函数在出错语句前有 @ 时将返回 0。</p>
 <p>如果激活了 <a href="https://www.php.net/manual/zh/errorfunc.configuration.php#ini.track-errors" target="_blank" rel="noopener"><strong>track_errors</strong></a> 特性，表达式所产生的任何错误信息都被存放在变量 <a href="https://www.php.net/manual/zh/reserved.variables.phperrormsg.php" target="_blank" rel="noopener"><strong>$php_errormsg</strong></a> 中。此变量在每次出错时都会被覆盖，所以如果想用它的话就要尽早检查。</p>
 <h3 id="执行运算">执行运算</h3>
@@ -719,42 +690,42 @@
 <h3 id="数组运算">数组运算</h3>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">例子</th>
-<th style="text-align:left">名称</th>
-<th style="text-align:left">结果</th>
+<tr class="header">
+<th style="text-align: left;">例子</th>
+<th style="text-align: left;">名称</th>
+<th style="text-align: left;">结果</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">$a + $b</td>
-<td style="text-align:left">联合</td>
-<td style="text-align:left">$a 和 $b 的联合。</td>
+<tr class="odd">
+<td style="text-align: left;">$a + $b</td>
+<td style="text-align: left;">联合</td>
+<td style="text-align: left;">$a 和 $b 的联合。</td>
 </tr>
-<tr>
-<td style="text-align:left">$a == $b</td>
-<td style="text-align:left">相等</td>
-<td style="text-align:left">如果 $a 和 $b 具有相同的键／值对则为 <strong><code>TRUE</code></strong>。</td>
+<tr class="even">
+<td style="text-align: left;">$a == $b</td>
+<td style="text-align: left;">相等</td>
+<td style="text-align: left;">如果 $a 和 $b 具有相同的键／值对则为 <strong><code>TRUE</code></strong>。</td>
 </tr>
-<tr>
-<td style="text-align:left">$a === $b</td>
-<td style="text-align:left">全等</td>
-<td style="text-align:left">如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 <strong><code>TRUE</code></strong>。</td>
+<tr class="odd">
+<td style="text-align: left;">$a === $b</td>
+<td style="text-align: left;">全等</td>
+<td style="text-align: left;">如果 $a 和 $b 具有相同的键／值对并且顺序和类型都相同则为 <strong><code>TRUE</code></strong>。</td>
 </tr>
-<tr>
-<td style="text-align:left">$a != $b</td>
-<td style="text-align:left">不等</td>
-<td style="text-align:left">如果 $a 不等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
+<tr class="even">
+<td style="text-align: left;">$a != $b</td>
+<td style="text-align: left;">不等</td>
+<td style="text-align: left;">如果 $a 不等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
 </tr>
-<tr>
-<td style="text-align:left">$a &lt;&gt; $b</td>
-<td style="text-align:left">不等</td>
-<td style="text-align:left">如果 $a 不等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
+<tr class="odd">
+<td style="text-align: left;">$a &lt;&gt; $b</td>
+<td style="text-align: left;">不等</td>
+<td style="text-align: left;">如果 $a 不等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
 </tr>
-<tr>
-<td style="text-align:left">$a !== $b</td>
-<td style="text-align:left">不全等</td>
-<td style="text-align:left">如果 $a 不全等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
+<tr class="even">
+<td style="text-align: left;">$a !== $b</td>
+<td style="text-align: left;">不全等</td>
+<td style="text-align: left;">如果 $a 不全等于 $b 则为 <strong><code>TRUE</code></strong>。</td>
 </tr>
 </tbody>
 </table>
@@ -772,7 +743,7 @@
 <h2 id="流程控制">流程控制</h2>
 <h3 id="不必多说的">不必多说的</h3>
 <p>if，else，while, do while, for</p>
-<h3 id="elseif-else-if">elseif/else if</h3>
+<h3 id="elseifelse-if">elseif/else if</h3>
 <p>必须要注意的是 <em>elseif</em> 与 <em>else if</em> 只有在使用花括号的情况下才认为是完全相同。如果用冒号来定义 <em>if</em>/<em>elseif</em> 条件，那就不能用两个单词的 <em>else if</em>，否则 PHP 会产生解析错误。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 不正确的使用方法： */</span></span><br><span class="line"><span class="keyword">if</span> ($a &gt; $b):</span><br><span class="line">    <span class="keyword">echo</span> $a.<span class="string">" is greater than "</span>.$b;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> ($a == $b): <span class="comment">// 将无法编译</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"The above line causes a parse error."</span>;</span><br><span class="line"><span class="keyword">endif</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 正确的使用方法： */</span></span><br><span class="line"><span class="keyword">if</span> ($a &gt; $b):</span><br><span class="line">    <span class="keyword">echo</span> $a.<span class="string">" is greater than "</span>.$b;</span><br><span class="line"><span class="keyword">elseif</span> ($a == $b): <span class="comment">// 注意使用了一个单词的 elseif</span></span><br><span class="line">    <span class="keyword">echo</span> $a.<span class="string">" equals "</span>.$b;</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">echo</span> $a.<span class="string">" is neither greater than or equal to "</span>.$b;</span><br><span class="line"><span class="keyword">endif</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="流程控制的替代语法">流程控制的替代语法</h3>
@@ -798,29 +769,29 @@
 <p>以下代码功能完全相同：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>);</span><br><span class="line">reset($arr);</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">list</span>(, $value) = each($arr)) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Value: $value&lt;br&gt;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($arr <span class="keyword">as</span> $value) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Value: $value&lt;br /&gt;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$arr = <span class="keyword">array</span>(<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>);</span><br><span class="line">reset($arr);</span><br><span class="line"><span class="keyword">while</span> (<span class="keyword">list</span>($key, $value) = each($arr)) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Key: $key; Value: $value&lt;br /&gt;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($arr <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"Key: $key; Value: $value&lt;br /&gt;\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="用-list-给嵌套的数组解包-¶">用 list() 给嵌套的数组解包<a href="https://www.php.net/manual/zh/control-structures.foreach.php#control-structures.foreach.list" target="_blank" rel="noopener"> ¶</a></h4>
+<h4 id="用-list-给嵌套的数组解包">用 list() 给嵌套的数组解包<a href="https://www.php.net/manual/zh/control-structures.foreach.php#control-structures.foreach.list" target="_blank" rel="noopener">¶</a></h4>
 <p><em>(PHP 5 &gt;= 5.5.0, PHP 7)</em></p>
 <p>PHP 5.5 增添了遍历一个数组的数组的功能并且把嵌套的数组解包到循环变量中，只需将 <a href="https://www.php.net/manual/zh/function.list.php" target="_blank" rel="noopener">list()</a> 作为值提供。</p>
 <p>例如：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$array = [</span><br><span class="line">    [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    [<span class="number">3</span>, <span class="number">4</span>],</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> ($array <span class="keyword">as</span> <span class="keyword">list</span>($a, $b)) &#123;</span><br><span class="line">    <span class="comment">// $a contains the first element of the nested array,</span></span><br><span class="line">    <span class="comment">// and $b contains the second element.</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"A: $a; B: $b\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">A: 1; B: 2</span></span><br><span class="line"><span class="comment">A: 3; B: 4</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<h3 id="break-continue">break/continue</h3>
+<h3 id="breakcontinue">break/continue</h3>
 <p>PHP中 <em>break</em>/continue 可以接受一个可选的数字参数来决定跳出几重循环。</p>
 <p>*<strong>break* 的更新记录</strong></p>
 <table>
 <thead>
-<tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">说明</th>
+<tr class="header">
+<th style="text-align: left;">版本</th>
+<th style="text-align: left;">说明</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">5.4.0</td>
-<td style="text-align:left"><em>break 0;</em> 不再合法。这在之前的版本被解析为 <em>break 1;</em>。</td>
+<tr class="odd">
+<td style="text-align: left;">5.4.0</td>
+<td style="text-align: left;"><em>break 0;</em> 不再合法。这在之前的版本被解析为 <em>break 1;</em>。</td>
 </tr>
-<tr>
-<td style="text-align:left">5.4.0</td>
-<td style="text-align:left">取消变量作为参数传递（例如 <em>$num = 2; break $num;</em>）。</td>
+<tr class="even">
+<td style="text-align: left;">5.4.0</td>
+<td style="text-align: left;">取消变量作为参数传递（例如 <em>$num = 2; break $num;</em>）。</td>
 </tr>
 </tbody>
 </table>
@@ -843,22 +814,22 @@
 </blockquote>
 <p><em>declare</em> 结构也可用于全局范围，影响到其后的所有代码（但如果有 <em>declare</em> 结构的文件被其它文件包含，则对包含它的父文件不起作用）。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">// these are the same:</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// you can use this:</span></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">// entire script here</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// or you can use this:</span></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>);</span><br><span class="line"><span class="comment">// entire script here</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="Tick">Tick</h4>
+<h4 id="tick">Tick</h4>
 <p>Tick（时钟周期）是一个在 <em>declare</em> 代码段中解释器每执行 N 条可计时的低级语句就会发生的事件。N 的值是在 <em>declare</em> 中的 <em>directive</em> 部分用 <code>ticks=N</code> 来指定的。</p>
 <p>不是所有语句都可计时。通常条件表达式和参数表达式都不可计时。</p>
 <p>在每个 tick 中出现的事件是由 <a href="https://www.php.net/manual/zh/function.register-tick-function.php" target="_blank" rel="noopener">register_tick_function()</a> 来指定的。更多细节见下面的例子。注意每个 tick 中可以出现多个事件。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(ticks=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// A function called on each tick event</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick_handler</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"tick_handler() called\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">register_tick_function(<span class="string">'tick_handler'</span>);</span><br><span class="line"></span><br><span class="line">$a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($a &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    $a += <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">print</span>($a);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">tick_handler() called</span></span><br><span class="line"><span class="comment">tick_handler() called</span></span><br><span class="line"><span class="comment">tick_handler() called</span></span><br><span class="line"><span class="comment">3tick_handler() called</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//和上面的效果相同</span></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tick_handler</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">echo</span> <span class="string">"tick_handler() called\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="number">1</span>;</span><br><span class="line">tick_handler();</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ($a &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    $a += <span class="number">2</span>;</span><br><span class="line">    tick_handler();</span><br><span class="line">    <span class="keyword">print</span>($a);</span><br><span class="line">    tick_handler();</span><br><span class="line">&#125;</span><br><span class="line">tick_handler();</span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h4 id="Encoding">Encoding</h4>
+<h4 id="encoding">Encoding</h4>
 <p>可以用 encoding 指令来对每段脚本指定其编码方式。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">declare</span>(encoding=<span class="string">'ISO-8859-1'</span>);</span><br><span class="line"><span class="comment">// code here</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>在 PHP 5.3 中除非在编译时指定了 <em>–enable-zend-multibyte</em>，否则 declare 中的 encoding 值会被忽略。注意除非用 <a href="https://www.php.net/manual/zh/function.phpinfo.php" target="_blank" rel="noopener">phpinfo()</a>，否则 PHP 不会显示出是否在编译时指定了 <em>–enable-zend-multibyte</em>。参见 <a href="https://www.php.net/manual/zh/ini.core.php#ini.zend.script-encoding" target="_blank" rel="noopener">zend.script_encoding</a>。</p>
+<p>在 PHP 5.3 中除非在编译时指定了 <em>--enable-zend-multibyte</em>，否则 declare 中的 encoding 值会被忽略。注意除非用 <a href="https://www.php.net/manual/zh/function.phpinfo.php" target="_blank" rel="noopener">phpinfo()</a>，否则 PHP 不会显示出是否在编译时指定了 <em>--enable-zend-multibyte</em>。参见 <a href="https://www.php.net/manual/zh/ini.core.php#ini.zend.script-encoding" target="_blank" rel="noopener">zend.script_encoding</a>。</p>
 <h3 id="return">return</h3>
 <p>如果在一个函数中调用 <strong>return</strong> 语句，将立即结束此函数的执行并将它的参数作为函数的值返回。<strong>return</strong> 也会终止 <a href="https://www.php.net/manual/zh/function.eval.php" target="_blank" rel="noopener">eval()</a> 语句或者脚本文件的执行。</p>
 <p>如果在全局范围中调用，则当前脚本文件中止运行。如果当前脚本文件是被 <a href="https://www.php.net/manual/zh/function.include.php" target="_blank" rel="noopener">include</a> 的或者 <a href="https://www.php.net/manual/zh/function.require.php" target="_blank" rel="noopener">require</a> 的，则控制交回调用文件。此外，如果当前脚本是被 <a href="https://www.php.net/manual/zh/function.include.php" target="_blank" rel="noopener">include</a> 的，则 <strong>return</strong> 的值会被当作 <a href="https://www.php.net/manual/zh/function.include.php" target="_blank" rel="noopener">include</a> 调用的返回值。如果在主脚本文件中调用 <strong>return</strong>，则脚本中止运行。如果当前脚本文件是在 php.ini 中的配置选项 <a href="https://www.php.net/manual/zh/ini.core.php#ini.auto-prepend-file" target="_blank" rel="noopener">auto_prepend_file</a> 或者 <a href="https://www.php.net/manual/zh/ini.core.php#ini.auto-append-file" target="_blank" rel="noopener">auto_append_file</a> 所指定的，则此脚本文件中止运行。</p>
 <blockquote>
-<p><strong>Note</strong>: 当用引用返回值时<em>永远不要</em>使用括号，这样行不通。只能通过引用返回变量，而不是语句的结果。如果使用 <em>return ($a);</em> 时其实<strong>不是返回一个变量，而是表达式 <em>($a)</em> 的值</strong>（当然，此时该值也正是 $a 的值）。</p>
+<p><strong>Note</strong>: 当用引用返回值时<em>永远不要</em>使用括号，这样行不通。只能通过引用返回变量，而不是语句的结果。如果使用 <em>return (<span class="math inline">\(a);* 时其实**不是返回一个变量，而是表达式 *(\)</span>a)</em> 的值**（当然，此时该值也正是 $a 的值）。</p>
 </blockquote>
-<h3 id="include-require">include/require</h3>
+<h3 id="includerequire">include/require</h3>
 <p>包含文件用。区别是include遇错产警告，require遇错终止。</p>
 <p>如果没有给出目录（只有文件名）时则按照 <a href="https://www.php.net/manual/zh/ini.core.php#ini.include-path" target="_blank" rel="noopener">include_path</a> 指定的目录寻找。如果在 <a href="https://www.php.net/manual/zh/ini.core.php#ini.include-path" target="_blank" rel="noopener">include_path</a> 下没找到该文件则 <em>include</em> 最后才在调用脚本文件所在的目录和当前工作目录下寻找。如果定义了路径（绝对和相对）<a href="https://www.php.net/manual/zh/ini.core.php#ini.include-path" target="_blank" rel="noopener">include_path</a> 会被完全忽略。</p>
 <p>当一个文件被包含时，其中所包含的代码继承了 include 所在行的<a href="https://www.php.net/manual/zh/language.variables.scope.php" target="_blank" rel="noopener">变量范围</a>。从该处开始，调用文件在该行处可用的任何变量在被调用的文件中也都可用。不过所有在包含文件中定义的函数和类都具有全局作用域（?）。</p>
@@ -878,14 +849,14 @@
 <blockquote>
 <p><strong>Note</strong>: 因为是一个语言构造器而不是一个函数，不能被 <a href="https://www.php.net/manual/zh/functions.variable-functions.php" target="_blank" rel="noopener">可变函数</a> 调用。</p>
 </blockquote>
-<h3 id="include-once-require-once">include_once/require_once</h3>
+<h3 id="include_oncerequire_once">include_once/require_once</h3>
 <p>只包含一次。</p>
 <blockquote>
 <p>Note:</p>
 <p>在 PHP 4中，_once 的行为在不区分大小写字母的操作系统（例如 Windows）中有所不同，例如：</p>
 <p>Example #1 include_once 在 PHP 4 运行于不区分大小写的操作系统中</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"a.php"</span>; <span class="comment">// 这将包含 a.php</span></span><br><span class="line"><span class="keyword">include_once</span> <span class="string">"A.php"</span>; <span class="comment">// 这将再次包含 a.php！（仅 PHP 4）</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>此行为在 PHP 5 中改了，例如在 Windows 中路径先被规格化，因此 C:\PROGRA~1\A.php 和 C:\Program Files\a.php 的实现一样，文件只会被包含一次。</p>
+<p>此行为在 PHP 5 中改了，例如在 Windows 中路径先被规格化，因此 C:~1.php 和 C:Files.php 的实现一样，文件只会被包含一次。</p>
 </blockquote>
 <h3 id="goto">goto</h3>
 <p>PHP 中的 <em>goto</em> 有一定限制，目标位置只能位于同一个文件和作用域，也就是说无法跳出一个函数或类方法，也无法跳入到另一个函数。也无法跳入到任何循环或者 switch 结构中。可以跳出循环或者 switch，通常的用法是用 <em>goto</em> 代替多层的 <em>break</em>。</p>
@@ -914,63 +885,68 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeyogurt</span><span class="params">($flavour, $type = <span class="string">"acidophilus"</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Making a bowl of $type $flavour.\n"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> makeyogurt(<span class="string">"raspberry"</span>);   <span class="comment">// works as expected</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="参数类型">参数类型</h3>
 <table>
+<colgroup>
+<col style="width: 43%">
+<col style="width: 43%">
+<col style="width: 13%">
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">type</th>
-<th style="text-align:left">Description</th>
-<th style="text-align:left">Minimum PHP version</th>
+<tr class="header">
+<th style="text-align: left;">type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Minimum PHP version</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">Class/interface name</td>
-<td style="text-align:left">The parameter must be an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> the given class or interface name.</td>
-<td style="text-align:left">PHP 5.0.0</td>
+<tr class="odd">
+<td style="text-align: left;">Class/interface name</td>
+<td style="text-align: left;">The parameter must be an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> the given class or interface name.</td>
+<td style="text-align: left;">PHP 5.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><em>self</em></td>
-<td style="text-align:left">The parameter must be an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> the same class as the one the method is defined on. This can only be used on class and instance methods.</td>
-<td style="text-align:left">PHP 5.0.0</td>
+<tr class="even">
+<td style="text-align: left;"><em>self</em></td>
+<td style="text-align: left;">The parameter must be an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> the same class as the one the method is defined on. This can only be used on class and instance methods.</td>
+<td style="text-align: left;">PHP 5.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
-<td style="text-align:left">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a>.</td>
-<td style="text-align:left">PHP 5.1.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a></td>
+<td style="text-align: left;">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a>.</td>
+<td style="text-align: left;">PHP 5.1.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a></td>
-<td style="text-align:left">The parameter must be a valid <a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a>.</td>
-<td style="text-align:left">PHP 5.4.0</td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a></td>
+<td style="text-align: left;">The parameter must be a valid <a href="https://www.php.net/manual/zh/language.types.callable.php" target="_blank" rel="noopener">callable</a>.</td>
+<td style="text-align: left;">PHP 5.4.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a></td>
-<td style="text-align:left">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">boolean</a> value.</td>
-<td style="text-align:left">PHP 7.0.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">bool</a></td>
+<td style="text-align: left;">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.boolean.php" target="_blank" rel="noopener">boolean</a> value.</td>
+<td style="text-align: left;">PHP 7.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a></td>
-<td style="text-align:left">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a>ing point number.</td>
-<td style="text-align:left">PHP 7.0.0</td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a></td>
+<td style="text-align: left;">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.float.php" target="_blank" rel="noopener">float</a>ing point number.</td>
+<td style="text-align: left;">PHP 7.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">int</a></td>
-<td style="text-align:left">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a>.</td>
-<td style="text-align:left">PHP 7.0.0</td>
+<tr class="odd">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">int</a></td>
+<td style="text-align: left;">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.integer.php" target="_blank" rel="noopener">integer</a>.</td>
+<td style="text-align: left;">PHP 7.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
-<td style="text-align:left">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>.</td>
-<td style="text-align:left">PHP 7.0.0</td>
+<tr class="even">
+<td style="text-align: left;"><a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a></td>
+<td style="text-align: left;">The parameter must be a <a href="https://www.php.net/manual/zh/language.types.string.php" target="_blank" rel="noopener">string</a>.</td>
+<td style="text-align: left;">PHP 7.0.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><em>iterable</em></td>
-<td style="text-align:left">The parameter must be either an <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> or an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> <strong>Traversable</strong>.</td>
-<td style="text-align:left">PHP 7.1.0</td>
+<tr class="odd">
+<td style="text-align: left;"><em>iterable</em></td>
+<td style="text-align: left;">The parameter must be either an <a href="https://www.php.net/manual/zh/language.types.array.php" target="_blank" rel="noopener">array</a> or an <a href="https://www.php.net/manual/zh/language.operators.type.php" target="_blank" rel="noopener"><em>instanceof</em></a> <strong>Traversable</strong>.</td>
+<td style="text-align: left;">PHP 7.1.0</td>
 </tr>
-<tr>
-<td style="text-align:left"><em>object</em></td>
-<td style="text-align:left">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a>.</td>
-<td style="text-align:left">PHP 7.2.0</td>
+<tr class="even">
+<td style="text-align: left;"><em>object</em></td>
+<td style="text-align: left;">The parameter must be an <a href="https://www.php.net/manual/zh/language.types.object.php" target="_blank" rel="noopener">object</a>.</td>
+<td style="text-align: left;">PHP 7.2.0</td>
 </tr>
 </tbody>
 </table>
@@ -982,10 +958,10 @@
 <p>实例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(int $a, int $b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    var_dump(sum(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line">    var_dump(sum(<span class="number">1.5</span>, <span class="number">2.5</span>));</span><br><span class="line">&#125; <span class="keyword">catch</span> (TypeError $e) &#123;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">'Error: '</span>.$e-&gt;getMessage();</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">int(3)</span></span><br><span class="line"><span class="comment">Error: Argument 1 passed to sum() must be of the type integer, float given, called in - on line 10</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <h4 id="可变数量的参数列表">可变数量的参数列表</h4>
-<p>PHP 在用户自定义函数中支持可变数量的参数列表。在 PHP 5.6 及以上的版本中，由 <em>…</em> 语法实现；在 PHP 5.5 及更早版本中，使用函数 <a href="https://www.php.net/manual/zh/function.func-num-args.php" target="_blank" rel="noopener">func_num_args()</a>，<a href="https://www.php.net/manual/zh/function.func-get-arg.php" target="_blank" rel="noopener">func_get_arg()</a>，和 <a href="https://www.php.net/manual/zh/function.func-get-args.php" target="_blank" rel="noopener">func_get_args()</a> 。</p>
-<p><em>…</em> in PHP 5.6+，例如：</p>
+<p>PHP 在用户自定义函数中支持可变数量的参数列表。在 PHP 5.6 及以上的版本中，由 <em>...</em> 语法实现；在 PHP 5.5 及更早版本中，使用函数 <a href="https://www.php.net/manual/zh/function.func-num-args.php" target="_blank" rel="noopener">func_num_args()</a>，<a href="https://www.php.net/manual/zh/function.func-get-arg.php" target="_blank" rel="noopener">func_get_arg()</a>，和 <a href="https://www.php.net/manual/zh/function.func-get-args.php" target="_blank" rel="noopener">func_get_args()</a> 。</p>
+<p><em>...</em> in PHP 5.6+，例如：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span><span class="params">(...$numbers)</span> </span>&#123;</span><br><span class="line">    $acc = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">foreach</span> ($numbers <span class="keyword">as</span> $n) &#123;</span><br><span class="line">        $acc += $n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $acc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> sum(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>也可以用…把list解压到参数列表中：</p>
+<p>也可以用...把list解压到参数列表中：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">($a, $b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $a + $b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> add(...[<span class="number">1</span>, <span class="number">2</span>]).<span class="string">"\n"</span>;</span><br><span class="line"></span><br><span class="line">$a = [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line"><span class="keyword">echo</span> add(...$a);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>在老版本（低于5.5）时，不需要特殊语法标注可变，但是需要使用函数，例如： <a href="https://www.php.net/manual/zh/function.func-num-args.php" target="_blank" rel="noopener">func_num_args()</a>, <a href="https://www.php.net/manual/zh/function.func-get-arg.php" target="_blank" rel="noopener">func_get_arg()</a> 和 <a href="https://www.php.net/manual/zh/function.func-get-args.php" target="_blank" rel="noopener">func_get_args()</a>.</p>
 <p>实例：</p>
@@ -1008,20 +984,24 @@
 <p>调用数组和类中的方法，例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"bar\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"baz\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$func = <span class="keyword">array</span>(<span class="string">"Foo"</span>, <span class="string">"bar"</span>);</span><br><span class="line">$func(); <span class="comment">// prints "bar"</span></span><br><span class="line">$func = <span class="keyword">array</span>(<span class="keyword">new</span> Foo, <span class="string">"baz"</span>);</span><br><span class="line">$func(); <span class="comment">// prints "baz"</span></span><br><span class="line">$func = <span class="string">"Foo::bar"</span>;</span><br><span class="line">$func(); <span class="comment">// prints "bar" as of PHP 7.0.0; prior, it raised a fatal error</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <table>
+<colgroup>
+<col style="width: 7%">
+<col style="width: 92%">
+</colgroup>
 <thead>
-<tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">说明</th>
+<tr class="header">
+<th style="text-align: left;">版本</th>
+<th style="text-align: left;">说明</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left">7.0.0</td>
-<td style="text-align:left">‘ClassName::methodName’ is allowed as variable function.</td>
+<tr class="odd">
+<td style="text-align: left;">7.0.0</td>
+<td style="text-align: left;">'ClassName::methodName' is allowed as variable function.</td>
 </tr>
-<tr>
-<td style="text-align:left">5.4.0</td>
-<td style="text-align:left">Arrays, which are valid callables, are allowed as variable functions.</td>
+<tr class="even">
+<td style="text-align: left;">5.4.0</td>
+<td style="text-align: left;">Arrays, which are valid callables, are allowed as variable functions.</td>
 </tr>
 </tbody>
 </table>
@@ -1030,13 +1010,13 @@
 <p>有时需要加载模块（和扩展模块一起编译）以使用模块中的函数。</p>
 <h3 id="匿名函数">匿名函数</h3>
 <p>也叫闭包函数。允许临时创建一个没有指定名称的函数。</p>
-<h3 id="Arrow函数">Arrow函数</h3>
+<h3 id="arrow函数">Arrow函数</h3>
 <p>PHP 7.4之后新增的使匿名函数语法更简洁的函数。</p>
 <h2 id="类与对象">类与对象</h2>
 <h3 id="基本概念">基本概念</h3>
 <h4 id="简单的类定义">简单的类定义</h4>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 声明属性</span></span><br><span class="line">    <span class="keyword">public</span> $var = <span class="string">'a default value'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 声明方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">displayVar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;var;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p>当一个方法在类定义内部被调用时，有一个可用的伪变量 $this。$this 是一个到主叫对象的引用（通常是该方法所从属的对象，但如果是从第二个对象<a href="https://www.php.net/manual/zh/language.oop5.static.php" target="_blank" rel="noopener">静态</a>调用时也可能是另一个对象）。</p>
+<p>当一个方法在类定义内部被调用时，有一个可用的伪变量 <span class="math inline">\(this。\)</span>this 是一个到主叫对象的引用（通常是该方法所从属的对象，但如果是从第二个对象<a href="https://www.php.net/manual/zh/language.oop5.static.php" target="_blank" rel="noopener">静态</a>调用时也可能是另一个对象）。</p>
 <p>示例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>)) &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">'$this is defined ('</span>;</span><br><span class="line">            <span class="keyword">echo</span> get_class(<span class="keyword">$this</span>);</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">")\n"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">"\$this is not defined.\n"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        A::foo();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = <span class="keyword">new</span> A();</span><br><span class="line">$a-&gt;foo();</span><br><span class="line"></span><br><span class="line">A::foo();</span><br><span class="line"></span><br><span class="line">$b = <span class="keyword">new</span> B();</span><br><span class="line">$b-&gt;bar();</span><br><span class="line"></span><br><span class="line">B::bar();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>Output of the above example in PHP 5:</p>
@@ -1059,7 +1039,7 @@
 <p>类的变量成员叫做“属性”。</p>
 <p>属性声明是由关键字 <em>public</em>，<em>protected</em> 或者 <em>private</em> 开头，然后跟一个普通的变量声明来组成。属性中的变量可以初始化，但是初始化的值必须是常数，这里的常数是指 PHP 脚本在编译阶段时就可以得到其值，而不依赖于运行时的信息才能求值。</p>
 <p>为了向后兼容 PHP 4，PHP 5 声明属性依然可以直接使用关键字 <em>var</em> 来替代（或者附加于）<em>public</em>，<em>protected</em> 或 <em>private</em>。但是已不再需要 <em>var</em> 了。如果直接使用 <em>var</em> 声明属性，而没有用 <em>public</em>，<em>protected</em> 或 <em>private</em> 之一，PHP 5 会将其视为 <em>public</em>。</p>
-<p>在类的成员方法里面，可以用 <em>-&gt;</em>（对象运算符）：$this-&gt;property（其中 <em>property</em> 是该属性名）这种方式来访问非静态属性。静态属性则是用 <em>::</em>（双冒号）：self::$property 来访问。更多静态属性与非静态属性的区别参见 <a href="https://www.php.net/manual/zh/language.oop5.static.php" target="_blank" rel="noopener">Static 关键字</a>。</p>
+<p>在类的成员方法里面，可以用 <em>-&gt;</em>（对象运算符）：<span class="math inline">\(this-&gt;property（其中 *property* 是该属性名）这种方式来访问非静态属性。静态属性则是用 *::*（双冒号）：self::\)</span>property 来访问。更多静态属性与非静态属性的区别参见 <a href="https://www.php.net/manual/zh/language.oop5.static.php" target="_blank" rel="noopener">Static 关键字</a>。</p>
 <p>实例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SimpleClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">   <span class="comment">// 错误的属性声明</span></span><br><span class="line">   <span class="keyword">public</span> $var1 = <span class="string">'hello '</span> . <span class="string">'world'</span>;</span><br><span class="line">   <span class="keyword">public</span> $var2 = <span class="string">&lt;&lt;&lt;EOD</span></span><br><span class="line"><span class="string">hello world</span></span><br><span class="line"><span class="string">EOD;</span></span><br><span class="line">   <span class="keyword">public</span> $var3 = <span class="number">1</span>+<span class="number">2</span>;</span><br><span class="line">   <span class="keyword">public</span> $var4 = <span class="keyword">self</span>::myStaticMethod();</span><br><span class="line">   <span class="keyword">public</span> $var5 = $myVar;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 正确的属性声明</span></span><br><span class="line">   <span class="keyword">public</span> $var6 = myConstant;</span><br><span class="line">   <span class="keyword">public</span> $var7 = <span class="keyword">array</span>(<span class="keyword">true</span>, <span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">   <span class="comment">//在 PHP 5.3.0 及之后，下面的声明也正确(newdoc)</span></span><br><span class="line">   <span class="keyword">public</span> $var8 = <span class="string">&lt;&lt;&lt;'EOD'</span></span><br><span class="line"><span class="string">hello world</span></span><br><span class="line"><span class="string">EOD;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <h3 id="类常量">类常量</h3>
@@ -1077,18 +1057,18 @@
 <h4 id="construct">__construct()</h4>
 <p>创建新对象时先调用此方法。初始化。</p>
 <blockquote>
-<p><strong>Note</strong>: 如果子类中定义了构造函数则不会隐式调用其父类的构造函数。要执行父类的构造函数，需要在子类的构造函数中调用 <strong>parent::__construct()</strong>。如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继承（假如没有被定义为 private 的话）。</p>
+<p><strong>Note</strong>: 如果子类中定义了构造函数则不会隐式调用其父类的构造函数。要执行父类的构造函数，需要在子类的构造函数中调用 **parent::__construct()**。如果子类没有定义构造函数则会如同一个普通的类方法一样从父类继承（假如没有被定义为 private 的话）。</p>
 </blockquote>
 <h4 id="destruct">__destruct()</h4>
 <p>析构函数会在到某个对象的所有引用都被删除或者当对象被显式销毁时执行。</p>
-<p>和构造函数一样，父类的析构函数不会被引擎暗中调用。要执行父类的析构函数，必须在子类的析构函数体中显式调用 <strong>parent::__destruct()</strong>。此外也和构造函数一样，子类如果自己没有定义析构函数则会继承父类的。</p>
+<p>和构造函数一样，父类的析构函数不会被引擎暗中调用。要执行父类的析构函数，必须在子类的析构函数体中显式调用 **parent::__destruct()**。此外也和构造函数一样，子类如果自己没有定义析构函数则会继承父类的。</p>
 <p>析构函数即使在使用 <a href="https://www.php.net/manual/zh/function.exit.php" target="_blank" rel="noopener">exit()</a> 终止脚本运行时也会被调用。在析构函数中调用 <a href="https://www.php.net/manual/zh/function.exit.php" target="_blank" rel="noopener">exit()</a> 将会中止其余关闭操作的运行。</p>
 <blockquote>
 <p><strong>Note</strong>: 试图在析构函数（在脚本终止时被调用）中抛出一个异常会导致致命错误。</p>
 </blockquote>
-<h3 id="访问控制（可见性）">访问控制（可见性）</h3>
+<h3 id="访问控制可见性">访问控制（可见性）</h3>
 <p>对属性或方法的访问控制，是通过在前面添加关键字 <em>public</em>（公有），<em>protected</em>（受保护）或 <em>private</em>（私有）来实现的。被定义为公有的类成员可以在任何地方被访问。被定义为受保护的类成员则可以被其自身以及其子类和父类访问。被定义为私有的类成员则只能被其定义所在的类访问。</p>
-<h4 id="属性-2">属性</h4>
+<h4 id="属性-1">属性</h4>
 <p>类属性必须定义为公有，受保护，私有之一。如果用 <em>var</em> 定义，则被视为公有。</p>
 <p>实例：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Define MyClass</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $public = <span class="string">'Public'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $protected = <span class="string">'Protected'</span>;</span><br><span class="line">    <span class="keyword">private</span> $private = <span class="string">'Private'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">printHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;public;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;protected;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;private;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj = <span class="keyword">new</span> MyClass();</span><br><span class="line"><span class="keyword">echo</span> $obj-&gt;public; <span class="comment">// 这行能被正常执行</span></span><br><span class="line"><span class="keyword">echo</span> $obj-&gt;protected; <span class="comment">// 这行会产生一个致命错误</span></span><br><span class="line"><span class="keyword">echo</span> $obj-&gt;private; <span class="comment">// 这行也会产生一个致命错误</span></span><br><span class="line">$obj-&gt;printHello(); <span class="comment">// 输出 Public、Protected 和 Private</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Define MyClass2</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass2</span> <span class="keyword">extends</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 可以对 public 和 protected 进行重定义，但 private 而不能</span></span><br><span class="line">    <span class="keyword">protected</span> $protected = <span class="string">'Protected2'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">printHello</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;public;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;protected;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;private;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$obj2 = <span class="keyword">new</span> MyClass2();</span><br><span class="line"><span class="keyword">echo</span> $obj2-&gt;public; <span class="comment">// 这行能被正常执行</span></span><br><span class="line"><span class="keyword">echo</span> $obj2-&gt;private; <span class="comment">// 未定义 private</span></span><br><span class="line"><span class="keyword">echo</span> $obj2-&gt;protected; <span class="comment">// 这行会产生一个致命错误</span></span><br><span class="line">$obj2-&gt;printHello(); <span class="comment">// 输出 Public、Protected2 和 Undefined</span></span><br><span class="line"></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
@@ -1099,7 +1079,7 @@
 <h3 id="继承">继承</h3>
 <p>当扩展一个类，子类就会继承父类所有公有的和受保护的方法。除非子类覆盖了父类的方法，被继承的方法都会保留其原有功能。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">bar</span> <span class="keyword">extends</span> <span class="title">foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// codes</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="范围解析操作符-（-）">范围解析操作符 （::）</h3>
+<h3 id="范围解析操作符">范围解析操作符 （::）</h3>
 <p>可以用于访问<a href="https://www.php.net/manual/zh/language.oop5.static.php" target="_blank" rel="noopener">静态</a>成员，<a href="https://www.php.net/manual/zh/language.oop5.constants.php" target="_blank" rel="noopener">类常量</a>，还可以用于覆盖类中的属性和方法。</p>
 <p>实例：</p>
 <p>在类定义外部使用：</p>
@@ -1109,7 +1089,7 @@
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OtherClass</span> <span class="keyword">extends</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> $my_static = <span class="string">'static var'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">function</span> <span class="title">doubleColon</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">parent</span>::CONST_VALUE . <span class="string">"\n"</span>;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">self</span>::$my_static . <span class="string">"\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$classname = <span class="string">'OtherClass'</span>;</span><br><span class="line"><span class="keyword">echo</span> $classname::doubleColon(); <span class="comment">// 自 PHP 5.3.0 起</span></span><br><span class="line"></span><br><span class="line">OtherClass::doubleColon();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
 <p>调用父类方法：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">myFunc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"MyClass::myFunc()\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">OtherClass</span> <span class="keyword">extends</span> <span class="title">MyClass</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 覆盖了父类的定义</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">myFunc</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 但还是可以调用父类中被覆盖的方法</span></span><br><span class="line">        <span class="keyword">parent</span>::myFunc();</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">"OtherClass::myFunc()\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$class = <span class="keyword">new</span> OtherClass();</span><br><span class="line">$class-&gt;myFunc();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="Static-2">Static</h3>
+<h3 id="static-1">Static</h3>
 <p>声明类属性或方法为静态，就可以不实例化类而直接访问。静态属性不能通过一个类已实例化的对象来访问（但静态方法可以）。</p>
 <p>由于静态方法不需要通过对象即可调用，所以伪变量 $this 在静态方法中不可用。</p>
 <p>静态属性不可以由对象通过 -&gt; 操作符来访问。</p>
@@ -1128,7 +1108,7 @@
 <p>在对象中调用一个不可访问方法时，<a href="https://www.php.net/manual/zh/language.oop5.overloading.php#object.call" target="_blank" rel="noopener">__call()</a> 会被调用。</p>
 <p>在静态上下文中调用一个不可访问方法时，<a href="https://www.php.net/manual/zh/language.oop5.overloading.php#object.callstatic" target="_blank" rel="noopener">__callStatic()</a> 会被调用。</p>
 <h3 id="魔术方法">魔术方法</h3>
-<h4 id="sleep-和-wakeup">__sleep()和__wakeup()</h4>
+<h4 id="sleep和__wakeup">__sleep()和__wakeup()</h4>
 <p>序列化时先调用__sleep()方法。反序列话是wakeup方法。</p>
 
     </div>
@@ -1233,7 +1213,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP基础"><span class="nav-number">1.</span> <span class="nav-text">PHP基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP变量"><span class="nav-number">2.</span> <span class="nav-text">PHP变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-number">2.1.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">2.2.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global"><span class="nav-number">2.2.1.</span> <span class="nav-text">global</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static"><span class="nav-number">2.2.2.</span> <span class="nav-text">Static</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Parameter"><span class="nav-number">2.2.3.</span> <span class="nav-text">Parameter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义变量"><span class="nav-number">2.3.</span> <span class="nav-text">预定义变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变变量"><span class="nav-number">2.4.</span> <span class="nav-text">可变变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP之外的变量"><span class="nav-number">2.5.</span> <span class="nav-text">PHP之外的变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出语句"><span class="nav-number">3.</span> <span class="nav-text">输出语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#echo和print"><span class="nav-number">3.1.</span> <span class="nav-text">echo和print</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#echo"><span class="nav-number">3.2.</span> <span class="nav-text">echo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#print"><span class="nav-number">3.3.</span> <span class="nav-text">print</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">4.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String"><span class="nav-number">4.1.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#heredoc"><span class="nav-number">4.1.1.</span> <span class="nav-text">heredoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nowdoc"><span class="nav-number">4.1.2.</span> <span class="nav-text">nowdoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量解析"><span class="nav-number">4.1.3.</span> <span class="nav-text">变量解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存取和修改字符"><span class="nav-number">4.1.4.</span> <span class="nav-text">存取和修改字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Int"><span class="nav-number">4.2.</span> <span class="nav-text">Int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Float"><span class="nav-number">4.3.</span> <span class="nav-text">Float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bool"><span class="nav-number">4.4.</span> <span class="nav-text">Bool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Array"><span class="nav-number">4.5.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义数组"><span class="nav-number">4.5.1.</span> <span class="nav-text">定义数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问数组单元"><span class="nav-number">4.5.2.</span> <span class="nav-text">访问数组单元</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新建、修改、删除值"><span class="nav-number">4.5.3.</span> <span class="nav-text">新建、修改、删除值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组解引用"><span class="nav-number">4.5.4.</span> <span class="nav-text">数组解引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组实用函数"><span class="nav-number">4.5.5.</span> <span class="nav-text">数组实用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.5.6.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换为数组"><span class="nav-number">4.5.7.</span> <span class="nav-text">转换为数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较"><span class="nav-number">4.5.8.</span> <span class="nav-text">比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object"><span class="nav-number">4.6.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">4.6.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换为对象"><span class="nav-number">4.6.2.</span> <span class="nav-text">转换为对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resource"><span class="nav-number">4.7.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback-Callable"><span class="nav-number">4.8.</span> <span class="nav-text">Callback&#x2F;Callable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NULL"><span class="nav-number">4.9.</span> <span class="nav-text">NULL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪类型与变量"><span class="nav-number">4.10.</span> <span class="nav-text">伪类型与变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mixed"><span class="nav-number">4.10.1.</span> <span class="nav-text">mixed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#number"><span class="nav-number">4.10.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#callback"><span class="nav-number">4.10.3.</span> <span class="nav-text">callback</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#array-object"><span class="nav-number">4.10.4.</span> <span class="nav-text">array|object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#void"><span class="nav-number">4.10.5.</span> <span class="nav-text">void</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#…"><span class="nav-number">4.10.6.</span> <span class="nav-text">…</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">4.11.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型设置"><span class="nav-number">4.11.1.</span> <span class="nav-text">类型设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型强制转换"><span class="nav-number">4.11.2.</span> <span class="nav-text">类型强制转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">5.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符优先级"><span class="nav-number">5.1.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较运算"><span class="nav-number">5.2.</span> <span class="nav-text">比较运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三目运算"><span class="nav-number">5.3.</span> <span class="nav-text">三目运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NULL合并运算"><span class="nav-number">5.4.</span> <span class="nav-text">NULL合并运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算数运算"><span class="nav-number">5.5.</span> <span class="nav-text">算数运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算"><span class="nav-number">5.6.</span> <span class="nav-text">赋值运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递增递减"><span class="nav-number">5.7.</span> <span class="nav-text">递增递减</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算"><span class="nav-number">5.8.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">5.9.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误控制运算"><span class="nav-number">5.10.</span> <span class="nav-text">错误控制运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行运算"><span class="nav-number">5.11.</span> <span class="nav-text">执行运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组运算"><span class="nav-number">5.12.</span> <span class="nav-text">数组运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型运算"><span class="nav-number">5.13.</span> <span class="nav-text">类型运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制"><span class="nav-number">6.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不必多说的"><span class="nav-number">6.1.</span> <span class="nav-text">不必多说的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#elseif-else-if"><span class="nav-number">6.2.</span> <span class="nav-text">elseif&#x2F;else if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制的替代语法"><span class="nav-number">6.3.</span> <span class="nav-text">流程控制的替代语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach"><span class="nav-number">6.4.</span> <span class="nav-text">foreach</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用-list-给嵌套的数组解包-¶"><span class="nav-number">6.4.1.</span> <span class="nav-text">用 list() 给嵌套的数组解包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-continue"><span class="nav-number">6.5.</span> <span class="nav-text">break&#x2F;continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch"><span class="nav-number">6.6.</span> <span class="nav-text">switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#declare"><span class="nav-number">6.7.</span> <span class="nav-text">declare</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Tick"><span class="nav-number">6.7.1.</span> <span class="nav-text">Tick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Encoding"><span class="nav-number">6.7.2.</span> <span class="nav-text">Encoding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return"><span class="nav-number">6.8.</span> <span class="nav-text">return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include-require"><span class="nav-number">6.9.</span> <span class="nav-text">include&#x2F;require</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include-once-require-once"><span class="nav-number">6.10.</span> <span class="nav-text">include_once&#x2F;require_once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goto"><span class="nav-number">6.11.</span> <span class="nav-text">goto</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义函数"><span class="nav-number">7.1.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归函数"><span class="nav-number">7.2.</span> <span class="nav-text">递归函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数"><span class="nav-number">7.3.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数类型"><span class="nav-number">7.4.</span> <span class="nav-text">参数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#严格类型"><span class="nav-number">7.4.1.</span> <span class="nav-text">严格类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可变数量的参数列表"><span class="nav-number">7.4.2.</span> <span class="nav-text">可变数量的参数列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">7.5.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变函数"><span class="nav-number">7.6.</span> <span class="nav-text">可变函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">7.7.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名函数"><span class="nav-number">7.8.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arrow函数"><span class="nav-number">7.9.</span> <span class="nav-text">Arrow函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与对象"><span class="nav-number">8.</span> <span class="nav-text">类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">8.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的类定义"><span class="nav-number">8.1.1.</span> <span class="nav-text">简单的类定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new"><span class="nav-number">8.1.2.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象赋值"><span class="nav-number">8.1.3.</span> <span class="nav-text">对象赋值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">8.2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类常量"><span class="nav-number">8.3.</span> <span class="nav-text">类常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的自动加载"><span class="nav-number">8.4.</span> <span class="nav-text">类的自动加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数和析构函数"><span class="nav-number">8.5.</span> <span class="nav-text">构造函数和析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#construct"><span class="nav-number">8.5.1.</span> <span class="nav-text">__construct()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#destruct"><span class="nav-number">8.5.2.</span> <span class="nav-text">__destruct()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制（可见性）"><span class="nav-number">8.6.</span> <span class="nav-text">访问控制（可见性）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-2"><span class="nav-number">8.6.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">8.6.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">8.7.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围解析操作符-（-）"><span class="nav-number">8.8.</span> <span class="nav-text">范围解析操作符 （::）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Static-2"><span class="nav-number">8.9.</span> <span class="nav-text">Static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类"><span class="nav-number">8.10.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载"><span class="nav-number">8.11.</span> <span class="nav-text">重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性重载"><span class="nav-number">8.11.1.</span> <span class="nav-text">属性重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法重载"><span class="nav-number">8.11.2.</span> <span class="nav-text">方法重载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#魔术方法"><span class="nav-number">8.12.</span> <span class="nav-text">魔术方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep-和-wakeup"><span class="nav-number">8.12.1.</span> <span class="nav-text">__sleep()和__wakeup()</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php基础"><span class="nav-number">1.</span> <span class="nav-text">PHP基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php变量"><span class="nav-number">2.</span> <span class="nav-text">PHP变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-number">2.1.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">2.2.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global"><span class="nav-number">2.2.1.</span> <span class="nav-text">global</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#static"><span class="nav-number">2.2.2.</span> <span class="nav-text">Static</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#parameter"><span class="nav-number">2.2.3.</span> <span class="nav-text">Parameter</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预定义变量"><span class="nav-number">2.3.</span> <span class="nav-text">预定义变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变变量"><span class="nav-number">2.4.</span> <span class="nav-text">可变变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php之外的变量"><span class="nav-number">2.5.</span> <span class="nav-text">PHP之外的变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出语句"><span class="nav-number">3.</span> <span class="nav-text">输出语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#echo和print"><span class="nav-number">3.1.</span> <span class="nav-text">echo和print</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#echo"><span class="nav-number">3.2.</span> <span class="nav-text">echo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#print"><span class="nav-number">3.3.</span> <span class="nav-text">print</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据类型"><span class="nav-number">4.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#string"><span class="nav-number">4.1.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#heredoc"><span class="nav-number">4.1.1.</span> <span class="nav-text">heredoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nowdoc"><span class="nav-number">4.1.2.</span> <span class="nav-text">nowdoc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量解析"><span class="nav-number">4.1.3.</span> <span class="nav-text">变量解析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存取和修改字符"><span class="nav-number">4.1.4.</span> <span class="nav-text">存取和修改字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#int"><span class="nav-number">4.2.</span> <span class="nav-text">Int</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#float"><span class="nav-number">4.3.</span> <span class="nav-text">Float</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bool"><span class="nav-number">4.4.</span> <span class="nav-text">Bool</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#array"><span class="nav-number">4.5.</span> <span class="nav-text">Array</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义数组"><span class="nav-number">4.5.1.</span> <span class="nav-text">定义数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#访问数组单元"><span class="nav-number">4.5.2.</span> <span class="nav-text">访问数组单元</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新建修改删除值"><span class="nav-number">4.5.3.</span> <span class="nav-text">新建、修改、删除值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组解引用"><span class="nav-number">4.5.4.</span> <span class="nav-text">数组解引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数组实用函数"><span class="nav-number">4.5.5.</span> <span class="nav-text">数组实用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">4.5.6.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换为数组"><span class="nav-number">4.5.7.</span> <span class="nav-text">转换为数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较"><span class="nav-number">4.5.8.</span> <span class="nav-text">比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#object"><span class="nav-number">4.6.</span> <span class="nav-text">Object</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化"><span class="nav-number">4.6.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#转换为对象"><span class="nav-number">4.6.2.</span> <span class="nav-text">转换为对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resource"><span class="nav-number">4.7.</span> <span class="nav-text">Resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#callbackcallable"><span class="nav-number">4.8.</span> <span class="nav-text">Callback&#x2F;Callable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.9.</span> <span class="nav-text">NULL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪类型与变量"><span class="nav-number">4.10.</span> <span class="nav-text">伪类型与变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mixed"><span class="nav-number">4.10.1.</span> <span class="nav-text">mixed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#number"><span class="nav-number">4.10.2.</span> <span class="nav-text">number</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#callback"><span class="nav-number">4.10.3.</span> <span class="nav-text">callback</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#arrayobject"><span class="nav-number">4.10.4.</span> <span class="nav-text">array|object</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#void"><span class="nav-number">4.10.5.</span> <span class="nav-text">void</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#section"><span class="nav-number">4.10.6.</span> <span class="nav-text">...</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">4.11.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类型设置"><span class="nav-number">4.11.1.</span> <span class="nav-text">类型设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型强制转换"><span class="nav-number">4.11.2.</span> <span class="nav-text">类型强制转换</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">5.</span> <span class="nav-text">运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运算符优先级"><span class="nav-number">5.1.</span> <span class="nav-text">运算符优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较运算"><span class="nav-number">5.2.</span> <span class="nav-text">比较运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三目运算"><span class="nav-number">5.3.</span> <span class="nav-text">三目运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null合并运算"><span class="nav-number">5.4.</span> <span class="nav-text">NULL合并运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算数运算"><span class="nav-number">5.5.</span> <span class="nav-text">算数运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋值运算"><span class="nav-number">5.6.</span> <span class="nav-text">赋值运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递增递减"><span class="nav-number">5.7.</span> <span class="nav-text">递增递减</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑运算"><span class="nav-number">5.8.</span> <span class="nav-text">逻辑运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#位运算"><span class="nav-number">5.9.</span> <span class="nav-text">位运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误控制运算"><span class="nav-number">5.10.</span> <span class="nav-text">错误控制运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行运算"><span class="nav-number">5.11.</span> <span class="nav-text">执行运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组运算"><span class="nav-number">5.12.</span> <span class="nav-text">数组运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型运算"><span class="nav-number">5.13.</span> <span class="nav-text">类型运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制"><span class="nav-number">6.</span> <span class="nav-text">流程控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不必多说的"><span class="nav-number">6.1.</span> <span class="nav-text">不必多说的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#elseifelse-if"><span class="nav-number">6.2.</span> <span class="nav-text">elseif&#x2F;else if</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程控制的替代语法"><span class="nav-number">6.3.</span> <span class="nav-text">流程控制的替代语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#foreach"><span class="nav-number">6.4.</span> <span class="nav-text">foreach</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用-list-给嵌套的数组解包"><span class="nav-number">6.4.1.</span> <span class="nav-text">用 list() 给嵌套的数组解包</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#breakcontinue"><span class="nav-number">6.5.</span> <span class="nav-text">break&#x2F;continue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch"><span class="nav-number">6.6.</span> <span class="nav-text">switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#declare"><span class="nav-number">6.7.</span> <span class="nav-text">declare</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#tick"><span class="nav-number">6.7.1.</span> <span class="nav-text">Tick</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#encoding"><span class="nav-number">6.7.2.</span> <span class="nav-text">Encoding</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#return"><span class="nav-number">6.8.</span> <span class="nav-text">return</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#includerequire"><span class="nav-number">6.9.</span> <span class="nav-text">include&#x2F;require</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#include_oncerequire_once"><span class="nav-number">6.10.</span> <span class="nav-text">include_once&#x2F;require_once</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#goto"><span class="nav-number">6.11.</span> <span class="nav-text">goto</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数"><span class="nav-number">7.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义函数"><span class="nav-number">7.1.</span> <span class="nav-text">自定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归函数"><span class="nav-number">7.2.</span> <span class="nav-text">递归函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数参数"><span class="nav-number">7.3.</span> <span class="nav-text">函数参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数类型"><span class="nav-number">7.4.</span> <span class="nav-text">参数类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#严格类型"><span class="nav-number">7.4.1.</span> <span class="nav-text">严格类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可变数量的参数列表"><span class="nav-number">7.4.2.</span> <span class="nav-text">可变数量的参数列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">7.5.</span> <span class="nav-text">返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变函数"><span class="nav-number">7.6.</span> <span class="nav-text">可变函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">7.7.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名函数"><span class="nav-number">7.8.</span> <span class="nav-text">匿名函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#arrow函数"><span class="nav-number">7.9.</span> <span class="nav-text">Arrow函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类与对象"><span class="nav-number">8.</span> <span class="nav-text">类与对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本概念"><span class="nav-number">8.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单的类定义"><span class="nav-number">8.1.1.</span> <span class="nav-text">简单的类定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#new"><span class="nav-number">8.1.2.</span> <span class="nav-text">new</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对象赋值"><span class="nav-number">8.1.3.</span> <span class="nav-text">对象赋值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">8.2.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类常量"><span class="nav-number">8.3.</span> <span class="nav-text">类常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的自动加载"><span class="nav-number">8.4.</span> <span class="nav-text">类的自动加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构造函数和析构函数"><span class="nav-number">8.5.</span> <span class="nav-text">构造函数和析构函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#construct"><span class="nav-number">8.5.1.</span> <span class="nav-text">__construct()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#destruct"><span class="nav-number">8.5.2.</span> <span class="nav-text">__destruct()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制可见性"><span class="nav-number">8.6.</span> <span class="nav-text">访问控制（可见性）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性-1"><span class="nav-number">8.6.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法"><span class="nav-number">8.6.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承"><span class="nav-number">8.7.</span> <span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围解析操作符"><span class="nav-number">8.8.</span> <span class="nav-text">范围解析操作符 （::）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static-1"><span class="nav-number">8.9.</span> <span class="nav-text">Static</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象类"><span class="nav-number">8.10.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重载"><span class="nav-number">8.11.</span> <span class="nav-text">重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性重载"><span class="nav-number">8.11.1.</span> <span class="nav-text">属性重载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法重载"><span class="nav-number">8.11.2.</span> <span class="nav-text">方法重载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#魔术方法"><span class="nav-number">8.12.</span> <span class="nav-text">魔术方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep和__wakeup"><span class="nav-number">8.12.1.</span> <span class="nav-text">__sleep()和__wakeup()</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -1307,13 +1287,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -1373,6 +1353,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

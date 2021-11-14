@@ -239,7 +239,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
+              <span>5.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -258,42 +258,42 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。<s>下次重装系统自己能看懂就行</s></p>
+        <p>上一篇文章介绍了Archlinux的安装流程。但是，现在连个图形界面也没有，一堆效率导向的包都没有装上，这还玩个🔨啊。这篇来看看如何把Arch配置成用起来超爽的工具。因为到这里还没有装好中文输入法，所以和上一篇一样是英文的。英语水平不高，有错误的话，万分抱歉。<del>下次重装系统自己能看懂就行</del></p>
 <a id="more"></a>
-<h2 id="Create-a-new-user">Create a new user</h2>
+<h2 id="create-a-new-user">Create a new user</h2>
 <p>It is unsafe to use root for daily use. It is better to create a ordinary user.</p>
-<p>Let’s create a new user named muted.</p>
+<p>Let's create a new user named muted.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd -m -G wheel muted</span><br></pre></td></tr></table></figure>
-<p><code>-m</code> stands for creating a new folder whose name is the same as your new user. You can use <code>~</code> to access it easily. <code>-G wheel</code> stands for adding the new user “muted” to a group named “wheel”.</p>
+<p><code>-m</code> stands for creating a new folder whose name is the same as your new user. You can use <code>~</code> to access it easily. <code>-G wheel</code> stands for adding the new user "muted" to a group named "wheel".</p>
 <p>Set a password for this user:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd muted</span><br></pre></td></tr></table></figure>
-<h2 id="Config-sudo">Config sudo</h2>
+<h2 id="config-sudo">Config sudo</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/vim /usr/bin/vi</span><br><span class="line">visudo</span><br></pre></td></tr></table></figure>
 <p>Uncomment <code># %wheel ALL=(ALL)ALL</code>, then reboot. This time your new user is able to use <code>sudo</code> command.</p>
-<h2 id="Graphical-interface-installation">Graphical interface installation</h2>
+<h2 id="graphical-interface-installation">Graphical interface installation</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dhcpcd  <span class="comment"># Connet to the Internet</span></span><br><span class="line">sudo pacman -S xf86-video-intel  <span class="comment"># If your GPU is from Intel</span></span><br></pre></td></tr></table></figure>
-<p>See also: <a href="https://wiki.archlinux.org/index.php/Xorg#Driver_installation" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Xorg#Driver_installation</a></p>
+<p>See also: https://wiki.archlinux.org/index.php/Xorg#Driver_installation</p>
 <p>Now install Xorg and some necessary packages:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg xorg-server plasma dolphin kate kdialog konsole fsearch dragon ffmpegthumbs sddm sddm-kcm</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sddm</span><br></pre></td></tr></table></figure>
 <p><code>kde-meta-kdeadmin</code> <code>kde-meta-kdeutils</code> <code>kde-meta-kdegraphics</code> have been removed because of obsoleteness.</p>
-<h2 id="Config-your-Internet">Config your Internet</h2>
+<h2 id="config-your-internet">Config your Internet</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl <span class="built_in">disable</span> netctl</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> NetworkManager  <span class="comment"># Draw attention on UPPER and lower case</span></span><br><span class="line">sudo pacman -S network-manager-applet</span><br></pre></td></tr></table></figure>
-<h2 id="Use-pacman-mirror">Use pacman mirror</h2>
+<h2 id="use-pacman-mirror">Use pacman mirror</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
 <p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
 <p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
-<h2 id="Use-archlinuxcn-repository">Use archlinuxcn repository</h2>
+<h2 id="use-archlinuxcn-repository">Use archlinuxcn repository</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
 <p>At the end of file add:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
-<p>If you are a ‘Xidianer’ too, you can also:</p>
+<p>If you are a 'Xidianer' too, you can also:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Server = https://linux.xidian.edu.cn/mirrors/archlinuxcn/<span class="variable">$arch</span></span><br></pre></td></tr></table></figure>
 <p>Then:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy</span><br><span class="line">sudo pacman -Syu</span><br><span class="line">sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
-<h2 id="Use-AUR-repository-with-yay">Use AUR repository with yay</h2>
+<h2 id="use-aur-repository-with-yay">Use AUR repository with yay</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S yay</span><br><span class="line">yay -Syu --devel --combinedupgrade --save</span><br></pre></td></tr></table></figure>
 <p>Then change current <code>aururl</code> to <code>https://aur.tuna.tsinghua.edu.cn</code>.</p>
-<h2 id="Use-fish-shell-as-your-default-shell">Use fish shell as  your default shell</h2>
+<h2 id="use-fish-shell-as-your-default-shell">Use fish shell as your default shell</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fish</span><br></pre></td></tr></table></figure>
 <p>Set fish the default shell on Konsole: <code>Konsole -&gt; Settings -&gt; Edit Current Profile</code>, choose /bin/fish as default command, Then restart Konsole.</p>
 <p>Use fish as default user shell:</p>
@@ -308,42 +308,40 @@
 <p><code>pmi</code> is short for <code>sudo pacman -S</code></p>
 <p><code>pms</code> is short for <code>sudo pacman -Ss</code></p>
 <p><code>pmu</code> is short for <code>sudo pacman -Syyu</code></p>
-<h2 id="Change-hosts-Github">Change hosts (Github)</h2>
-<p>Seems not very useful for me but… just record it here in case that some day I need it.</p>
+<h2 id="change-hosts-github">Change hosts (Github)</h2>
+<p>Seems not very useful for me but... just record it here in case that some day I need it.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S dnsutils</span><br></pre></td></tr></table></figure>
 <p>Use <code>dig</code> or <code>nslookup</code> command to build a hosts file yourself.</p>
-<h2 id="Bypass-GFW">Bypass GFW</h2>
+<h2 id="bypass-gfw">Bypass GFW</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S v2ray qv2ray proxychains-ng</span><br></pre></td></tr></table></figure>
-<p>More? …sorry but I won’t tell you more🤪</p>
+<p>More? ...sorry but I won't tell you more🤪</p>
 <p><strong>Caution! : Set your system time correctly first, or you can never success.</strong></p>
-<p>If you want some rules, look at here: <a href="https://github.com/Loyalsoldier/v2ray-rules-dat" target="_blank" rel="noopener">https://github.com/Loyalsoldier/v2ray-rules-dat</a>, just put geosite and geoip into <code>/usr/share/v2ray/</code>. Easy!</p>
-<h2 id="Fonts-config">Fonts config</h2>
+<p>If you want some rules, look at here: https://github.com/Loyalsoldier/v2ray-rules-dat, just put geosite and geoip into <code>/usr/share/v2ray/</code>. Easy!</p>
+<h2 id="fonts-config">Fonts config</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S noto-fonts noto-fonts-cjk noto-fonts-emoji ttf-sarasa-gothic nerd-fonts-jetbrains-mono wqy-microhei wqy-zenhei</span><br></pre></td></tr></table></figure>
-<p>Download the config file at <a href="https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf" target="_blank" rel="noopener">https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf</a>, put it into <code>~/.config/fontconfig/fonts.conf</code>, log out and log in, then it works.</p>
-<h2 id="Install-Google-chrome">Install Google-chrome</h2>
+<p>Download the config file at https://bitbucket.org/szclsya/dotfiles/src/master/fontconfig/fonts.conf, put it into <code>~/.config/fontconfig/fonts.conf</code>, log out and log in, then it works.</p>
+<h2 id="install-google-chrome">Install Google-chrome</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S google-chrome</span><br></pre></td></tr></table></figure>
 <p>Caution: the bin file named <code>google-chrome-stable</code>, so if you want to start it use command line, use:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">google-chrome-stable</span><br></pre></td></tr></table></figure>
-<h2 id="Chinese-input">Chinese input</h2>
-<p>I chose Rime(fcitx5) as my Chinese input scheme instead of sogou pinyin because the latter has some strange conflict with Jetbrains IDEs. <s>🔪🔪🔪Fuck Sogou</s></p>
+<h2 id="chinese-input">Chinese input</h2>
+<p>I chose Rime(fcitx5) as my Chinese input scheme instead of sogou pinyin because the latter has some strange conflict with Jetbrains IDEs. <del>🔪🔪🔪Fuck Sogou</del></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-im fcitx5-configtool</span><br><span class="line">sudo pacman -S fcitx5-chinese-addons fcitx5-gtk fcitx5-qt fcitx5-pinyin-zhwiki kcm-fcitx5</span><br><span class="line">sudo pacman -S fcitx5-rime</span><br></pre></td></tr></table></figure>
 <p><code>fcitx-configtool -&gt; add rime</code></p>
-<p>Now let’s config it:</p>
+<p>Now let's config it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.xprofile</span><br></pre></td></tr></table></figure>
 <p>Then add:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GTK_IM_MODULE=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE-fcitx</span><br><span class="line"><span class="built_in">export</span> XMODIFIERS=<span class="string">"@im=fcitx"</span></span><br><span class="line">fcitx5 &amp;</span><br></pre></td></tr></table></figure>
-<p>Log out then Log in. It works. But… It’s not BEEEAAAUTIFUL enough!</p>
-<p><strong>RXnb! Let’s use RX’s skin for fcitx5 input method!</strong><br>
-<a href="https://github.com/Reverier-Xu/RxWe10-Fcitx5" target="_blank" rel="noopener">https://github.com/Reverier-Xu/RxWe10-Fcitx5</a><br>
-Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/.config/fcitx5/conf/classicui.conf</code>:</p>
+<p>Log out then Log in. It works. But... It's not BEEEAAAUTIFUL enough!</p>
+<p><strong>RXnb! Let's use RX's skin for fcitx5 input method!</strong> https://github.com/Reverier-Xu/RxWe10-Fcitx5 Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/.config/fcitx5/conf/classicui.conf</code>:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 垂直候选列表</span></span><br><span class="line">Vertical Candidate List=False</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按屏幕 DPI 使用</span></span><br><span class="line">PerScreenDPI=True</span><br><span class="line"></span><br><span class="line"><span class="comment"># Font (设置成你喜欢的字体)</span></span><br><span class="line">Font=<span class="string">"字体字体字体字体写在这里"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主题</span></span><br><span class="line">Theme=RxWe10-light</span><br></pre></td></tr></table></figure>
 <p>Or you can use some famous theme such as:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S fcitx5-material-color</span><br></pre></td></tr></table></figure>
-<p>See Also: <a href="https://github.com/hosxy/Fcitx5-Material-Color" target="_blank" rel="noopener">https://github.com/hosxy/Fcitx5-Material-Color</a></p>
+<p>See Also: https://github.com/hosxy/Fcitx5-Material-Color</p>
 <p>If you want to use simplified Chinese, create a new file named <code>default.custom.yaml</code> under <code>$HOME/.local/share/fcitx5/rime/</code> . With <code>default.yaml</code> in <code>./build</code> folder as reference, you can customize your settings freely. Also, you can turn to <code>/usr/share/rime-data/</code> to do those things.</p>
-<h2 id="Install-Jetbrains-IDEs">Install Jetbrains IDEs</h2>
+<h2 id="install-jetbrains-ides">Install Jetbrains IDEs</h2>
 <p>Developers necessity. Use <code>pacman</code> or <code>yay</code> .</p>
-<h2 id="Install-Tencent-shits">Install Tencent shits</h2>
+<h2 id="install-tencent-shits">Install Tencent shits</h2>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/pacman.conf</span><br></pre></td></tr></table></figure>
 <p>To use deepin-wine I have to enable multilib since my Archlinux is x64 version (?)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Sy deepin.com.qq.office</span><br></pre></td></tr></table></figure>
@@ -351,12 +349,12 @@ Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S gnome-settings-daemon</span><br></pre></td></tr></table></figure>
 <p><code>System Settings -&gt; Start up and shut down -&gt; Autostart -&gt; Add Script -&gt; /usr/lib/gsd-xsettings</code></p>
 <p>Reboot. Now TIM is available. Though it is not easy to use as it is on Windows, we HAVE a TIM on Arch at least.</p>
-<h2 id="References">References</h2>
-<ol>
-<li><a href="https://www.viseator.com/2017/05/19/arch_setup/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/19/arch_setup/</a></li>
-<li><a href="https://www.wootec.top/2019/11/02/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/02/如何在Linux上优雅的堕落/</a></li>
-<li><a href="https://www.wootec.top/2019/11/15/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD-2/" target="_blank" rel="noopener">https://www.wootec.top/2019/11/15/如何在Linux上优雅的堕落-2/</a></li>
-<li><a href="https://rocka.me/article/arch-linux-kde-plasma-install-and-config" target="_blank" rel="noopener">https://rocka.me/article/arch-linux-kde-plasma-install-and-config</a></li>
+<h2 id="references">References</h2>
+<ol type="1">
+<li>https://www.viseator.com/2017/05/19/arch_setup/</li>
+<li>https://www.wootec.top/2019/11/02/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD/</li>
+<li>https://www.wootec.top/2019/11/15/%E5%A6%82%E4%BD%95%E5%9C%A8Linux%E4%B8%8A%E4%BC%98%E9%9B%85%E7%9A%84%E5%A0%95%E8%90%BD-2/</li>
+<li>https://rocka.me/article/arch-linux-kde-plasma-install-and-config</li>
 </ol>
 
     </div>
@@ -460,7 +458,7 @@ Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Create-a-new-user"><span class="nav-number">1.</span> <span class="nav-text">Create a new user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-sudo"><span class="nav-number">2.</span> <span class="nav-text">Config sudo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graphical-interface-installation"><span class="nav-number">3.</span> <span class="nav-text">Graphical interface installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-your-Internet"><span class="nav-number">4.</span> <span class="nav-text">Config your Internet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-pacman-mirror"><span class="nav-number">5.</span> <span class="nav-text">Use pacman mirror</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-archlinuxcn-repository"><span class="nav-number">6.</span> <span class="nav-text">Use archlinuxcn repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-AUR-repository-with-yay"><span class="nav-number">7.</span> <span class="nav-text">Use AUR repository with yay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-fish-shell-as-your-default-shell"><span class="nav-number">8.</span> <span class="nav-text">Use fish shell as  your default shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Change-hosts-Github"><span class="nav-number">9.</span> <span class="nav-text">Change hosts (Github)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bypass-GFW"><span class="nav-number">10.</span> <span class="nav-text">Bypass GFW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fonts-config"><span class="nav-number">11.</span> <span class="nav-text">Fonts config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Google-chrome"><span class="nav-number">12.</span> <span class="nav-text">Install Google-chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chinese-input"><span class="nav-number">13.</span> <span class="nav-text">Chinese input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Jetbrains-IDEs"><span class="nav-number">14.</span> <span class="nav-text">Install Jetbrains IDEs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Tencent-shits"><span class="nav-number">15.</span> <span class="nav-text">Install Tencent shits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">16.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#create-a-new-user"><span class="nav-number">1.</span> <span class="nav-text">Create a new user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-sudo"><span class="nav-number">2.</span> <span class="nav-text">Config sudo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#graphical-interface-installation"><span class="nav-number">3.</span> <span class="nav-text">Graphical interface installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#config-your-internet"><span class="nav-number">4.</span> <span class="nav-text">Config your Internet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-pacman-mirror"><span class="nav-number">5.</span> <span class="nav-text">Use pacman mirror</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-archlinuxcn-repository"><span class="nav-number">6.</span> <span class="nav-text">Use archlinuxcn repository</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-aur-repository-with-yay"><span class="nav-number">7.</span> <span class="nav-text">Use AUR repository with yay</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#use-fish-shell-as-your-default-shell"><span class="nav-number">8.</span> <span class="nav-text">Use fish shell as your default shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#change-hosts-github"><span class="nav-number">9.</span> <span class="nav-text">Change hosts (Github)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bypass-gfw"><span class="nav-number">10.</span> <span class="nav-text">Bypass GFW</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fonts-config"><span class="nav-number">11.</span> <span class="nav-text">Fonts config</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-google-chrome"><span class="nav-number">12.</span> <span class="nav-text">Install Google-chrome</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chinese-input"><span class="nav-number">13.</span> <span class="nav-text">Chinese input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-jetbrains-ides"><span class="nav-number">14.</span> <span class="nav-text">Install Jetbrains IDEs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-tencent-shits"><span class="nav-number">15.</span> <span class="nav-text">Install Tencent shits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">16.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -534,13 +532,13 @@ Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -600,6 +598,61 @@ Put those theme file to <code>/usr/share/fcitx5/themes/</code>, and set <code>~/
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

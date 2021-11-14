@@ -252,20 +252,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。<s>自己再装的时候能看懂就行</s></p>
+        <p>前几天手贱把自己原来的Manjaro系统搞炸了，于是趁这个机会重装了自己一直心心念念的Arch，也算是从零开始的Arch生活了吧。因为这篇博客是在装系统的过程中写的，当时还没有配置中文的输入法，所以用了英文来写。英文水平有限肯定会出一些错误，还请海涵。<del>自己再装的时候能看懂就行</del></p>
 <a id="more"></a>
-<h2 id="Prepare-an-installation-medium">Prepare an installation medium</h2>
+<h2 id="prepare-an-installation-medium">Prepare an installation medium</h2>
 <p>I used rufus on Windows 10 to make my U-disk an installation medium. I chose dd mode of rufus. Make sure there is an empty partition on your disk.</p>
 <p>I will go straight to the next step because this is easy.</p>
-<h2 id="Pre-Installation">Pre-Installation</h2>
-<h3 id="Boot-the-live-environment">Boot the live environment</h3>
+<h2 id="pre-installation">Pre-Installation</h2>
+<h3 id="boot-the-live-environment">Boot the live environment</h3>
 <p>Disable secure boot. Then restart your PC and boot from your USB device. Choose <code>Boot Arch Linux (x86_64)</code> , now you can see Archlinux is ready to load contents. Finally you will logged in on the first virtual console as the root user, and presented with a <code>zsh</code> shell prompt. You can autocomplete your commands using <code>tab</code> , OHHHHHH!</p>
-<h3 id="Verify-the-boot-mode">Verify the boot mode</h3>
+<h3 id="verify-the-boot-mode">Verify the boot mode</h3>
 <p>To verify the boot mode, list the efivars directory:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /sys/firmware/efi/efivars</span><br></pre></td></tr></table></figure>
-<p>If the command shows the directory without error, then the system is booted in UEFI mode. If the directory does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired, refer to your motherboard’s manual.</p>
+<p>If the command shows the directory without error, then the system is booted in UEFI mode. If the directory does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired, refer to your motherboard's manual.</p>
 <p>Or, a more secure way is <code>fdisk -l</code> ,if your SSD (or HDD) shows its <code>Disklabel type</code> is <code>gpt</code> and there is a small partition whose type is <code>EFI System</code> , Then your boot mode can be verified to be EFI.</p>
-<h3 id="Connect-to-the-Internet">Connect to the Internet</h3>
+<h3 id="connect-to-the-internet">Connect to the Internet</h3>
 <p>Arch needs network connection to complete its installation.</p>
 <p>Ensure your network interface is listed and enabled:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip link</span><br></pre></td></tr></table></figure>
@@ -277,39 +277,39 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping baidu.com</span><br></pre></td></tr></table></figure>
 <p>If everything is OK, quit iwd:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">quit</span><br></pre></td></tr></table></figure>
-<h3 id="Update-the-system-clock">Update the system clock</h3>
+<h3 id="update-the-system-clock">Update the system clock</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">timedatectl <span class="built_in">set</span>-ntp <span class="literal">true</span></span><br></pre></td></tr></table></figure>
 <p>To check the service status, use <code>timedatectl status</code>.</p>
-<h3 id="Partition-the-disks">Partition the disks</h3>
+<h3 id="partition-the-disks">Partition the disks</h3>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>Device Type</th>
 <th>File Name</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td>SATA/SAS/USB</td>
 <td>/dev/sda,/dev/sdb,……</td>
 </tr>
-<tr>
+<tr class="even">
 <td>IDE</td>
 <td>/dev/hd0,/dev/hd1,……</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>VIRTIO-BLOCK</td>
 <td>/dev/vda,/dev/vdb,……</td>
 </tr>
-<tr>
+<tr class="even">
 <td>M2(SSD)</td>
 <td>/dev/nvme0,/dev/nvme1</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>SD/MMC/EMMC(Card)</td>
 <td>/dev/mmcblk0,/dev/mmcblk1</td>
 </tr>
-<tr>
+<tr class="even">
 <td>CD drive</td>
 <td>/dev/cdrom,/dev/sr0,/dev/sr1</td>
 </tr>
@@ -317,7 +317,7 @@
 </table>
 <p>When recognized by the live system, disks are assigned to a <a href="https://wiki.archlinux.org/index.php/Block_device" target="_blank" rel="noopener">block device</a> such as <code>/dev/sda</code>, <code>/dev/nvme0n1</code> or <code>/dev/mmcblk0</code>. To identify these devices, use <code>lsblk</code> or <code>fdisk</code>.</p>
 <p>I boot my Arch in UEFI mode, so first I must create a boot partition (EFI system partition).</p>
-<h4 id="Create-a-boot-partition">Create a boot partition</h4>
+<h4 id="create-a-boot-partition">Create a boot partition</h4>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;  <span class="comment"># Example: fdisk /dev/sdx  or  fdisk /dev/nvmex</span></span><br></pre></td></tr></table></figure>
 <p>See usages of commands by typing <code>m</code> and enter.</p>
 <p>Enter <code>n</code> to create a new partition. You are asked to select the starting sector, generally we type enter (select by default). Then enter end sector or partition size. I used <code>+512M</code> .</p>
@@ -325,36 +325,36 @@
 <p>Enter <code>w</code> to save. You can check whether there is something wrong before that by <code>p</code>.</p>
 <p>Format it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.fat -F32 /dev/&#123;YOUR BOOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="Root-partition">Root partition</h4>
+<h4 id="root-partition">Root partition</h4>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk /dev/&#123;YOUR DISK&#125;</span><br></pre></td></tr></table></figure>
 <p>Create a new partition table if there is not one exist. I already have one on my disk so I go on directly.</p>
 <p>Enter <code>n</code> to create a new partition. I want my new partition fill up the free space completely, so I use enter to choose the default.</p>
 <p>Enter <code>p</code> then <code>w</code> just like creating your boot partition.</p>
 <p>Format it:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs.ext4 /dev/P&#123;YOUR ROOT PARTITION&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Mount-the-file-systems">Mount the file systems</h3>
+<h3 id="mount-the-file-systems">Mount the file systems</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/&#123;YOUR ROOT PARTITION&#125; /mnt</span><br><span class="line">mkdir /mnt/boot</span><br><span class="line">mount /dev/&#123;YOUR BOOT PARTITION&#125; /mnt/boot</span><br></pre></td></tr></table></figure>
-<h2 id="Installation">Installation</h2>
-<h3 id="Use-Pacman-Mirror">Use Pacman Mirror</h3>
+<h2 id="installation">Installation</h2>
+<h3 id="use-pacman-mirror">Use Pacman Mirror</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/pacman.d/mirrorlist</span><br></pre></td></tr></table></figure>
 <p>Copy the mirrors you wants to use and paste them to the beginning of this file. One of the commonly used mirrors is <code>https://mirrors.tuna.tsinghua.edu.cn</code>.</p>
 <p>I chose <code>https://linux.xidian.edu.cn/mirrors/archlinux/$repo/os/$arch</code> (Only available under the campus network environment).</p>
-<h3 id="Install-essential-packages">Install essential packages</h3>
+<h3 id="install-essential-packages">Install essential packages</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacstrap /mnt base base-devel linux linux-firmware dhcpcd</span><br></pre></td></tr></table></figure>
-<h2 id="Configure-the-system">Configure the system</h2>
-<h3 id="Fstab">Fstab</h3>
+<h2 id="configure-the-system">Configure the system</h2>
+<h3 id="fstab">Fstab</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">genfstab -L /mnt &gt;&gt; /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
 <p>We need a check to make sure it is right since it is an important step. Check the resulting <code>/mnt/etc/fstab</code> file, and edit it in case of errors:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /mnt/etc/fstab</span><br></pre></td></tr></table></figure>
-<h3 id="Chroot">Chroot</h3>
-<p><code>chroot</code> means ‘change root’. Change root into the new system:</p>
+<h3 id="chroot">Chroot</h3>
+<p><code>chroot</code> means 'change root'. Change root into the new system:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arch-chroot /mnt</span><br></pre></td></tr></table></figure>
 <p>We can also use this command to fix our system if there is some problem with it.</p>
-<h3 id="Time-zone">Time zone</h3>
+<h3 id="time-zone">Time zone</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">hwclock --systohc</span><br></pre></td></tr></table></figure>
-<h3 id="Install-necessary-packages">Install necessary packages</h3>
+<h3 id="install-necessary-packages">Install necessary packages</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim dialog wpa_supplicant ntfs-3g networkmanager netctl</span><br></pre></td></tr></table></figure>
-<h3 id="Localization">Localization</h3>
+<h3 id="localization">Localization</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/locale.gen</span><br></pre></td></tr></table></figure>
 <p>Uncomment <code>zh_CN.UTF-8 UTF-8</code> <code>zh_HK.UTF-8 UTF-8</code> <code>zh_TW.UTF-8 UTF-8</code> <code>en_US.UTF-8 UTF-8</code> .</p>
 <p>Then <code>:wq</code> save and quit.</p>
@@ -365,36 +365,32 @@
 <p>Add the following line to the first line of this file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LANG=en_US.UTF-8</span><br></pre></td></tr></table></figure>
 <p><code>:wq</code> . Fine.</p>
-<h3 id="Network-configuration">Network configuration</h3>
+<h3 id="network-configuration">Network configuration</h3>
 <p>Create the hostname file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hostname</span><br></pre></td></tr></table></figure>
 <p>Config your hosts:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts</span><br></pre></td></tr></table></figure>
 <p>Add the following contents to the end of this file:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1	localhost</span><br><span class="line">::1		localhost</span><br><span class="line">127.0.1.1	myhostname.localdomain	myhostname</span><br></pre></td></tr></table></figure>
-<h3 id="Set-root-password">Set root password</h3>
+<h3 id="set-root-password">Set root password</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
-<h3 id="Install-Intel-ucode-if-you-have-a-Intel-CPU">Install Intel-ucode (if you have a Intel CPU)</h3>
+<h3 id="install-intel-ucode-if-you-have-a-intel-cpu">Install Intel-ucode (if you have a Intel CPU)</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S intel-ucode</span><br></pre></td></tr></table></figure>
-<h3 id="Install-BootLoader">Install BootLoader</h3>
+<h3 id="install-bootloader">Install BootLoader</h3>
 <p>Caution! This blog is only for EFI/GPT boot mode! If you are in BIOS/MBR mode, please see <code>Reference 2</code> at the end.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pacman -S os-prober ntfs-3g</span><br><span class="line">pacman -S grub efibootmgr</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
-<p>If there is multi systems on your device, it is recommended to check whether each system’s entry is well generated.</p>
+<p>If there is multi systems on your device, it is recommended to check whether each system's entry is well generated.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
 <p>Check if it is all right.</p>
-<h3 id="Reboot-and-enjoy-archlinux">Reboot and enjoy archlinux</h3>
+<h3 id="reboot-and-enjoy-archlinux">Reboot and enjoy archlinux</h3>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br><span class="line">umount /mnt/boot</span><br><span class="line">umount /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
 <p>Pull out your U-disk. Login as root, enter your password.</p>
 <p>If you can see the command line, congratulations, you have installed Archlinux successfully! OHHHHHHH!</p>
 <p>There is still many things to do after that, I will put some guide for them on my next blog.</p>
-<h2 id="References">References</h2>
-<ol>
-<li>
-<p><a href="https://wiki.archlinux.org/index.php/Installation_guide" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Installation_guide</a></p>
-</li>
-<li>
-<p><a href="https://www.viseator.com/2017/05/17/arch_install/" target="_blank" rel="noopener">https://www.viseator.com/2017/05/17/arch_install/</a></p>
-</li>
+<h2 id="references">References</h2>
+<ol type="1">
+<li><p>https://wiki.archlinux.org/index.php/Installation_guide</p></li>
+<li><p>https://www.viseator.com/2017/05/17/arch_install/</p></li>
 </ol>
 
     </div>
@@ -498,7 +494,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prepare-an-installation-medium"><span class="nav-number">1.</span> <span class="nav-text">Prepare an installation medium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Pre-Installation"><span class="nav-number">2.</span> <span class="nav-text">Pre-Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Boot-the-live-environment"><span class="nav-number">2.1.</span> <span class="nav-text">Boot the live environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Verify-the-boot-mode"><span class="nav-number">2.2.</span> <span class="nav-text">Verify the boot mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Connect-to-the-Internet"><span class="nav-number">2.3.</span> <span class="nav-text">Connect to the Internet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update-the-system-clock"><span class="nav-number">2.4.</span> <span class="nav-text">Update the system clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Partition-the-disks"><span class="nav-number">2.5.</span> <span class="nav-text">Partition the disks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-boot-partition"><span class="nav-number">2.5.1.</span> <span class="nav-text">Create a boot partition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Root-partition"><span class="nav-number">2.5.2.</span> <span class="nav-text">Root partition</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-the-file-systems"><span class="nav-number">2.6.</span> <span class="nav-text">Mount the file systems</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-Pacman-Mirror"><span class="nav-number">3.1.</span> <span class="nav-text">Use Pacman Mirror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-essential-packages"><span class="nav-number">3.2.</span> <span class="nav-text">Install essential packages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-the-system"><span class="nav-number">4.</span> <span class="nav-text">Configure the system</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fstab"><span class="nav-number">4.1.</span> <span class="nav-text">Fstab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chroot"><span class="nav-number">4.2.</span> <span class="nav-text">Chroot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Time-zone"><span class="nav-number">4.3.</span> <span class="nav-text">Time zone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-necessary-packages"><span class="nav-number">4.4.</span> <span class="nav-text">Install necessary packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Localization"><span class="nav-number">4.5.</span> <span class="nav-text">Localization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Network-configuration"><span class="nav-number">4.6.</span> <span class="nav-text">Network configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set-root-password"><span class="nav-number">4.7.</span> <span class="nav-text">Set root password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-Intel-ucode-if-you-have-a-Intel-CPU"><span class="nav-number">4.8.</span> <span class="nav-text">Install Intel-ucode (if you have a Intel CPU)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-BootLoader"><span class="nav-number">4.9.</span> <span class="nav-text">Install BootLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reboot-and-enjoy-archlinux"><span class="nav-number">4.10.</span> <span class="nav-text">Reboot and enjoy archlinux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#prepare-an-installation-medium"><span class="nav-number">1.</span> <span class="nav-text">Prepare an installation medium</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pre-installation"><span class="nav-number">2.</span> <span class="nav-text">Pre-Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#boot-the-live-environment"><span class="nav-number">2.1.</span> <span class="nav-text">Boot the live environment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#verify-the-boot-mode"><span class="nav-number">2.2.</span> <span class="nav-text">Verify the boot mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#connect-to-the-internet"><span class="nav-number">2.3.</span> <span class="nav-text">Connect to the Internet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update-the-system-clock"><span class="nav-number">2.4.</span> <span class="nav-text">Update the system clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#partition-the-disks"><span class="nav-number">2.5.</span> <span class="nav-text">Partition the disks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#create-a-boot-partition"><span class="nav-number">2.5.1.</span> <span class="nav-text">Create a boot partition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#root-partition"><span class="nav-number">2.5.2.</span> <span class="nav-text">Root partition</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mount-the-file-systems"><span class="nav-number">2.6.</span> <span class="nav-text">Mount the file systems</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#installation"><span class="nav-number">3.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#use-pacman-mirror"><span class="nav-number">3.1.</span> <span class="nav-text">Use Pacman Mirror</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-essential-packages"><span class="nav-number">3.2.</span> <span class="nav-text">Install essential packages</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configure-the-system"><span class="nav-number">4.</span> <span class="nav-text">Configure the system</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#fstab"><span class="nav-number">4.1.</span> <span class="nav-text">Fstab</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chroot"><span class="nav-number">4.2.</span> <span class="nav-text">Chroot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#time-zone"><span class="nav-number">4.3.</span> <span class="nav-text">Time zone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-necessary-packages"><span class="nav-number">4.4.</span> <span class="nav-text">Install necessary packages</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#localization"><span class="nav-number">4.5.</span> <span class="nav-text">Localization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#network-configuration"><span class="nav-number">4.6.</span> <span class="nav-text">Network configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#set-root-password"><span class="nav-number">4.7.</span> <span class="nav-text">Set root password</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-intel-ucode-if-you-have-a-intel-cpu"><span class="nav-number">4.8.</span> <span class="nav-text">Install Intel-ucode (if you have a Intel CPU)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#install-bootloader"><span class="nav-number">4.9.</span> <span class="nav-text">Install BootLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reboot-and-enjoy-archlinux"><span class="nav-number">4.10.</span> <span class="nav-text">Reboot and enjoy archlinux</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -572,13 +568,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -638,6 +634,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -240,14 +240,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5k</span>
+              <span>4.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -261,12 +261,12 @@
       
         <p>CTF中经常出现的正则，基础薄弱。突击学习下记点笔记。</p>
 <a id="more"></a>
-<h2 id="PHP正则">PHP正则</h2>
+<h2 id="php正则">PHP正则</h2>
 <p>PCRE库函数中，正则匹配模式使用分隔符与元字符组成。</p>
 <h3 id="分隔符">分隔符</h3>
 <p>分隔符可以是非数字、非反斜线、非空格的任意字符。经常使用的分隔符是正斜线(/)、hash符号(#) 以及取反符号(~)，例如：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/foo bar/</span><br><span class="line"><span class="comment">#^[^0-9]$#</span></span><br><span class="line">~php~</span><br></pre></td></tr></table></figure>
-<p>如果模式中包含分隔符，则分隔符需要使用反斜杠（\）进行转义。</p>
+<p>如果模式中包含分隔符，则分隔符需要使用反斜杠（）进行转义。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/http:\/\<span class="comment">//</span></span><br></pre></td></tr></table></figure>
 <p>如果模式中包含较多的分割字符，建议更换其他的字符作为分隔符，也可以采用preg_quote进行转义。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$p = <span class="string">'http://'</span>;</span><br><span class="line">$p = <span class="string">'/'</span>.preg_quote($p, <span class="string">'/'</span>).<span class="string">'/'</span>;</span><br><span class="line"><span class="keyword">echo</span> $p;</span><br></pre></td></tr></table></figure>
@@ -279,125 +279,83 @@
 <p>共有两种不同的元字符：一种是可以在模式中方括号外任何地方使用的，另外一种 是需要在方括号内使用的。</p>
 <p><strong>在方括号外使用的元字符如下：</strong></p>
 <ul>
-<li>
-<p>**</p>
-<p>一般用于转义字符</p>
-</li>
-<li>
-<p><em>^</em></p>
-<p>断言目标的开始位置(或在多行模式下是行首)</p>
-</li>
-<li>
-<p><em>$</em></p>
-<p>断言目标的结束位置(或在多行模式下是行尾)</p>
-</li>
-<li>
-<p><em>.</em></p>
-<p>匹配除换行符外的任何字符(默认)</p>
-</li>
-<li>
-<p><em>[</em></p>
-<p>开始字符类定义</p>
-</li>
-<li>
-<p><em>]</em></p>
-<p>结束字符类定义</p>
-</li>
-<li>
-<p><em>|</em></p>
-<p>开始一个可选分支</p>
-</li>
-<li>
-<p><em>(</em></p>
-<p>子组的开始标记</p>
-</li>
-<li>
-<p><em>)</em></p>
-<p>子组的结束标记</p>
-</li>
-<li>
-<p><em>?</em></p>
-<p>作为量词，表示 0 次或 1 次匹配。位于量词后面用于改变量词的贪婪特性。 (查阅<a href="https://www.php.net/manual/zh/regexp.reference.repetition.php" target="_blank" rel="noopener">量词</a>)</p>
-</li>
-<li>
-<p><em>*</em></p>
-<p>量词，0 次或多次匹配</p>
-</li>
-<li>
-<p><em>+</em></p>
-<p>量词，1 次或多次匹配</p>
-</li>
-<li>
-<p><em>{</em></p>
-<p>自定义量词开始标记</p>
-</li>
-<li>
-<p><em>}</em></p>
-<p>自定义量词结束标记</p>
-</li>
+<li><p>**</p>
+<p>一般用于转义字符</p></li>
+<li><p><em>^</em></p>
+<p>断言目标的开始位置(或在多行模式下是行首)</p></li>
+<li><p><em>$</em></p>
+<p>断言目标的结束位置(或在多行模式下是行尾)</p></li>
+<li><p><em>.</em></p>
+<p>匹配除换行符外的任何字符(默认)</p></li>
+<li><p><em>[</em></p>
+<p>开始字符类定义</p></li>
+<li><p><em>]</em></p>
+<p>结束字符类定义</p></li>
+<li><p><em>|</em></p>
+<p>开始一个可选分支</p></li>
+<li><p><em>(</em></p>
+<p>子组的开始标记</p></li>
+<li><p><em>)</em></p>
+<p>子组的结束标记</p></li>
+<li><p><em>?</em></p>
+<p>作为量词，表示 0 次或 1 次匹配。位于量词后面用于改变量词的贪婪特性。 (查阅<a href="https://www.php.net/manual/zh/regexp.reference.repetition.php" target="_blank" rel="noopener">量词</a>)</p></li>
+<li><p><em>*</em></p>
+<p>量词，0 次或多次匹配</p></li>
+<li><p><em>+</em></p>
+<p>量词，1 次或多次匹配</p></li>
+<li><p><em>{</em></p>
+<p>自定义量词开始标记</p></li>
+<li><p><em>}</em></p>
+<p>自定义量词结束标记</p></li>
 </ul>
 <p><strong>模式中方括号内的部分称为“字符类”。 在一个字符类中仅有以下可用元字符：</strong></p>
 <ul>
-<li>
-<p>**</p>
-<p>转义字符</p>
-</li>
-<li>
-<p><em>^</em></p>
-<p>仅在作为第一个字符(方括号内)时，表明字符类取反</p>
-</li>
-<li>
-<p><em>-</em></p>
-<p>标记字符范围</p>
-</li>
+<li><p>**</p>
+<p>转义字符</p></li>
+<li><p><em>^</em></p>
+<p>仅在作为第一个字符(方括号内)时，表明字符类取反</p></li>
+<li><p><em>-</em></p>
+<p>标记字符范围</p></li>
 </ul>
 <h3 id="转义序列">转义序列</h3>
-<p><em>\n</em></p>
+<p>*</p>
 <p>换行 (十六进制 0A)</p>
-<p><em>\r</em></p>
-<p>回车 (十六进制 0D)</p>
-<p><em>\t</em></p>
-<p>水平制表符 (十六进制 09)</p>
-<p><em>\xhh</em></p>
+<p>*车 (十六进制 0D)</p>
+<p>*平制表符 (十六进制 09)</p>
+<p>*</p>
 <p>hh十六进制编码的字符，详细查看<a href="https://www.php.net/manual/zh/regexp.reference.unicode.php" target="_blank" rel="noopener">unicode properties</a> 属性</p>
-<p><em>\ddd</em></p>
+<p>*</p>
 <p>ddd八进制编码的字符，或者后向引用</p>
 <p><em>\040</em></p>
 <p>空格的另外一种用法</p>
 <p><em>\40</em></p>
 <p>当提供了少于40个子组时也认为是空格。</p>
-<p><em>\d</em></p>
-<p>任意十进制数字</p>
-<p><em>\D</em></p>
+<p>*意十进制数字</p>
+<p>*</p>
 <p>任意非十进制数字</p>
-<p><em>\h</em></p>
-<p>任意水平空白字符(since PHP 5.2.4)</p>
-<p><em>\H</em></p>
-<p>任意非水平空白字符(since PHP 5.2.4)</p>
-<p><em>\s</em></p>
+<p>*意水平空白字符(since PHP 5.2.4)</p>
+<p>*意非水平空白字符(since PHP 5.2.4)</p>
+<p>*</p>
 <p>任意空白字符</p>
-<p><em>\S</em></p>
+<p>*</p>
 <p>任意非空白字符</p>
-<p><em>\v</em></p>
-<p>任意垂直空白字符(since PHP 5.2.4)</p>
-<p><em>\V</em></p>
+<p>*意垂直空白字符(since PHP 5.2.4)</p>
+<p>*</p>
 <p>任意非垂直空白字符(since PHP 5.2.4)</p>
-<p><em>\w</em></p>
+<p>*</p>
 <p>任意单词字符</p>
-<p><em>\W</em></p>
+<p>*</p>
 <p>任意非单词字符</p>
-<p><em>\b</em></p>
-<p>单词边界</p>
-<p><em>\B</em></p>
+<p>*词边界</p>
+<p>*</p>
 <p>非单词边界</p>
-<p><em>\A</em></p>
+<p>*</p>
 <p>目标的开始位置(独立于多行模式)</p>
-<p><em>\Z</em></p>
+<p>*</p>
 <p>目标的结束位置或结束处的换行符(独立于多行模式)</p>
-<p><em>\z</em></p>
+<p>*</p>
 <p>目标的结束位置(独立于多行模式)</p>
-<p><em>\G</em></p>
-<p>在目标中首次匹配位置</p>
+<p>*目标中首次匹配位置</p>
 <h3 id="字符类">字符类</h3>
 <p>方括号标记开始结束。一个按类而不是按顺序匹配的规则。如</p>
 <p>[A-Z0-9]可以匹配A-Z或0-9之中的所有内容，而不是按顺序先匹配字母再匹配数字。</p>
@@ -406,45 +364,45 @@
 <h3 id="修饰符">修饰符</h3>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th><em>i</em></th>
 <th>不区分大小写（ignore） for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_CASELESS</a></th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td><em>m</em></td>
 <td>多行匹配（more） for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_MULTILINE</a></td>
 </tr>
-<tr>
+<tr class="even">
 <td><em>s</em></td>
 <td>句点使用时匹配包含换行符 for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_DOTALL</a></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><em>x</em></td>
 <td>将模式中的空白忽略 for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_EXTENDED</a></td>
 </tr>
-<tr>
+<tr class="even">
 <td><em>U</em></td>
 <td>只匹配最近的一个字符串;不重复匹配 for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_UNGREEDY</a></td>
 </tr>
-<tr>
+<tr class="odd">
 <td><em>X</em></td>
 <td>任意反斜线后接没有特殊含义的字符会导致一个错误 for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_EXTRA</a></td>
 </tr>
-<tr>
+<tr class="even">
 <td><em>J</em></td>
 <td>允许子组重名 for <a href="https://www.php.net/manual/zh/reference.pcre.pattern.modifiers.php" target="_blank" rel="noopener">PCRE_INFO_JCHANGED</a></td>
 </tr>
 </tbody>
 </table>
 <p>e was <em>DEPRECATED</em> in PHP 5.5.0, and <em>REMOVED</em> as of PHP 7.0.0. 如果设置了这个被弃用的修饰符， <a href="https://www.php.net/manual/zh/function.preg-replace.php" target="_blank" rel="noopener">preg_replace()</a> 在进行了对替换字符串的 后向引用替换之后, 将替换后的字符串作为php 代码评估执行(eval 函数方式)，并使用执行结果 作为实际参与替换的字符串。单引号、双引号、反斜线(**)和 NULL 字符在 后向引用替换时会被用反斜线转义.详见php手册。</p>
-<p><em>A</em> (<em>PCRE_ANCHORED</em>)  如果设置了这个修饰符，模式被强制为&quot;锚定&quot;模式，也就是说约束匹配使其仅从 目标字符串的开始位置搜索。这个效果同样可以使用适当的模式构造出来，并且 这也是 perl 种实现这种模式的唯一途径。</p>
-<p><em>U</em> (<em>PCRE_UNGREEDY</em>)  这个修饰符逆转了量词的&quot;贪婪&quot;模式。 使量词默认为非贪婪的，通过量词后紧跟*?* 的方式可以使其成为贪婪的。这和 perl 是不兼容的。 它同样可以使用 <a href="https://www.php.net/manual/zh/regexp.reference.internal-options.php" target="_blank" rel="noopener">模式内修饰符设置</a> (<em>?U</em>)进行设置， 或者在量词后以问号标记其非贪婪(比如*.*?*)。</p>
+<p><em>A</em> (<em>PCRE_ANCHORED</em>) 如果设置了这个修饰符，模式被强制为"锚定"模式，也就是说约束匹配使其仅从 目标字符串的开始位置搜索。这个效果同样可以使用适当的模式构造出来，并且 这也是 perl 种实现这种模式的唯一途径。</p>
+<p><em>U</em> (<em>PCRE_UNGREEDY</em>) 这个修饰符逆转了量词的"贪婪"模式。 使量词默认为非贪婪的，通过量词后紧跟<em>?</em> 的方式可以使其成为贪婪的。这和 perl 是不兼容的。 它同样可以使用 <a href="https://www.php.net/manual/zh/regexp.reference.internal-options.php" target="_blank" rel="noopener">模式内修饰符设置</a> (<em>?U</em>)进行设置， 或者在量词后以问号标记其非贪婪(比如<em>.*?</em>)。</p>
 <h3 id="子组">子组</h3>
 <p>子组通过圆括号分隔界定，并且它们可以嵌套。 将一个模式中的一部分标记为子组(子模式)主要是来做两件事情：</p>
-<ol>
-<li>将可选分支局部化。比如，模式*cat(arcat|erpillar|)*匹配 ”cat”， “cataract”， “caterpillar” 中的一个，如果没有圆括号的话，它匹配的则是 ”cataract”， “erpillar” 以及空字符串。</li>
+<ol type="1">
+<li>将可选分支局部化。比如，模式<em>cat(arcat|erpillar|)</em>匹配 ”cat”， “cataract”， “caterpillar” 中的一个，如果没有圆括号的话，它匹配的则是 ”cataract”， “erpillar” 以及空字符串。</li>
 <li>将子组设定为捕获子组(向上面定义的)。当整个模式匹配后， 目标字符串中匹配子组的部分将会通过 <strong>pcre_exec()()</strong> 的 <em>ovector</em> 参数回传给调用者。 左括号从左至右出现的次序就是对应子组的下标(从 1 开始)， 可以通过这些下标数字来获取捕获子模式匹配结果。</li>
 </ol>
 <p>为了方便简写，如果需要在非捕获子组开始位置设置选项， 选项字母可以位于 ? 和 : 之间，比如：</p>
@@ -456,8 +414,7 @@
 <h3 id="贪婪模式与懒惰模式">贪婪模式与懒惰模式</h3>
 <p>正则表达式中每个元字符匹配一个字符，当使用+之后将会变的贪婪，它将匹配尽可能多的字符，但使用问号?字符时，它将尽可能少的匹配字符，既是懒惰模式。</p>
 <ul>
-<li>贪婪模式：在可匹配与可不匹配的时候，优先匹配<br>
-//下面的\d表示匹配数字</li>
+<li>贪婪模式：在可匹配与可不匹配的时候，优先匹配 //下面的</li>
 </ul>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$p = <span class="string">'/\d+\-\d+/'</span>;</span><br><span class="line">$str = <span class="string">"我的电话是010-12345678"</span>;</span><br><span class="line">preg_match($p, $str, $match);</span><br><span class="line"><span class="keyword">echo</span> $match[<span class="number">0</span>]; <span class="comment">//结果为：010-12345678</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -476,7 +433,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$p</span> = <span class="string">"|&lt;[^&gt;]+&gt;(.*?)&lt;/[^&gt;]+&gt;|i"</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">"&lt;b&gt;example: &lt;/b&gt;&lt;div align=left&gt;this is a test&lt;/div&gt;"</span>;</span><br><span class="line">preg_match_all(<span class="variable">$p</span>, <span class="variable">$str</span>, <span class="variable">$matches</span>);</span><br><span class="line">print_r(<span class="variable">$matches</span>);</span><br></pre></td></tr></table></figure>
 <p>可以使用preg_match_all匹配一个表格中的数据：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$p = "/<span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>(.*?)<span class="tag">&lt;<span class="name">\</span>/<span class="attr">td</span>&gt;</span>\s*<span class="tag">&lt;<span class="name">td</span>&gt;</span>(.*?)<span class="tag">&lt;<span class="name">\</span>/<span class="attr">td</span>&gt;</span>\s*<span class="tag">&lt;<span class="name">\</span>/<span class="attr">tr</span>&gt;</span>/i";</span><br><span class="line">$str = "<span class="tag">&lt;<span class="name">table</span>&gt;</span> <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>Eric<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>25<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span> <span class="tag">&lt;<span class="name">tr</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>John<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;<span class="name">td</span>&gt;</span>26<span class="tag">&lt;/<span class="name">td</span>&gt;</span><span class="tag">&lt;/<span class="name">tr</span>&gt;</span> <span class="tag">&lt;/<span class="name">table</span>&gt;</span>";</span><br><span class="line">preg_match_all($p, $str, $matches);</span><br><span class="line">print_r($matches);</span><br></pre></td></tr></table></figure>
-<p>$matches结果排序为$matches[0]保存完整模式的所有匹配, $matches[1] 保存第一个子组的所有匹配，以此类推。</p>
+<p><span class="math inline">\(matches结果排序为\)</span>matches[0]保存完整模式的所有匹配, $matches[1] 保存第一个子组的所有匹配，以此类推。</p>
 <h3 id="正则表达式的搜索和替换">正则表达式的搜索和替换</h3>
 <p>正则表达式的搜索与替换在某些方面具有重要用途，比如调整目标字符串的格式，改变目标字符串中匹配字符串的顺序等。</p>
 <p>例如我们可以简单的调整字符串的日期格式：</p>
@@ -484,9 +441,9 @@
 <p>其中${1}与$1的写法是等效的，表示第一个匹配的字串，$2代表第二个匹配的。</p>
 <p>通过复杂的模式，我们可以更加精确的替换目标字符串的内容。</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$patterns = <span class="keyword">array</span> (<span class="string">'/(19|20)(\d&#123;2&#125;)-(\d&#123;1,2&#125;)-(\d&#123;1,2&#125;)/'</span>,</span><br><span class="line">                   <span class="string">'/^\s*&#123;(\w+)&#125;\s*=/'</span>);</span><br><span class="line">$replace = <span class="keyword">array</span> (<span class="string">'\3/\4/\1\2'</span>, <span class="string">'$\1 ='</span>);<span class="comment">//\3等效于$3,\4等效于$4，依次类推</span></span><br><span class="line"><span class="keyword">echo</span> preg_replace($patterns, $replace, <span class="string">'&#123;startDate&#125; = 1999-5-27'</span>); <span class="comment">//结果为：$startDate = 5/27/1999</span></span><br></pre></td></tr></table></figure>
-<p>//详细解释下结果：(19|20)表示取19或者20中任意一个数字，(\d{2})表示两个数字，(\d{1,2})表示1个或2个数字，(\d{1,2})表示1个或2个数字。^\s*{(\w+)\s*=}表示以任意空格开头的，并且包含在{}中的字符，并且以任意空格结尾的，最后有个=号的。<br>
-用正则替换来去掉多余的空格与字符：</p>
+<p>//详细解释下结果：(19|20)表示取19或者20中任意一个数字，()表示两个数字，()表示1个或2个数字，()表示1个或2个数字。^表示以任意空格开头的，并且包含在{}中的字符，并且以任意空格结尾的，最后有个=号的。 用正则替换来去掉多余的空格与字符：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$str</span> = <span class="string">'one     two'</span>;</span><br><span class="line"><span class="variable">$str</span> = preg_replace(<span class="string">'/\s+/'</span>, <span class="string">' '</span>, <span class="variable">$str</span>);</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$str</span>; // 结果改变为<span class="string">'one two'</span></span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -589,7 +546,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP正则"><span class="nav-number">1.</span> <span class="nav-text">PHP正则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分隔符"><span class="nav-number">1.1.</span> <span class="nav-text">分隔符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">1.2.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义序列"><span class="nav-number">1.3.</span> <span class="nav-text">转义序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符类"><span class="nav-number">1.4.</span> <span class="nav-text">字符类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选路径"><span class="nav-number">1.5.</span> <span class="nav-text">可选路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰符"><span class="nav-number">1.6.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子组"><span class="nav-number">1.7.</span> <span class="nav-text">子组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">1.8.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归模式"><span class="nav-number">1.9.</span> <span class="nav-text">递归模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪婪模式与懒惰模式"><span class="nav-number">1.10.</span> <span class="nav-text">贪婪模式与懒惰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用正则进行匹配"><span class="nav-number">1.11.</span> <span class="nav-text">使用正则进行匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找所有匹配结果"><span class="nav-number">1.12.</span> <span class="nav-text">查找所有匹配结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式的搜索和替换"><span class="nav-number">1.13.</span> <span class="nav-text">正则表达式的搜索和替换</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#php正则"><span class="nav-number">1.</span> <span class="nav-text">PHP正则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分隔符"><span class="nav-number">1.1.</span> <span class="nav-text">分隔符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元字符"><span class="nav-number">1.2.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转义序列"><span class="nav-number">1.3.</span> <span class="nav-text">转义序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符类"><span class="nav-number">1.4.</span> <span class="nav-text">字符类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可选路径"><span class="nav-number">1.5.</span> <span class="nav-text">可选路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修饰符"><span class="nav-number">1.6.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子组"><span class="nav-number">1.7.</span> <span class="nav-text">子组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">1.8.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归模式"><span class="nav-number">1.9.</span> <span class="nav-text">递归模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪婪模式与懒惰模式"><span class="nav-number">1.10.</span> <span class="nav-text">贪婪模式与懒惰模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用正则进行匹配"><span class="nav-number">1.11.</span> <span class="nav-text">使用正则进行匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查找所有匹配结果"><span class="nav-number">1.12.</span> <span class="nav-text">查找所有匹配结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式的搜索和替换"><span class="nav-number">1.13.</span> <span class="nav-text">正则表达式的搜索和替换</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -663,13 +620,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -729,6 +686,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

@@ -266,7 +266,7 @@
 <p>使用HDMI接入外接显示器，由于笔记本电脑自带的屏幕默认使用了Intel的核显，而HDMI接入的显示器会使用NVIDIA的显卡，造成禁用自带屏幕时的撕裂和渲染巨慢的问题。</p>
 <h2 id="解决方案">解决方案</h2>
 <h3 id="保证显卡驱动正常">保证显卡驱动正常</h3>
-<h4 id="Intel显卡驱动">Intel显卡驱动</h4>
+<h4 id="intel显卡驱动">Intel显卡驱动</h4>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S mesa lib32-mesa</span><br></pre></td></tr></table></figure>
 <p>另外需要注意的是，如果之前安装了 <code>xf86-video-intel</code> 包，最好卸载掉。官方已经不建议继续使用此软件包。</p>
 <blockquote>
@@ -275,16 +275,16 @@
 </blockquote>
 <p>卸载方式：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -Rsc xf86-video-intel</span><br></pre></td></tr></table></figure>
-<h4 id="Nvidia显卡驱动">Nvidia显卡驱动</h4>
+<h4 id="nvidia显卡驱动">Nvidia显卡驱动</h4>
 <p>安装 nvidia 包，为了对 32 位程序的支持，安装 lib32-nvidia-utils 包 (位于 multilib 仓库，需要在pacman config中提前自行开启此仓库)。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S nvidia lib32-nvidia-utils</span><br></pre></td></tr></table></figure>
-<h3 id="配置-PRIME-render-offload">配置 PRIME render offload</h3>
+<h3 id="配置-prime-render-offload">配置 PRIME render offload</h3>
 <p>安装 <code>nvidia-prime</code> 包来使用官方配置。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pacman -S nvidia-prime</span><br></pre></td></tr></table></figure>
 <p>重启系统后可以使用 <code>prime-run</code> 命令使指定程序在N卡上渲染。例如</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 n 卡渲染 vlc</span></span><br><span class="line">$ prime-run vlc</span><br><span class="line"><span class="comment"># 以 n 卡渲染 wine 游戏</span></span><br><span class="line">$ prime-run wine touhou08.exe</span><br></pre></td></tr></table></figure>
 <p>可以使用 <code>mesa-demo</code> 包里的 <code>glxinfo</code> 指令查看当前使用的显卡。</p>
-<h3 id="使用Optimus-Manager配置双显卡">使用Optimus Manager配置双显卡</h3>
+<h3 id="使用optimus-manager配置双显卡">使用Optimus Manager配置双显卡</h3>
 <p>此时HDMI连接的显示器可以正常工作了。但是笔电自带的显示器卡在TTY，可能是由于显卡不兼容的问题。我选择了使用Optimus Manager进行双显卡的配置。</p>
 <h4 id="事前准备">事前准备</h4>
 <p>首先清除（备份）<code>/etc/X11/xorg.conf.d/</code> 下的配置文件, 并删掉（备份）<code>/etc/X11/xorg.conf</code>, 因为Optimus Manager会自动生成配置文件存放到<code>/etc/X11/xorg.conf.d/</code>里面, 所以建议安装前把显示配置相关的文件都清除掉。</p>
@@ -307,11 +307,11 @@
 </ul>
 <h2 id="其它">其它</h2>
 <p>grub在哪块屏幕上显示的问题，之后补充。</p>
-<h2 id="References">References</h2>
-<ol>
-<li><a href="https://blog.sakuya.love/archives/linuxgpu/" target="_blank" rel="noopener">https://blog.sakuya.love/archives/linuxgpu/</a></li>
-<li><a href="https://blog.starry-s.me/posts/archlinux-pavilion-gaming-laptop/" target="_blank" rel="noopener">https://blog.starry-s.me/posts/archlinux-pavilion-gaming-laptop/</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/NVIDIA" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/NVIDIA</a></li>
+<h2 id="references">References</h2>
+<ol type="1">
+<li>https://blog.sakuya.love/archives/linuxgpu/</li>
+<li>https://blog.starry-s.me/posts/archlinux-pavilion-gaming-laptop/</li>
+<li>https://wiki.archlinux.org/index.php/NVIDIA</li>
 </ol>
 
     </div>
@@ -416,7 +416,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保证显卡驱动正常"><span class="nav-number">3.1.</span> <span class="nav-text">保证显卡驱动正常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Intel显卡驱动"><span class="nav-number">3.1.1.</span> <span class="nav-text">Intel显卡驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nvidia显卡驱动"><span class="nav-number">3.1.2.</span> <span class="nav-text">Nvidia显卡驱动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-PRIME-render-offload"><span class="nav-number">3.2.</span> <span class="nav-text">配置 PRIME render offload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Optimus-Manager配置双显卡"><span class="nav-number">3.3.</span> <span class="nav-text">使用Optimus Manager配置双显卡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事前准备"><span class="nav-number">3.3.1.</span> <span class="nav-text">事前准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">3.3.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">3.3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">3.3.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境"><span class="nav-number">1.</span> <span class="nav-text">环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解决方案"><span class="nav-number">3.</span> <span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#保证显卡驱动正常"><span class="nav-number">3.1.</span> <span class="nav-text">保证显卡驱动正常</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#intel显卡驱动"><span class="nav-number">3.1.1.</span> <span class="nav-text">Intel显卡驱动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#nvidia显卡驱动"><span class="nav-number">3.1.2.</span> <span class="nav-text">Nvidia显卡驱动</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-prime-render-offload"><span class="nav-number">3.2.</span> <span class="nav-text">配置 PRIME render offload</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用optimus-manager配置双显卡"><span class="nav-number">3.3.</span> <span class="nav-text">使用Optimus Manager配置双显卡</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#事前准备"><span class="nav-number">3.3.1.</span> <span class="nav-text">事前准备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装"><span class="nav-number">3.3.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">3.3.3.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用"><span class="nav-number">3.3.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -490,13 +490,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -556,6 +556,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

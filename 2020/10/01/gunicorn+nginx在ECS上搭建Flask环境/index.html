@@ -255,7 +255,7 @@
       
         <p>网络上能搜索到的资源基本都有些疏漏的地方，把自己的配置过程Po上来做个参考防止重复踩坑。</p>
 <a id="more"></a>
-<p><a href="https://zhuanlan.zhihu.com/p/22126999" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22126999</a> 这篇专栏写得还不错，参考了其中的一些内容做了自己的配置，不过这篇里也有一些没写清楚的超级坑点，坑了我好久，我在这里补充一些内容来防止重复踩坑了。</p>
+<p>https://zhuanlan.zhihu.com/p/22126999 这篇专栏写得还不错，参考了其中的一些内容做了自己的配置，不过这篇里也有一些没写清楚的超级坑点，坑了我好久，我在这里补充一些内容来防止重复踩坑了。</p>
 <p>相关版本清单如下：</p>
 <blockquote>
 <p>系统： Ubuntu 16.04 64位</p>
@@ -264,19 +264,19 @@
 <p>服务器软件：nginx</p>
 <p>Python版本： python3.5.2</p>
 </blockquote>
-<h1>云服务器相关</h1>
+<h1 id="云服务器相关">云服务器相关</h1>
 <p>笔者用的是阿里云ECS的学生机，当然你用其它家的产品也大同小异啦。</p>
 <p>ssh连接：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
 <p>建立普通用户账号：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd www -d /home/www -m</span><br><span class="line">passwd www</span><br></pre></td></tr></table></figure>
-<h1>安装相关支持</h1>
+<h1 id="安装相关支持">安装相关支持</h1>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install flask</span><br><span class="line">apt install python-pip</span><br><span class="line">pip install virtualenv</span><br></pre></td></tr></table></figure>
 <p>如果安装virtualenv遇到以下报错：</p>
 <figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">IOError: [Errno <span class="number">2</span>] <span class="keyword">No</span> such <span class="keyword">file</span> <span class="keyword">or</span> directory: <span class="string">'/tmp/pip-kYFqUa-build/setup.py'</span></span><br></pre></td></tr></table></figure>
 <p>尝试：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade pip</span><br></pre></td></tr></table></figure>
-<h1>页面配置</h1>
+<h1 id="页面配置">页面配置</h1>
 <p>先保留root终端，新开一个终端并使用刚才新建的用户登录服务器。</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ssh</span> www<span class="variable">@xxx</span>.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
 <p>创建网站根目录：</p>
@@ -287,7 +287,7 @@
 <p>使用SFTP可以上传本地的工程文件到blog文件夹。建议使用www用户。</p>
 <p>pip包生成requiements.txt:</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">freeze</span> &gt; requirements.txt</span><br></pre></td></tr></table></figure>
-<h1>Gunicorn配置</h1>
+<h1 id="gunicorn配置">Gunicorn配置</h1>
 <p>下面配置Gunicorn：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">source</span> <span class="string">venv/bin/activate</span></span><br><span class="line"><span class="attr">pip</span> <span class="string">install gunicorn</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/home/www/blog</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">gunicorn.conf</span></span><br></pre></td></tr></table></figure>
 <p>之后用vim写入：</p>
@@ -299,7 +299,7 @@
 <figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> logs</span><br></pre></td></tr></table></figure>
 <p>退出虚拟环境：</p>
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">deactivate</span></span><br></pre></td></tr></table></figure>
-<h1>Supervisor配置</h1>
+<h1 id="supervisor配置">Supervisor配置</h1>
 <p><strong>使用root用户：</strong></p>
 <p>配置supervisor：</p>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt install supervisor</span><br><span class="line"><span class="keyword">cd</span> /etc/supervisor/<span class="keyword">conf</span>.d</span><br><span class="line"><span class="keyword">vim</span> blog.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
@@ -312,12 +312,12 @@
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service supervisor <span class="literal">start</span></span><br></pre></td></tr></table></figure>
 <p>加载配置：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl reread</span></span><br><span class="line"><span class="attr">supervisorctl</span> <span class="string">update</span></span><br><span class="line"><span class="attr">sudo</span> <span class="string">supervisorctl start blog</span></span><br></pre></td></tr></table></figure>
-<h1>Nginx配置</h1>
+<h1 id="nginx配置">Nginx配置</h1>
 <p>开始配置nginx：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apt</span> <span class="string">install nginx</span></span><br><span class="line"><span class="attr">cd</span> <span class="string">/etc/nginx/sites-avaliable</span></span><br><span class="line"><span class="attr">vim</span> <span class="string">blog</span></span><br></pre></td></tr></table></figure>
 <p>输入对于blog的配置：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server</span> <span class="string">&#123;  </span></span><br><span class="line">        <span class="attr">listen</span>   <span class="string">80;  </span></span><br><span class="line">        <span class="attr">server_name</span> <span class="string">www.xxx.com xxx.com;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">root</span> <span class="string">/home/www/blog;</span></span><br><span class="line">        <span class="attr">access_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line">        <span class="attr">error_log</span> <span class="string">/home/www/blog/logs/access.log;</span></span><br><span class="line"></span><br><span class="line">        <span class="attr">location</span> <span class="string">/ &#123;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">X-Forward-For $proxy_add_x_forwarded_for;  </span></span><br><span class="line">            <span class="attr">proxy_set_header</span> <span class="string">Host $http_host;  </span></span><br><span class="line">            <span class="attr">proxy_redirect</span> <span class="string">off;  </span></span><br><span class="line">            <span class="attr">if</span> <span class="string">(!-f $request_filename) &#123;  </span></span><br><span class="line">                <span class="attr">proxy_pass</span> <span class="string">http://127.0.0.1:8000;  </span></span><br><span class="line">                <span class="meta">break;</span>  <span class="string"></span></span><br><span class="line">            <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">        <span class="meta">&#125;</span>  <span class="string"></span></span><br><span class="line">    <span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>**检查并根据实际情况修改上面的server_name和root配置。**检查监听端口和上面设置是否一致。<code>:wq</code>保存。</p>
+<p><strong>检查并根据实际情况修改上面的server_name和root配置。</strong>检查监听端口和上面设置是否一致。<code>:wq</code>保存。</p>
 <p>下面链接配置文件到sites-enabled:</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-enabled/</span></span><br><span class="line">ln -s <span class="regexp">/etc/</span>nginx<span class="regexp">/sites-avaliable/</span>blog .<span class="regexp">/blog</span></span><br></pre></td></tr></table></figure>
 <p>重启nginx：</p>
@@ -427,7 +427,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">云服务器相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">安装相关支持</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">3.</span> <span class="nav-text">页面配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text">Gunicorn配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">5.</span> <span class="nav-text">Supervisor配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">6.</span> <span class="nav-text">Nginx配置</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#云服务器相关"><span class="nav-number">1.</span> <span class="nav-text">云服务器相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装相关支持"><span class="nav-number">2.</span> <span class="nav-text">安装相关支持</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#页面配置"><span class="nav-number">3.</span> <span class="nav-text">页面配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gunicorn配置"><span class="nav-number">4.</span> <span class="nav-text">Gunicorn配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#supervisor配置"><span class="nav-number">5.</span> <span class="nav-text">Supervisor配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx配置"><span class="nav-number">6.</span> <span class="nav-text">Nginx配置</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -501,13 +501,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -567,6 +567,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 

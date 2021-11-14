@@ -258,29 +258,29 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(<s>大概</s>)</p>
+        <p>ArchLinux 配合KDE Plasma作为一个桌面系统来使用，相当好用。不过也有一些痛点和痒点需要自己踩坑。把踩坑过程放在这里整理一下。持续更新(<del>大概</del>)</p>
 <a id="more"></a>
-<h2 id="Plasma-discover-无法联网">Plasma-discover 无法联网</h2>
+<h2 id="plasma-discover-无法联网">Plasma-discover 无法联网</h2>
 <h3 id="问题描述">问题描述</h3>
 <p>装了个比较纯净的Arch系统，没有安装kde-applications包组，发现plasma-discover无法联网，显示<code>Unable to load applications. Please verify Internet connectivity</code>。</p>
 <h3 id="解决方案">解决方案</h3>
 <p>问题的产生是由于缺少kde-application包组里的一些包。不过这个包组实在臃肿，我不愿意装它。所以去定位造成问题的包了。最后发现造成问题的包是 <code>packagekit-qt5</code> 和 <code>appstream</code> 这两个。所以：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S packagekit-qt5 appstream</span><br></pre></td></tr></table></figure>
 <p>问题解决。</p>
-<h2 id="双系统情况下Windows磁盘无法自动挂载">双系统情况下Windows磁盘无法自动挂载</h2>
-<h3 id="问题描述-2">问题描述</h3>
+<h2 id="双系统情况下windows磁盘无法自动挂载">双系统情况下Windows磁盘无法自动挂载</h2>
+<h3 id="问题描述-1">问题描述</h3>
 <p>我使用了Arch和Win10的双系统。每次需要访问Win10硬盘分区中的内容都要手动重新挂载而且需要用户密码。懒狗觉得这样不行，必须把这个问题解决了才能叫做懒狗。</p>
-<h3 id="解决方案-2">解决方案</h3>
+<h3 id="解决方案-1">解决方案</h3>
 <p>首先解决每次都需要手动挂载的问题。我先让它来个自动挂载。先查看一下分区看看自己需要挂载哪些内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
 <p>我需要挂载的是两个分区，一个是 <code>/dev/nvme0n1p3</code> （C盘），一个是 <code>/dev/nvme0n1p5</code> （D盘）。所以编辑一下fstab的内容：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/fstab</span><br></pre></td></tr></table></figure>
 <p>在文件的最后加上这样几句：</p>
 <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># /dev/nvme0n1p3</span></span><br><span class="line"><span class="meta-keyword">/dev/</span>nvme0n1p3          <span class="meta-keyword">/run/</span>media<span class="meta-keyword">/muted/</span>Windows/  ntfs        rw,relatime     <span class="number">0</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="meta"># /dev/nvme0n1p5</span></span><br><span class="line"><span class="meta-keyword">/dev/</span>nvme0n1p5          <span class="meta-keyword">/run/</span>media<span class="meta-keyword">/muted/</span>DATA/      ntfs        rw,relatime     <span class="number">0</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-<p>当然，具体情况具体分析，<s>意思就是你照抄上面这份估计一般不行（</s></p>
-<p>接下来解决需要输入密码的问题。STFW之后发现这个密码的配置在 <code>/usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy  </code> 这里。备份一下：</p>
+<p>当然，具体情况具体分析，<del>意思就是你照抄上面这份估计一般不行（</del></p>
+<p>接下来解决需要输入密码的问题。STFW之后发现这个密码的配置在 <code>/usr/share/polkit-1/actions/org.freedesktop.UDisks2.policy</code> 这里。备份一下：</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/polkit-<span class="number">1</span>/actions/org<span class="selector-class">.freedesktop</span><span class="selector-class">.UDisks2</span><span class="selector-class">.policy</span> org<span class="selector-class">.freedesktop</span><span class="selector-class">.UDisks2</span><span class="selector-class">.policy</span>.bak</span><br></pre></td></tr></table></figure>
-<p>改一下文件里 <code>&lt;action id=&quot;org.freedesktop.udisks2.filesystem-mount-system&quot;&gt;</code> 的相关配置，把 <code>&lt;allow_active&gt;</code> 标签里的 <code>auth_admin_keep</code> 改成 <code>yes</code> 。我的是在173行，当然这也需要具体情况具体分析了。</p>
+<p>改一下文件里 <code>&lt;action id="org.freedesktop.udisks2.filesystem-mount-system"&gt;</code> 的相关配置，把 <code>&lt;allow_active&gt;</code> 标签里的 <code>auth_admin_keep</code> 改成 <code>yes</code> 。我的是在173行，当然这也需要具体情况具体分析了。</p>
 <p>重启一下，发现这两块分区自动挂载到了/run/media/下面。成了！</p>
 
     </div>
@@ -384,7 +384,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plasma-discover-无法联网"><span class="nav-number">1.</span> <span class="nav-text">Plasma-discover 无法联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双系统情况下Windows磁盘无法自动挂载"><span class="nav-number">2.</span> <span class="nav-text">双系统情况下Windows磁盘无法自动挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述-2"><span class="nav-number">2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-2"><span class="nav-number">2.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#plasma-discover-无法联网"><span class="nav-number">1.</span> <span class="nav-text">Plasma-discover 无法联网</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述"><span class="nav-number">1.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双系统情况下windows磁盘无法自动挂载"><span class="nav-number">2.</span> <span class="nav-text">双系统情况下Windows磁盘无法自动挂载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决方案-1"><span class="nav-number">2.2.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -458,13 +458,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">91k</span>
+    <span title="站点总字数">94k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:23</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
@@ -524,6 +524,61 @@
 
 
   
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
