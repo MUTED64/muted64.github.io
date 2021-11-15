@@ -21,12 +21,12 @@
     var CONFIG = {"hostname":"blog.muted.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="抽象代数学了好像没学，👴 要重学 😭（ 为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。">
+  <meta name="description" content="抽象代数学了好像没学，👴 要重学 😭（ 为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。 Socratica 频道讲数学的女老师又温柔又可爱讲的又清楚 😭😭，我看爆，建议都去看（">
 <meta property="og:type" content="article">
 <meta property="og:title" content="抽象代数 Remake 指南 I - 群">
 <meta property="og:url" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/index.html">
 <meta property="og:site_name" content="MUTED&#39;s Blog">
-<meta property="og:description" content="抽象代数学了好像没学，👴 要重学 😭（ 为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。">
+<meta property="og:description" content="抽象代数学了好像没学，👴 要重学 😭（ 为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。 Socratica 频道讲数学的女老师又温柔又可爱讲的又清楚 😭😭，我看爆，建议都去看（">
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CayleyTable.png">
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CayleyNoDuplicate.png">
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CosetNotOverlap1.png">
@@ -34,8 +34,10 @@
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/NormalSubgroup.png">
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/QuotientGroup.png">
 <meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CyclicGroup.png">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/Homomorphism.jpg">
+<meta property="og:image" content="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/HomomorphismExample.jpg">
 <meta property="article:published_time" content="2021-11-06T14:28:54.000Z">
-<meta property="article:modified_time" content="2021-11-14T14:22:08.722Z">
+<meta property="article:modified_time" content="2021-11-15T12:54:32.435Z">
 <meta property="article:author" content="MUTED">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="密码学">
@@ -230,7 +232,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-11-14 22:22:08" itemprop="dateModified" datetime="2021-11-14T22:22:08+08:00">2021-11-14</time>
+                <time title="修改时间：2021-11-15 20:54:32" itemprop="dateModified" datetime="2021-11-15T20:54:32+08:00">2021-11-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
+              <span>4.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -269,22 +271,23 @@
       
         <p>抽象代数学了好像没学，👴 要重学 😭（</p>
 <p>为了方便理解有些部分可能写得并不是很严谨，不过对于理解抽象代数基本内容来说还是不错的。</p>
+<p>Socratica 频道讲数学的女老师又温柔又可爱讲的又清楚 😭😭，我看爆，建议都去看（</p>
 <a id="more"></a>
 <h2 id="抽象代数">抽象代数</h2>
 <p>1800 年之后，人们发现他们使用相似的数学工具解决了几何，数论，拓扑，代数等诸多不同领域的问题。这引发了一个想法：将数学工具从具体的实际问题中间“抽象”出来，从而通过以一般的形式研究这个抽象后的数学工具来解决各类不同的具体问题。这导致了抽象代数这个领域的诞生。</p>
 <p>经过时间的推移，人们从伽罗瓦、高斯以及其他人所使用的一些数学工具中“抽象”出一个通用的工具，进而研究它的一切，群论就此产生。</p>
 <p>将这种思想运用到其它领域，又产生了多个其它的抽象对象，如：环（Rings），域（Fields），矢量空间（Vectors），模（Modules）等。这些抽象的对象共同构成了抽象代数这门学科。</p>
-<h2 id="群group">群（Group）</h2>
+<h2 id="群（Group）">群（Group）</h2>
 <p>“群”是抽象代数中及其重要的部分。由于其相对简单的定义，我们先从群入手去了解抽象代数的相关重要概念。</p>
 <h3 id="群的定义">群的定义</h3>
 <p>一个群 G（指代 Group 的首字母）需要包含如下的要素：</p>
 <ul>
 <li>一个元素（Element）的集合 G，元素可以不必是数字。</li>
-<li>操作（Operation）： 可以记作 <span class="math inline">\(+\)</span>，<span class="math inline">\(×\)</span>，<span class="math inline">\(*\)</span> 等。</li>
-<li>闭合性（Closed）： <span class="math inline">\(x,y∈G \Rightarrow x*y∈G\)</span></li>
-<li>单位元 e（identity）： <span class="math inline">\(y*e=e*y=y\)</span></li>
-<li>逆元（inverse）： 对于所有 G 中的 x 均存在逆元使得 <span class="math inline">\(x*x^{-1}=e\)</span></li>
-<li>结合性（Associativity）： <span class="math inline">\(a*(b*c)=(a*b)*c\)</span></li>
+<li>操作（Operation）： 可以记作 $+$，$×$，$*$ 等。</li>
+<li>闭合性（Closed）： $x,y∈G \Rightarrow x*y∈G$</li>
+<li>单位元 e（identity）： $y<em>e=e</em>y=y$</li>
+<li>逆元（inverse）： 对于所有 G 中的 x 均存在逆元使得 $x*x^{-1}=e$</li>
+<li>结合性（Associativity）： $a*(b<em>c)=(a</em>b)*c$</li>
 </ul>
 <p>注意： 群中的运算不一定是可交换的，如果可交换，则称该群为交换（commutative）群或阿贝尔（Abelian）群。</p>
 <blockquote>
@@ -292,15 +295,15 @@
 <p>我们希望群的定义尽可能的简单。不过，如果我们希望使用抽象代数来解决问题，那么我们希望这个定义能够求解方程。对于方程的求解来讲所能限制到的最小条件就是我们对群的定义。想要了解更加详细的内容可以参见<a href="https://www.youtube.com/watch?v=yHq_yzYZV6U&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=4" target="_blank" rel="noopener">Socratica 的这个视频</a>。</p>
 </blockquote>
 <h3 id="子群">子群</h3>
-<p>我们可以定义一个群 G（Group）的一个子群 H（因为 H 是 G 的下一个字母）：群 H 的集合是群 G 集合的一个子集，不过 H 仍然是一个群。记作 <span class="math inline">\(H \leq G\)</span>，读作 H 是 G 的子群。</p>
+<p>我们可以定义一个群 G（Group）的一个子群 H（因为 H 是 G 的下一个字母）：群 H 的集合是群 G 集合的一个子集，不过 H 仍然是一个群。记作 $H \leq G$，读作 H 是 G 的子群。</p>
 <blockquote>
 <p>子群 ： 子集 &amp;&amp; 群</p>
 </blockquote>
 <p>一些特殊的情况：</p>
 <ul>
-<li><span class="math inline">\(G \leq G\)</span></li>
-<li><span class="math inline">\(\{e\} \leq G\)</span>，此时 <span class="math inline">\(\{e\}\)</span> 称为平凡群（Trivial Group）。</li>
-<li>如果 <span class="math inline">\(H \neq G\)</span>，那么 H 可以叫做 G 的真子群，记作 <span class="math inline">\(H&lt;G\)</span></li>
+<li>$G \leq G$</li>
+<li>${e} \leq G$，此时 ${e}$ 称为平凡群（Trivial Group）。</li>
+<li>如果 $H \neq G$，那么 H 可以叫做 G 的真子群，记作 $H&lt;G$</li>
 </ul>
 <h3 id="群乘法表">群乘法表</h3>
 <p>群乘法表（Group Multiplication Tables），也称作 Cayley 表，可以展示群中的运算的一些性质。</p>
@@ -316,29 +319,30 @@
 <h3 id="拉格朗日定理">拉格朗日定理</h3>
 <p>为了研究一个群，我们可以从它的子群来入手。但是我们从哪里开始寻找子群呢？答案是，可以使用拉格朗日定理。拉格朗日定理揭示了群和它的子群间的大小关系，通过拉格朗日定理，我们可以显著缩小可能的子群的范围。</p>
 <p>拉格朗日定理说的大致意思就是：一个群的阶（Order，即群中元素的个数）可以被这个群的子群的阶整除。</p>
-<p><span class="math display">\[
-Order\ of\ G = \#\ of\ elements\ in\ G = |G|
-\]</span></p>
-<p><span class="math display">\[
-H \leq G \Rightarrow |H|\ divides\ |G|
-\]</span></p>
-<p>拉格朗日定理可以极大地缩小子群的范围。举个例子，我们要找一个阶是 323 的 G 的子群。由于 <span class="math inline">\(323=17\times19\)</span>，所以可能的子群的阶只有 1,17,19 和 323。</p>
+<p>$$<br>
+Order\ of\ G = #\ of\ elements\ in\ G = |G|<br>
+$$</p>
+<p>$$<br>
+H \leq G \Rightarrow |H|\ divides\ |G|<br>
+$$</p>
+<p>拉格朗日定理可以极大地缩小子群的范围。举个例子，我们要找一个阶是 323 的 G 的子群。由于 $323=17\times19$，所以可能的子群的阶只有 1,17,19 和 323。</p>
 <blockquote>
-<p>注意： 拉格朗日定理并没有说一定存在阶为 17 或 19 的子群。拉格朗日定理只是说，如果这个群存在除了<span class="math inline">\(\{e\}\)</span>和 G 之外的子群，那么子群的阶必定为 17 或 19。</p>
+<p>注意： 拉格朗日定理并没有说一定存在阶为 17 或 19 的子群。拉格朗日定理只是说，如果这个群存在除了 ${e}$ 和 G 之外的子群，那么子群的阶必定为 17 或 19。</p>
 </blockquote>
-<p>拉格朗日定理的证明需要用到陪集（coset）的概念。我们接下来看一下拉格朗日定理的证明，不想看证明的可以跳过...</p>
+<p>拉格朗日定理的证明需要用到陪集（coset）的概念。我们接下来看一下拉格朗日定理的证明，不想看证明的可以跳过…</p>
 <p>我们设 G 是阶为 n 的有限群。</p>
-<ol type="1">
+<ol>
 <li>对于 H = {e}，显然是成立的。</li>
 <li>对于 H = G，显然也是成立的。</li>
 <li>对于这两种之外的情况，我们需要构造陪集来说明。</li>
 </ol>
-<p>陪集的构造也是很简单的，如图所示，我们找到一个不在 H 中的元素 <span class="math inline">\(g_1\)</span>，用它和 H 中所有的元素 h 相乘，构成的集合就是陪集。注意陪集只是一个集合而不是群，因为陪集中没有单位元。</p>
+<p>陪集的构造也是很简单的，如图所示，我们找到一个不在 H 中的元素 $g_1$，用它和 H 中所有的元素 h 相乘，构成的集合就是陪集。注意陪集只是一个集合而不是群，因为陪集中没有单位元。</p>
 <p>陪集的一个非常非常重要性质就是：陪集和 H 之间不重叠，陪集和陪集之间也互不重叠。如果想了解更加详细的证明，可以参考<a href="https://www.youtube.com/watch?v=TCcSZEL_3CQ&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=7" target="_blank" rel="noopener">这个视频</a>。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CosetNotOverlap1.png" alt="陪集不重叠"></p>
-<p>还有一个重要的性质：所有陪集的大小都是相等的，都等于 H 的阶 。这点我们可以通过说明陪集中不存在重复的元素来证明。</p>
+<p>还有一个重要的性质：所有陪集的大小都是相等的，都等于 H 的阶<br>
+。这点我们可以通过说明陪集中不存在重复的元素来证明。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CosetSameSize.png" alt="陪集大小相等"></p>
-<p>既然我们证明了陪集互不重叠且大小相等，那么我们知道，H 和它的陪集在一起可以填满整个 G（如图所示），也就是说，G 中的元素个数是 H 中元素个数的整数倍。至此，我们可以说明拉格朗日定理 <span class="math inline">\(|H|\ divides\ |G|\)</span>。</p>
+<p>既然我们证明了陪集互不重叠且大小相等，那么我们知道，H 和它的陪集在一起可以填满整个 G（如图所示），也就是说，G 中的元素个数是 H 中元素个数的整数倍。至此，我们可以说明拉格朗日定理 $|H|\ divides\ |G|$。</p>
 <p>非交换群中左陪集和右陪集是不同的，但是如果要证明拉格朗日定理的话，左陪集和右陪集过程类似。我们都是通过证明陪集间不重叠且大小相等，让陪集填满整个 G，从而证明拉格朗日定理的。</p>
 <h3 id="正规子群和商群">正规子群和商群</h3>
 <p>正规子群 N（Normal Subgroup）和普通的子群的区别，简单来说就是它可以和它的陪集一同构成一个新的群。这个构成的新群中的元素和原来的群完全不同，它的元素是正规子群（可以看成是和 e 做运算的陪集）和它的所有陪集。这个形成的新群就叫做商群（Quotient Group）。（或者叫 Factory Group）</p>
@@ -352,14 +356,14 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 <li>商群由陪集构成，在运算上确实是闭合的。</li>
 <li>商群的运算和原来的群是相同的，只不过是在陪集上对每一个元素都可以进行这样的运算，可以以陪集的代表元为代表来运算。</li>
 <li>单位元： 构成这个商群的正规子群（N）。</li>
-<li>逆元： 陪集 <span class="math inline">\(yN\)</span> 的逆元是 <span class="math inline">\(y^{-1}N\)</span>。</li>
+<li>逆元： 陪集 $yN$ 的逆元是 $y^{-1}N$。</li>
 <li>结合律也是成立的。</li>
 </ul>
 <p>对于证明，有兴趣的读者可以参考<a href="https://www.youtube.com/watch?v=vYKdh5oQ4Zw&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=8" target="_blank" rel="noopener">这个视频</a>。</p>
 <h3 id="正规子群的性质和判定">正规子群的性质和判定</h3>
 <p>并不是所有的子群都是正规子群。有些子群和它的陪集是不能构成一个群的。一个是正规子群的条件是：</p>
-<p>对于所有的 <span class="math inline">\(y∈G\)</span>，都有 <span class="math inline">\(y^{-1}Ny=N\)</span>。</p>
-<p>反过来也是成立的。如果满足了这个条件，那么这个子群就是正规子群，记作 <span class="math inline">\(N \unlhd G\)</span>。</p>
+<p>对于所有的 $y∈G$，都有 $y^{-1}Ny=N$。</p>
+<p>反过来也是成立的。如果满足了这个条件，那么这个子群就是正规子群，记作 $N \unlhd G$。</p>
 <p>证明同样可以参考上面的那个视频。</p>
 <h3 id="简单群">简单群</h3>
 <p>我们知道，群至少会有两个子群。一个是由单位元构成的群，一个是它自身。我们成只有这两个子群的群为简单群（Simple Group）。</p>
@@ -371,6 +375,26 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 <p>那么为什么要叫循环群呢？其实在无限循环群上不是太明显，在有限循环群中体现的比较明显。有限循环群实际上是在无限循环群中取了模，例如模 n 的有限循环群会在 0 到 n-1 之间不停地循环。其它的特性是相似的。我觉得实际上可以把无限循环群想成循环周期为无穷的一个循环群（</p>
 <p>循环群包括了有限循环群、无限循环群和平凡群。</p>
 <p>一个称为“有限生成阿贝尔群基本定理”（The Fundamental Theorem of Finitely Generated Abelian Groups）的定理说，任何有限生成的阿贝尔群都可以分解为有限数量的循环群。每个循环群要么是整数，要么是整数 mod n，所以循环群是有限生成阿贝尔群的基本构建块。</p>
+<h3 id="群的同态">群的同态</h3>
+<p>有些群之间可能有某些相似性。我们如何来判断这种相似性呢？答案是：同态（Homomorphism）。&quot;Homo&quot;的意思是同质的，&quot;Morph&quot;的意思是结构，将它们组合起来我们可以理解群同态的意思是，“两个群的结构是具有同质性的”。同态可以判断两个群之间相似性。它是从其中一个群到另一个群的映射，它同时保留了这两个群的结构。下面我们来说明同态是怎么定义的。</p>
+<p>比如，我们有一个群 G，它的运算是 $*$，还有一个群 H，它的运算是 $\diamond$。我们想要判断它们之间的相似性。</p>
+<p>我们取 $x,y \in G$，并且 $x * y = z$。为了说明 $G$ 和 $H$ 之间的同态关系，我们想要定义一个从 $G$ 到 $H$ 的映射 $f$，即 $f:G\rightarrow H$，使得 $f(x) \diamond f(y) = f(z)$，也就是说要使 $f(x),f(y)$ 在 $H$ 中的表现和 $x,y$ 在 $G$ 中的表现是相似的。</p>
+<p>既然我们又知道 $z=x<em>y$，那么我们就可以推出 $f(x) \diamond f(y) = f(x</em>y)$，这就是群同态的定义。我们可以通过下图很直观地看出同态的定义。</p>
+<p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/Homomorphism.jpg" alt="通过表格直观地看同态的定义"></p>
+<p>我们可以举个例子，如下图，我们可以看到加法和幂乘运算是同态的。</p>
+<p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/HomomorphismExample.jpg" alt="通过表格直观地看同态的定义"></p>
+<h3 id="群的同构">群的同构</h3>
+<p>群的同态揭示了群之间的相似性。那么有没有两个群的表现是相同的呢？有的。和群的同态类似，它叫做群的同构（Isomorphism）。</p>
+<p>群同态和群同构实际上是挺像的。只不过同构中有两个条件同态可以不用满足：</p>
+<ul>
+<li>同构中 f 是单射（一对一的）。同态可以不必满足，在同态中可以有多个 G 中的元素映射到一个 H 中的元素。</li>
+<li>同构中 f 是满射，也就是说 H 中的所有元素都有 G 中的元素与之对应。而同态可以不必满足。</li>
+</ul>
+<p>因此在同构中我们有了 $f$ 也就有了 $f^{-1}$，这个映射的过程是可逆的。我们也可以说，同构就是一个双射的同态。</p>
+<h3 id="群中元素的阶">群中元素的阶</h3>
+<p>群的阶我们前边已经说过，就是群中元素的个数。那么群中元素的阶又是什么呢？它和群的阶又有什么关系？</p>
+<p>实际上，群中元素 a 的阶（Order）是使得 $a^n=e$ 成立的最小的正整数 n。它的记法和群的阶也是一样的： $|a|=n$，只不过 $|\ |$ 中间是元素而不是群。</p>
+<p>对于有限群来说，所有群中元素的阶的最大值实际上就是群的阶，这给了我们群的阶的另一种理解方式。对照上面说过的 Cayley 表的性质还是很好理解的。对于无限群来说，群的阶是不存在的，实际上就是无限群中有的元素不论和自己进行多少次运算也不会得到 e。</p>
 
     </div>
 
@@ -474,7 +498,7 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象代数"><span class="nav-number">1.</span> <span class="nav-text">抽象代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#群group"><span class="nav-number">2.</span> <span class="nav-text">群（Group）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#群的定义"><span class="nav-number">2.1.</span> <span class="nav-text">群的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子群"><span class="nav-number">2.2.</span> <span class="nav-text">子群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群乘法表"><span class="nav-number">2.3.</span> <span class="nav-text">群乘法表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日定理"><span class="nav-number">2.4.</span> <span class="nav-text">拉格朗日定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规子群和商群"><span class="nav-number">2.5.</span> <span class="nav-text">正规子群和商群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#商群的要素"><span class="nav-number">2.6.</span> <span class="nav-text">商群的要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规子群的性质和判定"><span class="nav-number">2.7.</span> <span class="nav-text">正规子群的性质和判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单群"><span class="nav-number">2.8.</span> <span class="nav-text">简单群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环群"><span class="nav-number">2.9.</span> <span class="nav-text">循环群</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象代数"><span class="nav-number">1.</span> <span class="nav-text">抽象代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#群（Group）"><span class="nav-number">2.</span> <span class="nav-text">群（Group）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#群的定义"><span class="nav-number">2.1.</span> <span class="nav-text">群的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子群"><span class="nav-number">2.2.</span> <span class="nav-text">子群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群乘法表"><span class="nav-number">2.3.</span> <span class="nav-text">群乘法表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拉格朗日定理"><span class="nav-number">2.4.</span> <span class="nav-text">拉格朗日定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规子群和商群"><span class="nav-number">2.5.</span> <span class="nav-text">正规子群和商群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#商群的要素"><span class="nav-number">2.6.</span> <span class="nav-text">商群的要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正规子群的性质和判定"><span class="nav-number">2.7.</span> <span class="nav-text">正规子群的性质和判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单群"><span class="nav-number">2.8.</span> <span class="nav-text">简单群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环群"><span class="nav-number">2.9.</span> <span class="nav-text">循环群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群的同态"><span class="nav-number">2.10.</span> <span class="nav-text">群的同态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群的同构"><span class="nav-number">2.11.</span> <span class="nav-text">群的同构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#群中元素的阶"><span class="nav-number">2.12.</span> <span class="nav-text">群中元素的阶</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -548,13 +572,13 @@ H \leq G \Rightarrow |H|\ divides\ |G|
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">站点总字数：</span>
-    <span title="站点总字数">94k</span>
+    <span title="站点总字数">95k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:26</span>
+    <span title="站点阅读时长">1:27</span>
 </div>
   <!--<div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
   </div>
