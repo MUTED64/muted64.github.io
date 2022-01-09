@@ -1625,17 +1625,17 @@
 <p>1800 年之后，人们发现他们使用相似的数学工具解决了几何，数论，拓扑，代数等诸多不同领域的问题。这引发了一个想法：将数学工具从具体的实际问题中间“抽象”出来，从而通过以一般的形式研究这个抽象后的数学工具来解决各类不同的具体问题。这导致了抽象代数这个领域的诞生。</p>
 <p>经过时间的推移，人们从伽罗瓦、高斯以及其他人所使用的一些数学工具中“抽象”出一个通用的工具，进而研究它的一切，群论就此产生。</p>
 <p>将这种思想运用到其它领域，又产生了多个其它的抽象对象，如：环（Rings），域（Fields），矢量空间（Vectors），模（Modules）等。这些抽象的对象共同构成了抽象代数这门学科。</p>
-<h2 id="群group">群（Group）</h2>
+<h2 id="群（Group）">群（Group）</h2>
 <p>“群”是抽象代数中及其重要的部分。由于其相对简单的定义，我们先从群入手去了解抽象代数的相关重要概念。</p>
 <h3 id="群的定义">群的定义</h3>
 <p>一个群 G（指代 Group 的首字母）需要包含如下的要素：</p>
 <ul>
 <li>一个元素（Element）的集合 G，元素可以不必是数字。</li>
-<li>操作（Operation）： 可以记作 <span class="math inline">\(+\)</span>，<span class="math inline">\(×\)</span>，<span class="math inline">\(*\)</span> 等。</li>
-<li>闭合性（Closed）： <span class="math inline">\(x,y∈G \Rightarrow x*y∈G\)</span></li>
-<li>单位元 e（identity）： <span class="math inline">\(y*e=e*y=y\)</span></li>
-<li>逆元（inverse）： 对于所有 G 中的 x 均存在逆元使得 <span class="math inline">\(x*x^{-1}=e\)</span></li>
-<li>结合性（Associativity）： <span class="math inline">\(a*(b*c)=(a*b)*c\)</span></li>
+<li>操作（Operation）： 可以记作 $+$，$×$，$*$ 等。</li>
+<li>闭合性（Closed）： $x,y∈G \Rightarrow x*y∈G$</li>
+<li>单位元 e（identity）： $y<em>e=e</em>y=y$</li>
+<li>逆元（inverse）： 对于所有 G 中的 x 均存在逆元使得 $x*x^{-1}=e$</li>
+<li>结合性（Associativity）： $a*(b<em>c)=(a</em>b)*c$</li>
 </ul>
 <p>注意： 群中的运算不一定是可交换的，如果可交换，则称该群为交换（commutative）群或阿贝尔（Abelian）群。</p>
 <blockquote>
@@ -1643,15 +1643,15 @@
 <p>我们希望群的定义尽可能的简单。不过，如果我们希望使用抽象代数来解决问题，那么我们希望这个定义能够求解方程。对于方程的求解来讲所能限制到的最小条件就是我们对群的定义。想要了解更加详细的内容可以参见<a href="https://www.youtube.com/watch?v=yHq_yzYZV6U&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=4" target="_blank" rel="noopener">Socratica 的这个视频</a>。</p>
 </blockquote>
 <h3 id="子群">子群</h3>
-<p>我们可以定义一个群 G（Group）的一个子群 H（因为 H 是 G 的下一个字母）：群 H 的集合是群 G 集合的一个子集，不过 H 仍然是一个群。记作 <span class="math inline">\(H \leq G\)</span>，读作 H 是 G 的子群。</p>
+<p>我们可以定义一个群 G（Group）的一个子群 H（因为 H 是 G 的下一个字母）：群 H 的集合是群 G 集合的一个子集，不过 H 仍然是一个群。记作 $H \leq G$，读作 H 是 G 的子群。</p>
 <blockquote>
 <p>子群 ： 子集 &amp;&amp; 群</p>
 </blockquote>
 <p>一些特殊的情况：</p>
 <ul>
-<li><span class="math inline">\(G \leq G\)</span></li>
-<li><span class="math inline">\(\{e\} \leq G\)</span>，此时 <span class="math inline">\(\{e\}\)</span> 称为平凡群（Trivial Group）。</li>
-<li>如果 <span class="math inline">\(H \neq G\)</span>，那么 H 可以叫做 G 的真子群，记作 <span class="math inline">\(H&lt;G\)</span></li>
+<li>$G \leq G$</li>
+<li>${e} \leq G$，此时 ${e}$ 称为平凡群（Trivial Group）。</li>
+<li>如果 $H \neq G$，那么 H 可以叫做 G 的真子群，记作 $H&lt;G$</li>
 </ul>
 <h3 id="群乘法表">群乘法表</h3>
 <p>群乘法表（Group Multiplication Tables），也称作 Cayley 表，可以展示群中的运算的一些性质。</p>
@@ -1667,29 +1667,30 @@
 <h3 id="拉格朗日定理">拉格朗日定理</h3>
 <p>为了研究一个群，我们可以从它的子群来入手。但是我们从哪里开始寻找子群呢？答案是，可以使用拉格朗日定理。拉格朗日定理揭示了群和它的子群间的大小关系，通过拉格朗日定理，我们可以显著缩小可能的子群的范围。</p>
 <p>拉格朗日定理说的大致意思就是：一个群的阶（Order，即群中元素的个数）可以被这个群的子群的阶整除。</p>
-<p><span class="math display">\[
-Order\ of\ G = \#\ of\ elements\ in\ G = |G|
-\]</span></p>
-<p><span class="math display">\[
-H \leq G \Rightarrow |H|\ divides\ |G|
-\]</span></p>
-<p>拉格朗日定理可以极大地缩小子群的范围。举个例子，我们要找一个阶是 323 的 G 的子群。由于 <span class="math inline">\(323=17\times19\)</span>，所以可能的子群的阶只有 1,17,19 和 323。</p>
+<p>$$<br>
+Order\ of\ G = #\ of\ elements\ in\ G = |G|<br>
+$$</p>
+<p>$$<br>
+H \leq G \Rightarrow |H|\ divides\ |G|<br>
+$$</p>
+<p>拉格朗日定理可以极大地缩小子群的范围。举个例子，我们要找一个阶是 323 的 G 的子群。由于 $323=17\times19$，所以可能的子群的阶只有 1,17,19 和 323。</p>
 <blockquote>
-<p>注意： 拉格朗日定理并没有说一定存在阶为 17 或 19 的子群。拉格朗日定理只是说，如果这个群存在除了 <span class="math inline">\(\{e\}\)</span> 和 G 之外的子群，那么子群的阶必定为 17 或 19。</p>
+<p>注意： 拉格朗日定理并没有说一定存在阶为 17 或 19 的子群。拉格朗日定理只是说，如果这个群存在除了 ${e}$ 和 G 之外的子群，那么子群的阶必定为 17 或 19。</p>
 </blockquote>
-<p>拉格朗日定理的证明需要用到陪集（coset）的概念。我们接下来看一下拉格朗日定理的证明，不想看证明的可以跳过...</p>
+<p>拉格朗日定理的证明需要用到陪集（coset）的概念。我们接下来看一下拉格朗日定理的证明，不想看证明的可以跳过…</p>
 <p>我们设 G 是阶为 n 的有限群。</p>
-<ol type="1">
+<ol>
 <li>对于 H = {e}，显然是成立的。</li>
 <li>对于 H = G，显然也是成立的。</li>
 <li>对于这两种之外的情况，我们需要构造陪集来说明。</li>
 </ol>
-<p>陪集的构造也是很简单的，如图所示，我们找到一个不在 H 中的元素 <span class="math inline">\(g_1\)</span>，用它和 H 中所有的元素 h 相乘，构成的集合就是陪集。注意陪集只是一个集合而不是群，因为陪集中没有单位元。</p>
+<p>陪集的构造也是很简单的，如图所示，我们找到一个不在 H 中的元素 $g_1$，用它和 H 中所有的元素 h 相乘，构成的集合就是陪集。注意陪集只是一个集合而不是群，因为陪集中没有单位元。</p>
 <p>陪集的一个非常非常重要性质就是：陪集和 H 之间不重叠，陪集和陪集之间也互不重叠。如果想了解更加详细的证明，可以参考<a href="https://www.youtube.com/watch?v=TCcSZEL_3CQ&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=7" target="_blank" rel="noopener">这个视频</a>。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CosetNotOverlap1.png" alt="陪集不重叠"></p>
-<p>还有一个重要的性质：所有陪集的大小都是相等的，都等于 H 的阶 。这点我们可以通过说明陪集中不存在重复的元素来证明。</p>
+<p>还有一个重要的性质：所有陪集的大小都是相等的，都等于 H 的阶<br>
+。这点我们可以通过说明陪集中不存在重复的元素来证明。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/CosetSameSize.png" alt="陪集大小相等"></p>
-<p>既然我们证明了陪集互不重叠且大小相等，那么我们知道，H 和它的陪集在一起可以填满整个 G（如图所示），也就是说，G 中的元素个数是 H 中元素个数的整数倍。至此，我们可以说明拉格朗日定理 <span class="math inline">\(|H|\ divides\ |G|\)</span>。</p>
+<p>既然我们证明了陪集互不重叠且大小相等，那么我们知道，H 和它的陪集在一起可以填满整个 G（如图所示），也就是说，G 中的元素个数是 H 中元素个数的整数倍。至此，我们可以说明拉格朗日定理 $|H|\ divides\ |G|$。</p>
 <p>非交换群中左陪集和右陪集是不同的，但是如果要证明拉格朗日定理的话，左陪集和右陪集过程类似。我们都是通过证明陪集间不重叠且大小相等，让陪集填满整个 G，从而证明拉格朗日定理的。</p>
 <h3 id="正规子群和商群">正规子群和商群</h3>
 <p>正规子群 N（Normal Subgroup）和普通的子群的区别，简单来说就是它可以和它的陪集一同构成一个新的群。这个构成的新群中的元素和原来的群完全不同，它的元素是正规子群（可以看成是和 e 做运算的陪集）和它的所有陪集。这个形成的新群就叫做商群（Quotient Group）。（或者叫 Factory Group）</p>
@@ -1703,14 +1704,14 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 <li>商群由陪集构成，在运算上确实是闭合的。</li>
 <li>商群的运算和原来的群是相同的，只不过是在陪集上对每一个元素都可以进行这样的运算，可以以陪集的代表元为代表来运算。</li>
 <li>单位元： 构成这个商群的正规子群（N）。</li>
-<li>逆元： 陪集 <span class="math inline">\(yN\)</span> 的逆元是 <span class="math inline">\(y^{-1}N\)</span>。</li>
+<li>逆元： 陪集 $yN$ 的逆元是 $y^{-1}N$。</li>
 <li>结合律也是成立的。</li>
 </ul>
 <p>对于证明，有兴趣的读者可以参考<a href="https://www.youtube.com/watch?v=vYKdh5oQ4Zw&amp;list=PLi01XoE8jYoi3SgnnGorR_XOW3IcK-TP6&amp;index=8" target="_blank" rel="noopener">这个视频</a>。</p>
 <h3 id="正规子群的性质和判定">正规子群的性质和判定</h3>
 <p>并不是所有的子群都是正规子群。有些子群和它的陪集是不能构成一个群的。一个是正规子群的条件是：</p>
-<p>对于所有的 <span class="math inline">\(y∈G\)</span>，都有 <span class="math inline">\(y^{-1}Ny=N\)</span>。</p>
-<p>反过来也是成立的。如果满足了这个条件，那么这个子群就是正规子群，记作 <span class="math inline">\(N \unlhd G\)</span>。</p>
+<p>对于所有的 $y∈G$，都有 $y^{-1}Ny=N$。</p>
+<p>反过来也是成立的。如果满足了这个条件，那么这个子群就是正规子群，记作 $N \unlhd G$。</p>
 <p>证明同样可以参考上面的那个视频。</p>
 <h3 id="简单群">简单群</h3>
 <p>我们知道，群至少会有两个子群。一个是由单位元构成的群，一个是它自身。我们成只有这两个子群的群为简单群（Simple Group）。</p>
@@ -1723,10 +1724,10 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 <p>循环群包括了有限循环群、无限循环群和平凡群。</p>
 <p>一个称为“有限生成阿贝尔群基本定理”（The Fundamental Theorem of Finitely Generated Abelian Groups）的定理说，任何有限生成的阿贝尔群都可以分解为有限数量的循环群。每个循环群要么是整数，要么是整数 mod n，所以循环群是有限生成阿贝尔群的基本构建块。</p>
 <h3 id="群的同态">群的同态</h3>
-<p>有些群之间可能有某些相似性。我们如何来判断这种相似性呢？答案是：同态（Homomorphism）。"Homo"的意思是同质的，"Morph"的意思是结构，将它们组合起来我们可以理解群同态的意思是，“两个群的结构是具有同质性的”。同态可以判断两个群之间相似性。它是从其中一个群到另一个群的映射，它同时保留了这两个群的结构。下面我们来说明同态是怎么定义的。</p>
-<p>比如，我们有一个群 G，它的运算是 <span class="math inline">\(*\)</span>，还有一个群 H，它的运算是 <span class="math inline">\(\diamond\)</span>。我们想要判断它们之间的相似性。</p>
-<p>我们取 <span class="math inline">\(x,y \in G\)</span>，并且 <span class="math inline">\(x * y = z\)</span>。为了说明 <span class="math inline">\(G\)</span> 和 <span class="math inline">\(H\)</span> 之间的同态关系，我们想要定义一个从 <span class="math inline">\(G\)</span> 到 <span class="math inline">\(H\)</span> 的映射 <span class="math inline">\(f\)</span>，即 <span class="math inline">\(f:G\rightarrow H\)</span>，使得 <span class="math inline">\(f(x) \diamond f(y) = f(z)\)</span>，也就是说要使 <span class="math inline">\(f(x),f(y)\)</span> 在 <span class="math inline">\(H\)</span> 中的表现和 <span class="math inline">\(x,y\)</span> 在 <span class="math inline">\(G\)</span> 中的表现是相似的。</p>
-<p>既然我们又知道 <span class="math inline">\(z=x*y\)</span>，那么我们就可以推出 <span class="math inline">\(f(x) \diamond f(y) = f(x*y)\)</span>，这就是群同态的定义。我们可以通过下图很直观地看出同态的定义。</p>
+<p>有些群之间可能有某些相似性。我们如何来判断这种相似性呢？答案是：同态（Homomorphism）。&quot;Homo&quot;的意思是同质的，&quot;Morph&quot;的意思是结构，将它们组合起来我们可以理解群同态的意思是，“两个群的结构是具有同质性的”。同态可以判断两个群之间相似性。它是从其中一个群到另一个群的映射，它同时保留了这两个群的结构。下面我们来说明同态是怎么定义的。</p>
+<p>比如，我们有一个群 G，它的运算是 $*$，还有一个群 H，它的运算是 $\diamond$。我们想要判断它们之间的相似性。</p>
+<p>我们取 $x,y \in G$，并且 $x * y = z$。为了说明 $G$ 和 $H$ 之间的同态关系，我们想要定义一个从 $G$ 到 $H$ 的映射 $f$，即 $f:G\rightarrow H$，使得 $f(x) \diamond f(y) = f(z)$，也就是说要使 $f(x),f(y)$ 在 $H$ 中的表现和 $x,y$ 在 $G$ 中的表现是相似的。</p>
+<p>既然我们又知道 $z=x<em>y$，那么我们就可以推出 $f(x) \diamond f(y) = f(x</em>y)$，这就是群同态的定义。我们可以通过下图很直观地看出同态的定义。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/Homomorphism.jpg" alt="通过表格直观地看同态的定义"></p>
 <p>我们可以举个例子，如下图，我们可以看到加法和幂乘运算是同态的。</p>
 <p><img src="/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/HomomorphismExample.jpg" alt="通过表格直观地看同态的定义"></p>
@@ -1737,11 +1738,13 @@ H \leq G \Rightarrow |H|\ divides\ |G|
 <li>同构中 f 是单射（一对一的）。同态可以不必满足，在同态中可以有多个 G 中的元素映射到一个 H 中的元素。</li>
 <li>同构中 f 是满射，也就是说 H 中的所有元素都有 G 中的元素与之对应。而同态可以不必满足。</li>
 </ul>
-<p>因此在同构中我们有了 <span class="math inline">\(f\)</span> 也就有了 <span class="math inline">\(f^{-1}\)</span>，这个映射的过程是可逆的。我们也可以说，同构就是一个双射的同态。</p>
+<p>因此在同构中我们有了 $f$ 也就有了 $f^{-1}$，这个映射的过程是可逆的。我们也可以说，同构就是一个双射的同态。</p>
 <h3 id="群中元素的阶">群中元素的阶</h3>
 <p>群的阶我们前边已经说过，就是群中元素的个数。那么群中元素的阶又是什么呢？它和群的阶又有什么关系？</p>
-<p>实际上，群中元素 a 的阶（Order）是使得 <span class="math inline">\(a^n=e\)</span> 成立的最小的正整数 n。它的记法和群的阶也是一样的： <span class="math inline">\(|a|=n\)</span>，只不过 <span class="math inline">\(|\ |\)</span> 中间是元素而不是群。</p>
+<p>实际上，群中元素 a 的阶（Order）是使得 $a^n=e$ 成立的最小的正整数 n。它的记法和群的阶也是一样的： $|a|=n$，只不过 $|\ |$ 中间是元素而不是群。</p>
 <p>对于有限群来说，所有群中元素的阶的最大值实际上就是群的阶，这给了我们群的阶的另一种理解方式。对照上面说过的 Cayley 表的性质还是很好理解的。对于无限群来说，群的阶是不存在的，实际上就是无限群中有的元素不论和自己进行多少次运算也不会得到 e。</p>
+<h3 id="对称群">对称群</h3>
+<p>首先注意，对称群（Symmetric Group）和空间对称群（Symmetry Group）是不同的东西。对称群的元素是置换，而空间对称群的元素是对二面体的旋转 r 和翻转 f。</p>
 ]]></content>
       <categories>
         <category>数学</category>
@@ -2922,6 +2925,67 @@ H \leq G \Rightarrow |H|\ divides\ |G|
       <tags>
         <tag>PHP</tag>
         <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>密码学大作业</title>
+    <url>/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/</url>
+    <content><![CDATA[<p>2021 密码学课程需要的作业。<a href="https://github.com/MUTED64/XDU_Crypto2021" target="_blank" rel="noopener">代码</a>放在 GitHub 仓库。</p>
+<a id="more"></a>
+<h2 id="实验一">实验一</h2>
+<h3 id="破解维吉尼亚密码">破解维吉尼亚密码</h3>
+<p>原理：使用暴力方式求解互重合指数，以此判断密钥长度，将维吉尼亚密码拆分成多个单表替换密码，对每个单表替换密码使用重合指数求替换表，最终获取维吉尼亚密码明文。</p>
+<p>没什么好说的，放上密钥和明文：</p>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="symbol">Key</span> is: <span class="keyword">b'\xba\x1f\x91\xb2S\xcd&gt;'</span></span><br><span class="line"><span class="keyword">Plain </span>text is: Cryptography is the practice <span class="keyword">and </span>study of techniques for, among other things, secure communication in the presence of attackers. Cryptography has <span class="keyword">been </span>used for hundreds, <span class="meta">if</span> not thousands, of years, <span class="keyword">but </span>traditional cryptosystems were designed <span class="keyword">and </span>evaluated in a fairly ad hoc manner. For example, the Vigenere encryption scheme was thought to <span class="keyword">be </span>secure for decades after <span class="keyword">it </span>was invented, <span class="keyword">but </span>we now know, <span class="keyword">and </span>this exercise demonstrates, that <span class="keyword">it </span>can <span class="keyword">be </span><span class="keyword">broken </span>very easily.</span><br></pre></td></tr></table></figure>
+<h3 id="reapeatingkeyxor">ReapeatingKeyXOR</h3>
+<p>原理：先计算汉明距离得到 29 为密钥长度，再进行异或解密。和上边的有一些部分是相似的，只不过判断密钥长度用了汉明距离，不算难。</p>
+<figure class="highlight vbnet"><table><tr><td class="code"><pre><span class="line">密钥为：Terminator X: Bring the noise、</span><br><span class="line">明文为：Plain <span class="keyword">text</span> <span class="keyword">is</span>: I<span class="comment">'m back and I'm ringin' the bell</span></span><br><span class="line">A rockin<span class="comment">' on the mike while the fly girls yell</span></span><br><span class="line"><span class="keyword">In</span> ecstasy <span class="keyword">in</span> the back <span class="keyword">of</span> <span class="keyword">me</span></span><br><span class="line">Well that<span class="comment">'s my DJ Deshay cuttin' all them Z's</span></span><br><span class="line">Hittin<span class="comment">' hard and the girlies goin' crazy</span></span><br><span class="line">Vanilla<span class="comment">'s on the mike, man I'm not lazy.</span></span><br><span class="line"></span><br><span class="line">I<span class="comment">'m lettin' my drug kick in</span></span><br><span class="line">It controls my mouth <span class="keyword">and</span> I begin</span><br><span class="line"><span class="keyword">To</span> just <span class="keyword">let</span> it flow, <span class="keyword">let</span> my concepts go</span><br><span class="line">My posse<span class="comment">'s to the side yellin', Go Vanilla Go!</span></span><br><span class="line"></span><br><span class="line">Smooth <span class="comment">'cause that's the way I will be</span></span><br><span class="line"><span class="keyword">And</span> <span class="keyword">if</span> you don<span class="comment">'t give a damn, then</span></span><br><span class="line">Why you starin<span class="comment">' at me</span></span><br><span class="line">So <span class="keyword">get</span> <span class="keyword">off</span> <span class="comment">'cause I control the stage</span></span><br><span class="line">There<span class="comment">'s no dissin' allowed</span></span><br><span class="line">I<span class="comment">'m in my own phase</span></span><br><span class="line">The girlies sa y they love <span class="keyword">me</span> <span class="keyword">and</span> that <span class="keyword">is</span> ok</span><br><span class="line"><span class="keyword">And</span> I can dance better than any kid n<span class="comment">' play</span></span><br><span class="line"></span><br><span class="line">Stage <span class="number">2</span> -- Yea the one ya<span class="comment">' wanna listen to</span></span><br><span class="line">It<span class="comment">'s off my head so let the beat play through</span></span><br><span class="line">So I can funk it up <span class="keyword">and</span> make it sound good</span><br><span class="line"><span class="number">1</span><span class="number">-2</span><span class="number">-3</span> Yo -- Knock <span class="keyword">on</span> some wood</span><br><span class="line"><span class="keyword">For</span> good luck, I <span class="keyword">like</span> my rhymes atrocious</span><br><span class="line">Supercalafragilisticexpialidocious</span><br><span class="line">I<span class="comment">'m an effect and that you can bet</span></span><br><span class="line">I can <span class="keyword">take</span> a fly girl <span class="keyword">and</span> make her wet.</span><br><span class="line"></span><br><span class="line">I<span class="comment">'m like Samson -- Samson to Delilah</span></span><br><span class="line">There<span class="comment">'s no denyin', You can try to hang</span></span><br><span class="line">But you<span class="comment">'ll keep tryin' to get my style</span></span><br><span class="line">Over <span class="keyword">and</span> over, practice makes perfect</span><br><span class="line">But <span class="keyword">not</span> <span class="keyword">if</span> you<span class="comment">'re a loafer.</span></span><br><span class="line"></span><br><span class="line">You<span class="comment">'ll get nowhere, no place, no time, no girls</span></span><br><span class="line">Soon -- Oh my God, homebody, you probably eat</span><br><span class="line">Spaghetti <span class="keyword">with</span> a spoon! Come <span class="keyword">on</span> <span class="keyword">and</span> say it!</span><br><span class="line"></span><br><span class="line">VIP. Vanilla Ice yep, yep, I<span class="comment">'m comin' hard like a rhino</span></span><br><span class="line">Intoxicating so you stagger <span class="keyword">like</span> a wino</span><br><span class="line">So punks <span class="keyword">stop</span> trying <span class="keyword">and</span> girl <span class="keyword">stop</span> cryin<span class="comment">'</span></span><br><span class="line">Vanilla Ice <span class="keyword">is</span> sellin<span class="comment">' and you people are buyin'</span></span><br><span class="line"><span class="comment">'Cause why the freaks are jockin' like Crazy Glue</span></span><br><span class="line">Movin<span class="comment">' and groovin' trying to sing along</span></span><br><span class="line">All through the ghetto groovin<span class="comment">' this here song</span></span><br><span class="line">Now you<span class="comment">'re amazed by the VIP posse.</span></span><br><span class="line"></span><br><span class="line">Steppin<span class="comment">' so hard like a German Nazi</span></span><br><span class="line">Startled <span class="keyword">by</span> the bases hittin<span class="comment">' ground</span></span><br><span class="line">There<span class="comment">'s no trippin' on mine, I'm just gettin' down</span></span><br><span class="line">Sparkamatic, I<span class="comment">'m hangin' tight like a fanatic</span></span><br><span class="line">You trapped <span class="keyword">me</span> once <span class="keyword">and</span> I thought that</span><br><span class="line">You might have it</span><br><span class="line">So <span class="keyword">step</span> down <span class="keyword">and</span> lend <span class="keyword">me</span> your ear</span><br><span class="line"><span class="comment">'89 in my time! You, '90 is my year.</span></span><br><span class="line"></span><br><span class="line">You<span class="comment">'re weakenin' fast, YO! and I can tell it</span></span><br><span class="line">Your body<span class="comment">'s gettin' hot, so, so I can smell it</span></span><br><span class="line">So don<span class="comment">'t be mad and don't be sad</span></span><br><span class="line"><span class="comment">'Cause the lyrics belong to ICE, You can call me Dad</span></span><br><span class="line">You<span class="comment">'re pitchin' a fit, so step back and endure</span></span><br><span class="line"><span class="keyword">Let</span> the witch doctor, Ice, <span class="keyword">do</span> the dance <span class="keyword">to</span> cure</span><br><span class="line">So come up close <span class="keyword">and</span> don<span class="comment">'t be square</span></span><br><span class="line">You wanna battle <span class="keyword">me</span> -- Anytime, anywhere</span><br><span class="line"></span><br><span class="line">You thought that I was weak, Boy, you<span class="comment">'re dead wrong</span></span><br><span class="line">So come <span class="keyword">on</span>, everybody <span class="keyword">and</span> sing this song</span><br><span class="line"></span><br><span class="line">Say -- Play that funky music Say, go white boy, go white boy go</span><br><span class="line">play that funky music Go white boy, go white boy, go</span><br><span class="line">Lay down <span class="keyword">and</span> boogie <span class="keyword">and</span> play that funky music till you die.</span><br><span class="line"></span><br><span class="line">Play that funky music Come <span class="keyword">on</span>, Come <span class="keyword">on</span>, <span class="keyword">let</span> <span class="keyword">me</span> hear</span><br><span class="line">Play that funky music white boy you say it, say it</span><br><span class="line">Play that funky music A little louder now</span><br><span class="line">Play that funky music, white boy Come <span class="keyword">on</span>, Come <span class="keyword">on</span>, Come <span class="keyword">on</span></span><br><span class="line">Play that funky music</span><br></pre></td></tr></table></figure>
+<h3 id="sha1-破解">SHA1 破解</h3>
+<p>纯纯的暴力破解。每个按键只按了一次。逻辑并不难，但是需要跑挺久的。</p>
+<p><img src="https://qn-scd0.yuketang.cn/subject_file/1632924566167/8155883_o_1fgou708nu18q1b19nf1mr91p6ca" alt="SHA1破解"></p>
+<h2 id="实验二">实验二</h2>
+<h3 id="ecb-破解和-cbc-字节翻转">ECB 破解和 CBC 字节翻转</h3>
+<p>利用 CBC 的前一块密文与后一块明文 XOR 的特性实现字节翻转攻击。用了一种比较巧妙的方法。由于每次可以在秘密前加入特定数量的字节，可以逐字节将未知密文的最后一字节顶到下一块的第一字节，从而通过按字节的暴力破解来破解 ECB 模式的系统。这种方法比普通的暴力破解可以少用很多算力。</p>
+<p>CBC 翻转可以通过添加 data 构造块，并异或这一块的某个字节。实际上，将这一块的现有字节异或下一块的对应字节并异或目的字节，将其填到这一块中覆盖现有字节，可以实现目的位的篡改。</p>
+<p>代码和运行结果截图如下。</p>
+<p><img src="https://qn-scd0.yuketang.cn/subject_file/1634956462582/8155883_o_1filfvick134l7ur2q91nin1jrdf" alt="ECB"></p>
+<h3 id="aes-mrz">AES MRZ</h3>
+<p>某民航电子护照的机器可读区域的破解，代码如下：</p>
+<p><img src="https://qn-scd0.yuketang.cn/subject_file/1634956530595/8155883_o_1filg1kq3iot1pq11vml18neth1k" alt="AES MRZ"></p>
+<h2 id="实验三">实验三</h2>
+<p>RSA 大礼包。题目附件给出了使用某 RSA 软件加密信息的逻辑，此 RSA 软件在设计中存在一定缺陷，如多次使用过小的 e、或产生的素数间存在相关性等，可能导致针对 RSA 的多种攻击，同时由于用户原因可能多次发送同样的明文加密的信息，使得该加密系统易被破解。题目给出了 21 个由此加密系统加密的帧，要求尽可能使用数学知识破解该 RSA 系统，获得明文及参数。</p>
+<h3 id="rsa-广播攻击">RSA 广播攻击</h3>
+<p>如果有 x 条消息满足明文相同，指数相同且为 x，则可以列出下列方程组：</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/广播.png"></p>
+<p>从而可以利用中国剩余定理解出<span class="math inline">\(m^e\)</span>，开 e 次方根获得明文 m 的值。 在本题目中，满足条件的 e 可以为 3 或 5。e 为 3 的情况解出的 <span class="math inline">\(m_3\)</span> 不能找到 3 次方根，舍弃，e 为 5 的情况下可以使用 RSA 广播攻击正确解出明文。</p>
+<h3 id="rsa-共模攻击">RSA 共模攻击</h3>
+<p>如果存在两条相同明文所产生的消息，其模数 n 相同，指数 e 互素，则可知：</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/共模1.png"></p>
+<p>则可以由扩展欧几里得定理构造 <span class="math inline">\(xe_1+ye_2=1\)</span>，使得</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/共模2.png"></p>
+<p>从而获得明文 m。 在本题中，可以通过共模攻击获得第 0 和 4 帧的明文消息。</p>
+<h3 id="模公因子">模公因子</h3>
+<p>如果 RSA 系统中一对消息的模数 <span class="math inline">\(n_1,n_2\)</span> 含有共同的因子 p，则可以将两模数进行素因子分解，即</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/公因子1.png"></p>
+<p>从而获得两个帧中模数 n 的欧拉函数：</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/公因子2.png"></p>
+<p>求 e 对 <span class="math inline">\(\phi(n)\)</span> 的逆，即可得到私钥 d，从而解密两条消息。在本题中可以通过公因子攻击解出帧 1 和帧 18 的消息和参数。</p>
+<h3 id="破解随机数发生器">破解随机数发生器</h3>
+<p>从上面的共公因子攻击中，我们找到了由随机数发生器生成的素数 p。假设该随机数发生器采用的随机数产生方式是线性同余，且以 16bit 为单位，则通过对该素数 p 进行参数 a、c 的计算可以破解该随机数发生器的参数，从而采用该随机数发生器以暴力破解的方式获得其它帧的随机数。通过这种方式将暴力破解的随机数空间降低到了 16bit 的可接受范围内。</p>
+<p>考虑线性同余随机数发生器 <span class="math inline">\(x_n+1≡ax_n+c\ (mod\ m)\)</span>。</p>
+<p>由于直接对该同余式进行求解，在 m 不确定的情况下存在解不唯一的情况，所以采用分组运算的方式，假设 m 为 <span class="math inline">\(2^{16}\)</span> 列出方程组并求解 a 和 c。即</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/随机数1.png"></p>
+<p>上下两式相减，可得：</p>
+<p><img src="/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/随机数2.png"></p>
+<p>对于获得的 a 和 c 可以得到随机数发生器的全部参数后通过对随机数发生器 的初值进行暴力破解，验证通过随机数发生器产生的是否为帧中模数 N 的因 子，从而对 N 进行分解，得到 RSA 的所有参数。可得其中 16 个帧的 p 和 q 值。有了 p 和 q 即可方便地计算 <span class="math inline">\(\phi(n)\)</span>，从而获得所有的参数，包括私钥 d 以及解密出的明文 x。其余的 5 个帧由于不是由 16bit 的整数倍构成的，对其进行生成后截取前 n 位进行破解，最终也能得到 N 的分解。或者去网上搜索已经获得的明文也是可以的。</p>
+<p>最终可以由所有帧的参数获得最终的明文：</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">My<span class="built_in"> secret </span>is a famous saying of Albert Einstein. That is <span class="string">"Logic will</span></span><br><span class="line"><span class="string">get you from A to B. Imagination will take you everywhere."</span></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>安全</category>
+      </categories>
+      <tags>
+        <tag>密码学</tag>
       </tags>
   </entry>
 </search>

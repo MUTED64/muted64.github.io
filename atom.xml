@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.muted.top/"/>
-  <updated>2021-11-13T15:34:02.024Z</updated>
+  <updated>2022-01-09T10:21:46.209Z</updated>
   <id>https://blog.muted.top/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>密码学大作业</title>
+    <link href="https://blog.muted.top/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/"/>
+    <id>https://blog.muted.top/2022/01/09/%E5%AF%86%E7%A0%81%E5%AD%A6%E5%A4%A7%E4%BD%9C%E4%B8%9A/</id>
+    <published>2022-01-09T09:29:58.000Z</published>
+    <updated>2022-01-09T10:21:46.209Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2021 密码学课程需要的作业。&lt;a href=&quot;https://github.com/MUTED64/XDU_Crypto2021&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;代码&lt;/a&gt;放在 GitHub 仓库。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="安全" scheme="https://blog.muted.top/categories/%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="密码学" scheme="https://blog.muted.top/tags/%E5%AF%86%E7%A0%81%E5%AD%A6/"/>
+    
+  </entry>
   
   <entry>
     <title>fcitx5-rime配置指南</title>
@@ -44,7 +65,7 @@
     <link href="https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/"/>
     <id>https://blog.muted.top/2021/11/06/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0Remake%E6%8C%87%E5%8D%97I-%E7%BE%A4/</id>
     <published>2021-11-06T14:28:54.000Z</published>
-    <updated>2021-11-15T12:54:32.435Z</updated>
+    <updated>2021-11-15T15:38:39.480Z</updated>
     
     <summary type="html">
     
@@ -440,27 +461,6 @@
       <category term="python" scheme="https://blog.muted.top/tags/python/"/>
     
       <category term="GUI" scheme="https://blog.muted.top/tags/GUI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CTF中琐碎的姿势们</title>
-    <link href="https://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/"/>
-    <id>https://blog.muted.top/2020/06/16/CTF%E4%B8%AD%E7%90%90%E7%A2%8E%E7%9A%84%E5%A7%BF%E5%8A%BF%E4%BB%AC/</id>
-    <published>2020-06-16T11:42:02.000Z</published>
-    <updated>2020-07-23T02:42:17.929Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录CTF中的一些琐碎杂项备忘，方便查找。&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="网络安全" scheme="https://blog.muted.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
-    
-    
-      <category term="CTF" scheme="https://blog.muted.top/tags/CTF/"/>
     
   </entry>
   
